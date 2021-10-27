@@ -1,22 +1,12 @@
 package cn.claycoffee.ClayTech;
 
-import cn.claycoffee.ClayTech.api.ClayTechManager;
-import cn.claycoffee.ClayTech.api.Planet;
-import cn.claycoffee.ClayTech.implementation.Planets.Earth;
-import cn.claycoffee.ClayTech.implementation.Planets.Mars;
-import cn.claycoffee.ClayTech.implementation.Planets.Moon;
-import cn.claycoffee.ClayTech.implementation.items.*;
-import cn.claycoffee.ClayTech.implementation.resources.ClayFuel;
-import cn.claycoffee.ClayTech.listeners.*;
-import cn.claycoffee.ClayTech.utils.Lang;
-import cn.claycoffee.ClayTech.utils.Metrics;
-import cn.claycoffee.ClayTech.utils.PlanetUtils;
-import cn.claycoffee.ClayTech.utils.RocketUtils;
-import cn.claycoffee.clayapi.utils.DataYML;
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
-import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -26,12 +16,51 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import cn.claycoffee.ClayTech.api.ClayTechManager;
+import cn.claycoffee.ClayTech.api.Planet;
+import cn.claycoffee.ClayTech.implementation.Planets.Earth;
+import cn.claycoffee.ClayTech.implementation.Planets.Mars;
+import cn.claycoffee.ClayTech.implementation.Planets.Moon;
+import cn.claycoffee.ClayTech.implementation.items.Armors;
+import cn.claycoffee.ClayTech.implementation.items.ClayFuelResource;
+import cn.claycoffee.ClayTech.implementation.items.Clay_basic;
+import cn.claycoffee.ClayTech.implementation.items.DrinkMakingStaff;
+import cn.claycoffee.ClayTech.implementation.items.Drinks;
+import cn.claycoffee.ClayTech.implementation.items.EffectItems;
+import cn.claycoffee.ClayTech.implementation.items.Elements;
+import cn.claycoffee.ClayTech.implementation.items.FoodMakingStaff;
+import cn.claycoffee.ClayTech.implementation.items.Foods;
+import cn.claycoffee.ClayTech.implementation.items.Golden_things;
+import cn.claycoffee.ClayTech.implementation.items.Ingots;
+import cn.claycoffee.ClayTech.implementation.items.MachineMakingBasic;
+import cn.claycoffee.ClayTech.implementation.items.Machines;
+import cn.claycoffee.ClayTech.implementation.items.PotionAffect_Weapons;
+import cn.claycoffee.ClayTech.implementation.items.Railways;
+import cn.claycoffee.ClayTech.implementation.items.RocketMakings;
+import cn.claycoffee.ClayTech.implementation.items.Rockets;
+import cn.claycoffee.ClayTech.implementation.items.Skulls;
+import cn.claycoffee.ClayTech.implementation.items.Spacethings;
+import cn.claycoffee.ClayTech.implementation.items.Tools;
+import cn.claycoffee.ClayTech.implementation.resources.ClayFuel;
+import cn.claycoffee.ClayTech.listeners.BlockUseListener;
+import cn.claycoffee.ClayTech.listeners.FoodDropListener;
+import cn.claycoffee.ClayTech.listeners.FoodEatListener;
+import cn.claycoffee.ClayTech.listeners.ItemInteractListener;
+import cn.claycoffee.ClayTech.listeners.ItemUseListener;
+import cn.claycoffee.ClayTech.listeners.MenuListener;
+import cn.claycoffee.ClayTech.listeners.PlanetBaseListener;
+import cn.claycoffee.ClayTech.listeners.PlanetListener;
+import cn.claycoffee.ClayTech.listeners.RailwayListener;
+import cn.claycoffee.ClayTech.listeners.RocketLauncherListener;
+import cn.claycoffee.ClayTech.listeners.WeaponListener;
+import cn.claycoffee.ClayTech.utils.Lang;
+import cn.claycoffee.ClayTech.utils.Metrics;
+import cn.claycoffee.ClayTech.utils.PlanetUtils;
+import cn.claycoffee.ClayTech.utils.RocketUtils;
+import cn.claycoffee.clayapi.utils.DataYML;
+import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
+import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 
 public class ClayTech extends JavaPlugin implements SlimefunAddon {
     protected static ClayTech plugin;
@@ -119,7 +148,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     public void onEnable() {
         plugin = this;
         // 当前研究ID: 9936
-        DataYML configDYML = new DataYML("config.yml");
+        DataYML configDYML = new DataYML("config.yml", this);
         config = configDYML.getCustomConfig();
         configDYML.saveCustomConfig();
         config = this.getConfig();
