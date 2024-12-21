@@ -41,6 +41,7 @@ import cn.claycoffee.ClayTech.utils.Metrics;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.IdConflictException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -338,27 +339,125 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerSlimefun() {
-        new Machines();
+        try {
+            new Machines();
+        } catch (IdConflictException ignored) {
 
-        new Clay_basic();
-        new PotionAffect_Weapons();
-        new Golden_things();
-        new Skulls();
-        new Armors();
-        new DrinkMakingStaff();
-        new Drinks();
-        new FoodMakingStaff();
-        new Foods();
-        new MachineMakingBasic();
-        new Elements();
-        new Railways();
-        new EffectItems();
-        new Ingots();
-        new Tools();
-        new ClayFuelResource();
-        new RocketMakings();
-        new Rockets();
-        new Spacethings();
+        }
+
+        try {
+            new Clay_basic();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new PotionAffect_Weapons();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Golden_things();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Skulls();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Armors();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new DrinkMakingStaff();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Drinks();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new FoodMakingStaff();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Foods();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new MachineMakingBasic();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Elements();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Railways();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new EffectItems();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Ingots();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Tools();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new ClayFuelResource();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new RocketMakings();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Rockets();
+        } catch (IdConflictException ignored) {
+
+        }
+
+        try {
+            new Spacethings();
+        } catch (IdConflictException ignored) {
+
+        }
     }
 
 

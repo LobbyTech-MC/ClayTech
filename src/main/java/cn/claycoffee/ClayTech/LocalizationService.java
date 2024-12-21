@@ -62,7 +62,7 @@ public class LocalizationService {
 
     @ParametersAreNonnullByDefault
     public LocalizationService(JavaPlugin plugin) {
-        this(plugin, "");
+        this(plugin, "lang");
     }
 
     @ParametersAreNonnullByDefault
