@@ -24,13 +24,13 @@ import java.util.List;
 public class SlimefunUtils {
     public static void registerItem(ItemGroup category, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
         SlimefunItem slimefunItem = new SlimefunItem(category, item, Recipetype, recipe);
-        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), Integer.parseInt(id), ResearchName, cost));
+        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
         slimefunItem.register(ClayTech.getInstance());
     }
 
     public static void registerItem(ItemGroup category, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch, ItemHandler[] handlers) {
         SlimefunItem slimefunItem = new SlimefunItem(category, item, Recipetype, recipe);
-        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), Integer.parseInt(id), ResearchName, cost));
+        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
         for (ItemHandler handler : handlers) {
             slimefunItem.addItemHandler(handler);
         }

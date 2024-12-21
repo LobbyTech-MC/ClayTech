@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a936f7a-9cb7-4377-a50a-145773459a69" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/SkullItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/SkullItem.java" afterDir="false" />
-    </list>
+    <list default="true" id="4a936f7a-9cb7-4377-a50a-145773459a69" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,6 +45,11 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\github_clone\ClayTech\src\main\resources\lang" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
