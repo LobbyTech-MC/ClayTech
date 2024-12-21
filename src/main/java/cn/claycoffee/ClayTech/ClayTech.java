@@ -296,6 +296,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
         }.runTaskAsynchronously(this);
 
+        getLogger().info("ClayTech has been enabled.");
     }
 
     @Override
