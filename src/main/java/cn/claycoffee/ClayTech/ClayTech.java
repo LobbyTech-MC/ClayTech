@@ -153,7 +153,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             highrailspeed = "3";
         if (!new File(getDataFolder() + "/" + locale + ".yml").exists()) {
             Bukkit.getLogger().info("§cLoading Error: Locale not found.Disabling plugin..");
-            this.getServer().getPluginManager().disablePlugin(this);
         }
 
         service = new LocalizationService(this);
@@ -164,8 +163,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
         if (!compatible) {
             Bukkit.getLogger().info(Lang.readGeneralText("Not_compatible"));
-            this.getServer().getPluginManager().disablePlugin(this);
-            return;
         }
 
         Metrics mt = new Metrics(this, 6887);
