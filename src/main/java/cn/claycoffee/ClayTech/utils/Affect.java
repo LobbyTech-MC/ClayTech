@@ -1,6 +1,6 @@
 package cn.claycoffee.ClayTech.utils;
 
-import me.mrCookieSlime.Slimefun.api.Slimefun;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -10,18 +10,19 @@ public class Affect {
     public static void AffectCheck(Player d, Player e) {
         if (d.getInventory().getItemInMainHand() != null) {
             ItemStack HandItem = d.getInventory().getItemInMainHand();
-            if (Slimefun.hasUnlocked(d, HandItem, true)) {
+            SlimefunItem item = SlimefunItem.getByItem(HandItem);
+            if (item != null && item.getResearch() != null && item.getResearch().canUnlock(d)) {
                 try {
-                    if (Utils.ExitsInList(Lang.readGeneralText("Blind_5_effect"), Utils.getLore(HandItem))) {
+                    if (Utils.ExistInList(Lang.readGeneralText("Blind_5_effect"), Utils.getLore(HandItem))) {
                         e.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 4));
                     }
-                    if (Utils.ExitsInList(Lang.readGeneralText("Slowness_5_effect"), Utils.getLore(HandItem))) {
+                    if (Utils.ExistInList(Lang.readGeneralText("Slowness_5_effect"), Utils.getLore(HandItem))) {
                         e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 4));
                     }
-                    if (Utils.ExitsInList(Lang.readGeneralText("Confusion_5_effect"), Utils.getLore(HandItem))) {
+                    if (Utils.ExistInList(Lang.readGeneralText("Confusion_5_effect"), Utils.getLore(HandItem))) {
                         e.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 4));
                     }
-                    if (Utils.ExitsInList(Lang.readGeneralText("Poison_3_effect"), Utils.getLore(HandItem))) {
+                    if (Utils.ExistInList(Lang.readGeneralText("Poison_3_effect"), Utils.getLore(HandItem))) {
                         e.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 40, 2));
                     }
                 } catch (NullPointerException err2) {
@@ -29,11 +30,11 @@ public class Affect {
             }
         }
         if (e.getInventory().getBoots() != null) {
-            if (Slimefun.hasUnlocked(e, e.getInventory().getBoots(), true)) {
+            SlimefunItem item = SlimefunItem.getByItem(e.getInventory().getBoots());
+            if (item != null && item.getResearch() != null && item.getResearch().canUnlock(e)) {
                 try {
-                    if (Utils.ExitsInList(Lang.readGeneralText("Anti_Slowness_3_effect"),
-                            Utils.getLore(e.getInventory().getBoots()))
-                            && Slimefun.hasUnlocked(e, e.getInventory().getBoots(), true)) {
+                    if (Utils.ExistInList(Lang.readGeneralText("Anti_Slowness_3_effect"),
+                            Utils.getLore(e.getInventory().getBoots()))) {
                         d.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 2));
                     }
                 } catch (NullPointerException err2) {

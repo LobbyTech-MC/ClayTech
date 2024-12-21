@@ -13,7 +13,7 @@ public class RocketUtils {
                 if (str.startsWith(Lang.readGeneralText("Fuel"))) {
                     str = StrUtils.getRightStr(str, "§6");
                     str = StrUtils.getLeftStr(str, "§9");
-                    return new Integer(str).intValue();
+                    return Integer.parseInt(str);
                 }
             }
         } else {
@@ -27,7 +27,7 @@ public class RocketUtils {
             for (String str : Utils.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Fuel"))) {
                     str = StrUtils.getRightStr(str, "§9/§a");
-                    return new Integer(str).intValue();
+                    return Integer.parseInt(str);
                 }
             }
         } else {
@@ -57,7 +57,7 @@ public class RocketUtils {
                 if (str.startsWith(Lang.readGeneralText("Oxygen"))) {
                     str = StrUtils.getRightStr(str, "§6");
                     str = StrUtils.getLeftStr(str, "§9");
-                    return new Integer(str).intValue();
+                    return Integer.parseInt(str);
                 }
             }
         } else {
@@ -86,7 +86,7 @@ public class RocketUtils {
             for (String str : Utils.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Oxygen"))) {
                     str = StrUtils.getRightStr(str, "§9/§a");
-                    return new Integer(str).intValue();
+                    return Integer.parseInt(str);
                 }
             }
         } else {
@@ -100,7 +100,7 @@ public class RocketUtils {
             for (String str : Utils.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("ProtectLevel"))) {
                     str = StrUtils.getRightStr(str, "§6");
-                    return new Integer(str).intValue();
+                    return Integer.parseInt(str);
                 }
             }
         } else {

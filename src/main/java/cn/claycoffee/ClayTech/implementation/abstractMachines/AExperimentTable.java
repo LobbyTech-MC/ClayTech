@@ -1,6 +1,11 @@
 package cn.claycoffee.ClayTech.implementation.abstractMachines;
 
 import cn.claycoffee.ClayTech.utils.Lang;
+import com.google.common.base.Preconditions;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
@@ -8,23 +13,19 @@ import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import org.apache.commons.lang.Validate;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -46,16 +47,16 @@ public abstract class AExperimentTable extends SlimefunItem implements Inventory
     private static final int[] BORDER_A = {0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26,
             27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 44, 45, 46, 47, 48, 49, 50, 51, 41, 52, 53};
     private static final int[] BORDER_B = {37, 38, 39, 41, 42, 43};
-    private static final ItemStack FREE_STATE_ITEM = new CustomItem(Material.BLACK_STAINED_GLASS_PANE,
+    private static final ItemStack FREE_STATE_ITEM = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final ItemStack BORDER_A_ITEM = new CustomItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_A_ITEM = new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final ItemStack BORDER_B_ITEM = new CustomItem(Material.LIME_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public AExperimentTable(Category category, SlimefunItemStack item, RecipeType recipeType,
+    public AExperimentTable(ItemGroup category, SlimefunItemStack item, RecipeType recipeType,
                             ItemStack[] recipe) {
 
         super(category, item, recipeType, recipe);
@@ -117,7 +118,7 @@ public abstract class AExperimentTable extends SlimefunItem implements Inventory
         for (int eachID : BORDER_B) {
             preset.addItem(eachID, BORDER_B_ITEM, ChestMenuUtils.getEmptyClickHandler());
         }
-        preset.addItem(4, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "),
+        preset.addItem(4, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "),
                 ChestMenuUtils.getEmptyClickHandler());
         preset.addItem(4, FREE_STATE_ITEM, ChestMenuUtils.getEmptyClickHandler());
         for (int i : getOutputSlots()) {
@@ -203,7 +204,7 @@ public abstract class AExperimentTable extends SlimefunItem implements Inventory
                     processor.updateProgressBar(inv, 4, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
-                    inv.replaceExistingItem(4, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(4, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                     for (ItemStack output : currentOperation.getResults()) {
                         inv.pushItem(output.clone(), getOutputSlots());
@@ -234,7 +235,7 @@ public abstract class AExperimentTable extends SlimefunItem implements Inventory
      * @author TheBusyBiscuit
      */
     protected boolean takeCharge(Location l) {
-        Validate.notNull(l, "Can't attempt to take charge from a null location!");
+        Preconditions.checkNotNull(l, "Can't attempt to take charge from a null location!");
 
         if (isChargeable()) {
             int charge = getCharge(l);

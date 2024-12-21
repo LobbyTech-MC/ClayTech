@@ -3,9 +3,9 @@ package cn.claycoffee.ClayTech.implementation.items;
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.implementation.machines.*;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -95,8 +95,8 @@ public class Machines {
                 ClayTechItems.CLAY_SPACESUIT_OXYGEN_INJECTOR);
         SlimefunItemStack cobblestonegenerator = new SlimefunItemStack("CLAY_COBBLESTONE_GENERATOR",
                 ClayTechItems.CLAY_COBBLESTONE_GENERATOR);
-        SlimefunItemStack electricwaterpump = new SlimefunItemStack("CLAY_ELECTRIC_WATER_PUMP",
-                ClayTechItems.CLAY_ELECTRIC_WATER_PUMP);
+        //SlimefunItemStack electricwaterpump = new SlimefunItemStack("CLAY_ELECTRIC_WATER_PUMP",
+        //        ClayTechItems.CLAY_ELECTRIC_WATER_PUMP);
         SlimefunItemStack electriccopier = new SlimefunItemStack("CLAY_ELECTRIC_COPIER",
                 ClayTechItems.CLAY_ELECTRIC_COPIER);
         SlimefunItemStack witherkiller = new SlimefunItemStack("CLAY_WITHER_KILLER",
@@ -124,8 +124,8 @@ public class Machines {
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClaySpaceSuitOxygenInjector).register(ClayTech.getInstance());
         new CobbleStoneGenerator(ClayTechItems.C_MACHINES, cobblestonegenerator, "CLAY_COBBLESTONE_GENERATOR",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayCobbleStoneGenerator).register(ClayTech.getInstance());
-        new ElectricWaterPump(ClayTechItems.C_MACHINES, electricwaterpump, "CLAY_ELECTRIC_WATER_PUMP",
-                RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricWaterPump).register(ClayTech.getInstance());
+        //new ElectricWaterPump(ClayTechItems.C_MACHINES, electricwaterpump, "CLAY_ELECTRIC_WATER_PUMP",
+        //        RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricWaterPump).register(ClayTech.getInstance());
         new ClayElectricCopier(ClayTechItems.C_MACHINES, electriccopier, "CLAY_ELECTRIC_COPIER",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricCopier).register(ClayTech.getInstance());
         new WitherKiller(ClayTechItems.C_MACHINES, witherkiller, "CLAY_WITHER_KILLER",

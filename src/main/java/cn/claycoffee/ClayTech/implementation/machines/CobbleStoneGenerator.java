@@ -3,6 +3,11 @@ package cn.claycoffee.ClayTech.implementation.machines;
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.api.events.PlayerCraftItemEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
+import com.google.common.base.Preconditions;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
@@ -10,18 +15,19 @@ import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -47,16 +53,16 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41,
             42, 43, 44, 12, 14, 21, 23, 30, 31, 32};
     private static final int[] BORDER_B = {10, 11, 15, 16, 19, 20, 24, 25, 28, 29, 33, 34};
-    private static final ItemStack BORDER_A_ITEM = new CustomItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_A_ITEM = new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final ItemStack BORDER_B_ITEM = new CustomItem(Material.LIME_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
     public static Map<Block, MachineRecipe> processing = new HashMap<Block, MachineRecipe>();
     public static Map<Block, Integer> progress = new HashMap<Block, Integer>();
     protected final List<MachineRecipe> recipes = new ArrayList<MachineRecipe>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public CobbleStoneGenerator(Category category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public CobbleStoneGenerator(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
                                 ItemStack[] recipe) {
         super(category, item, id, recipeType, recipe);
 
@@ -107,7 +113,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
         for (int eachID : BORDER_B) {
             preset.addItem(eachID, BORDER_B_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         }
-        preset.addItem(13, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "),
+        preset.addItem(13, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "),
                 ChestMenuUtils.getEmptyClickHandler());
 
         for (int i : getOutputSlots()) {
@@ -155,7 +161,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
      * @author TheBusyBiscuit
      */
     protected boolean takeCharge(Location l) {
-        Validate.notNull(l, "Can't attempt to take charge from a null location!");
+        Preconditions.checkNotNull(l, "Can't attempt to take charge from a null location!");
 
         if (isChargeable()) {
             int charge = getCharge(l);
@@ -182,7 +188,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
                     processor.updateProgressBar(inv, 22, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
-                    inv.replaceExistingItem(22, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
 
                     for (ItemStack output : currentOperation.getResults()) {
                         inv.pushItem(output.clone(), getOutputSlots());

@@ -59,6 +59,7 @@ public class ItemUseListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
+        /*
         if (Utils.getBlockMetadata(e.getBlock(), "cantDestroy") != null) {
             boolean canDestroy = !((boolean) Utils.getBlockMetadata(e.getBlock(), "cantDestroy"));
             if (!canDestroy) {
@@ -70,5 +71,7 @@ public class ItemUseListener implements Listener {
             e.setCancelled(true);
             e.getPlayer().sendMessage(Lang.readGeneralText("cantBreak"));
         }
+
+         */
     }
 }

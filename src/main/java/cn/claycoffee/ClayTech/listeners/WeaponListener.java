@@ -36,7 +36,7 @@ public class WeaponListener implements Listener {
         if (e.getRightClicked().getType() == EntityType.PLAYER) {
             Player d = e.getPlayer();
             try {
-                if (Utils.ExitsInList("§7钩子武器", Utils.getLore(d.getInventory().getItemInMainHand()))) {
+                if (Utils.ExistInList("§7钩子武器", Utils.getLore(d.getInventory().getItemInMainHand()))) {
                     Player p = (Player) e.getRightClicked();
                     Affect.AffectCheck(d, p);
                 }

@@ -12,11 +12,7 @@ import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.Metrics;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
-import cn.claycoffee.clayapi.utils.DataYML;
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -31,28 +27,43 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClayTech extends JavaPlugin implements SlimefunAddon {
     protected static ClayTech plugin;
     private static String locale;
-    private static DataYML currentLangYML;
-    private static FileConfiguration currentLang;
-    private static DataYML planetYML;
     private static String highrailspeed;
     private static String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",")
             .split(",")[3];
     private static boolean compatible = true;
     private static List<Planet> planetList = new ArrayList<Planet>();
     private static String overworld = "";
-    private static DataYML planetDataYML;
     private static ClayTechUpdater updater;
     private static boolean spacetravelneedperm;
     private static String updateBranch;
     private static FileConfiguration config;
-    private static DataYML defaultLangYML;
     private static FileConfiguration defaultLang;
     private static boolean worldBorderEnabled;
+    private static LocalizationService service;
+    private static ConfigManager configManager;
+    private static ConfigManager planetManager;
+    private static ConfigManager planetDataManager;
+    public static LocalizationService getLocalizationService() {
+        return service;
+    }
+
+    public static ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public static ConfigManager getPlanetManager() {
+        return planetManager;
+    }
+
+    public static ConfigManager getPlanetDataManager() {
+        return planetDataManager;
+    }
 
     public static ClayTech getInstance() {
         return plugin;
@@ -60,10 +71,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
     public static String getLocale() {
         return locale;
-    }
-
-    public static DataYML getLangYML() {
-        return currentLangYML;
     }
 
     public static boolean isSpaceTravelNeedPerm() {
@@ -89,21 +96,8 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     public static String getOverworld() {
         return overworld;
     }
-
-    public static DataYML getPlanetYML() {
-        return planetYML;
-    }
-
-    public static DataYML getPlanetDataYML() {
-        return planetDataYML;
-    }
-
     public static String getUpdateBranch() {
         return updateBranch;
-    }
-
-    public static DataYML getDefaultLangYML() {
-        return defaultLangYML;
     }
 
     public static FileConfiguration getDefaultLang() {
@@ -118,72 +112,38 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     @Override
     public void onEnable() {
         plugin = this;
-        // 当前研究ID: 9936
-        DataYML configDYML = new DataYML("config.yml");
-        config = configDYML.getCustomConfig();
-        configDYML.saveCustomConfig();
-        config = this.getConfig();
+
+        configManager = new ConfigManager("config.yml");
         locale = config.getString("Locale");
         if (locale == null)
             locale = "en-US";
-        highrailspeed = config.getString("highrailspeed");
+        highrailspeed = configManager.getConfig().getString("highrailspeed");
         if (highrailspeed == null)
             highrailspeed = "3";
         if (!new File(getDataFolder() + "/" + locale + ".yml").exists()) {
             Bukkit.getLogger().info("§cLoading Error: Locale not found.Disabling plugin..");
             this.getServer().getPluginManager().disablePlugin(this);
         }
-        Utils.updateConfig(this, configDYML);
-        configDYML.saveCustomConfig();
-        configDYML.reloadCustomConfig();
-        overworld = config.getString("overworld");
-        currentLangYML = new DataYML(locale + ".yml");
-        currentLangYML.saveCDefaultConfig();
-        currentLangYML.reloadCustomConfig();
-        currentLang = currentLangYML.getCustomConfig();
-        defaultLangYML = new DataYML("en-US.yml");
-        defaultLang = defaultLangYML.getCustomConfig();
-        Utils.updateLocale(this, locale, currentLangYML);
-        Utils.updateLocale(this, "en-US", defaultLangYML);
-        currentLangYML.saveCustomConfig();
-        currentLangYML.reloadCustomConfig();
-        defaultLangYML.saveCustomConfig();
-        defaultLangYML.reloadCustomConfig();
 
-        switch (version) {
-            case "v1_16_R3":
-                break;
-            case "v1_16_R2":
-                break;
-            case "v1_16_R1":
-                break;
-            case "v1_15_R1":
-                break;
-            case "v1_14_R1":
-                break;
-            default:
-                compatible = false;
-                break;
-        }
+        service = new LocalizationService(this);
+        service.addLanguage(locale);
+        service.addLanguage("en-US");
+
+        overworld = config.getString("overworld");
+
         if (!compatible) {
             Bukkit.getLogger().info(Lang.readGeneralText("Not_compatible"));
             this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        if (!SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_15)) {
-            Bukkit.getLogger().info(Lang.readGeneralText("Before_115"));
-        }
+
         Metrics mt = new Metrics(this, 6887);
         mt.addCustomChart(new Metrics.SimplePie("language", () -> languageCodeToLanguage(locale)));
 
-        planetYML = new DataYML("planets.yml");
-        planetYML.saveCDefaultConfig();
-        planetYML.reloadCustomConfig();
-        planetDataYML = new DataYML("planetsdata.yml");
-        planetDataYML.saveCDefaultConfig();
-        planetDataYML.reloadCustomConfig();
+        planetManager = new ConfigManager("planets.yml");
+        planetDataManager = new ConfigManager("planetdata.yml");
+
         Bukkit.getLogger().info(Lang.readGeneralText("startTip"));
-        Config cfg = new Config(this);
         Bukkit.getLogger().info(Lang.readGeneralText("registeringItems"));
         try {
             registerSlimefun();
@@ -242,8 +202,10 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
                 Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_1"));
                 Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_2").replaceAll("\\{version\\}",
                         plugin.getDescription().getVersion()));
-                Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_3").replaceAll("\\{author\\}",
-                        Utils.ArrayToString(Authors.toArray(new String[Authors.size()]), ",", ".")));
+                Bukkit.getLogger().info(
+                        ChatColor.GREEN + Lang.readGeneralText("Info_3").replaceAll(
+                                "\\{author\\}",
+                                Arrays.toString(Authors.toArray(new String[Authors.size()]))));
                 Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_4"));
                 Bukkit.getLogger().info(ChatColor.GREEN
                         + Lang.readGeneralText("Info_5").replaceAll("\\{issue_tracker\\}", plugin.getBugTrackerURL()));
@@ -408,8 +370,10 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         for (Planet p : PlanetList) {
             PlanetNameList.add(p.getPlanetWorldName());
         }
-        if (Utils.ExitsInList(id, PlanetNameList.toArray(new String[PlanetNameList.size()]))) {
-            return PlanetList.get(PlanetNameList.indexOf(id)).getPlanetGenerator();
+        for (String name : PlanetNameList.toArray(new String[0])) {
+            if (id.equals(name)) {
+                return PlanetList.get(PlanetNameList.indexOf(id)).getPlanetGenerator();
+            }
         }
         return Bukkit.getWorld(getOverworld()).getGenerator();
     }

@@ -1,9 +1,7 @@
 package cn.claycoffee.ClayTech.api;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import cn.claycoffee.ClayTech.objects.storage.DataYML;
-import com.onarandombox.MultiverseCore.MultiverseCore;
-import com.onarandombox.MultiverseCore.api.MVWorldManager;
+import cn.claycoffee.ClayTech.ConfigManager;
 import org.bukkit.*;
 import org.bukkit.World.Environment;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,14 +9,15 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.IOException;
 import java.util.Random;
 
 /**
  * Planet. 星球.
  */
 public class Planet {
-    private static final DataYML planets = ClayTech.getPlanetYML();
-    private static final FileConfiguration f = planets.getCustomConfig();
+    private static final ConfigManager planet = ClayTech.getPlanetManager();
+    private static final FileConfiguration f = planet.getConfig();
     private final String planetName;
     private final ItemStack displayItem;
     private final ChunkGenerator planetWorld;
@@ -31,7 +30,7 @@ public class Planet {
     private boolean cold;
 
     public Planet(String planetName, ItemStack displayItem, ChunkGenerator planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
+                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) throws IOException {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld;
@@ -47,8 +46,7 @@ public class Planet {
             } else {
                 f.set(this.planetName, false);
             }
-            planets.saveCustomConfig();
-            planets.reloadCustomConfig();
+            f.save(planet.getFile());
         }
         if (!f.contains(this.planetName + "-spawnMobs")) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
@@ -58,8 +56,7 @@ public class Planet {
                 f.set(this.planetName + "-spawnMobs", false);
                 this.spawnMob = false;
             }
-            planets.saveCustomConfig();
-            planets.reloadCustomConfig();
+            f.save(planet.getFile());
         } else {
             this.spawnMob = f.getBoolean(this.planetName + "-spawnMobs");
         }
@@ -67,7 +64,7 @@ public class Planet {
     }
 
     public Planet(String planetName, ItemStack displayItem, World planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
+                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) throws IOException {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld.getGenerator();
@@ -82,8 +79,7 @@ public class Planet {
             } else {
                 f.set(this.planetName, false);
             }
-            planets.saveCustomConfig();
-            planets.reloadCustomConfig();
+            f.save(planet.getFile());
         }
         if (!f.contains(this.planetName + "-spawnMobs")) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
@@ -93,8 +89,7 @@ public class Planet {
                 f.set(this.planetName + "-spawnMobs", false);
                 this.spawnMob = false;
             }
-            planets.saveCustomConfig();
-            planets.reloadCustomConfig();
+            f.save(planet.getFile());
         } else {
             this.spawnMob = f.getBoolean(this.planetName + "-spawnMobs");
         }
@@ -152,22 +147,6 @@ public class Planet {
             newWorld.createWorld();
         } catch (Exception e) {
         }
-
-
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if (Bukkit.getPluginManager().isPluginEnabled("Multiverse-Core")) {
-                    MVWorldManager wm = ((MultiverseCore) Bukkit.getPluginManager().getPlugin("Multiverse-Core"))
-                            .getMVWorldManager();
-                    wm.addWorld(trimWorldName(planetName), environment, null, WorldType.NORMAL, null,
-                            "ClayTech:" + planetName, true);
-                }
-
-            }
-
-        }.runTaskAsynchronously(ClayTech.getInstance());
     }
 
     private String trimWorldName(String userInput) {

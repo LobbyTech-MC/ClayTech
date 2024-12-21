@@ -5,6 +5,7 @@ import cn.claycoffee.ClayTech.ClayTechBiomes;
 import cn.claycoffee.ClayTech.api.Planet;
 import com.wimbli.WorldBorder.BorderData;
 import com.wimbli.WorldBorder.Config;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -174,16 +175,16 @@ public class PlanetUtils {
         int totalPage = PlanetUtils.getTotalPage();
         if (currentPage == 1) {
             Preset.setItem(46,
-                    Utils.newItemD(Material.LIME_STAINED_GLASS_PANE, Lang.readMachinesText("PREVIOUS_PAGE_CANT_USE")));
+                    new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, Lang.readMachinesText("PREVIOUS_PAGE_CANT_USE")));
         } else {
-            Preset.setItem(46, Utils.newItemD(Material.LIME_STAINED_GLASS_PANE,
+            Preset.setItem(46, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
                     Lang.readMachinesText("PREVIOUS_PAGE") + " (" + (currentPage - 1) + "/" + totalPage + ")"));
         }
         if (currentPage == totalPage) {
             Preset.setItem(52,
-                    Utils.newItemD(Material.LIME_STAINED_GLASS_PANE, Lang.readMachinesText("NEXT_PAGE_CANT_USE")));
+                    new CustomItemStack(Material.LIME_STAINED_GLASS_PANE, Lang.readMachinesText("NEXT_PAGE_CANT_USE")));
         } else {
-            Preset.setItem(52, Utils.newItemD(Material.LIME_STAINED_GLASS_PANE,
+            Preset.setItem(52, new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
                     Lang.readMachinesText("NEXT_PAGE") + "(" + (currentPage + 1) + "/" + totalPage + ")"));
         }
         return Preset;

@@ -5,10 +5,10 @@ import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.api.events.RocketLandEvent;
-import cn.claycoffee.ClayTech.objects.storage.DataYML;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
+import cn.claycoffee.ClayTech.utils.Utils;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -39,19 +39,20 @@ public class RocketLauncherListener implements Listener {
             Player p = (Player) e.getWhoClicked();
             if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("ROCKET_LAUNCHER"))) {
                 e.setCancelled(true);
-                if (Utils.ExitsInList(e.getRawSlot(), planet)) {
+                if (Utils.ExistInList(e.getRawSlot(), planet)) {
                     if (e.getInventory().getItem(e.getRawSlot()) != null) {
                         ItemStack handItem = p.getInventory().getItemInMainHand();
                         if (ClayTechManager.isRocket(handItem)) {
                             // 是火箭
                             Inventory inv = e.getInventory();
-                            Block b = ClayTechData.RunningLaunchersG.get(inv);
+                            // todo
+                            //Block b = ClayTechData.RunningLaunchersG.get(inv);
                             int currentPage = 1;
-                            if (Utils.getMetadata(b, "currentPage") != null) {
-                                currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
-                            }
+                            //if (Utils.getMetadata(b, "currentPage") != null) {
+                            //    currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
+                            //}
                             int index = (currentPage - 1) * 21 + (e.getRawSlot() - 18) - 1;
-                            Planet current = PlanetUtils.getPlanet(b.getWorld());
+                            //Planet current = PlanetUtils.getPlanet(b.getWorld());
                             // 排列星球
                             List<Planet> pl = new ArrayList<Planet>();
                             for (Planet p1 : ClayTech.getPlanets()) {
@@ -60,7 +61,7 @@ public class RocketLauncherListener implements Listener {
                             Planet[] pl2 = pl.toArray(new Planet[pl.size()]);
                             List<Integer> d = new ArrayList<Integer>();
                             for (Planet p1 : pl2) {
-                                d.add((Integer) PlanetUtils.getDistance(current, p1));
+                            //    d.add((Integer) PlanetUtils.getDistance(current, p1));
                             }
                             Integer[] distance = d.toArray(new Integer[d.size()]);
                             for (int i = 0; i < distance.length; i++) {
@@ -79,6 +80,7 @@ public class RocketLauncherListener implements Listener {
                             pl = Arrays.asList(pl2);
 
                             Planet target = pl.get(index);
+                            /*
                             if (!target.getPlanetWorldName().equalsIgnoreCase(current.getPlanetWorldName())) {
                                 if (PlanetUtils.getFuel(current, target) <= RocketUtils.getFuel(handItem)) {
                                     if (handItem.getAmount() == 1) {
@@ -181,10 +183,13 @@ public class RocketLauncherListener implements Listener {
                                     p.sendMessage(Lang.readGeneralText("NotEnoughFuel"));
                                     e.setCancelled(true);
                                 }
+
                             } else {
                                 p.sendMessage(Lang.readGeneralText("SamePlanet"));
                                 e.setCancelled(true);
                             }
+
+                             */
                         } else {
                             p.sendMessage(Lang.readGeneralText("NotRocket"));
                             e.setCancelled(true);
@@ -194,20 +199,22 @@ public class RocketLauncherListener implements Listener {
                         p.openInventory(e.getInventory());
                     }
                 }
+
                 Inventory inv = e.getInventory();
-                Block b = ClayTechData.RunningLaunchersG.get(inv);
-                Planet current = PlanetUtils.getPlanet(b.getWorld());
+                // todo
+                //Block b = ClayTechData.RunningLaunchersG.get(inv);
+                //Planet current = PlanetUtils.getPlanet(b.getWorld());
                 int currentPage = 1;
                 if (e.getRawSlot() == 46) {
                     // 上一页
-                    if (b != null) {
-                        if (Utils.getMetadata(b, "currentPage") != null) {
-                            currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
-                        }
+                    //if (b != null) {
+                        //if (Utils.getMetadata(b, "currentPage") != null) {
+                        //    currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
+                        //}
                         if (currentPage > 1) {
                             currentPage -= 1;
-                            Utils.setMetadata(b, "currentPage", currentPage + "");
-                            inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
+                        //    Utils.setMetadata(b, "currentPage", currentPage + "");
+                        //    inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
                         } else {
                             e.setCancelled(true);
                             p.openInventory(inv);
@@ -216,6 +223,8 @@ public class RocketLauncherListener implements Listener {
                 }
                 if (e.getRawSlot() == 52) {
                     // 下一页
+                    // todo
+                    /*
                     if (b != null) {
                         if (Utils.getMetadata(b, "currentPage") != null) {
                             currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
@@ -229,8 +238,9 @@ public class RocketLauncherListener implements Listener {
                             p.openInventory(inv);
                         }
                     }
+
+                     */
                 }
             }
         }
-    }
 }

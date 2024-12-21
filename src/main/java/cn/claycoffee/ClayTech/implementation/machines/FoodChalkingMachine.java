@@ -3,15 +3,16 @@ package cn.claycoffee.ClayTech.implementation.machines;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.implementation.abstractMachines.ANewContainer;
 import cn.claycoffee.ClayTech.utils.Lang;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.core.categories.LockedCategory;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class FoodChalkingMachine extends ANewContainer {
 
-    public FoodChalkingMachine(LockedCategory category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public FoodChalkingMachine(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
                                ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }

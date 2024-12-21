@@ -1,16 +1,7 @@
 package cn.claycoffee.ClayTech.implementation.items;
 
-import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
-import cn.claycoffee.ClayTech.utils.Lang;
-import cn.claycoffee.ClayTech.utils.SlimefunUtils;
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
-import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 public class Skulls {
@@ -28,22 +19,18 @@ public class Skulls {
                 new ItemStack(Material.IRON_BLOCK), ClayTechItems.ARTIFICIAL_GOLD_NUGGET, ClayTechItems.CLAY_STICK,
                 ClayTechItems.ARTIFICIAL_GOLD_NUGGET, new ItemStack(Material.IRON_BLOCK),
                 new ItemStack(Material.GOLD_BLOCK), new ItemStack(Material.IRON_BLOCK)};
-        ItemStack[] ClockRecipe = SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14)
-                ? new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
+        ItemStack[] ClockRecipe =
+                new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
                 new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
                 ClayTechItems.MAGIC_CLAY, new ItemStack(Material.IRON_INGOT),
                 new ItemStack(Material.IRON_INGOT), new ItemStack(Material.BLACK_DYE),
-                new ItemStack(Material.IRON_INGOT)}
-                : new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
-                new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
-                ClayTechItems.MAGIC_CLAY, new ItemStack(Material.IRON_INGOT),
-                new ItemStack(Material.IRON_INGOT), new ItemStack(Material.COAL),
                 new ItemStack(Material.IRON_INGOT)};
         ItemStack[] LanternRecipe = {new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG),
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG), new ItemStack(Material.GLOWSTONE),
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG), ClayTechItems.MAGIC_CLAY,
                 new ItemStack(Material.OAK_LOG)};
 
+        /*
         // 注册物品
         SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "CLAYCOFFEE_HEAD", ClayTechItems.CLAYCOFFEE_HEAD,
                 "notresearch", 10, RecipeType.ANCIENT_ALTAR, ClayCoffeeHeadRecipe, false);
@@ -68,5 +55,7 @@ public class Skulls {
         skull_basic2.addItems(SlimefunItem.getByItem(ClayTechItems.CLOCK_C),
                 SlimefunItem.getByItem(ClayTechItems.LANTERN_C));
         skull_basic2.register();
+
+         */
     }
 }

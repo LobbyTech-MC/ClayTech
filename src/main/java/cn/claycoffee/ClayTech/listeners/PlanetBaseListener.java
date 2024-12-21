@@ -3,9 +3,9 @@ package cn.claycoffee.ClayTech.listeners;
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
+import cn.claycoffee.ClayTech.ConfigManager;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.Planet;
-import cn.claycoffee.ClayTech.objects.storage.DataYML;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
@@ -32,8 +32,8 @@ public class PlanetBaseListener implements Listener {
                 ClayTechItems.PLANET_BASE_SIGNER, true)) {
             Planet p = PlanetUtils.getPlanet(e.getBlock().getWorld());
             if (p != null) {
-                DataYML planetsData = ClayTech.getPlanetDataYML();
-                FileConfiguration pd = planetsData.getCustomConfig();
+                ConfigManager planetsData = ClayTech.getPlanetDataManager();
+                FileConfiguration pd = planetsData.getConfig();
                 if (!pd.getBoolean(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".base")) {
                     pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".base", true);
                     pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseX",
@@ -42,7 +42,12 @@ public class PlanetBaseListener implements Listener {
                             e.getBlock().getY() + 1);
                     pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseZ",
                             e.getBlock().getZ());
-                    planetsData.saveCustomConfig();
+                    try {
+                        pd.save(planetsData.getFile());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        return;
+                    }
                     e.getPlayer().sendMessage(Lang.readGeneralText("BaseCompleted"));
                     return;
                 } else {
@@ -62,8 +67,8 @@ public class PlanetBaseListener implements Listener {
     public void BlockBreakEvent(BlockBreakEvent e) {
         if (BlockStorage.checkID(e.getBlock()) != null) {
             if (BlockStorage.checkID(e.getBlock()).equalsIgnoreCase("PLANET_BASE_SIGNER")) {
-                DataYML planetsData = ClayTech.getPlanetDataYML();
-                FileConfiguration pd = planetsData.getCustomConfig();
+                ConfigManager planetsData = ClayTech.getPlanetDataManager();
+                FileConfiguration pd = planetsData.getConfig();
                 int baseX = pd.getInt(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseX");
                 int baseY = pd.getInt(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseY");
                 int baseZ = pd.getInt(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseZ");
@@ -76,7 +81,12 @@ public class PlanetBaseListener implements Listener {
                         pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseX", null);
                         pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseY", null);
                         pd.set(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseZ", null);
-                        planetsData.saveCustomConfig();
+                        try {
+                            pd.save(planetsData.getFile());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            return;
+                        }
                         e.getPlayer().sendMessage(Lang.readGeneralText("BaseDestroyed"));
                     } else {
                         e.getPlayer().sendMessage(Lang.readGeneralText("NotYourBase"));
@@ -188,15 +198,16 @@ public class PlanetBaseListener implements Listener {
     public void InventoryClickEvent(InventoryClickEvent e) {
         if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("CLAY_ROCKET_FUEL_INJECTOR"))
                 && e.getSlot() == 20) {
-            if (ClayTechData.RunningInjectors.get(e.getInventory()) != null) {
-                e.setCancelled(true);
-            }
+            // todo
+            //if (ClayTechData.RunningInjectors.get(e.getInventory()) != null) {
+            //    e.setCancelled(true);
+            //}
         }
         if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("CLAY_SPACESUIT_OXYGEN_INJECTOR"))
                 && e.getSlot() == 22) {
-            if (ClayTechData.RunningInjectorsOxygen.get(e.getInventory()) != null) {
-                e.setCancelled(true);
-            }
+            //if (ClayTechData.RunningInjectorsOxygen.get(e.getInventory()) != null) {
+            //    e.setCancelled(true);
+            //}
         }
     }
 }
