@@ -1,9 +1,13 @@
 package cn.claycoffee.ClayTech.implementation.Planets;
 
 import cn.claycoffee.ClayTech.api.Planet;
-import cn.claycoffee.ClayTech.implementation.Planets.populators.*;
+import cn.claycoffee.ClayTech.implementation.Planets.populators.MoonClayFusionOrePopulator;
+import cn.claycoffee.ClayTech.implementation.Planets.populators.MoonCoalPopulator;
+import cn.claycoffee.ClayTech.implementation.Planets.populators.MoonCopperOrePopulator;
+import cn.claycoffee.ClayTech.implementation.Planets.populators.MoonDiamondPopulator;
+import cn.claycoffee.ClayTech.implementation.Planets.populators.MoonKreepPopulator;
 import cn.claycoffee.ClayTech.utils.Lang;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -20,7 +24,7 @@ public class Moon extends ChunkGenerator {
     private SimplexOctaveGenerator sog;
 
     public Moon() {
-        new Planet("CMoon", new CustomItem(Material.GRAY_GLAZED_TERRACOTTA, Lang.readPlanetsText("Moon")), this,
+        new Planet("CMoon", new CustomItemStack(Material.GRAY_GLAZED_TERRACOTTA, Lang.readPlanetsText("Moon")), this,
                 Environment.NORMAL, false, 3, 100, 1, true).register();
     }
 

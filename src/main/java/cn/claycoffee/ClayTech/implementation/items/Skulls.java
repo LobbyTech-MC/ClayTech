@@ -21,10 +21,10 @@ public class Skulls {
                 new ItemStack(Material.GOLD_BLOCK), new ItemStack(Material.IRON_BLOCK)};
         ItemStack[] ClockRecipe =
                 new ItemStack[]{new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
-                new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
-                ClayTechItems.MAGIC_CLAY, new ItemStack(Material.IRON_INGOT),
-                new ItemStack(Material.IRON_INGOT), new ItemStack(Material.BLACK_DYE),
-                new ItemStack(Material.IRON_INGOT)};
+                        new ItemStack(Material.IRON_INGOT), new ItemStack(Material.IRON_INGOT),
+                        ClayTechItems.MAGIC_CLAY, new ItemStack(Material.IRON_INGOT),
+                        new ItemStack(Material.IRON_INGOT), new ItemStack(Material.BLACK_DYE),
+                        new ItemStack(Material.IRON_INGOT)};
         ItemStack[] LanternRecipe = {new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG),
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG), new ItemStack(Material.GLOWSTONE),
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG), ClayTechItems.MAGIC_CLAY,

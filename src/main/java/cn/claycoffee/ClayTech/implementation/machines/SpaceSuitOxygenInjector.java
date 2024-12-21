@@ -1,26 +1,26 @@
 package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.events.InjectOxygenEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
@@ -31,7 +31,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
     public final static int[] inputslots = new int[]{22};
@@ -39,9 +43,9 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     private static final int[] BORDER_A = {0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27,
             28, 29, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44};
     private static final int[] BORDER_B = {12, 13, 14, 21, 23, 30, 31, 32};
-    private static final ItemStack BORDER_A_ITEM = Utils.newItemD(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_A_ITEM = new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final ItemStack BORDER_B_ITEM = Utils.newItemD(Material.LIME_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
     private static final List<Material> LEAVES = Arrays
             .asList(new Material[]{Material.OAK_LEAVES, Material.ACACIA_LEAVES, Material.BIRCH_LEAVES,
@@ -57,6 +61,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         super(category, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::SetupMenu);
 
+        /*
         registerBlockHandler(id, (p, b, tool, reason) -> {
             BlockMenu inv = BlockStorage.getInventory(b);
             if (inv != null) {
@@ -81,6 +86,8 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
             processing.remove(b);
             return true;
         });
+
+         */
     }
 
     @Override
@@ -133,7 +140,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         for (int eachID : BORDER_B) {
             Preset.addItem(eachID, BORDER_B_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         }
-        Preset.addItem(4, Utils.addLore(Utils.newItem(Material.BLACK_STAINED_GLASS_PANE), " "),
+        Preset.addItem(4, Utils.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "),
                 ChestMenuUtils.getEmptyClickHandler());
 
         Preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -211,7 +218,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 }
             } else {
                 // 处理结束
-                inv.replaceExistingItem(4, Utils.addLore(Utils.newItem(Material.BLACK_STAINED_GLASS_PANE), " "));
+                inv.replaceExistingItem(4, Utils.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "));
 
                 ItemStack spacesuit = item.get(b);
                 if (RocketUtils.getOxygen(spacesuit) + 5 > RocketUtils.getMaxOxygen(spacesuit)) {
@@ -229,7 +236,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
 
                 }.runTask(ClayTech.getInstance());
                 inv.replaceExistingItem(22, spacesuit);
-                ClayTechData.RunningInjectorsOxygen.remove(inv.toInventory());
+                //ClayTechData.RunningInjectorsOxygen.remove(inv.toInventory());
                 progress.remove(b);
                 processing.remove(b);
                 item.remove(b);
@@ -261,7 +268,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                             new ItemStack[]{});
                     item.put(b, spacesuit.clone());
                     inv.consumeItem(22, 1);
-                    ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
+                    //ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
                     inv.replaceExistingItem(22, new ItemStack(Material.BEDROCK));
                     processing.put(b, oxygeninjectrecipe);
                     progress.put(b, oxygeninjectrecipe.getTicks());

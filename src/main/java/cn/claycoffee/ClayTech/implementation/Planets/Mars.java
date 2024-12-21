@@ -2,7 +2,7 @@ package cn.claycoffee.ClayTech.implementation.Planets;
 
 import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.utils.Lang;
-import cn.claycoffee.ClayTech.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -17,7 +17,7 @@ public class Mars extends ChunkGenerator {
     private SimplexOctaveGenerator sog;
 
     public Mars() {
-        new Planet("CMars", Utils.newItemD(Material.YELLOW_GLAZED_TERRACOTTA, Lang.readPlanetsText("Mars")), this,
+        new Planet("CMars", new CustomItemStack(Material.YELLOW_GLAZED_TERRACOTTA, Lang.readPlanetsText("Mars")), this,
                 Environment.NORMAL, true, 1, 100, 0, false).register();
     }
 

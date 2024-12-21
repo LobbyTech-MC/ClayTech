@@ -2,7 +2,6 @@ package cn.claycoffee.ClayTech.implementation.Planets.populators;
 
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -10,14 +9,14 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.eclipse.jdt.annotation.NonNull;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class MoonClayFusionOrePopulator extends BlockPopulator {
 
     @Override
-    public void populate(@NonNull World world, @NonNull Random random, @NonNull Chunk source) {
+    public void populate(@Nonnull World world, @Nonnull Random random, @Nonnull Chunk source) {
         new BukkitRunnable() {
 
             @Override
@@ -34,10 +33,6 @@ public class MoonClayFusionOrePopulator extends BlockPopulator {
                         final int tz = z;
                         Block sourceb = source.getBlock(x, y, z);
                         if (sourceb.getType() == Material.STONE) {
-                            if (!SlimefunPlugin.getRegistry().getWorlds().containsKey(world.getName())) {
-                                BlockStorage bs = new BlockStorage(world);
-                                SlimefunPlugin.getRegistry().getWorlds().put(world.getName(), bs);
-                            }
                             if (BlockStorage.hasBlockInfo(sourceb.getLocation())) return;
                             new BukkitRunnable() {
 

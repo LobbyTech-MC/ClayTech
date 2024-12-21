@@ -5,9 +5,37 @@ import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.implementation.Planets.Earth;
 import cn.claycoffee.ClayTech.implementation.Planets.Mars;
 import cn.claycoffee.ClayTech.implementation.Planets.Moon;
-import cn.claycoffee.ClayTech.implementation.items.*;
+import cn.claycoffee.ClayTech.implementation.items.Armors;
+import cn.claycoffee.ClayTech.implementation.items.ClayFuelResource;
+import cn.claycoffee.ClayTech.implementation.items.Clay_basic;
+import cn.claycoffee.ClayTech.implementation.items.DrinkMakingStaff;
+import cn.claycoffee.ClayTech.implementation.items.Drinks;
+import cn.claycoffee.ClayTech.implementation.items.EffectItems;
+import cn.claycoffee.ClayTech.implementation.items.Elements;
+import cn.claycoffee.ClayTech.implementation.items.FoodMakingStaff;
+import cn.claycoffee.ClayTech.implementation.items.Foods;
+import cn.claycoffee.ClayTech.implementation.items.Golden_things;
+import cn.claycoffee.ClayTech.implementation.items.Ingots;
+import cn.claycoffee.ClayTech.implementation.items.MachineMakingBasic;
+import cn.claycoffee.ClayTech.implementation.items.Machines;
+import cn.claycoffee.ClayTech.implementation.items.PotionAffect_Weapons;
+import cn.claycoffee.ClayTech.implementation.items.Railways;
+import cn.claycoffee.ClayTech.implementation.items.RocketMakings;
+import cn.claycoffee.ClayTech.implementation.items.Rockets;
+import cn.claycoffee.ClayTech.implementation.items.Skulls;
+import cn.claycoffee.ClayTech.implementation.items.Spacethings;
+import cn.claycoffee.ClayTech.implementation.items.Tools;
 import cn.claycoffee.ClayTech.implementation.resources.ClayFuel;
-import cn.claycoffee.ClayTech.listeners.*;
+import cn.claycoffee.ClayTech.listeners.BlockUseListener;
+import cn.claycoffee.ClayTech.listeners.FoodDropListener;
+import cn.claycoffee.ClayTech.listeners.FoodEatListener;
+import cn.claycoffee.ClayTech.listeners.ItemInteractListener;
+import cn.claycoffee.ClayTech.listeners.ItemUseListener;
+import cn.claycoffee.ClayTech.listeners.PlanetBaseListener;
+import cn.claycoffee.ClayTech.listeners.PlanetListener;
+import cn.claycoffee.ClayTech.listeners.RailwayListener;
+import cn.claycoffee.ClayTech.listeners.RocketLauncherListener;
+import cn.claycoffee.ClayTech.listeners.WeaponListener;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.Metrics;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
@@ -49,6 +77,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     private static ConfigManager configManager;
     private static ConfigManager planetManager;
     private static ConfigManager planetDataManager;
+
     public static LocalizationService getLocalizationService() {
         return service;
     }
@@ -96,6 +125,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     public static String getOverworld() {
         return overworld;
     }
+
     public static String getUpdateBranch() {
         return updateBranch;
     }
@@ -114,6 +144,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         plugin = this;
 
         configManager = new ConfigManager("config.yml");
+        config = configManager.getConfig();
         locale = config.getString("Locale");
         if (locale == null)
             locale = "en-US";
@@ -158,7 +189,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             worldBorderEnabled = true;
         }
 
-        Bukkit.getPluginManager().registerEvents(new MenuListener(), this);
         Bukkit.getPluginManager().registerEvents(new ItemInteractListener(), this);
         Bukkit.getPluginManager().registerEvents(new ItemUseListener(), this);
         Bukkit.getPluginManager().registerEvents(new FoodEatListener(), this);

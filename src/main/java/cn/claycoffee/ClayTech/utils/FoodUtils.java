@@ -4,6 +4,7 @@ import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.api.events.PlayerDrinkEvent;
 import cn.claycoffee.ClayTech.api.events.PlayerEatEvent;
 import cn.claycoffee.ClayTech.api.events.PlayerWashEvent;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,8 +16,6 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 
 import java.util.Random;
 
@@ -48,7 +47,7 @@ public class FoodUtils {
     }
 
     public static void drink(Player p, ItemStack handingItem, ItemStack food, int increaseFoodLevel) {
-        drink(p,handingItem,food,increaseFoodLevel,new PotionEffect[]{});
+        drink(p, handingItem, food, increaseFoodLevel, new PotionEffect[]{});
     }
 
     public static void food(Player p, ItemStack handingItem, ItemStack food, int increaseFoodLevel,
@@ -77,7 +76,7 @@ public class FoodUtils {
     }
 
     public static void food(Player p, ItemStack handingItem, ItemStack food, int incraseFoodLevel) {
-        food(p,handingItem,food,incraseFoodLevel,new PotionEffect[]{});
+        food(p, handingItem, food, incraseFoodLevel, new PotionEffect[]{});
     }
 
     public static void wash(Player p, ItemStack handingItem, ItemStack matchItem, ItemStack cleanItem) {
@@ -87,7 +86,7 @@ public class FoodUtils {
                 if (i.contains(new ItemStack(Material.WATER_BUCKET))) {
                     int waterBucketIndex = i.first(new ItemStack(Material.WATER_BUCKET));
                     handingItem.setAmount(handingItem.getAmount() - 1);
-                    i.setItem(waterBucketIndex,null);
+                    i.setItem(waterBucketIndex, null);
                     i.addItem(new ItemStack(Material.BUCKET));
                     i.addItem(cleanItem);
                     p.sendMessage(Lang.readGeneralText("Wash_Message"));
@@ -103,7 +102,7 @@ public class FoodUtils {
 
     public static void destroy(Player p, Block b, ItemStack targetBlock, ItemStack dropItem, ItemStack disableItem,
                                int i, BlockBreakEvent b1) {
-        destroy(p,b,targetBlock,dropItem,disableItem,i,i,b1);
+        destroy(p, b, targetBlock, dropItem, disableItem, i, i, b1);
     }
 
     public static void destroy(Player p, Block b, ItemStack targetBlock, ItemStack dropItem, ItemStack disableItem,
@@ -111,14 +110,14 @@ public class FoodUtils {
         if (b.getType() == targetBlock.getType()) {
             if (p.getInventory().getItemInMainHand() != new ItemStack(Material.AIR)) {
                 if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)
-                        || SlimefunUtils.isItemSimilar(disableItem,p.getInventory().getItemInMainHand(),true)) {
+                        || SlimefunUtils.isItemSimilar(disableItem, p.getInventory().getItemInMainHand(), true)) {
                     return;
                 }
             }
             Random r = new Random();
             int random = r.nextInt(100);
             if (random >= from && random <= to) {
-                p.getWorld().dropItemNaturally(p.getLocation(),dropItem);
+                p.getWorld().dropItemNaturally(p.getLocation(), dropItem);
                 b1.setDropItems(false);
             }
         }
@@ -129,7 +128,7 @@ public class FoodUtils {
         int random = r.nextInt(100);
         if (random >= from && random <= to) {
             e.setCancelled(true);
-            e.getPlayer().getWorld().dropItemNaturally(e.getPlayer().getLocation(),drop);
+            e.getPlayer().getWorld().dropItemNaturally(e.getPlayer().getLocation(), drop);
         }
     }
 }

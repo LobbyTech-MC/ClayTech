@@ -1,7 +1,6 @@
 package cn.claycoffee.ClayTech.listeners;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.ConfigManager;
 import cn.claycoffee.ClayTech.api.ClayTechManager;

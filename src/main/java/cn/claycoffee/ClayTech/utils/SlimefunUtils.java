@@ -40,6 +40,7 @@ public class SlimefunUtils {
     public static void registerItem(ItemGroup category, String id, ItemStack itemStack, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
         registerItem(category, id, new SlimefunItemStack(id, itemStack), ResearchName, cost, Recipetype, recipe, registerResearch);
     }
+
     public static void registerArmors(ItemGroup category, String nameprefix, ItemStack[] ItemStack, String ResearchName,
                                       int cost, RecipeType Recipetype, ItemStack MaterialStack, boolean registerResearch) {
 

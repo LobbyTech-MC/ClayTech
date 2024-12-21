@@ -4,9 +4,9 @@ import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.SlimefunUtils;
-import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -53,7 +53,7 @@ public class Clay_basic {
 
         Research basic5 = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_ELECTRIC_WATER_PUMP"), 9933,
                 Lang.readResearchesText("CLAYTECH_ELECTRIC_WATER_PUMP"), 65);
-        basic5.addItems(SlimefunItem.getByItem(ClayTechItems.CLAY_ELECTRIC_WATER_PUMP));
+        //basic5.addItems(SlimefunItem.getByItem(ClayTechItems.CLAY_ELECTRIC_WATER_PUMP));
         basic5.register();
 
         Research basic6 = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_WITHER_KILLER"), 9935,

@@ -6,13 +6,17 @@ import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
-import cn.claycoffee.ClayTech.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.type.Dispenser;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Boss;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -388,9 +392,9 @@ public class PlanetListener implements Listener {
                 //boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
                 if (!inRocket.equalsIgnoreCase("true")) {
                     //if (ast) {
-                        e.getPlayer().setMetadata("allowSpaceTeleport",
-                                new FixedMetadataValue(ClayTech.getInstance(), false));
-                        //return;
+                    e.getPlayer().setMetadata("allowSpaceTeleport",
+                            new FixedMetadataValue(ClayTech.getInstance(), false));
+                    //return;
                     //}
                     // 其他星球传送到主世界
                     e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));
@@ -403,9 +407,9 @@ public class PlanetListener implements Listener {
                 //boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
                 if (!p.getPlanetWorldName().equalsIgnoreCase(ClayTech.getOverworld())) {
                     //if (ast) {
-                        e.getPlayer().setMetadata("allowSpaceTeleport",
-                                new FixedMetadataValue(ClayTech.getInstance(), false));
-                        //return;
+                    e.getPlayer().setMetadata("allowSpaceTeleport",
+                            new FixedMetadataValue(ClayTech.getInstance(), false));
+                    //return;
                     //}
                     // 其他星球传送到主世界
                     e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));
@@ -418,9 +422,9 @@ public class PlanetListener implements Listener {
             //boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
             if (!to.getPlanetWorldName().equalsIgnoreCase(ClayTech.getOverworld())) {
                 //if (ast) {
-                    e.getPlayer().setMetadata("allowSpaceTeleport",
-                            new FixedMetadataValue(ClayTech.getInstance(), false));
-                    //return;
+                e.getPlayer().setMetadata("allowSpaceTeleport",
+                        new FixedMetadataValue(ClayTech.getInstance(), false));
+                //return;
                 //}
                 // 在主世界传送到其他星球
                 e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));
@@ -441,8 +445,8 @@ public class PlanetListener implements Listener {
                     && ClayTechManager.isSpaceSuit(p.getInventory().getBoots())) {
                 e.setDamage(e.getDamage() - e.getFinalDamage());
                 //if (Utils.readPlayerMetadataBoolean(p, "SpaceSuitNoCostDurability")) {
-                    e.setCancelled(true);
-                    p.setMetadata("SpaceSuitNoCostDurability", new FixedMetadataValue(ClayTech.getInstance(), false));
+                e.setCancelled(true);
+                p.setMetadata("SpaceSuitNoCostDurability", new FixedMetadataValue(ClayTech.getInstance(), false));
                 //}
                 p.sendMessage(Lang.readGeneralText("SpaceSuitFall"));
             }
@@ -461,8 +465,8 @@ public class PlanetListener implements Listener {
                     && ClayTechManager.isSpaceSuit(p.getInventory().getBoots())) {
                 e.setDamage(e.getDamage() - e.getFinalDamage());
                 //if (Utils.readPlayerMetadataBoolean(p, "SpaceSuitNoCostDurability")) {
-                    e.setCancelled(true);
-                    p.setMetadata("SpaceSuitNoCostDurability", new FixedMetadataValue(ClayTech.getInstance(), false));
+                e.setCancelled(true);
+                p.setMetadata("SpaceSuitNoCostDurability", new FixedMetadataValue(ClayTech.getInstance(), false));
                 //}
                 p.sendMessage(Lang.readGeneralText("SpaceSuitFall"));
             }

@@ -8,6 +8,7 @@ public class SkullItem {
     public static ItemStack fromHash(String hash) {
         return new CustomItemStack(SlimefunUtils.getCustomHead(hash));
     }
+
     public static ItemStack fromURL(String url) {
         return new CustomItemStack(SlimefunUtils.getCustomHead(url));
     }

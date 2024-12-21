@@ -1,13 +1,16 @@
 package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.events.RocketInjectFuelEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.attributes.MachineProcessHolder;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
@@ -15,22 +18,18 @@ import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.handlers.SimpleBlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -51,9 +50,9 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 31, 17, 18, 26, 27, 35, 36, 37, 38, 39,
             40, 41, 42, 43, 44};
     private static final int[] BORDER_B = {10, 11, 12, 19, 21, 28, 29, 30, 14, 15, 16, 23, 25, 32, 33, 34};
-    private static final ItemStack BORDER_A_ITEM = new CustomItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_A_ITEM = new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final ItemStack BORDER_B_ITEM = new CustomItem(Material.LIME_STAINED_GLASS_PANE,
+    private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
     public static Map<Block, MachineRecipe> processing = new HashMap<>();
     public static Map<Block, Integer> progress = new HashMap<>();
@@ -139,7 +138,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         for (int eachID : BORDER_B) {
             preset.addItem(eachID, BORDER_B_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         }
-        preset.addItem(22, new CustomItem(Material.BLACK_STAINED_GLASS_PANE, "§9§l←", " "),
+        preset.addItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←", " "),
                 ChestMenuUtils.getEmptyClickHandler());
 
         preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -215,7 +214,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
             } else {
                 // 处理结束
                 inv.replaceExistingItem(22,
-                        Utils.addLore(Utils.newItemD(Material.BLACK_STAINED_GLASS_PANE, "§9§l←"), " "));
+                        Utils.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←"), " "));
 
                 ItemStack rocket = item.get(b);
                 if (RocketUtils.getFuel(rocket) + 5 > RocketUtils.getMaxFuel(rocket)) {
@@ -232,7 +231,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
 
                 }.runTask(ClayTech.getInstance());
                 inv.replaceExistingItem(20, rocket);
-                ClayTechData.RunningInjectors.remove(inv.toInventory());
+                //ClayTechData.RunningInjectors.remove(inv.toInventory());
                 progress.remove(b);
                 processing.remove(b);
                 item.remove(b);
@@ -263,7 +262,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                             new ItemStack[]{});
                     item.put(b, rocket.clone());
                     inv.consumeItem(20, 1);
-                    ClayTechData.RunningInjectors.put(inv.toInventory(), b);
+                    //ClayTechData.RunningInjectors.put(inv.toInventory(), b);
                     inv.replaceExistingItem(20, new ItemStack(Material.BEDROCK));
                     processing.put(b, fuelinjectrecipe);
                     progress.put(b, fuelinjectrecipe.getTicks());

@@ -3,7 +3,6 @@ package cn.claycoffee.ClayTech;
 import cn.claycoffee.ClayTech.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,10 +11,8 @@ public class ClayTechMachineRecipes {
             new ItemStack(Material.INK_SAC), new ItemStack(Material.INK_SAC), ClayTechItems.MAGIC_CLAY,
             new ItemStack(Material.INK_SAC), new ItemStack(Material.INK_SAC), new ItemStack(Material.END_CRYSTAL),
             new ItemStack(Material.INK_SAC)};
-    public final static ItemStack[] BLIND_SWORD = SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16) ? new ItemStack[]{ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE,
+    public final static ItemStack[] BLIND_SWORD = new ItemStack[]{ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE,
             ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, new ItemStack(Material.NETHERITE_SWORD),
-            ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE} : new ItemStack[]{ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE,
-            ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, new ItemStack(Material.DIAMOND_SWORD),
             ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE, ClayTechItems.BLIND_CORE};
     public final static ItemStack[] POISON_EYE = {new ItemStack(Material.SPIDER_EYE),
             new ItemStack(Material.SPIDER_EYE), new ItemStack(Material.SPIDER_EYE), new ItemStack(Material.SPIDER_EYE),
@@ -56,11 +53,8 @@ public class ClayTechMachineRecipes {
             ClayTechItems.ADVANCED_CONFUSION_CORE, new ItemStack(Material.BOW), ClayTechItems.ADVANCED_CONFUSION_CORE,
             ClayTechItems.ADVANCED_BLIND_CORE, ClayTechItems.ADVANCED_POISON_CORE,
             ClayTechItems.ADVANCED_SLOWNESS_CORE};
-    public final static ItemStack[] POISON_SWORD = SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16) ? new ItemStack[]{ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE,
+    public final static ItemStack[] POISON_SWORD = new ItemStack[]{ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE,
             ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE, new ItemStack(Material.NETHERITE_SWORD),
-            ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE,
-            ClayTechItems.POISON_CORE} : new ItemStack[]{ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE,
-            ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE, new ItemStack(Material.DIAMOND_SWORD),
             ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE, ClayTechItems.POISON_CORE,
             ClayTechItems.POISON_CORE};
     public final static ItemStack[] ANTI_SLOWNESS_BOOTS = {ClayTechItems.SLOWNESS_CORE, ClayTechItems.SLOWNESS_CORE,
@@ -231,22 +225,9 @@ public class ClayTechMachineRecipes {
     ;
     public final static ItemStack[] CLAY_FUSION_INGOT_O = {null, null, null, null, ClayTechItems.CLAY_FUSION_ORE, null,
             null, null, null};
-    public static ItemStack[] HONEY_SWEET = SlimefunPlugin.getMinecraftVersion()
-            .isAtLeast(MinecraftVersion.MINECRAFT_1_15)
-            ? new ItemStack[]{new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SWEET_BERRIES),
+    public static ItemStack[] HONEY_SWEET = new ItemStack[]{new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SWEET_BERRIES),
             new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SUGAR),
             new ItemStack(Material.HONEY_BOTTLE), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SUGAR), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SUGAR)}
-            : SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_14)
-            ? new ItemStack[]{new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.GOLD_INGOT), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SUGAR), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SUGAR)}
-            : new ItemStack[]{new ItemStack(Material.SUGAR), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.SUGAR), new ItemStack(Material.SUGAR),
-            new ItemStack(Material.GOLD_INGOT), new ItemStack(Material.SUGAR),
             new ItemStack(Material.SUGAR), new ItemStack(Material.SUGAR),
             new ItemStack(Material.SUGAR)};
     static ItemStack newMotor;

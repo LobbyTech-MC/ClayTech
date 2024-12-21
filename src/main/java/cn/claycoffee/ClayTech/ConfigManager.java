@@ -15,18 +15,18 @@ public class ConfigManager {
     private final FileConfiguration existingConfig;
     private final File existingFile;
 
+    public ConfigManager(String ymlName) {
+        existingFile = new File(ClayTech.getInstance().getDataFolder(), ymlName);
+        existingConfig = YamlConfiguration.loadConfiguration(existingFile);
+        setupDefaultConfig(ymlName);
+    }
+
     public FileConfiguration getConfig() {
         return existingConfig;
     }
 
     public File getFile() {
         return existingFile;
-    }
-
-    public ConfigManager(String ymlName) {
-        setupDefaultConfig(ymlName);
-        existingFile = new File(ClayTech.getInstance().getDataFolder(), ymlName);
-        existingConfig = YamlConfiguration.loadConfiguration(existingFile);
     }
 
     private void setupDefaultConfig(String ymlName) {

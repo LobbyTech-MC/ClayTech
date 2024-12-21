@@ -27,6 +27,7 @@ public class Utils {
         }
         return false;
     }
+
     public static boolean ExistInList(Object a, List<Object> b) {
         for (Object o : b) {
             if (o.equals(a)) {
@@ -35,6 +36,7 @@ public class Utils {
         }
         return false;
     }
+
     public static boolean ExistInList(String a, List<String> b) {
         for (String s : b) {
             if (s.equals(a)) {
@@ -102,5 +104,47 @@ public class Utils {
 
         meta.setLore(lore);
         itemStack.setItemMeta(meta);
+    }
+
+    public static ItemStack addLore(ItemStack itemStack, String lore) {
+        if (itemStack == null || itemStack.getType() == Material.AIR) {
+            return null;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return null;
+        }
+
+        List<String> loreList = meta.getLore();
+        if (loreList == null) {
+            loreList = new ArrayList<>();
+        }
+
+        loreList.add(lore);
+        meta.setLore(loreList);
+        itemStack.setItemMeta(meta);
+        return itemStack;
+    }
+
+    public static ItemStack addLore(ItemStack itemStack, List<String> lore) {
+        if (itemStack == null || itemStack.getType() == Material.AIR) {
+            return null;
+        }
+
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) {
+            return null;
+        }
+
+        List<String> loreList = meta.getLore();
+        if (loreList == null) {
+            loreList = new ArrayList<>();
+        }
+
+        loreList.addAll(lore);
+        meta.setLore(loreList);
+        itemStack.setItemMeta(meta);
+        return itemStack;
     }
 }

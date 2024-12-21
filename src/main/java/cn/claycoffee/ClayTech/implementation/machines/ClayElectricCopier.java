@@ -8,14 +8,9 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -99,21 +94,21 @@ public class ClayElectricCopier extends ANewContainer {
             ItemStack output = inv.getItemInSlot(20);
             if (inv.getItemInSlot(19).getType() == Material.WRITABLE_BOOK && inv.getItemInSlot(20).getType() == Material.WRITABLE_BOOK) {
                 // Mode I
-                mode.put(b,1);
+                mode.put(b, 1);
             } else if (inv.getItemInSlot(19).getType() == Material.WRITTEN_BOOK && inv.getItemInSlot(20).getType() == Material.WRITABLE_BOOK) {
                 // Mode II
-                mode.put(b,2);
+                mode.put(b, 2);
             } else if (inv.getItemInSlot(19).getType() == Material.WRITABLE_BOOK && inv.getItemInSlot(20).getType() == Material.WRITTEN_BOOK) {
                 // Mode II
-                mode.put(b,2);
-            } else mode.put(b,0);;
+                mode.put(b, 2);
+            } else mode.put(b, 0);
+            ;
             if (mode.get(b) > 0) {
                 BookMeta sourceMeta = (BookMeta) input.getItemMeta();
                 MachineRecipe r;
-                if(mode.get(b) == 1) {
-                   r = new MachineRecipe(sourceMeta.getPages().size() * 4, new ItemStack[]{}, new ItemStack[]{input});
-                }
-                else {
+                if (mode.get(b) == 1) {
+                    r = new MachineRecipe(sourceMeta.getPages().size() * 4, new ItemStack[]{}, new ItemStack[]{input});
+                } else {
                     BookMeta copyMeta = (BookMeta) output.getItemMeta();
                     copyMeta.setPages(sourceMeta.getPages());
                     copyMeta.setGeneration(BookMeta.Generation.COPY_OF_ORIGINAL);

@@ -1,8 +1,6 @@
 package cn.claycoffee.ClayTech.implementation.guis;
 
-import cn.claycoffee.ClayTech.api.exceptions.AlreadyProtectedException;
 import cn.claycoffee.ClayTech.utils.Lang;
-import cn.claycoffee.ClayTech.utils.Utils;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -27,19 +25,20 @@ public class ClayAirLockerGUI extends ChestMenu {
 
     private int size;
     private boolean isProtected;
-    public boolean isProtected() {
-        return isProtected;
-    }
-
-    public int getSize() {
-        return size;
-    }
 
     public ClayAirLockerGUI(int size, String title, boolean isProtected, Block b) {
         super(title);
         this.b = b;
         this.size = size;
         this.isProtected = isProtected;
+    }
+
+    public boolean isProtected() {
+        return isProtected;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     public void init() {

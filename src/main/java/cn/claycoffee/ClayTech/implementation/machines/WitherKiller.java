@@ -2,9 +2,9 @@ package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.implementation.abstractMachines.ACraftingTable;
 import cn.claycoffee.ClayTech.utils.Lang;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

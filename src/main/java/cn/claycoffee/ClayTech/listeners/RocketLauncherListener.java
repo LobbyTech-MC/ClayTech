@@ -1,29 +1,16 @@
 package cn.claycoffee.ClayTech.listeners;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.Planet;
-import cn.claycoffee.ClayTech.api.events.RocketLandEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
-import cn.claycoffee.ClayTech.utils.PlanetUtils;
-import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +48,7 @@ public class RocketLauncherListener implements Listener {
                             Planet[] pl2 = pl.toArray(new Planet[pl.size()]);
                             List<Integer> d = new ArrayList<Integer>();
                             for (Planet p1 : pl2) {
-                            //    d.add((Integer) PlanetUtils.getDistance(current, p1));
+                                //    d.add((Integer) PlanetUtils.getDistance(current, p1));
                             }
                             Integer[] distance = d.toArray(new Integer[d.size()]);
                             for (int i = 0; i < distance.length; i++) {
@@ -208,22 +195,22 @@ public class RocketLauncherListener implements Listener {
                 if (e.getRawSlot() == 46) {
                     // 上一页
                     //if (b != null) {
-                        //if (Utils.getMetadata(b, "currentPage") != null) {
-                        //    currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
-                        //}
-                        if (currentPage > 1) {
-                            currentPage -= 1;
+                    //if (Utils.getMetadata(b, "currentPage") != null) {
+                    //    currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
+                    //}
+                    if (currentPage > 1) {
+                        currentPage -= 1;
                         //    Utils.setMetadata(b, "currentPage", currentPage + "");
                         //    inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
-                        } else {
-                            e.setCancelled(true);
-                            p.openInventory(inv);
-                        }
+                    } else {
+                        e.setCancelled(true);
+                        p.openInventory(inv);
                     }
                 }
-                if (e.getRawSlot() == 52) {
-                    // 下一页
-                    // todo
+            }
+            if (e.getRawSlot() == 52) {
+                // 下一页
+                // todo
                     /*
                     if (b != null) {
                         if (Utils.getMetadata(b, "currentPage") != null) {
@@ -240,7 +227,7 @@ public class RocketLauncherListener implements Listener {
                     }
 
                      */
-                }
             }
         }
+    }
 }

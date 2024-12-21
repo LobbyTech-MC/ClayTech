@@ -2,12 +2,15 @@ package cn.claycoffee.ClayTech.api;
 
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ConfigManager;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
+import org.bukkit.World;
 import org.bukkit.World.Environment;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.util.Random;
@@ -30,7 +33,7 @@ public class Planet {
     private boolean cold;
 
     public Planet(String planetName, ItemStack displayItem, ChunkGenerator planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) throws IOException {
+                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld;
@@ -46,7 +49,11 @@ public class Planet {
             } else {
                 f.set(this.planetName, false);
             }
-            f.save(planet.getFile());
+            try {
+                f.save(planet.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (!f.contains(this.planetName + "-spawnMobs")) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
@@ -56,7 +63,11 @@ public class Planet {
                 f.set(this.planetName + "-spawnMobs", false);
                 this.spawnMob = false;
             }
-            f.save(planet.getFile());
+            try {
+                f.save(planet.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             this.spawnMob = f.getBoolean(this.planetName + "-spawnMobs");
         }
@@ -64,7 +75,7 @@ public class Planet {
     }
 
     public Planet(String planetName, ItemStack displayItem, World planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) throws IOException {
+                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld.getGenerator();
@@ -79,7 +90,11 @@ public class Planet {
             } else {
                 f.set(this.planetName, false);
             }
-            f.save(planet.getFile());
+            try {
+                f.save(planet.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (!f.contains(this.planetName + "-spawnMobs")) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
@@ -89,7 +104,11 @@ public class Planet {
                 f.set(this.planetName + "-spawnMobs", false);
                 this.spawnMob = false;
             }
-            f.save(planet.getFile());
+            try {
+                f.save(planet.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             this.spawnMob = f.getBoolean(this.planetName + "-spawnMobs");
         }
