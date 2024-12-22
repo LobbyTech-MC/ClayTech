@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SlimefunUtil {
+    // todo: use constants instead of static variables
     public static int id = 950230;
 
     public static @NotNull ItemBuilder newItem() {
@@ -111,6 +112,7 @@ public class SlimefunUtil {
         }
 
         public @NotNull ItemBuilder withItem(SlimefunItemStack itemStack) {
+            itemStack = new SlimefunItemStack("CLAYTECH_" + itemStack.getItemId(), itemStack);
             this.itemStack = itemStack;
             return this;
         }
