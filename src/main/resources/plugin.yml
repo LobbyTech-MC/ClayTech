@@ -1,5 +1,5 @@
 name: ClayTech-Changed
-main: cn.claycoffee.ClayTech.ClayTech
+main: cn.claycoffee.clayTech.ClayTech
 version: ${project.version}
 api-version: 1.20
 author: ClayCoffee
