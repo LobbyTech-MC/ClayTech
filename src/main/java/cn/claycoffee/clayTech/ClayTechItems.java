@@ -1,6 +1,7 @@
 package cn.claycoffee.clayTech;
 
 import cn.claycoffee.clayTech.utils.ItemUtil;
+import cn.claycoffee.clayTech.utils.KeyUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -261,47 +262,52 @@ public class ClayTechItems {
     public static final SlimefunItemStack REINFORCED_ALLOY_PICKAXE = getSlimefunItemStack(Material.IRON_PICKAXE, Lang.readItemText("REINFORCED_ALLOY_PICKAXE"), "REINFORCED_ALLOY_PICKAXE");
     public static final SlimefunItemStack CLAY_ALLOY_PICKAXE = getSlimefunItemStack(Material.IRON_PICKAXE, Lang.readItemText("CLAY_ALLOY_PICKAXE"), "CLAY_ALLOY_PICKAXE");
     public static final SlimefunItemStack CLAY_ALLOY_HELMET = getSlimefunItemStack(Material.IRON_HELMET, Lang.readItemText("CLAY_ALLOY_HELMET"), "CLAY_ALLOY_HELMET");
-    public static final SlimefunItemStack CLAY_ALLOY_CHESTPLATE = getSlimefunItemStack(Material.IRON_HELMET, Lang.readItemText("CLAY_ALLOY_CHESTPLATE"), "CLAY_ALLOY_CHESTPLATE");
-    public static final SlimefunItemStack CLAY_ALLOY_LEGGINGS = getSlimefunItemStack(Material.IRON_HELMET, Lang.readItemText("CLAY_ALLOY_LEGGINGS"), "CLAY_ALLOY_LEGGINGS");
-    public static final SlimefunItemStack CLAY_ALLOY_BOOTS = getSlimefunItemStack(Material.IRON_HELMET, Lang.readItemText("CLAY_ALLOY_BOOTS"), "CLAY_ALLOY_BOOTS");
-    private static final NamespacedKey N_BASIC = new NamespacedKey(ClayTech.plugin, "clayitemgroup");
+    public static final SlimefunItemStack CLAY_ALLOY_CHESTPLATE = getSlimefunItemStack(Material.IRON_CHESTPLATE, Lang.readItemText("CLAY_ALLOY_CHESTPLATE"), "CLAY_ALLOY_CHESTPLATE");
+    public static final SlimefunItemStack CLAY_ALLOY_LEGGINGS = getSlimefunItemStack(Material.IRON_LEGGINGS, Lang.readItemText("CLAY_ALLOY_LEGGINGS"), "CLAY_ALLOY_LEGGINGS");
+    public static final SlimefunItemStack CLAY_ALLOY_BOOTS = getSlimefunItemStack(Material.IRON_BOOTS, Lang.readItemText("CLAY_ALLOY_BOOTS"), "CLAY_ALLOY_BOOTS");
+    private static final NamespacedKey N_BASIC = KeyUtil.newKey("claytech_basic");
     // 分类
     public static final LockedItemGroup C_BASICS = new LockedItemGroup(N_BASIC,
             new CustomItemStack(Material.CLAY, Lang.readCategoriesText("Basic")),
-            new NamespacedKey(Slimefun.instance(), "basic_machines"));
+            KeyUtil.newKey(Slimefun.instance(), "basic_machines"));
     public static final LockedItemGroup C_WEAPONS = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup1"),
+            KeyUtil.newKey("claytech_weapons"),
             new CustomItemStack(Material.DIAMOND_SWORD, Lang.readCategoriesText("Weapons")), N_BASIC);
-    public static final LockedItemGroup C_FOOD = new LockedItemGroup(new NamespacedKey(ClayTech.plugin, "clayitemgroup"),
+    public static final LockedItemGroup C_FOOD = new LockedItemGroup(
+            KeyUtil.newKey("claytech_food"),
             new CustomItemStack(Material.ENCHANTED_GOLDEN_APPLE, Lang.readCategoriesText("Food")), N_BASIC);
     public static final LockedItemGroup C_FOODMATERIALS = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup2"),
+            KeyUtil.newKey( "claytech_foodmaterials"),
             new CustomItemStack(Material.COCOA_BEANS, Lang.readCategoriesText("FoodMakings")), N_BASIC);
-    public static final LockedItemGroup C_DRINK = new LockedItemGroup(new NamespacedKey(ClayTech.plugin, "clayitemgroup"),
+    public static final LockedItemGroup C_DRINK = new LockedItemGroup(
+            KeyUtil.newKey("claytech_drink"),
             new CustomItemStack(Material.WATER_BUCKET, Lang.readCategoriesText("Drink")), N_BASIC);
     public static final LockedItemGroup C_MATERIALS = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup3"),
+            KeyUtil.newKey("claytech_materials"),
             new CustomItemStack(Material.COAL, Lang.readCategoriesText("Makings")), N_BASIC);
-    public static final LockedItemGroup C_ARMORS = new LockedItemGroup(new NamespacedKey(ClayTech.plugin, "clayitemgroup"),
+    public static final LockedItemGroup C_ARMORS = new LockedItemGroup(
+            KeyUtil.newKey("claytech_armors"),
             new CustomItemStack(Material.DIAMOND_CHESTPLATE, Lang.readCategoriesText("Armors")), N_BASIC);
     public static final LockedItemGroup C_DECORATES = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup4"),
+            KeyUtil.newKey("claytech_decorates"),
             new CustomItemStack(Material.PLAYER_HEAD, Lang.readCategoriesText("Decorates")), N_BASIC);
     public static final LockedItemGroup C_ELEMENTS = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup5"),
+            KeyUtil.newKey("claytech_elements"),
             new CustomItemStack(Material.FLOWER_POT, Lang.readCategoriesText("Elements")), N_BASIC);
     public static final LockedItemGroup C_MACHINES = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup6"),
+            KeyUtil.newKey("claytech_machines"),
             new CustomItemStack(Material.FURNACE, Lang.readCategoriesText("Machines")), N_BASIC);
-    public static final LockedItemGroup C_OTHER = new LockedItemGroup(new NamespacedKey(ClayTech.plugin, "clayitemgroup7"),
+    public static final LockedItemGroup C_OTHER = new LockedItemGroup(
+            KeyUtil.newKey("claytech_other"),
             new CustomItemStack(Material.POWERED_RAIL, Lang.readCategoriesText("Other")), N_BASIC);
-    public static final LockedItemGroup C_TOOLS = new LockedItemGroup(new NamespacedKey(ClayTech.plugin, "clayitemgroup8"),
+    public static final LockedItemGroup C_TOOLS = new LockedItemGroup(
+            KeyUtil.newKey("claytech_tools"),
             new CustomItemStack(Material.DIAMOND_PICKAXE, Lang.readCategoriesText("Tools")), N_BASIC);
     public static final LockedItemGroup C_ORESTHINGS = new LockedItemGroup(
-            new NamespacedKey(ClayTech.plugin, "clayitemgroup9"),
+            KeyUtil.newKey("claytech_oresthings"),
             new CustomItemStack(Material.BRICK, Lang.readCategoriesText("OreThings")), N_BASIC);
-    public static ItemStack HONEY_SWEET = new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
-            Lang.readItemLore("HONEY_SWEET"));
+    public static SlimefunItemStack HONEY_SWEET = new SlimefunItemStack("HONEY_SWEET", new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
+            Lang.readItemLore("HONEY_SWEET")));
 
     public static SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER")));
 

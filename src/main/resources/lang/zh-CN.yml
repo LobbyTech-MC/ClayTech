@@ -29,8 +29,6 @@ General:
   Cant_Eat_Message: "&c您已经饱了,不用再吃东西了!"
   Wash_Message: "&6清洗完毕!!"
   Cant_Wash_Message: "&c无法清洗!你没有水桶!"
-  Before_115: "&c检测到您的服务器运行在1.15版本以下,可能导致有的物品无法注册,但仍可正常运行本插件."
-  Not_compatible: "&c对不起,本插件仅限1.14.x,1.15.x,1.16.x的服务器使用!请尽快升级您的服务器.."
   TNT_EXPLOSION_CREATER_WAIT: "&aTNT将在5秒钟后放置。 请尽快逃离，避免受到伤害。"
   TNT_EXPLOSION_CREATER_NO_TNT: "&c您的背包里没有TNT，无法放置!"
   TNT_EXPLOSION_CREATER_SUCCESS: "&aTNT成功爆炸。"
@@ -214,7 +212,8 @@ Items:
   ELEMENT_OXYGEN: "&e氧元素"
   ELEMENT_OXYGEN_LORE:
     - "&e氧元素"
-    - "&74P + 5O2 =点燃=2P2O5"
+    - "            点燃      "
+    - "&74P + 5O₂ =====2P₂O₅"
     - "&7在元素提取机中放入草方块三个获得"
     - "<cantplace>"
   ELEMENT_CARBON: "&e碳元素"
@@ -580,6 +579,9 @@ Items:
   CLAY_AIR_LOCK_BLOCK_LORE:
     - "&3与气闸门一同使用"
     - "&3当气闸门被踩时生效"
+  CLAYCOFFEE_HEAD: "ClayCoffee 的头"
+  CLOCK_C : "&b时钟"
+  LANTERN_C : "&b灯笼"
   # End Items
 Researches:
   CLAYTECH_ARMORS_I: "基础效果装备"
@@ -622,6 +624,17 @@ Researches:
   CLAYTECH_COPIER: "复印机"
   CLAYTECH_WITHER_KILLER: "沙雕机"
   CLAYTECH_SPACETHINGS_I: "气闸门"
+  ANTI_SLOWNESS_ARMOR: "抗慢性装甲"
+  CLAY_ALLOY_ARMORS: "粘土合金装备"
+  CLAYTECH_COCOA_BEAN: "可可豆"
+  CLAYTECH_PLASTIC: "塑料"
+  CLAYTECH_DRINK_BOTTLE: "瓶子"
+  CLAYTECH_DIRTY_DRINK_BOTTLE: "脏瓶子"
+  CLAYTECH_DIRTY_TEA: "脏茶"
+  CLAYTECH_RAW_TEA: "生茶"
+  CLAYTECH_TEA_POWDER: "茶粉"
+  CLAYTECH_LEMON_POWDER: "柠檬粉"
+  CLAYTECH_FUEL: "粘土燃料"
 MachineRecipes:
   CLAY_FUSION_MACHINE: "&a&o在粘土融合器内合成"
   CLAY_ELETRIC_CAULDRON: "&a&o在电锅内合成"

@@ -5,9 +5,9 @@ import cn.claycoffee.clayTech.ClayTech;
 import java.util.List;
 
 public class Lang {
-    public static String rocketPrefix = readGeneralText("RocketPrefix");
-    public static String spaceSuitPrefix = readGeneralText("SpaceSuitPrefix");
-    public static String oxygenDistributerPrefix = readGeneralText("OxygenDistributerPrefix");
+    public static String rocketPrefix = readGeneralText("Rocket");
+    public static String spaceSuitPrefix = readGeneralText("SpaceSuit");
+    public static String oxygenDistributerPrefix = readGeneralText("OxygenDistributer");
 
     public static String readItemText(String name) {
         return ClayTech.getLocalizationService().getString("Items." + name);

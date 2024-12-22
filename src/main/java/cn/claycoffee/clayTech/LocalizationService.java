@@ -1,5 +1,7 @@
 package cn.claycoffee.clayTech;
 
+import cn.claycoffee.clayTech.utils.KeyUtil;
+import cn.claycoffee.clayTech.utils.Lang;
 import com.google.common.base.Preconditions;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -9,7 +11,6 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -265,19 +266,19 @@ public class LocalizationService {
     @Nonnull
     @ParametersAreNonnullByDefault
     public RecipeType getRecipeType(String id, Material material, String... extraLore) {
-        return new RecipeType(new NamespacedKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, material, extraLore));
+        return new RecipeType(KeyUtil.newKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, material, extraLore));
     }
 
     @Nonnull
     @ParametersAreNonnullByDefault
     public RecipeType getRecipeType(String id, String texture, String... extraLore) {
-        return new RecipeType(new NamespacedKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, texture, extraLore));
+        return new RecipeType(KeyUtil.newKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, texture, extraLore));
     }
 
     @Nonnull
     @ParametersAreNonnullByDefault
     public RecipeType getRecipeType(String id, ItemStack itemStack, String... extraLore) {
-        return new RecipeType(new NamespacedKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, itemStack, extraLore));
+        return new RecipeType(KeyUtil.newKey(this.getPlugin(), id), this.getItemBy(this.recipesKey, id, itemStack, extraLore));
     }
 
     public void setIdPrefix(String idPrefix) {
@@ -317,6 +318,25 @@ public class LocalizationService {
     @Nonnull
     public String color(@Nonnull String str) {
         str = ChatColor.translateAlternateColorCodes('&', str);
+        if (str.contains("<") && str.contains(">")) {
+            str = str.replaceAll("<no_premission>", Lang.readGeneralText("no_permission"));
+            str = str.replaceAll("<cantplace>", Lang.readGeneralText("CantPlace"));
+            str = str.replaceAll("<cantbreak>", Lang.readGeneralText("CantBreak"));
+            str = str.replaceAll("<blindfive>", Lang.readGeneralText("Blind_5_effect"));
+            str = str.replaceAll("<slownessfive>", Lang.readGeneralText("Slowness_5_effect"));
+            str = str.replaceAll("<confusionfive>", Lang.readGeneralText("Confusion_5_effect"));
+            str = str.replaceAll("<poisonthree>", Lang.readGeneralText("Poison_3_effect"));
+            str = str.replaceAll("<antislownessthree>", Lang.readGeneralText("Anti_Slowness_3_effect"));
+            str = str.replaceAll("<durability>", Lang.readGeneralText("Durability"));
+            str = str.replaceAll("<canteat>", Lang.readGeneralText("CantEat"));
+            str = str.replaceAll("<cantinteract>", Lang.readGeneralText("CantInteract"));
+            str = str.replaceAll("<rocket>", Lang.readGeneralText("Rocket"));
+            str = str.replaceAll("<spacesuit>", Lang.readGeneralText("SpaceSuit"));
+            str = str.replaceAll("<fuel>", Lang.readGeneralText("Fuel"));
+            str = str.replaceAll("<oxygen>", Lang.readGeneralText("Oxygen"));
+            str = str.replaceAll("<protectlevel>", Lang.readGeneralText("ProtectLevel"));
+            str = str.replaceAll("<oxygendistributer>", Lang.readGeneralText("OxygenDistributer"));
+        }
         return str;
     }
 

@@ -162,7 +162,7 @@ public class SlimefunUtils {
                 throw new IllegalArgumentException("Items cannot be empty");
             }
 
-            Research research = new Research(KeyUtil.newKey(name), id, name, cost);
+            Research research = new Research(KeyUtil.newKey(String.valueOf(id)), id, name, cost);
             for (SlimefunItem item : items) {
                 research.addItems(item);
             }
@@ -178,14 +178,14 @@ public class SlimefunUtils {
     public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
         item = new SlimefunItemStack("CLAYTECH_" + id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
-        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
+        slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
         slimefunItem.register(ClayTech.getInstance());
     }
 
     public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch, ItemHandler[] handlers) {
         item = new SlimefunItemStack("CLAYTECH_" + id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
-        slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
+        slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
         for (ItemHandler handler : handlers) {
             slimefunItem.addItemHandler(handler);
         }

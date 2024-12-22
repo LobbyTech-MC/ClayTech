@@ -5,26 +5,26 @@ import cn.claycoffee.clayTech.aarewrite.api.Planet;
 import cn.claycoffee.clayTech.implementation.Planets.Earth;
 import cn.claycoffee.clayTech.implementation.Planets.Mars;
 import cn.claycoffee.clayTech.implementation.Planets.Moon;
-import cn.claycoffee.clayTech.implementation.items.Armors;
-import cn.claycoffee.clayTech.implementation.items.ClayFuelResource;
-import cn.claycoffee.clayTech.implementation.items.ClayBasic;
-import cn.claycoffee.clayTech.implementation.items.DrinkMakingStaff;
-import cn.claycoffee.clayTech.implementation.items.Drinks;
-import cn.claycoffee.clayTech.implementation.items.EffectItems;
-import cn.claycoffee.clayTech.implementation.items.Elements;
-import cn.claycoffee.clayTech.implementation.items.FoodMakingStaff;
-import cn.claycoffee.clayTech.implementation.items.Foods;
-import cn.claycoffee.clayTech.implementation.items.GoldenThings;
-import cn.claycoffee.clayTech.implementation.items.Ingots;
-import cn.claycoffee.clayTech.implementation.items.MachineMakingBasic;
-import cn.claycoffee.clayTech.implementation.items.Machines;
-import cn.claycoffee.clayTech.implementation.items.PotionAffectWeapons;
-import cn.claycoffee.clayTech.implementation.items.Railways;
-import cn.claycoffee.clayTech.implementation.items.RocketMakings;
-import cn.claycoffee.clayTech.implementation.items.Rockets;
-import cn.claycoffee.clayTech.implementation.items.Skulls;
-import cn.claycoffee.clayTech.implementation.items.Spacethings;
-import cn.claycoffee.clayTech.implementation.items.Tools;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Armors;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.ClayFuelResource;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.ClayBasic;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.DrinkMakingStaff;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Drinks;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.EffectItems;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Elements;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.FoodMakingStaff;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Foods;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.GoldenThings;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Ingots;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.MachineMakingBasic;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Machines;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.PotionAffectWeapons;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Railways;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.RocketMakings;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Rockets;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Skulls;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Spacethings;
+import cn.claycoffee.clayTech.aarewrite.implementation.items.Tools;
 import cn.claycoffee.clayTech.implementation.resources.ClayFuel;
 import cn.claycoffee.clayTech.aarewrite.core.listeners.BlockUseListener;
 import cn.claycoffee.clayTech.aarewrite.core.listeners.FoodDropListener;
@@ -359,125 +359,26 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     }
 
     private void registerSlimefun() {
-        try {
-            new Machines();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new ClayBasic();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new PotionAffectWeapons();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new GoldenThings();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Skulls();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Armors();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new DrinkMakingStaff();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Drinks();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new FoodMakingStaff();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Foods();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new MachineMakingBasic();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Elements();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Railways();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new EffectItems();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Ingots();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Tools();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new ClayFuelResource();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new RocketMakings();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Rockets();
-        } catch (IdConflictException ignored) {
-
-        }
-
-        try {
-            new Spacethings();
-        } catch (IdConflictException ignored) {
-
-        }
+        new ClayBasic();
+        new Machines();
+        new PotionAffectWeapons();
+        new GoldenThings();
+        new Skulls();
+        new Armors();
+        new DrinkMakingStaff();
+        new Drinks();
+        new FoodMakingStaff();
+        new Foods();
+        new MachineMakingBasic();
+        new Elements();
+        new Railways();
+        new EffectItems();
+        new Ingots();
+        new Tools();
+        new ClayFuelResource();
+        new RocketMakings();
+        new Rockets();
+        new Spacethings();
     }
 
 

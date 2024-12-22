@@ -2,6 +2,7 @@ package cn.claycoffee.clayTech.implementation.resources;
 
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechItems;
+import cn.claycoffee.clayTech.utils.KeyUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.SlimefunUtils;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
@@ -11,7 +12,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
 public class ClayFuel implements GEOResource {
-    private final NamespacedKey key = new NamespacedKey(ClayTech.getInstance(), "CLAY_FUEL");
+    private final NamespacedKey key = KeyUtil.newKey("CLAY_FUEL");
 
     public ClayFuel() {
         SlimefunUtils.registerResource(this);
