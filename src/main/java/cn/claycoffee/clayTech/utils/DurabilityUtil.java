@@ -7,11 +7,12 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class DurabilityUtil {
-    public static int getDurability(ItemStack itemStack) {
+    public static int getDurability(@Nullable ItemStack itemStack) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return 0;
         }
@@ -28,7 +29,7 @@ public class DurabilityUtil {
         return durability;
     }
 
-    public static void setDurability(ItemStack itemStack, int durability) {
+    public static void setDurability(@Nullable ItemStack itemStack, int durability) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return;
         }

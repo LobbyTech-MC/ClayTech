@@ -24,7 +24,7 @@ public class CraftingTable extends ACraftingTable {
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.CRAFTING_TABLE);
     }
 

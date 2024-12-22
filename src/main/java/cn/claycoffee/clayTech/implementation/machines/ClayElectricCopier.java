@@ -6,16 +6,16 @@ import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,25 +30,20 @@ import java.util.Map;
 
 public class ClayElectricCopier extends ANewContainer {
     private static final Map<Block, Integer> mode = new HashMap<>();
-    private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
     public ClayElectricCopier(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                               ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 
-    @Override
-    public MachineProcessor<CraftingOperation> getMachineProcessor() {
-        return processor;
-    }
 
     @Override
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_ELECTRIC_COPIER");
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.BOOK);
     }
 
@@ -62,47 +57,29 @@ public class ClayElectricCopier extends ANewContainer {
         return 256;
     }
 
-    // == todo ==
     @Override
-    public void constructMenu(BlockMenuPreset preset) {
-
-    }
-
-    @Override
-    public MachineRecipe findNextRecipe(BlockMenu inv) {
+    public @Nullable MachineRecipe findNextRecipe(BlockMenu inv) {
         return null;
     }
 
-    @Override
-    public int[] getInputSlots() {
-        return new int[0];
-    }
-
-    @Override
-    public int[] getOutputSlots() {
-        return new int[0];
-    }
-
-    // == todo ==
-
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         if (inv == null) {
             return;
         }
 
-        CraftingOperation currentOperation = processor.getOperation(b);
+        CraftingOperation currentOperation = getMachineProcessor().getOperation(b);
 
         if (currentOperation != null) {
             if (takeCharge(b.getLocation())) {
 
                 if (!currentOperation.isFinished()) {
-                    processor.updateProgressBar(inv, 22, currentOperation);
+                    getMachineProcessor().updateProgressBar(inv, 22, currentOperation);
                     currentOperation.addProgress(1);
                 } else {
                     inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
-                    processor.endOperation(b);
-                    inv.addItem(getInputSlots()[0], processor.getOperation(b).getIngredients()[0]);
+                    getMachineProcessor().endOperation(b);
+                    inv.addItem(getInputSlots()[0], getMachineProcessor().getOperation(b).getIngredients()[0]);
                 }
             }
         } else {
@@ -133,7 +110,7 @@ public class ClayElectricCopier extends ANewContainer {
                     c.setItemMeta(copyMeta);
                     r = new MachineRecipe(sourceMeta.getPages().size() * 4, new ItemStack[]{input}, new ItemStack[]{c});
                 }
-                processor.startOperation(b, new CraftingOperation(r));
+                getMachineProcessor().startOperation(b, new CraftingOperation(r));
             }
         }
     }

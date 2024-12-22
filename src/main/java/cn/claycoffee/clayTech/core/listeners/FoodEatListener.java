@@ -10,11 +10,12 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class FoodEatListener implements Listener {
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerInteractEvent(PlayerInteractEvent e) {
+    public void PlayerInteractEvent(@NotNull PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             Player p = e.getPlayer();
             if (e.hasItem()) {

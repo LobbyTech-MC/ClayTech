@@ -4,9 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Called when a player drank a food. 当一个玩家喝粘土科技中的饮料的时候触发.
+ * Called when a player drank food. 当一个玩家喝粘土科技中的饮料的时候触发.
  */
 public class PlayerDrinkEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
@@ -18,7 +19,7 @@ public class PlayerDrinkEvent extends Event {
         this.drink = drink;
     }
 
-    public static HandlerList getHandlerList() {
+    public static @NotNull HandlerList getHandlerList() {
         return handlers;
     }
 
@@ -37,7 +38,7 @@ public class PlayerDrinkEvent extends Event {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return handlers;
     }
 }

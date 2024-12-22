@@ -3,9 +3,9 @@ package cn.claycoffee.clayTech.implementation.machines;
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechData;
 import cn.claycoffee.clayTech.ClayTechItems;
-import cn.claycoffee.clayTech.utils.ItemStackUtil;
-import cn.claycoffee.clayTech.api.events.RocketInjectFuelEvent;
 import cn.claycoffee.clayTech.api.ClayTechManager;
+import cn.claycoffee.clayTech.api.events.RocketInjectFuelEvent;
+import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.RocketUtil;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
@@ -39,6 +39,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,13 +58,13 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
             Lang.readMachinesText("SPLIT_LINE"));
     private static final Map<Block, ItemStack> item = new HashMap<>();
     private static final Map<Block, ItemStack> itemFuel = new HashMap<>();
-    public static Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static Map<Block, Integer> progress = new HashMap<>();
+    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public RocketFuelInjector(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
-                              ItemStack[] recipe) {
+    public RocketFuelInjector(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType,
+                              ItemStack @NotNull [] recipe) {
 
         super(itemGroup, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::constructMenu);
@@ -71,7 +72,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         addItemHandler(onBlockBreak());
     }
 
-    protected BlockBreakHandler onBlockBreak() {
+    protected @NotNull BlockBreakHandler onBlockBreak() {
         return new SimpleBlockBreakHandler() {
 
             @Override
@@ -90,7 +91,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     }
 
     @Override
-    public EnergyNetComponentType getEnergyComponentType() {
+    public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -109,11 +110,11 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         return outputSlots;
     }
 
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_ROCKET_FUEL_INJECTOR");
     }
 
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 
@@ -125,11 +126,11 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         return 1;
     }
 
-    public String getMachineIdentifier() {
+    public @NotNull String getMachineIdentifier() {
         return "CLAY_ROCKET_FUEL_INJECTOR";
     }
 
-    public void constructMenu(BlockMenuPreset preset) {
+    public void constructMenu(@NotNull BlockMenuPreset preset) {
         preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -153,7 +154,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == Material.AIR;
                 }
@@ -170,7 +171,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         return getProcessing(b) != null;
     }
 
-    public void registerRecipe(MachineRecipe recipe) {
+    public void registerRecipe(@NotNull MachineRecipe recipe) {
         recipe.setTicks(recipe.getTicks() / getSpeed());
         recipes.add(recipe);
     }
@@ -183,7 +184,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
+            public void tick(@NotNull Block b, SlimefunItem sf, SlimefunBlockData data) {
                 RocketFuelInjector.this.tick(b);
             }
 
@@ -194,7 +195,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         });
     }
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {
@@ -269,7 +270,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     }
 
     @Override
-    public MachineProcessor<CraftingOperation> getMachineProcessor() {
+    public @NotNull MachineProcessor<CraftingOperation> getMachineProcessor() {
         return processor;
     }
 }

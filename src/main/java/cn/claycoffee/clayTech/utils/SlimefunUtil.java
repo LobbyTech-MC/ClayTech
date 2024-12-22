@@ -11,6 +11,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,22 +20,22 @@ import java.util.List;
 public class SlimefunUtil {
     public static int id = 950230;
 
-    public static ItemBuilder newItem() {
+    public static @NotNull ItemBuilder newItem() {
         return new ItemBuilder();
     }
 
-    public static ResearchBuilder newResearch() {
+    public static @NotNull ResearchBuilder newResearch() {
         return new ResearchBuilder();
     }
 
-    public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
+    public static void registerItem(@NotNull ItemGroup itemGroup, @NotNull String id, SlimefunItemStack item, @NotNull String ResearchName, int cost, @NotNull RecipeType Recipetype, ItemStack @NotNull [] recipe, boolean registerResearch) {
         item = new SlimefunItemStack("CLAYTECH_" + id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
         slimefunItem.register(ClayTech.getInstance());
     }
 
-    public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch, ItemHandler[] handlers) {
+    public static void registerItem(@NotNull ItemGroup itemGroup, @NotNull String id, SlimefunItemStack item, @NotNull String ResearchName, int cost, @NotNull RecipeType Recipetype, ItemStack @NotNull [] recipe, boolean registerResearch, ItemHandler @NotNull [] handlers) {
         item = new SlimefunItemStack("CLAYTECH_" + id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
@@ -44,12 +45,12 @@ public class SlimefunUtil {
         slimefunItem.register(ClayTech.getInstance());
     }
 
-    public static void registerItem(ItemGroup itemGroup, String id, ItemStack itemStack, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
+    public static void registerItem(@NotNull ItemGroup itemGroup, @NotNull String id, @NotNull ItemStack itemStack, @NotNull String ResearchName, int cost, @NotNull RecipeType Recipetype, ItemStack @NotNull [] recipe, boolean registerResearch) {
         registerItem(itemGroup, id, new SlimefunItemStack(id, itemStack), ResearchName, cost, Recipetype, recipe, registerResearch);
     }
 
-    public static void registerArmors(ItemGroup itemGroup, String nameprefix, ItemStack[] ItemStack, String ResearchName,
-                                      int cost, RecipeType Recipetype, ItemStack MaterialStack, boolean registerResearch) {
+    public static void registerArmors(@NotNull ItemGroup itemGroup, String nameprefix, ItemStack @NotNull [] ItemStack, String ResearchName,
+                                      int cost, @NotNull RecipeType Recipetype, ItemStack MaterialStack, boolean registerResearch) {
 
         nameprefix = "CLAYTECH_" + nameprefix;
         SlimefunItemStack HELMET = new SlimefunItemStack(nameprefix + "_HELMET", ItemStack[0]);
@@ -67,7 +68,7 @@ public class SlimefunUtil {
         BOOTS_I.register(ClayTech.getInstance());
     }
 
-    public static ItemStack[] getArmorsStack(ArmorType type, ItemStack itemStack) {
+    public static ItemStack @NotNull [] getArmorsStack(@NotNull ArmorType type, ItemStack itemStack) {
         return switch (type) {
             case HELMET -> new ItemStack[]{
                     itemStack, itemStack, itemStack,
@@ -88,7 +89,7 @@ public class SlimefunUtil {
         };
     }
 
-    public static void registerResource(GEOResource res) {
+    public static void registerResource(@NotNull GEOResource res) {
         res.register();
         Slimefun.getRegistry().getGEOResources().add(res);
     }
@@ -104,12 +105,12 @@ public class SlimefunUtil {
         private RecipeType recipeType;
         private ItemStack[] recipe;
 
-        public ItemBuilder withItemGroup(ItemGroup itemGroup) {
+        public @NotNull ItemBuilder withItemGroup(ItemGroup itemGroup) {
             this.itemGroup = itemGroup;
             return this;
         }
 
-        public ItemBuilder withItem(SlimefunItemStack itemStack) {
+        public @NotNull ItemBuilder withItem(SlimefunItemStack itemStack) {
             this.itemStack = itemStack;
             return this;
         }
@@ -122,27 +123,27 @@ public class SlimefunUtil {
             return this;
         }
 
-        public ItemBuilder withRecipeType(RecipeType recipeType) {
+        public @NotNull ItemBuilder withRecipeType(RecipeType recipeType) {
             this.recipeType = recipeType;
             return this;
         }
 
-        public ItemBuilder withRecipe(ItemStack[] recipe) {
+        public @NotNull ItemBuilder withRecipe(ItemStack[] recipe) {
             this.recipe = recipe;
             return this;
         }
 
-        public ItemBuilder withHandler(ItemHandler handler) {
+        public @NotNull ItemBuilder withHandler(ItemHandler handler) {
             this.handlers.add(handler);
             return this;
         }
 
-        public ItemBuilder withHandlers(ItemHandler... handlers) {
+        public @NotNull ItemBuilder withHandlers(ItemHandler... handlers) {
             this.handlers.addAll(Arrays.asList(handlers));
             return this;
         }
 
-        public SlimefunItem build() {
+        public @NotNull SlimefunItem build() {
             if (itemGroup == null) {
                 throw new IllegalArgumentException("Item Group cannot be null");
             }
@@ -175,56 +176,56 @@ public class SlimefunUtil {
         private int id;
         private int cost;
 
-        public ResearchBuilder addItems(SlimefunItem... items) {
+        public @NotNull ResearchBuilder addItems(SlimefunItem... items) {
             this.items.addAll(Arrays.asList(items));
             return this;
         }
 
-        public ResearchBuilder addItems(SlimefunItemStack... items) {
+        public @NotNull ResearchBuilder addItems(SlimefunItemStack @NotNull ... items) {
             for (SlimefunItemStack item : items) {
                 this.items.add(SlimefunItem.getByItem(item));
             }
             return this;
         }
 
-        public ResearchBuilder addItems(ItemStack... items) {
+        public @NotNull ResearchBuilder addItems(ItemStack @NotNull ... items) {
             for (ItemStack item : items) {
                 this.items.add(SlimefunItem.getByItem(item));
             }
             return this;
         }
 
-        public ResearchBuilder addItem(SlimefunItem item) {
+        public @NotNull ResearchBuilder addItem(SlimefunItem item) {
             this.items.add(item);
             return this;
         }
 
-        public ResearchBuilder addItem(SlimefunItemStack item) {
+        public @NotNull ResearchBuilder addItem(SlimefunItemStack item) {
             this.items.add(SlimefunItem.getByItem(item));
             return this;
         }
 
-        public ResearchBuilder addItem(ItemStack item) {
+        public @NotNull ResearchBuilder addItem(ItemStack item) {
             this.items.add(SlimefunItem.getByItem(item));
             return this;
         }
 
-        public ResearchBuilder withId(int id) {
+        public @NotNull ResearchBuilder withId(int id) {
             this.id = id;
             return this;
         }
 
-        public ResearchBuilder withCost(int cost) {
+        public @NotNull ResearchBuilder withCost(int cost) {
             this.cost = cost;
             return this;
         }
 
-        public ResearchBuilder withName(String name) {
+        public @NotNull ResearchBuilder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Research build() {
+        public @NotNull Research build() {
             if (items.isEmpty()) {
                 throw new IllegalArgumentException("Items cannot be empty");
             }

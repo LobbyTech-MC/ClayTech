@@ -16,6 +16,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +51,7 @@ public abstract class ARocketTable extends AbstractMachine {
     }
 
     @Override
-    public void constructMenu(BlockMenuPreset preset) {
+    public void constructMenu(@NotNull BlockMenuPreset preset) {
         preset.addItem(5, BORDER_ITEM, ChestMenuUtils.getEmptyClickHandler());
         for (int eachID : BORDER) {
             preset.addItem(eachID, BORDER_ITEM, ChestMenuUtils.getEmptyClickHandler());
@@ -77,7 +79,7 @@ public abstract class ARocketTable extends AbstractMachine {
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == Material.AIR;
                 }
@@ -86,7 +88,7 @@ public abstract class ARocketTable extends AbstractMachine {
     }
 
     @Override
-    public MachineRecipe findNextRecipe(BlockMenu inv) {
+    public @Nullable MachineRecipe findNextRecipe(@NotNull BlockMenu inv) {
         MachineRecipe r = null;
         Map<Integer, Integer> found = new HashMap<>();
         int i;

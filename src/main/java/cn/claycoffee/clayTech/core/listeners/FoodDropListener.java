@@ -11,10 +11,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class FoodDropListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void BlockBreakEvent(BlockBreakEvent e) {
+    public void BlockBreakEvent(@NotNull BlockBreakEvent e) {
         if (!e.isCancelled()) {
             if (e.getPlayer().getGameMode() == GameMode.SURVIVAL) {
                 FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.OAK_LEAVES),
@@ -38,7 +39,7 @@ public class FoodDropListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerFishEvent(PlayerFishEvent e) {
+    public void PlayerFishEvent(@NotNull PlayerFishEvent e) {
         if (e.getState() == State.CAUGHT_FISH) {
             FoodUtil.fish(e, 1, 10, ClayTechItems.SNAIL_HEALTHY);
             try {

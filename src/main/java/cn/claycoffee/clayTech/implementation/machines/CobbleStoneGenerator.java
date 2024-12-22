@@ -31,6 +31,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,20 +48,20 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
             Lang.readMachinesText("SPLIT_LINE"));
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    public static Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static Map<Block, Integer> progress = new HashMap<>();
+    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public CobbleStoneGenerator(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                                ItemStack[] recipe) {
+    public CobbleStoneGenerator(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull String id, @NotNull RecipeType recipeType,
+                                ItemStack @NotNull [] recipe) {
         super(itemGroup, item, id, recipeType, recipe);
 
         createPreset(this, getInventoryTitle(), this::constructMenu);
         processor.setProgressBar(getProgressBar());
     }
 
-    protected BlockBreakHandler onBlockBreak() {
+    protected @NotNull BlockBreakHandler onBlockBreak() {
         return new SimpleBlockBreakHandler() {
 
             @Override
@@ -77,7 +78,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
         };
     }
 
-    private String getInventoryTitle() {
+    private @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_COBBLESTONE_GENERATOR");
     }
 
@@ -87,7 +88,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
     }
 
     @Override
-    public EnergyNetComponentType getEnergyComponentType() {
+    public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -96,7 +97,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
         return new int[]{22};
     }
 
-    public void constructMenu(BlockMenuPreset preset) {
+    public void constructMenu(@NotNull BlockMenuPreset preset) {
         for (int eachID : BORDER_A) {
             preset.addItem(eachID, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         }
@@ -115,7 +116,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == Material.AIR;
                 }
@@ -132,7 +133,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
+            public void tick(@NotNull Block b, SlimefunItem sf, SlimefunBlockData data) {
                 CobbleStoneGenerator.this.tick(b);
             }
 
@@ -150,7 +151,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
      * @return Whether charge was taken if its chargeable
      * @author TheBusyBiscuit
      */
-    protected boolean takeCharge(Location l) {
+    protected boolean takeCharge(@NotNull Location l) {
         Preconditions.checkNotNull(l, "Can't attempt to take charge from a null location!");
 
         if (isChargeable()) {
@@ -167,7 +168,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
         }
     }
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         CraftingOperation currentOperation = processor.getOperation(b);
 
@@ -194,7 +195,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
         }
     }
 
-    private ItemStack getProgressBar() {
+    private @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.MOSSY_COBBLESTONE);
     }
 
@@ -211,7 +212,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
     }
 
     @Override
-    public MachineProcessor<CraftingOperation> getMachineProcessor() {
+    public @NotNull MachineProcessor<CraftingOperation> getMachineProcessor() {
         return processor;
     }
 }

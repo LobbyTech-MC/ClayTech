@@ -28,7 +28,7 @@ public class WitherKiller extends ACraftingTable {
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.WITHER_SKELETON_SKULL);
     }
 

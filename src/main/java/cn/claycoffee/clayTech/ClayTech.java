@@ -1,9 +1,13 @@
 package cn.claycoffee.clayTech;
 
+import cn.claycoffee.clayTech.api.ClayTechManager;
 import cn.claycoffee.clayTech.api.objects.Planet;
 import cn.claycoffee.clayTech.core.managers.ConfigManager;
 import cn.claycoffee.clayTech.core.managers.ListenerManager;
 import cn.claycoffee.clayTech.core.services.LocalizationService;
+import cn.claycoffee.clayTech.core.worlds.Earth;
+import cn.claycoffee.clayTech.core.worlds.Mars;
+import cn.claycoffee.clayTech.core.worlds.Moon;
 import cn.claycoffee.clayTech.implementation.items.Armors;
 import cn.claycoffee.clayTech.implementation.items.ClayBasic;
 import cn.claycoffee.clayTech.implementation.items.ClayFuelResource;
@@ -24,10 +28,6 @@ import cn.claycoffee.clayTech.implementation.items.Rockets;
 import cn.claycoffee.clayTech.implementation.items.Skulls;
 import cn.claycoffee.clayTech.implementation.items.Spacethings;
 import cn.claycoffee.clayTech.implementation.items.Tools;
-import cn.claycoffee.clayTech.api.ClayTechManager;
-import cn.claycoffee.clayTech.core.worlds.Earth;
-import cn.claycoffee.clayTech.core.worlds.Mars;
-import cn.claycoffee.clayTech.core.worlds.Moon;
 import cn.claycoffee.clayTech.implementation.resources.ClayFuel;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.Metrics;
@@ -44,6 +44,7 @@ import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,11 +61,11 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     private static final boolean compatible = true;
     private static final List<Planet> planetList = new ArrayList<>();
     protected static ClayTech plugin;
-    private static String locale;
-    private static String highrailspeed;
-    private static String overworld = "";
+    private static @Nullable String locale;
+    private static @Nullable String highrailspeed;
+    private static @Nullable String overworld = "";
     private static boolean spacetravelneedperm;
-    private static String updateBranch;
+    private static @Nullable String updateBranch;
     private static FileConfiguration config;
     private static FileConfiguration defaultLang;
     private static boolean worldBorderEnabled;
@@ -210,7 +211,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return compatible;
     }
 
-    public static List<Planet> getPlanets() {
+    public static @NotNull List<Planet> getPlanets() {
         return planetList;
     }
 
@@ -319,7 +320,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         }
     }
 
-    private String languageCodeToLanguage(String code) {
+    private @NotNull String languageCodeToLanguage(@NotNull String code) {
         return switch (code.toUpperCase()) {
             case "ZH-CN" -> "Simplified Chinese";
             case "ZH-TW" -> "Traditional Chinese";
@@ -385,7 +386,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     }
 
     @Override
-    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, String id) {
+    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, @NotNull String id) {
         List<String> PlanetNameList = new ArrayList<>();
         List<Planet> PlanetList = getPlanets();
         for (Planet p : PlanetList) {

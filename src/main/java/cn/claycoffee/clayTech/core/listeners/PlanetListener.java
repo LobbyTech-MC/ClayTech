@@ -2,8 +2,8 @@ package cn.claycoffee.clayTech.core.listeners;
 
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechData;
-import cn.claycoffee.clayTech.api.objects.Planet;
 import cn.claycoffee.clayTech.api.ClayTechManager;
+import cn.claycoffee.clayTech.api.objects.Planet;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.PlanetUtil;
 import cn.claycoffee.clayTech.utils.RocketUtil;
@@ -37,11 +37,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 public class PlanetListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void EntitySpawnEvent(EntitySpawnEvent e) {
+    public void EntitySpawnEvent(@NotNull EntitySpawnEvent e) {
         Planet p = PlanetUtil.getPlanet(e.getEntity().getWorld());
         if (p != null) {
             if (!p.getMobSpawnable()) {
@@ -55,7 +56,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerChangeWorldEvent(PlayerChangedWorldEvent e) {
+    public void PlayerChangeWorldEvent(@NotNull PlayerChangedWorldEvent e) {
         e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
         e.getPlayer().removePotionEffect(PotionEffectType.SLOW_FALLING);
 
@@ -207,7 +208,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void PlayerJoinEvent(PlayerJoinEvent e) {
+    public void PlayerJoinEvent(@NotNull PlayerJoinEvent e) {
         e.getPlayer().removePotionEffect(PotionEffectType.JUMP);
         e.getPlayer().removePotionEffect(PotionEffectType.SLOW_FALLING);
 
@@ -358,7 +359,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void EntityPotionEffectEvent(EntityPotionEffectEvent e) {
+    public void EntityPotionEffectEvent(@NotNull EntityPotionEffectEvent e) {
         if (e.getCause() == Cause.MILK && e.getEntity() instanceof Player) {
             Planet p = PlanetUtil.getPlanet(e.getEntity().getWorld());
             if (p == null) return;
@@ -370,7 +371,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerTeleportEvent(PlayerTeleportEvent e) {
+    public void PlayerTeleportEvent(@NotNull PlayerTeleportEvent e) {
         if (e.getPlayer().hasPermission("claytech.bypasstpcheck")) return;
 
         Planet p = PlanetUtil.getPlanet(e.getPlayer().getWorld());
@@ -430,7 +431,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void EntityDamageEvent(EntityDamageEvent e) {
+    public void EntityDamageEvent(@NotNull EntityDamageEvent e) {
         if (e.getEntityType() == EntityType.PLAYER && e.getCause() == DamageCause.FALL) {
             Player p = (Player) e.getEntity();
             if (ClayTechManager.isSpaceSuit(p.getInventory().getHelmet())
@@ -448,7 +449,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void EntityDeathEvent(EntityDeathEvent ev) {
+    public void EntityDeathEvent(@NotNull EntityDeathEvent ev) {
         EntityDamageEvent e = ev.getEntity().getLastDamageCause();
         if (e == null) return;
         if (e.getEntityType() == EntityType.PLAYER && e.getCause() == DamageCause.FALL) {
@@ -468,7 +469,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void PlayerBucketEmptyEvent(PlayerBucketEmptyEvent e) {
+    public void PlayerBucketEmptyEvent(@NotNull PlayerBucketEmptyEvent e) {
         // 禁止玩家放置液体
         Planet p = PlanetUtil.getPlanet(e.getBlock().getWorld());
         if (p != null) {
@@ -504,7 +505,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void BlockDispenseEvent(BlockDispenseEvent e) {
+    public void BlockDispenseEvent(@NotNull BlockDispenseEvent e) {
         // 禁止发射器放置液体
         Planet p = PlanetUtil.getPlanet(e.getBlock().getWorld());
         if (p != null) {
@@ -544,7 +545,7 @@ public class PlanetListener implements Listener {
     }
 
     @EventHandler
-    public void CauldronLevelChangeEvent(CauldronLevelChangeEvent e) {
+    public void CauldronLevelChangeEvent(@NotNull CauldronLevelChangeEvent e) {
         Planet p = PlanetUtil.getPlanet(e.getBlock().getWorld());
         if (p != null) {
             if (p.getCold()) {

@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,7 +31,7 @@ import java.util.List;
  */
 public final class ItemStackUtil {
     public static final ItemStack AIR = new ItemStack(Material.AIR);
-    public static final ItemNameAdapter itemNameAdapter = ItemNameAdapter.get();
+    public static final @org.jetbrains.annotations.Nullable ItemNameAdapter itemNameAdapter = ItemNameAdapter.get();
 
     /**
      * Clone an #{@link ItemStack}
@@ -38,11 +39,11 @@ public final class ItemStackUtil {
      * @param item to be cloned
      * @return a cloned #{@link ItemStack}
      */
-    public static ItemStack cloneItem(@Nonnull ItemStack item) {
+    public static @NotNull ItemStack cloneItem(@Nonnull ItemStack item) {
         return item instanceof ItemStackWrapper ? new ItemStack(item) : item.clone();
     }
 
-    public static ItemStack getCleanItem(@Nullable ItemStack item) {
+    public static @NotNull ItemStack getCleanItem(@Nullable ItemStack item) {
         if (item == null) {
             return new ItemStack(Material.AIR);
         }
@@ -63,7 +64,7 @@ public final class ItemStackUtil {
      * @param amount the amount of the result item
      * @return a cloned #{@link ItemStack}
      */
-    public static ItemStack cloneItem(@Nonnull ItemStack item, int amount) {
+    public static @NotNull ItemStack cloneItem(@Nonnull ItemStack item, int amount) {
         ItemStack itemStack = item instanceof ItemStackWrapper ? new ItemStack(item) : item.clone();
         itemStack.setAmount(amount);
         return itemStack;
@@ -376,7 +377,7 @@ public final class ItemStackUtil {
         return result;
     }
 
-    public static ItemStack getDried(@Nonnull ItemStack item) {
+    public static @org.jetbrains.annotations.Nullable ItemStack getDried(@Nonnull ItemStack item) {
         if (item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
             return null;
         }
@@ -411,14 +412,14 @@ public final class ItemStackUtil {
         return yamlConfiguration.getItemStack("item");
     }
 
-    public static String color(String str) {
+    public static String color(@org.jetbrains.annotations.Nullable String str) {
         if (str == null) {
             return null;
         }
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 
-    public static void giveOrDropItem(Player p, ItemStack toGive) {
+    public static void giveOrDropItem(@NotNull Player p, @NotNull ItemStack toGive) {
         for (int i = 0; i < 64; i++) {
             if (toGive.getAmount() <= 0) {
                 return;
@@ -433,17 +434,17 @@ public final class ItemStackUtil {
         }
     }
 
-    public static void send(CommandSender p, String message) {
+    public static void send(@NotNull CommandSender p, String message) {
         p.sendMessage(color("&7[&6NetworksExpansion&7] &r" + message));
     }
 
-    public static ItemStack getPreEnchantedItemStack(Material material) {
+    public static @NotNull ItemStack getPreEnchantedItemStack(@NotNull Material material) {
         return getPreEnchantedItemStack(material, true);
     }
 
     @Nonnull
     @SafeVarargs
-    public static ItemStack getPreEnchantedItemStack(Material material, boolean hide, @Nonnull Pair<Enchantment, Integer>... enchantments) {
+    public static ItemStack getPreEnchantedItemStack(@NotNull Material material, boolean hide, @Nonnull Pair<Enchantment, Integer>... enchantments) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();
         for (Pair<Enchantment, Integer> pair : enchantments) {
@@ -457,7 +458,7 @@ public final class ItemStackUtil {
     }
 
     @Nonnull
-    public static List<String> getLore(ItemStack itemStack) {
+    public static List<String> getLore(@org.jetbrains.annotations.Nullable ItemStack itemStack) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return new ArrayList<>();
         }
@@ -476,7 +477,7 @@ public final class ItemStackUtil {
     }
 
     @Nullable
-    public static ItemStack setLoreList(ItemStack itemStack, List<String> lore) {
+    public static ItemStack setLoreList(@org.jetbrains.annotations.Nullable ItemStack itemStack, List<String> lore) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return null;
         }
@@ -497,11 +498,11 @@ public final class ItemStackUtil {
         return setLoreList(itemStack, new ArrayList<>(List.of(lore)));
     }
 
-    public static List<String> getLoreList(ItemStack itemStack) {
+    public static @NotNull List<String> getLoreList(ItemStack itemStack) {
         return getLore(itemStack);
     }
 
-    public static ItemStack addLore(ItemStack itemStack, String lore) {
+    public static ItemStack addLore(@org.jetbrains.annotations.Nullable ItemStack itemStack, String lore) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return null;
         }
@@ -522,7 +523,7 @@ public final class ItemStackUtil {
         return itemStack;
     }
 
-    public static ItemStack addLore(ItemStack itemStack, List<String> lore) {
+    public static ItemStack addLore(@org.jetbrains.annotations.Nullable ItemStack itemStack, @NotNull List<String> lore) {
         if (itemStack == null || itemStack.getType() == Material.AIR) {
             return null;
         }

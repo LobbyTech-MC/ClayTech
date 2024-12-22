@@ -16,6 +16,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,14 +35,14 @@ public abstract class AExperimentTable extends AbstractMachine {
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
 
-    public AExperimentTable(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
-                            ItemStack[] recipe) {
+    public AExperimentTable(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType,
+                            ItemStack @NotNull [] recipe) {
 
         super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
-    public void constructMenu(BlockMenuPreset preset) {
+    public void constructMenu(@NotNull BlockMenuPreset preset) {
         preset.addItem(4, FREE_STATE_ITEM, ChestMenuUtils.getEmptyClickHandler());
         for (int eachID : BORDER_A) {
             preset.addItem(eachID, BORDER_A_ITEM, ChestMenuUtils.getEmptyClickHandler());
@@ -60,7 +62,7 @@ public abstract class AExperimentTable extends AbstractMachine {
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == Material.AIR;
                 }
@@ -79,7 +81,7 @@ public abstract class AExperimentTable extends AbstractMachine {
     }
 
     @Override
-    public MachineRecipe findNextRecipe(BlockMenu inv) {
+    public @Nullable MachineRecipe findNextRecipe(@NotNull BlockMenu inv) {
         MachineRecipe r = null;
         Map<Integer, Integer> found = new HashMap<>();
         int i;

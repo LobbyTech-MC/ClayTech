@@ -1,6 +1,5 @@
 package cn.claycoffee.clayTech.core.managers;
 
-import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.core.listeners.Debug;
 import cn.claycoffee.clayTech.core.listeners.FoodDropListener;
 import cn.claycoffee.clayTech.core.listeners.FoodEatListener;
@@ -21,6 +20,7 @@ import java.util.List;
 public class ListenerManager {
     private final JavaPlugin plugin;
     private final List<Listener> listeners = new ArrayList<>();
+
     public ListenerManager(JavaPlugin plugin) {
         this.plugin = plugin;
         listeners.add(new Debug()); // todo remove it in release version

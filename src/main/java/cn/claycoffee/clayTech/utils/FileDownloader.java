@@ -3,6 +3,7 @@ package cn.claycoffee.clayTech.utils;
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechData;
 import com.google.gson.JsonArray;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,7 +16,7 @@ import java.net.URL;
 @Deprecated
 public class FileDownloader {
 
-    public static String updateFunc(String urlp, String fileName, String savePath, JsonArray ja) {
+    public static @NotNull String updateFunc(@NotNull String urlp, String fileName, @NotNull String savePath, JsonArray ja) {
         try {
             if (ClayTech.getInstance().getConfig().getBoolean("replace-when-server-stops")) {
                 ClayTechData.updateJar = getFileData(urlp);
@@ -46,7 +47,7 @@ public class FileDownloader {
 
     }
 
-    public static String downloadFile(String urlp, String fileName, String savePath) {
+    public static @NotNull String downloadFile(@NotNull String urlp, String fileName, @NotNull String savePath) {
         try {
             URL url = new URL(urlp);
             HttpURLConnection conne = (HttpURLConnection) url.openConnection();
@@ -72,7 +73,7 @@ public class FileDownloader {
         }
     }
 
-    public static byte[] getFileData(String urlp) {
+    public static byte[] getFileData(@NotNull String urlp) {
         try {
             URL url = new URL(urlp);
             HttpURLConnection conne = (HttpURLConnection) url.openConnection();
@@ -89,7 +90,7 @@ public class FileDownloader {
         }
     }
 
-    public static byte[] readInputStream(InputStream inputStream) throws IOException {
+    public static byte[] readInputStream(@NotNull InputStream inputStream) throws IOException {
         byte[] buffer = new byte[1024];
         int leng = 0;
         ByteArrayOutputStream b = new ByteArrayOutputStream();

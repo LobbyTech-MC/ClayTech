@@ -2,9 +2,9 @@ package cn.claycoffee.clayTech.implementation.machines;
 
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechData;
-import cn.claycoffee.clayTech.utils.ItemStackUtil;
-import cn.claycoffee.clayTech.api.events.InjectOxygenEvent;
 import cn.claycoffee.clayTech.api.ClayTechManager;
+import cn.claycoffee.clayTech.api.events.InjectOxygenEvent;
+import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.RocketUtil;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
@@ -31,6 +31,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,12 +54,12 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
             .asList(new Material[]{Material.OAK_LEAVES, Material.ACACIA_LEAVES, Material.BIRCH_LEAVES,
                     Material.DARK_OAK_LEAVES, Material.JUNGLE_LEAVES, Material.SPRUCE_LEAVES});
     private static final Map<Block, ItemStack> item = new HashMap<>();
-    public static Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static Map<Block, Integer> progress = new HashMap<>();
+    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
-    public SpaceSuitOxygenInjector(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                                   ItemStack[] recipe) {
+    public SpaceSuitOxygenInjector(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                                   ItemStack @NotNull [] recipe) {
 
         super(itemGroup, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::SetupMenu);
@@ -92,7 +94,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     }
 
     @Override
-    public EnergyNetComponentType getEnergyComponentType() {
+    public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -111,11 +113,11 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return outputslots;
     }
 
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_SPACESUIT_OXYGEN_INJECTOR");
     }
 
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 
@@ -127,11 +129,11 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return 1;
     }
 
-    public String getMachineIdentifier() {
+    public @NotNull String getMachineIdentifier() {
         return "CLAY_SPACESUIT_OXYGEN_INJECTOR";
     }
 
-    public void SetupMenu(BlockMenuPreset Preset) {
+    public void SetupMenu(@NotNull BlockMenuPreset Preset) {
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -155,7 +157,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == Material.AIR;
                 }
@@ -172,7 +174,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return getProcessing(b) != null;
     }
 
-    public void registerRecipe(MachineRecipe recipe) {
+    public void registerRecipe(@NotNull MachineRecipe recipe) {
         recipe.setTicks(recipe.getTicks() / getSpeed());
         recipes.add(recipe);
     }
@@ -185,7 +187,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
+            public void tick(@NotNull Block b, SlimefunItem sf, SlimefunBlockData data) {
                 SpaceSuitOxygenInjector.this.tick(b);
             }
 
@@ -196,7 +198,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         });
     }
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {

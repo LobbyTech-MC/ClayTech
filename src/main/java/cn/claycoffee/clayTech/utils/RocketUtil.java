@@ -2,6 +2,7 @@ package cn.claycoffee.clayTech.utils;
 
 import cn.claycoffee.clayTech.api.ClayTechManager;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class RocketUtil {
         return -1;
     }
 
-    public static void setFuel(ItemStack im, int fuel) {
+    public static void setFuel(@NotNull ItemStack im, int fuel) {
         if (ClayTechManager.isRocket(im)) {
             int i = 0;
             List<String> lore = ItemStackUtil.getLoreList(im);
@@ -65,7 +66,7 @@ public class RocketUtil {
         return -1;
     }
 
-    public static void setOxygen(ItemStack im, int oxygen) {
+    public static void setOxygen(@NotNull ItemStack im, int oxygen) {
         if (ClayTechManager.isSpaceSuit(im) || ClayTechManager.isOxygenDistributer(im)) {
             int i = 0;
             List<String> lore = ItemStackUtil.getLoreList(im);

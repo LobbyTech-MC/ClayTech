@@ -4,6 +4,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Called when a rocket injected fuel.当一个火箭注入燃料的时候触发.
@@ -20,7 +21,7 @@ public class RocketInjectFuelEvent extends Event {
         this.machine = machine;
     }
 
-    public static HandlerList getHandlerList() {
+    public static @NotNull HandlerList getHandlerList() {
         return handlers;
     }
 
@@ -46,7 +47,7 @@ public class RocketInjectFuelEvent extends Event {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return handlers;
     }
 

@@ -31,7 +31,7 @@ public class Moon extends ChunkGenerator {
 
     @SuppressWarnings("deprecation")
     @Override
-    public ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int chunkX, int chunkZ, @NotNull BiomeGrid biome) {
+    public @NotNull ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int chunkX, int chunkZ, @NotNull BiomeGrid biome) {
         ChunkData chunkData = createChunkData(world);
         if (sog == null) {
             sog = new SimplexOctaveGenerator(world.getSeed(), 1);
@@ -64,7 +64,7 @@ public class Moon extends ChunkGenerator {
     }
 
     @Override
-    public List<BlockPopulator> getDefaultPopulators(World world) {
+    public @NotNull List<BlockPopulator> getDefaultPopulators(World world) {
         List<BlockPopulator> ret = new ArrayList<>();
         ret.add(new MoonCoalPopulator());
         ret.add(new MoonDiamondPopulator());

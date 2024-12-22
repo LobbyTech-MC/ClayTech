@@ -3,19 +3,20 @@ package cn.claycoffee.clayTech.utils;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class SkullUtil {
-    public static ItemStack getByBase64(String base64) {
+    public static @NotNull ItemStack getByBase64(@NotNull String base64) {
         PlayerSkin skin = PlayerSkin.fromBase64(base64);
         return PlayerHead.getItemStack(skin);
     }
 
-    public static ItemStack getByHash(String hash) {
+    public static @NotNull ItemStack getByHash(@NotNull String hash) {
         PlayerSkin skin = PlayerSkin.fromHashCode(hash);
         return PlayerHead.getItemStack(skin);
     }
 
-    public static ItemStack getByURL(String url) {
+    public static @NotNull ItemStack getByURL(@NotNull String url) {
         PlayerSkin skin = PlayerSkin.fromURL(url);
         return PlayerHead.getItemStack(skin);
     }

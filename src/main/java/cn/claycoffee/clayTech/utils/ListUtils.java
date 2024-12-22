@@ -1,5 +1,7 @@
 package cn.claycoffee.clayTech.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -11,11 +13,11 @@ import java.util.List;
  */
 
 public class ListUtils {
-    public static boolean existsInStringList(List<String> list, String content) {
+    public static boolean existsInStringList(@NotNull List<String> list, String content) {
         return list.contains(content);
     }
 
-    public static boolean existsInArray(int[] arr, int e) {
+    public static boolean existsInArray(int @NotNull [] arr, int e) {
         for (int i : arr) {
             if (i == e) return true;
         }

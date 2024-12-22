@@ -1,7 +1,9 @@
 package cn.claycoffee.clayTech.utils;
 
+import org.jetbrains.annotations.Nullable;
+
 public class StrUtil {
-    public static String getLeftStr(String str, String separator) {
+    public static String getLeftStr(@Nullable String str, @Nullable String separator) {
         if (str == null || separator == null) {
             return null;
         }
@@ -12,7 +14,7 @@ public class StrUtil {
         return str.substring(0, index);
     }
 
-    public static String getRightStr(String str, String separator) {
+    public static String getRightStr(@Nullable String str, @Nullable String separator) {
         if (str == null || separator == null) {
             return null;
         }

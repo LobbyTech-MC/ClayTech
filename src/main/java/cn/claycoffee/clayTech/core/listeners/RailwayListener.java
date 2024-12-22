@@ -11,10 +11,11 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class RailwayListener implements Listener {
     @EventHandler
-    public void VehicleMoveEvent(VehicleMoveEvent e) {
+    public void VehicleMoveEvent(@NotNull VehicleMoveEvent e) {
         if (e.getVehicle() instanceof Minecart ve) {
             World veworld = ve.getWorld();
             Location veloc = ve.getLocation();

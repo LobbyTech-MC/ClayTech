@@ -9,6 +9,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class ClayFuel implements GEOResource {
     private final NamespacedKey key = KeyUtil.newKey("CLAY_FUEL");
@@ -18,7 +19,7 @@ public class ClayFuel implements GEOResource {
     }
 
     @Override
-    public NamespacedKey getKey() {
+    public @NotNull NamespacedKey getKey() {
         return key;
     }
 
@@ -41,12 +42,12 @@ public class ClayFuel implements GEOResource {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return Lang.readResourcesText("CLAY_FUEL");
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NotNull ItemStack getItem() {
         return ClayTechItems.CLAY_FUEL.clone();
     }
 

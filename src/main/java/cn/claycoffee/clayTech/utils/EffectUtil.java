@@ -5,9 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 
 public class EffectUtil {
-    public static void EffectCheck(Player d, Player e) {
+    public static void EffectCheck(@NotNull Player d, @NotNull Player e) {
         ItemStack HandItem = d.getInventory().getItemInMainHand();
         SlimefunItem item = SlimefunItem.getByItem(HandItem);
         if (item != null && item.getResearch() != null && item.getResearch().canUnlock(d)) {

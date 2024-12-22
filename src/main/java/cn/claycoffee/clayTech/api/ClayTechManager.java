@@ -5,6 +5,8 @@ import cn.claycoffee.clayTech.ClayTechItems;
 import cn.claycoffee.clayTech.utils.Lang;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 
@@ -35,7 +37,7 @@ public class ClayTechManager {
         return false;
     }
 
-    public static boolean isRocket(ItemStack item) {
+    public static boolean isRocket(@Nullable ItemStack item) {
         if (item == null)
             return false;
         if (item.hasItemMeta()) {
@@ -44,7 +46,7 @@ public class ClayTechManager {
         return false;
     }
 
-    public static boolean isSpaceSuit(ItemStack item) {
+    public static boolean isSpaceSuit(@Nullable ItemStack item) {
         if (item == null)
             return false;
         if (item.hasItemMeta()) {
@@ -53,7 +55,7 @@ public class ClayTechManager {
         return false;
     }
 
-    public static boolean isOxygenDistributer(ItemStack item) {
+    public static boolean isOxygenDistributer(@Nullable ItemStack item) {
         if (item == null)
             return false;
         if (item.hasItemMeta()) {
@@ -62,7 +64,7 @@ public class ClayTechManager {
         return false;
     }
 
-    public static void allowSpaceTeleportOnce(Player p) {
+    public static void allowSpaceTeleportOnce(@NotNull Player p) {
         ClayTechData.AllowSpaceTeleport.add(p.getUniqueId());
     }
 }

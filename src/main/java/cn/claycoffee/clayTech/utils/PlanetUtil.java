@@ -11,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public class PlanetUtil {
             42, 43};
     private final static int MAX_TRY_TIMES = 40;
 
-    public static int getHighestBlockAt(World w, int x, int z) {
+    public static int getHighestBlockAt(@NotNull World w, int x, int z) {
         int currentHighestY = 0;
         for (int y = 0; y < 255; y++) {
             if (w.getBlockAt(x, y, z).getType() != Material.AIR) {
@@ -32,7 +34,7 @@ public class PlanetUtil {
         return currentHighestY;
     }
 
-    public static Location findSafeLocation(World w) {
+    public static @Nullable Location findSafeLocation(@NotNull World w) {
         boolean pass = false;
         Location ret = null;
         int i = 0;
@@ -71,7 +73,7 @@ public class PlanetUtil {
         return ret;
     }
 
-    public static Planet getPlanet(World w) {
+    public static @Nullable Planet getPlanet(@NotNull World w) {
         for (Planet each : ClayTech.getPlanets()) {
             if (each.getPlanetWorldName().equalsIgnoreCase(w.getName())) {
                 return each;
@@ -80,7 +82,7 @@ public class PlanetUtil {
         return null;
     }
 
-    public static int getDistance(Planet a, Planet b) {
+    public static int getDistance(@NotNull Planet a, @NotNull Planet b) {
         if (a.getDistance() > b.getDistance()) {
             return a.getDistance() - b.getDistance();
         }
@@ -90,7 +92,7 @@ public class PlanetUtil {
         return 0;
     }
 
-    public static int getFuel(Planet from, Planet to) {
+    public static int getFuel(@NotNull Planet from, @NotNull Planet to) {
         int distance = getDistance(from, to);
         if (distance == 0) {
             return 25;
@@ -99,7 +101,7 @@ public class PlanetUtil {
         }
     }
 
-    public static String booleanToString(boolean b) {
+    public static @NotNull String booleanToString(boolean b) {
 
         if (b == true) {
             return Lang.readGeneralText("Yes_1");
@@ -121,7 +123,7 @@ public class PlanetUtil {
         return 0;
     }
 
-    public static Inventory renderLauncherMenu(Planet current, Inventory Preset, int currentPage) {
+    public static @NotNull Inventory renderLauncherMenu(@NotNull Planet current, @NotNull Inventory Preset, int currentPage) {
         int v = 0;
         int c = 0;
 
@@ -187,7 +189,7 @@ public class PlanetUtil {
         return Preset;
     }
 
-    public static ClayTechBiomes getBiome(int height, boolean hasRiver, boolean hasLava, boolean hasCrater) {
+    public static @NotNull ClayTechBiomes getBiome(int height, boolean hasRiver, boolean hasLava, boolean hasCrater) {
         if (height <= 62) {
             if (hasRiver)
                 return ClayTechBiomes.RIVER;

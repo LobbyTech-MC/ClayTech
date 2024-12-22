@@ -3,9 +3,9 @@ package cn.claycoffee.clayTech.core.listeners;
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechData;
 import cn.claycoffee.clayTech.ClayTechItems;
-import cn.claycoffee.clayTech.core.managers.ConfigManager;
-import cn.claycoffee.clayTech.api.objects.Planet;
 import cn.claycoffee.clayTech.api.ClayTechManager;
+import cn.claycoffee.clayTech.api.objects.Planet;
+import cn.claycoffee.clayTech.core.managers.ConfigManager;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.PlanetUtil;
 import cn.claycoffee.clayTech.utils.RocketUtil;
@@ -22,13 +22,14 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlanetBaseListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void BlockPlaceEvent(BlockPlaceEvent e) {
+    public void BlockPlaceEvent(@NotNull BlockPlaceEvent e) {
         if (SlimefunUtils.isItemSimilar(e.getPlayer().getInventory().getItemInMainHand(),
                 ClayTechItems.PLANET_BASE_SIGNER, true)) {
             Planet p = PlanetUtil.getPlanet(e.getBlock().getWorld());
@@ -65,7 +66,7 @@ public class PlanetBaseListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void BlockBreakEvent(BlockBreakEvent e) {
+    public void BlockBreakEvent(@NotNull BlockBreakEvent e) {
         SlimefunItem item = StorageCacheUtils.getSfItem(e.getBlock().getLocation());
         if (item != null) {
             if (item.getId().equals("PLANET_BASE_SIGNER")) {
@@ -99,7 +100,7 @@ public class PlanetBaseListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerInteractEvent(PlayerInteractEvent e) {
+    public void PlayerInteractEvent(@NotNull PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (e.hasItem()) {
                 if (ClayTechManager.isOxygenDistributer(e.getItem())) {
@@ -197,7 +198,7 @@ public class PlanetBaseListener implements Listener {
     }
 
     @EventHandler
-    public void InventoryClickEvent(InventoryClickEvent e) {
+    public void InventoryClickEvent(@NotNull InventoryClickEvent e) {
         if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("CLAY_ROCKET_FUEL_INJECTOR"))
                 && e.getSlot() == 20) {
             if (ClayTechData.RunningInjectors.get(e.getInventory()) != null) {

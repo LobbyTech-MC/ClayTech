@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ClayTechCommands implements TabExecutor {
-    String[] subCommands = {"checkupdate"};
+    String @NotNull [] subCommands = {"checkupdate"};
 
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         if (args.length > 1)
             return new ArrayList<>();
         if (args.length == 0)
@@ -24,7 +24,7 @@ public class ClayTechCommands implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         if (command.getName().equalsIgnoreCase("claytech")) {
             if (args.length >= 1) {
                 if (args.length == 1) {
@@ -53,7 +53,7 @@ public class ClayTechCommands implements TabExecutor {
         return true;
     }
 
-    private void subCommandNotFound(CommandSender sender) {
+    private void subCommandNotFound(@NotNull CommandSender sender) {
         sender.sendMessage(Lang.readGeneralText("command_not_found"));
     }
 

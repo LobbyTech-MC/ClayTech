@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -51,7 +53,7 @@ public class Metrics {
     // Should the response text be logged?
     private static boolean logResponseStatusText;
     // The uuid of the server
-    private static String serverUUID;
+    private static @Nullable String serverUUID;
 
     static {
         // You can use the property to disable the check in your test environment
@@ -73,7 +75,7 @@ public class Metrics {
     }
 
     // The plugin
-    private final Plugin plugin;
+    private final @NotNull Plugin plugin;
     // The plugin id
     private final int pluginId;
     // A list with all custom charts
@@ -89,7 +91,7 @@ public class Metrics {
      *                 <a href="https://bstats.org/what-is-my-plugin-id">What is my
      *                 plugin id?</a>
      */
-    public Metrics(Plugin plugin, int pluginId) {
+    public Metrics(@NotNull Plugin plugin, int pluginId) {
         if (plugin == null) {
             throw new IllegalArgumentException("Plugin cannot be null!");
         }
@@ -163,7 +165,7 @@ public class Metrics {
      * @param data   The data to send.
      * @throws Exception If the request failed.
      */
-    private static void sendData(Plugin plugin, JsonObject data) throws Exception {
+    private static void sendData(@NotNull Plugin plugin, @NotNull JsonObject data) throws Exception {
         if (data == null) {
             throw new IllegalArgumentException("Data cannot be null!");
         }
@@ -213,7 +215,7 @@ public class Metrics {
      * @return The gzipped String.
      * @throws IOException If the compression failed.
      */
-    private static byte[] compress(final String str) throws IOException {
+    private static byte[] compress(final @Nullable String str) throws IOException {
         if (str == null) {
             return null;
         }
@@ -238,7 +240,7 @@ public class Metrics {
      *
      * @param chart The chart to add.
      */
-    public void addCustomChart(CustomChart chart) {
+    public void addCustomChart(@NotNull CustomChart chart) {
         if (chart == null) {
             throw new IllegalArgumentException("Chart cannot be null!");
         }
@@ -276,7 +278,7 @@ public class Metrics {
      *
      * @return The plugin specific data.
      */
-    public JsonObject getPluginData() {
+    public @NotNull JsonObject getPluginData() {
         JsonObject data = new JsonObject();
 
         String pluginName = plugin.getDescription().getName();
@@ -304,7 +306,7 @@ public class Metrics {
      *
      * @return The server specific data.
      */
-    private JsonObject getServerData() {
+    private @NotNull JsonObject getServerData() {
         // Minecraft specific data
         int playerAmount;
         try {
@@ -411,21 +413,21 @@ public class Metrics {
     public static abstract class CustomChart {
 
         // The id of the chart
-        final String chartId;
+        final @NotNull String chartId;
 
         /**
          * Class constructor.
          *
          * @param chartId The id of the chart.
          */
-        CustomChart(String chartId) {
+        CustomChart(@NotNull String chartId) {
             if (chartId == null || chartId.isEmpty()) {
                 throw new IllegalArgumentException("ChartId cannot be null or empty!");
             }
             this.chartId = chartId;
         }
 
-        private JsonObject getRequestJsonObject() {
+        private @Nullable JsonObject getRequestJsonObject() {
             JsonObject chart = new JsonObject();
             chart.addProperty("chartId", chartId);
             try {
@@ -444,7 +446,7 @@ public class Metrics {
             return chart;
         }
 
-        protected abstract JsonObject getChartData() throws Exception;
+        protected abstract @Nullable JsonObject getChartData() throws Exception;
 
     }
 
@@ -461,13 +463,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public SimplePie(String chartId, Callable<String> callable) {
+        public SimplePie(@NotNull String chartId, Callable<String> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             String value = callable.call();
             if (value == null || value.isEmpty()) {
@@ -492,13 +494,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public AdvancedPie(String chartId, Callable<Map<String, Integer>> callable) {
+        public AdvancedPie(@NotNull String chartId, Callable<Map<String, Integer>> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
@@ -536,13 +538,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public DrilldownPie(String chartId, Callable<Map<String, Map<String, Integer>>> callable) {
+        public DrilldownPie(@NotNull String chartId, Callable<Map<String, Map<String, Integer>>> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        public JsonObject getChartData() throws Exception {
+        public @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Map<String, Integer>> map = callable.call();
@@ -585,13 +587,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public SingleLineChart(String chartId, Callable<Integer> callable) {
+        public SingleLineChart(@NotNull String chartId, Callable<Integer> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             int value = callable.call();
             if (value == 0) {
@@ -617,13 +619,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public MultiLineChart(String chartId, Callable<Map<String, Integer>> callable) {
+        public MultiLineChart(@NotNull String chartId, Callable<Map<String, Integer>> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
@@ -662,13 +664,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public SimpleBarChart(String chartId, Callable<Map<String, Integer>> callable) {
+        public SimpleBarChart(@NotNull String chartId, Callable<Map<String, Integer>> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
@@ -700,13 +702,13 @@ public class Metrics {
          * @param chartId  The id of the chart.
          * @param callable The callable which is used to request the chart data.
          */
-        public AdvancedBarChart(String chartId, Callable<Map<String, int[]>> callable) {
+        public AdvancedBarChart(@NotNull String chartId, Callable<Map<String, int[]>> callable) {
             super(chartId);
             this.callable = callable;
         }
 
         @Override
-        protected JsonObject getChartData() throws Exception {
+        protected @Nullable JsonObject getChartData() throws Exception {
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, int[]> map = callable.call();

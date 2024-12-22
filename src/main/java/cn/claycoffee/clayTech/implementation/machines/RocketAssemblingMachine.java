@@ -8,6 +8,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class RocketAssemblingMachine extends ARocketTable {
 
@@ -17,12 +18,12 @@ public class RocketAssemblingMachine extends ARocketTable {
     }
 
     @Override
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_ROCKET_ASSEMBLING_MACHINE");
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 

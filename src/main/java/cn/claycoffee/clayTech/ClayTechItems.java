@@ -17,6 +17,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -308,10 +309,10 @@ public class ClayTechItems {
     public static final LockedItemGroup C_ORESTHINGS = new LockedItemGroup(
             KeyUtil.newKey("claytech_oresthings"),
             new CustomItemStack(Material.BRICK, Lang.readCategoriesText("OreThings")), N_BASIC);
-    public static SlimefunItemStack HONEY_SWEET = new SlimefunItemStack("HONEY_SWEET", new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
+    public static @NotNull SlimefunItemStack HONEY_SWEET = new SlimefunItemStack("HONEY_SWEET", new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
             Lang.readItemLore("HONEY_SWEET")));
 
-    public static SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"))), meta -> {
+    public static @NotNull SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"))), meta -> {
         meta.getPersistentDataContainer().set(KeyUtil.newKey("durability"), PersistentDataType.INTEGER, 32);
     });
 
@@ -334,27 +335,27 @@ public class ClayTechItems {
         ItemUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(Material m, String name, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(Material m, String name, @NotNull String id) {
         return new SlimefunItemStack(id, new CustomItemStack(m, name));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(Material m, String name, List<String> lore, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(Material m, String name, @NotNull List<String> lore, @NotNull String id) {
         return new SlimefunItemStack(id, new CustomItemStack(m, name, lore));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(ItemStack stack, String name, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, @NotNull String id) {
         return new SlimefunItemStack(id, ItemUtil.setDisplayName(stack, name));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(ItemStack stack, String name, List<String> lore, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, List<String> lore, @NotNull String id) {
         return new SlimefunItemStack(id, ItemUtil.setInfo(stack, name, lore));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(ItemStack stack, String name, String[] lore, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, String[] lore, @NotNull String id) {
         return new SlimefunItemStack(id, ItemUtil.setInfo(stack, name, lore));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(ItemStack stack, String name, List<String> lore, MachineTier tier, MachineType type, int buffer, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, @NotNull List<String> lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         ItemStack item = stack.clone();
 
         lore.replaceAll(s -> s.replaceAll("%TIER%", LoreBuilder.machine(tier, type)));
@@ -363,7 +364,7 @@ public class ClayTechItems {
         return new SlimefunItemStack(id, ItemUtil.setInfo(item, name, lore));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(Material m, String name, List<String> lore, MachineTier tier, MachineType type, int buffer, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull Material m, String name, @NotNull List<String> lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         ItemStack item = new ItemStack(m);
 
         lore.replaceAll(s -> s.replaceAll("%TIER%", LoreBuilder.machine(tier, type)));
@@ -372,11 +373,11 @@ public class ClayTechItems {
         return new SlimefunItemStack(id, ItemUtil.setInfo(item, name, lore));
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(Material m, String name, String[] lore, MachineTier tier, MachineType type, int buffer, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull Material m, String name, String[] lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         return getSlimefunItemStack(m, name, Arrays.asList(lore), tier, type, buffer, id);
     }
 
-    private static SlimefunItemStack getSlimefunItemStack(ItemStack stack, String name, String[] lore, MachineTier tier, MachineType type, int buffer, String id) {
+    private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, String[] lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         return getSlimefunItemStack(stack, name, Arrays.asList(lore), tier, type, buffer, id);
     }
 }

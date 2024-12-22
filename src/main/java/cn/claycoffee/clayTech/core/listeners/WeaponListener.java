@@ -1,7 +1,7 @@
 package cn.claycoffee.clayTech.core.listeners;
 
-import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.EffectUtil;
+import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.ObjectUtil;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -11,10 +11,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class WeaponListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public void EntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
+    public void EntityDamageByEntityEvent(@NotNull EntityDamageByEntityEvent e) {
         if (e.isCancelled()) return;
         if (e.getDamager().getType() == EntityType.ARROW) {
             try {
@@ -33,7 +34,7 @@ public class WeaponListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void PlayerInteractEntityEvent(PlayerInteractEntityEvent e) {
+    public void PlayerInteractEntityEvent(@NotNull PlayerInteractEntityEvent e) {
         if (e.getRightClicked().getType() == EntityType.PLAYER) {
             Player d = e.getPlayer();
             try {

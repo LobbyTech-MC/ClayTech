@@ -8,10 +8,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 public class Debug implements Listener {
     @EventHandler
-    public void onWantTeleport(AsyncPlayerChatEvent e) {
+    public void onWantTeleport(@NotNull AsyncPlayerChatEvent e) {
         if (!e.getPlayer().isOp()) {
             return;
         }

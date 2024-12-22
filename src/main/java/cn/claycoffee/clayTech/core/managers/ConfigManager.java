@@ -4,6 +4,7 @@ import cn.claycoffee.clayTech.ClayTech;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
@@ -13,10 +14,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 public class ConfigManager {
-    private final FileConfiguration existingConfig;
-    private final File existingFile;
+    private final @NotNull FileConfiguration existingConfig;
+    private final @NotNull File existingFile;
 
-    public ConfigManager(String ymlName) {
+    public ConfigManager(@NotNull String ymlName) {
         existingFile = new File(ClayTech.getInstance().getDataFolder(), ymlName);
         existingConfig = YamlConfiguration.loadConfiguration(existingFile);
         setupDefaultConfig(ymlName);
@@ -30,7 +31,7 @@ public class ConfigManager {
         return existingFile;
     }
 
-    private void setupDefaultConfig(String ymlName) {
+    private void setupDefaultConfig(@NotNull String ymlName) {
         final ClayTech plugin = ClayTech.getInstance();
         final InputStream inputStream = plugin.getResource(ymlName);
 

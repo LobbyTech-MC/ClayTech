@@ -9,21 +9,22 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class ExperimentTableNormal extends AExperimentTable {
 
-    public ExperimentTableNormal(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                                 ItemStack[] recipe) {
+    public ExperimentTableNormal(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                                 ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_EXPERIMENTTABLE_NORMAL");
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.TNT);
     }
 

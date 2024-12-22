@@ -3,12 +3,13 @@ package cn.claycoffee.clayTech.utils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ItemUtil {
-    public static ItemStack setDisplayName(ItemStack item, String newDisplayName) {
+    public static @NotNull ItemStack setDisplayName(@NotNull ItemStack item, String newDisplayName) {
         ItemStack ret = item.clone();
         ItemMeta im = item.getItemMeta();
         im.setDisplayName(newDisplayName);
@@ -16,7 +17,7 @@ public class ItemUtil {
         return ret;
     }
 
-    public static ItemStack setLore(ItemStack item, String[] newLore) {
+    public static @NotNull ItemStack setLore(@NotNull ItemStack item, String[] newLore) {
         ItemStack ret = item.clone();
         ItemMeta im = item.getItemMeta();
         im.setLore(Arrays.asList(newLore));
@@ -24,7 +25,7 @@ public class ItemUtil {
         return ret;
     }
 
-    public static ItemStack setLore(ItemStack item, List<String> newLore) {
+    public static @NotNull ItemStack setLore(@NotNull ItemStack item, List<String> newLore) {
         ItemStack ret = item.clone();
         ItemMeta im = item.getItemMeta();
         im.setLore(newLore);
@@ -32,7 +33,7 @@ public class ItemUtil {
         return ret;
     }
 
-    public static ItemStack setInfo(ItemStack item, String displayName, List<String> lore) {
+    public static @NotNull ItemStack setInfo(@NotNull ItemStack item, String displayName, List<String> lore) {
         ItemStack ret = item.clone();
         ItemMeta im = item.getItemMeta();
         im.setDisplayName(displayName);
@@ -41,7 +42,7 @@ public class ItemUtil {
         return ret;
     }
 
-    public static ItemStack setInfo(ItemStack item, String displayName, String[] lore) {
+    public static @NotNull ItemStack setInfo(@NotNull ItemStack item, String displayName, String[] lore) {
         ItemStack ret = item.clone();
         ItemMeta im = item.getItemMeta();
         im.setDisplayName(displayName);
@@ -50,7 +51,7 @@ public class ItemUtil {
         return ret;
     }
 
-    public static ItemStack addEnchantment(ItemStack item, Enchantment ench, int lvl) {
+    public static @NotNull ItemStack addEnchantment(@NotNull ItemStack item, @NotNull Enchantment ench, int lvl) {
         ItemStack ret = item.clone();
         ret.addUnsafeEnchantment(ench, lvl);
         return ret;

@@ -16,12 +16,13 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
 public class FoodUtil {
-    public static void drink(Player p, ItemStack handingItem, ItemStack food, int incraseFoodLevel,
-                             PotionEffect[] effect) {
+    public static void drink(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack food, int incraseFoodLevel,
+                             PotionEffect @NotNull [] effect) {
         if (handingItem.hasItemMeta()) {
             if (SlimefunUtils.isItemSimilar(food, handingItem, true)) {
                 if (p.getFoodLevel() < 20) {
@@ -46,12 +47,12 @@ public class FoodUtil {
         }
     }
 
-    public static void drink(Player p, ItemStack handingItem, ItemStack food, int increaseFoodLevel) {
+    public static void drink(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack food, int increaseFoodLevel) {
         drink(p, handingItem, food, increaseFoodLevel, new PotionEffect[]{});
     }
 
-    public static void food(Player p, ItemStack handingItem, ItemStack food, int increaseFoodLevel,
-                            PotionEffect[] effect) {
+    public static void food(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack food, int increaseFoodLevel,
+                            PotionEffect @NotNull [] effect) {
         if (handingItem.hasItemMeta()) {
             if (SlimefunUtils.isItemSimilar(food, handingItem, true)) {
                 if (p.getFoodLevel() < 20) {
@@ -75,11 +76,11 @@ public class FoodUtil {
         }
     }
 
-    public static void food(Player p, ItemStack handingItem, ItemStack food, int incraseFoodLevel) {
+    public static void food(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack food, int incraseFoodLevel) {
         food(p, handingItem, food, incraseFoodLevel, new PotionEffect[]{});
     }
 
-    public static void wash(Player p, ItemStack handingItem, ItemStack matchItem, ItemStack cleanItem) {
+    public static void wash(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack matchItem, ItemStack cleanItem) {
         try {
             if (SlimefunUtils.isItemSimilar(handingItem, matchItem, true)) {
                 Inventory i = p.getInventory();
@@ -100,13 +101,13 @@ public class FoodUtil {
         }
     }
 
-    public static void destroy(Player p, Block b, ItemStack targetBlock, ItemStack dropItem, ItemStack disableItem,
-                               int i, BlockBreakEvent b1) {
+    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull ItemStack targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
+                               int i, @NotNull BlockBreakEvent b1) {
         destroy(p, b, targetBlock, dropItem, disableItem, i, i, b1);
     }
 
-    public static void destroy(Player p, Block b, ItemStack targetBlock, ItemStack dropItem, ItemStack disableItem,
-                               int from, int to, BlockBreakEvent b1) {
+    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull ItemStack targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
+                               int from, int to, @NotNull BlockBreakEvent b1) {
         if (b.getType() == targetBlock.getType()) {
             if (!p.getInventory().getItemInMainHand().equals(new ItemStack(Material.AIR))) {
                 if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)
@@ -123,7 +124,7 @@ public class FoodUtil {
         }
     }
 
-    public static void fish(PlayerFishEvent e, int from, int to, ItemStack drop) {
+    public static void fish(@NotNull PlayerFishEvent e, int from, int to, @NotNull ItemStack drop) {
         Random r = new Random();
         int random = r.nextInt(100);
         if (random >= from && random <= to) {

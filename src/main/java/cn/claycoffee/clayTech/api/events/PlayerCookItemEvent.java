@@ -4,6 +4,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Called when a player cooked a item. 当一个玩家使用锅煮物品成功的时候触发.
@@ -20,7 +21,7 @@ public class PlayerCookItemEvent extends Event {
         this.machine = machine;
     }
 
-    public static HandlerList getHandlerList() {
+    public static @NotNull HandlerList getHandlerList() {
         return handlers;
     }
 
@@ -46,7 +47,7 @@ public class PlayerCookItemEvent extends Event {
     }
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return handlers;
     }
 

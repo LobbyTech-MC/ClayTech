@@ -6,8 +6,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class ANewContainer extends AbstractMachine {
-    public ANewContainer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
-                         ItemStack[] recipe) {
+    public ANewContainer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 }

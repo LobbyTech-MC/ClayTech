@@ -11,6 +11,8 @@ import org.bukkit.WorldType;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Random;
@@ -23,7 +25,7 @@ public class Planet {
     private static final FileConfiguration f = planet.getConfig();
     private final String planetName;
     private final ItemStack displayItem;
-    private final ChunkGenerator planetWorld;
+    private final @Nullable ChunkGenerator planetWorld;
     private final Environment environment;
     private final boolean spawnMob;
     private boolean habitable;
@@ -74,7 +76,7 @@ public class Planet {
 
     }
 
-    public Planet(String planetName, ItemStack displayItem, World planetWorld, Environment environment,
+    public Planet(String planetName, ItemStack displayItem, @NotNull World planetWorld, Environment environment,
                   boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
         this.planetName = planetName;
         this.displayItem = displayItem;
@@ -175,7 +177,7 @@ public class Planet {
         }
     }
 
-    private String trimWorldName(String userInput) {
+    private @NotNull String trimWorldName(@NotNull String userInput) {
         return userInput.replaceAll("^[./\\\\]+", "");
     }
 
@@ -227,7 +229,7 @@ public class Planet {
         return this.planetName;
     }
 
-    public ItemStack getDisplayStack() {
+    public @NotNull ItemStack getDisplayStack() {
         return this.displayItem.clone();
     }
 

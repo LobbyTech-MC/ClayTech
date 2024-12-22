@@ -24,7 +24,7 @@ public class RocketFuelGenerator extends ACraftingTable {
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 

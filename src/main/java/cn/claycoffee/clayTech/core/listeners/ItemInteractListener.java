@@ -8,10 +8,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemInteractListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void BlockPlaceEvent(BlockPlaceEvent e) {
+    public void BlockPlaceEvent(@NotNull BlockPlaceEvent e) {
         if (ObjectUtil.ExistsInList(Lang.readGeneralText("CantPlaceLore"), ItemStackUtil.getLore(e.getItemInHand()))) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(Lang.readGeneralText("CantPlace"));
@@ -20,7 +21,7 @@ public class ItemInteractListener implements Listener {
 
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void PlayerInteractEvent(PlayerInteractEvent e) {
+    public void PlayerInteractEvent(@NotNull PlayerInteractEvent e) {
         if (e.hasItem()) {
             if (e.getItem().hasItemMeta()) {
                 if (ObjectUtil.ExistsInList(Lang.readGeneralText("CantEat"), ItemStackUtil.getLore(e.getItem()))) {

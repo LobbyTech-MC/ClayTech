@@ -15,6 +15,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.util.noise.SimplexOctaveGenerator;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ public class Mars extends ChunkGenerator {
 
     @SuppressWarnings("deprecation")
     @Override
-    public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
+    public @NotNull ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int chunkX, int chunkZ, @NotNull BiomeGrid biome) {
         ChunkData chunkData = createChunkData(world);
         if (sog == null) {
             sog = new SimplexOctaveGenerator(world.getSeed(), 1);
@@ -101,7 +102,7 @@ public class Mars extends ChunkGenerator {
 
     // Use moon's as a temp solution lol
     @Override
-    public List<BlockPopulator> getDefaultPopulators(World world) {
+    public @NotNull List<BlockPopulator> getDefaultPopulators(World world) {
         List<BlockPopulator> ret = new ArrayList<>();
         ret.add(new MoonCoalPopulator());
         ret.add(new MoonDiamondPopulator());

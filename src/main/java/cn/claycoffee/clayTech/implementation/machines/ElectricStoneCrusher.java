@@ -5,11 +5,9 @@ import cn.claycoffee.clayTech.utils.Lang;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class ElectricStoneCrusher extends ANewContainer {
 
@@ -19,12 +17,12 @@ public class ElectricStoneCrusher extends ANewContainer {
     }
 
     @Override
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_ELECTRIC_STONE_CRUSHER");
     }
 
     @Override
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 
@@ -43,27 +41,4 @@ public class ElectricStoneCrusher extends ANewContainer {
     public int getCapacity() {
         return 128;
     }
-
-    // == todo ==
-    @Override
-    public int[] getInputSlots() {
-        return new int[0];
-    }
-
-    @Override
-    public int[] getOutputSlots() {
-        return new int[0];
-    }
-
-    @Override
-    public void constructMenu(BlockMenuPreset preset) {
-
-    }
-
-    @Override
-    public MachineRecipe findNextRecipe(BlockMenu inv) {
-        return null;
-    }
-
-    // == todo ==
 }

@@ -3,6 +3,7 @@ package cn.claycoffee.clayTech.api.objects;
 import com.google.common.base.Preconditions;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,9 +14,9 @@ import java.io.IOException;
  * @noinspection ConstantValue
  */
 public final class Language {
-    private final String lang;
-    private final File currentFile;
-    private final FileConfiguration currentConfig;
+    private final @NotNull String lang;
+    private final @NotNull File currentFile;
+    private final @NotNull FileConfiguration currentConfig;
 
     @ParametersAreNonnullByDefault
     public Language(String lang, File currentFile, FileConfiguration defaultConfig) {
