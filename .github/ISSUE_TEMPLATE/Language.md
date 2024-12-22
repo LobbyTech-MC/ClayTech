@@ -1,6 +1,9 @@
 ---
-name: Language report about: Issue about languages. title: "[Language]"
-labels: 'Language' assignees: ''
+name: ""
+Language report about: Issue about languages. 
+title: "[Language]"
+labels: 'Language' 
+assignees: ''
 
 ---
 

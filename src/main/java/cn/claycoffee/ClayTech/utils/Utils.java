@@ -188,6 +188,7 @@ public class Utils {
     public static MetadataValue getMetadata(Block block, String key) {
         return block.getMetadata(key).get(0);
     }
+
     public static MetadataValue getBlockMetadata(Block block, String key) {
         return getMetadata(block, key);
     }

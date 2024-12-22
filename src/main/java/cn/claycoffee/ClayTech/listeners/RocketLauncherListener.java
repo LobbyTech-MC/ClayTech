@@ -10,7 +10,6 @@ import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
-import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -37,8 +36,7 @@ public class RocketLauncherListener implements Listener {
 
     @EventHandler
     public void InventoryMoveItemEvent(InventoryClickEvent e) {
-        if (e.getWhoClicked() instanceof Player) {
-            Player p = (Player) e.getWhoClicked();
+        if (e.getWhoClicked() instanceof Player p) {
             if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("ROCKET_LAUNCHER"))) {
                 e.setCancelled(true);
                 if (Utils.ExistInList(e.getRawSlot(), planet)) {
@@ -55,19 +53,17 @@ public class RocketLauncherListener implements Listener {
                             int index = (currentPage - 1) * 21 + (e.getRawSlot() - 18) - 1;
                             Planet current = PlanetUtils.getPlanet(b.getWorld());
                             // 排列星球
-                            List<Planet> pl = new ArrayList<Planet>();
-                            for (Planet p1 : ClayTech.getPlanets()) {
-                                pl.add(p1);
-                            }
-                            Planet[] pl2 = pl.toArray(new Planet[pl.size()]);
-                            List<Integer> d = new ArrayList<Integer>();
+                            List<Planet> pl = new ArrayList<>();
+                            pl.addAll(ClayTech.getPlanets());
+                            Planet[] pl2 = pl.toArray(new Planet[0]);
+                            List<Integer> d = new ArrayList<>();
                             for (Planet p1 : pl2) {
                                 d.add(PlanetUtils.getDistance(current, p1));
                             }
-                            Integer[] distance = d.toArray(new Integer[d.size()]);
+                            Integer[] distance = d.toArray(new Integer[0]);
                             for (int i = 0; i < distance.length; i++) {
                                 for (int j = 0; j < distance.length - i - 1; j++) {
-                                    if (distance[j].intValue() > distance[j + 1].intValue()) {
+                                    if (distance[j] > distance[j + 1]) {
                                         int temp = distance[j + 1];
                                         distance[j + 1] = distance[j];
                                         distance[j] = temp;
@@ -92,9 +88,7 @@ public class RocketLauncherListener implements Listener {
                                             }
                                         }
                                         String inRocket = "false";
-                                        if (Utils.readPlayerMetadataString(p, "inrocket") != null) {
-                                            inRocket = Utils.readPlayerMetadataString(p, "inrocket");
-                                        }
+                                        inRocket = Utils.readPlayerMetadataString(p, "inrocket");
                                         if (!inRocket.equalsIgnoreCase("true")) {
                                             p.setMetadata("inrocket",
                                                     new FixedMetadataValue(ClayTech.getInstance(), "true"));
@@ -205,34 +199,30 @@ public class RocketLauncherListener implements Listener {
                 int currentPage = 1;
                 if (e.getRawSlot() == 46) {
                     // 上一页
-                    if (b != null) {
-                        if (Utils.getMetadata(b, "currentPage") != null) {
-                            currentPage = Utils.getMetadata(b, "currentPage").asInt();
-                        }
-                        if (currentPage > 1) {
-                            currentPage -= 1;
-                            Utils.setMetaData(b, "currentPage", currentPage + "");
-                            inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
-                        } else {
-                            e.setCancelled(true);
-                            p.openInventory(inv);
-                        }
+                    if (Utils.getMetadata(b, "currentPage") != null) {
+                        currentPage = Utils.getMetadata(b, "currentPage").asInt();
+                    }
+                    if (currentPage > 1) {
+                        currentPage -= 1;
+                        Utils.setMetaData(b, "currentPage", currentPage + "");
+                        inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
+                    } else {
+                        e.setCancelled(true);
+                        p.openInventory(inv);
                     }
                 }
                 if (e.getRawSlot() == 52) {
                     // 下一页
-                    if (b != null) {
-                        if (Utils.getMetadata(b, "currentPage") != null) {
-                            currentPage = Utils.getMetadata(b, "currentPage").asInt();
-                        }
-                        if (currentPage < PlanetUtils.getTotalPage()) {
-                            currentPage += 1;
-                            Utils.setMetaData(b, "currentPage", currentPage + "");
-                            inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
-                        } else {
-                            e.setCancelled(true);
-                            p.openInventory(inv);
-                        }
+                    if (Utils.getMetadata(b, "currentPage") != null) {
+                        currentPage = Utils.getMetadata(b, "currentPage").asInt();
+                    }
+                    if (currentPage < PlanetUtils.getTotalPage()) {
+                        currentPage += 1;
+                        Utils.setMetaData(b, "currentPage", currentPage + "");
+                        inv = PlanetUtils.renderLauncherMenu(current, inv, currentPage);
+                    } else {
+                        e.setCancelled(true);
+                        p.openInventory(inv);
                     }
                 }
             }

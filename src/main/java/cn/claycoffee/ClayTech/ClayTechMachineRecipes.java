@@ -221,7 +221,6 @@ public class ClayTechMachineRecipes {
 
     public final static ItemStack[] COPPER_DUST_O = {null, null, null, null, ClayTechItems.COPPER_ORE, null, null,
             null, null};
-    ;
     public final static ItemStack[] CLAY_FUSION_INGOT_O = {null, null, null, null, ClayTechItems.CLAY_FUSION_ORE, null,
             null, null, null};
     public static ItemStack[] HONEY_SWEET = new ItemStack[]{new ItemStack(Material.SWEET_BERRIES), new ItemStack(Material.SWEET_BERRIES),

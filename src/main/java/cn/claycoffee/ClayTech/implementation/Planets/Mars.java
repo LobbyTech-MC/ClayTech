@@ -48,7 +48,7 @@ public class Mars extends ChunkGenerator {
 
                 int basicHeight = (int) (basicNoiseValue * 40D + 45D);
                 int finalHeight = basicHeight;
-                finalHeight += 7D;
+                finalHeight += 7;
 
                 chunkData.setBlock(x, 0, z, Material.BEDROCK);
 
@@ -60,7 +60,7 @@ public class Mars extends ChunkGenerator {
                 if (c1 >= 0.4) {
                     // 生成沙砾
                     chunkData.setBlock(x, finalHeight - 1, z, Material.GRAVEL);
-                } else if (c1 <= 0.4 && c1 >= 0.3) {
+                } else if (c1 >= 0.3) {
                     // 生成红沙
                     chunkData.setBlock(x, finalHeight - 1, z, Material.RED_SAND);
                 } else {

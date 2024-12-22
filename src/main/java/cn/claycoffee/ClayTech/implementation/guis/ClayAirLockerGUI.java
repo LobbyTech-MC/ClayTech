@@ -19,12 +19,12 @@ import org.bukkit.inventory.ItemStack;
  */
 
 public class ClayAirLockerGUI extends ChestMenu {
-    private static int[] border = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
+    private static final int[] border = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26};
 
-    private Block b;
+    private final Block b;
 
-    private int size;
-    private boolean isProtected;
+    private final int size;
+    private final boolean isProtected;
 
     public ClayAirLockerGUI(int size, String title, boolean isProtected, Block b) {
         super(title);
@@ -53,13 +53,11 @@ public class ClayAirLockerGUI extends ChestMenu {
                 if (s == 11) {
                     if (waitTime <= 1) return false;
                     waitTime--;
-                    StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
-                    open(p);
                 } else {
                     waitTime++;
-                    StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
-                    open(p);
                 }
+                StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
+                open(p);
                 return false;
             });
         }

@@ -16,7 +16,6 @@ import org.bukkit.metadata.MetadataValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,10 +24,8 @@ public class ItemUseListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void EntityExplodeEvent(EntityExplodeEvent e) {
-        List<Block> blockL = new ArrayList<Block>();
-        for (Block b : e.blockList()) {
-            blockL.add(b);
-        }
+        List<Block> blockL = new ArrayList<>();
+        blockL.addAll(e.blockList());
         boolean already = false;
         for (Block each : blockL) {
             for (MetadataValue eachv : each.getMetadata("isExplosionCreater")) {
@@ -46,13 +43,7 @@ public class ItemUseListener implements Listener {
 
                     }
                     if (eachv.asBoolean()) {
-                        Iterator<Block> b = e.blockList().iterator();
-                        while (b.hasNext()) {
-                            Block next = b.next();
-                            if (next.getType() == Material.CHEST || next.getType() == Material.FURNACE) {
-                                b.remove();
-                            }
-                        }
+                        e.blockList().removeIf(next -> next.getType() == Material.CHEST || next.getType() == Material.FURNACE);
                         break;
 
                     }

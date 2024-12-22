@@ -9,7 +9,6 @@ import cn.claycoffee.ClayTech.listeners.ItemUseListener;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.SlimefunUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
-import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
@@ -33,11 +32,7 @@ public class EffectItems {
                     Bukkit.getPluginManager().callEvent(new PlayerUseItemEvent(e.getPlayer(), e.getItem()));
                     boolean pass = false;
                     String md = Utils.readPlayerMetadataString(e.getPlayer(), "lastUseTNTCreaterTime");
-                    if (md != null) {
-                        if (System.currentTimeMillis() >= Long.parseLong(md) + 5000L) {
-                            pass = true;
-                        }
-                    } else {
+                    if (System.currentTimeMillis() >= Long.parseLong(md) + 5000L) {
                         pass = true;
                     }
                     if (pass) {

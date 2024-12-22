@@ -387,15 +387,13 @@ public class PlanetListener implements Listener {
                 }
                 // 否则，目标位置在另外一个星球.
 
-                if (Utils.readPlayerMetadataString(e.getPlayer(), "inrocket") != null) {
-                    inRocket = Utils.readPlayerMetadataString(e.getPlayer(), "inrocket");
-                }
+                inRocket = Utils.readPlayerMetadataString(e.getPlayer(), "inrocket");
                 boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
                 if (!inRocket.equalsIgnoreCase("true")) {
                     if (ast) {
-                    e.getPlayer().setMetadata("allowSpaceTeleport",
-                            new FixedMetadataValue(ClayTech.getInstance(), false));
-                    return;
+                        e.getPlayer().setMetadata("allowSpaceTeleport",
+                                new FixedMetadataValue(ClayTech.getInstance(), false));
+                        return;
                     }
                     // 其他星球传送到主世界
                     e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));
@@ -408,9 +406,9 @@ public class PlanetListener implements Listener {
                 boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
                 if (!p.getPlanetWorldName().equalsIgnoreCase(ClayTech.getOverworld())) {
                     if (ast) {
-                    e.getPlayer().setMetadata("allowSpaceTeleport",
-                            new FixedMetadataValue(ClayTech.getInstance(), false));
-                    return;
+                        e.getPlayer().setMetadata("allowSpaceTeleport",
+                                new FixedMetadataValue(ClayTech.getInstance(), false));
+                        return;
                     }
                     // 其他星球传送到主世界
                     e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));
@@ -423,9 +421,9 @@ public class PlanetListener implements Listener {
             boolean ast = Utils.readPlayerMetadataBoolean(e.getPlayer(), "allowSpaceTeleport");
             if (!to.getPlanetWorldName().equalsIgnoreCase(ClayTech.getOverworld())) {
                 if (ast) {
-                e.getPlayer().setMetadata("allowSpaceTeleport",
-                        new FixedMetadataValue(ClayTech.getInstance(), false));
-                return;
+                    e.getPlayer().setMetadata("allowSpaceTeleport",
+                            new FixedMetadataValue(ClayTech.getInstance(), false));
+                    return;
                 }
                 // 在主世界传送到其他星球
                 e.getPlayer().sendMessage(Lang.readGeneralText("CantUseOtherTeleportInUniverse"));

@@ -165,6 +165,7 @@ public class Planet {
         try {
             newWorld.createWorld();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

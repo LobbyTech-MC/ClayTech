@@ -47,13 +47,13 @@ public class FoodEatListener implements Listener {
                     FoodUtils.food(p, e.getItem(), ClayTechItems.COOKED_SWEET_POTATO, 6);
                     FoodUtils.food(p, e.getItem(), ClayTechItems.TUNA_FISH, 6);
                     FoodUtils.food(p, e.getItem(), ClayTechItems.GREEN_GRASS, 1);
-                } catch (NullPointerException err) {
+                } catch (NullPointerException ignored) {
                 }
                 FoodUtils.wash(p, e.getItem(), ClayTechItems.DIRTY_DRINK_BOTTLE, ClayTechItems.DRINK_BOTTLE);
                 try {
                     // 这里放其他清理Event!!
                     FoodUtils.wash(p, e.getItem(), ClayTechItems.DIRTY_TEA, ClayTechItems.RAW_TEA);
-                } catch (NullPointerException err) {
+                } catch (NullPointerException ignored) {
                 }
             }
         }

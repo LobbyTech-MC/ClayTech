@@ -35,12 +35,8 @@ public class FileDownloader {
             }
             FileOutputStream fos = new FileOutputStream(ClayTech.getInstance().getFile());
             fos.write(getdata);
-            if (fos != null) {
-                fos.close();
-            }
-            if (input != null) {
-                input.close();
-            }
+            fos.close();
+            input.close();
             return saveDir + File.separator + fileName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,12 +62,8 @@ public class FileDownloader {
             File file = new File(saveDir + File.separator + fileName);
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(getdata);
-            if (fos != null) {
-                fos.close();
-            }
-            if (input != null) {
-                input.close();
-            }
+            fos.close();
+            input.close();
             return saveDir + File.separator + fileName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,9 +80,7 @@ public class FileDownloader {
 
             InputStream input = conne.getInputStream();
             byte[] getdata = readInputStream(input);
-            if (input != null) {
-                input.close();
-            }
+            input.close();
             return getdata;
         } catch (Exception e) {
             e.printStackTrace();

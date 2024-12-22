@@ -47,9 +47,9 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
             Lang.readMachinesText("SPLIT_LINE"));
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    public static Map<Block, MachineRecipe> processing = new HashMap<Block, MachineRecipe>();
-    public static Map<Block, Integer> progress = new HashMap<Block, Integer>();
-    protected final List<MachineRecipe> recipes = new ArrayList<MachineRecipe>();
+    public static Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static Map<Block, Integer> progress = new HashMap<>();
+    protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
     public CobbleStoneGenerator(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
@@ -117,7 +117,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
                 @Override
                 public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == Material.AIR;
                 }
             });
         }

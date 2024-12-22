@@ -7,13 +7,11 @@ import org.bukkit.inventory.ItemStack;
 public class SkullItem {
     public static ItemStack fromHash(String hash) {
         PlayerSkin skin = PlayerSkin.fromHashCode(hash);
-        ItemStack head = PlayerHead.getItemStack(skin);
-        return head;
+        return PlayerHead.getItemStack(skin);
     }
 
     public static ItemStack fromURL(String url) {
         PlayerSkin skin = PlayerSkin.fromURL(url);
-        ItemStack head = PlayerHead.getItemStack(skin);
-        return head;
+        return PlayerHead.getItemStack(skin);
     }
 }

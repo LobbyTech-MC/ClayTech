@@ -15,8 +15,7 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 public class RailwayListener implements Listener {
     @EventHandler
     public void VehicleMoveEvent(VehicleMoveEvent e) {
-        if (e.getVehicle() instanceof Minecart) {
-            Minecart ve = (Minecart) e.getVehicle();
+        if (e.getVehicle() instanceof Minecart ve) {
             World veworld = ve.getWorld();
             Location veloc = ve.getLocation();
             Block rail = veworld.getBlockAt(veloc);

@@ -38,7 +38,10 @@ import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+/**
+ * @noinspection ConstantValue
+ */
+@SuppressWarnings({"unused", "deprecation"})
 public class LocalizationService {
     private static final Map<String, String> CACHE = new HashMap<>();
     private static final String KEY_NAME = ".name";
@@ -53,12 +56,12 @@ public class LocalizationService {
     private final File langFolder;
     private final List<String> languages;
     private final Map<String, Language> langMap;
+    private final String colorTagRegex = "<[a-zA-Z0-9_]+>";
+    private final Pattern pattern = Pattern.compile(this.colorTagRegex);
     private String idPrefix = "";
     private String itemGroupKey = "categories";
     private String itemsKey = "items";
     private String recipesKey = "recipes";
-    private String colorTagRegex = "<[a-zA-Z0-9_]+>";
-    private Pattern pattern = Pattern.compile(this.colorTagRegex);
 
     @ParametersAreNonnullByDefault
     public LocalizationService(JavaPlugin plugin) {
@@ -297,14 +300,18 @@ public class LocalizationService {
         Preconditions.checkArgument(itemStack != null, MSG_ITEMSTACK_NULL);
         if (extraLore != null && extraLore.length != 0) {
             ItemMeta meta = itemStack.getItemMeta();
-            List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList();
+            if (meta == null) {
+                return itemStack;
+            }
+            List<String> lore = meta.getLore();
+            if (lore == null) {
+                lore = new ArrayList<>();
+            }
             lore.addAll(color(Arrays.asList(extraLore)));
             meta.setLore(lore);
             itemStack.setItemMeta(meta);
-            return itemStack;
-        } else {
-            return itemStack;
         }
+        return itemStack;
     }
 
     @Nonnull

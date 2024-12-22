@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CraftingTable extends ACraftingTable {
-    private static Map<Block, ItemStack[]> inputItem = new HashMap<>();
-    private static Map<Block, ItemStack> outputItem = new HashMap<>();
+    private static final Map<Block, ItemStack[]> inputItem = new HashMap<>();
+    private static final Map<Block, ItemStack> outputItem = new HashMap<>();
 
     public CraftingTable(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                          ItemStack[] recipe) {

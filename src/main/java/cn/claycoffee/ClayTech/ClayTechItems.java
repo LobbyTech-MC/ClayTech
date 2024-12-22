@@ -218,7 +218,6 @@ public class ClayTechItems {
     public static final ItemStack ROCKET_ENGINE = getSlimefunItemStack(SkullItem.fromURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("ROCKET_ENGINE"), Lang.readItemLore("ROCKET_ENGINE"), "ROCKET_ENGINE");
-    ;
     public static final ItemStack ROCKET_FUEL_TANK = getSlimefunItemStack(SkullItem.fromURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("ROCKET_FUEL_TANK"), Lang.readItemLore("ROCKET_FUEL_TANK"), "ROCKET_FUEL_TANK");

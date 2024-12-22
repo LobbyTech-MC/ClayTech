@@ -11,8 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class ItemInteractListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void BlockPlaceEvent(BlockPlaceEvent e) {
-        if (Utils.ExistInList(Lang.readGeneralText("CantPlaceLore"), Utils.getLore(e.getItemInHand()))
-                && !e.isCancelled()) {
+        if (Utils.ExistInList(Lang.readGeneralText("CantPlaceLore"), Utils.getLore(e.getItemInHand()))) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(Lang.readGeneralText("CantPlace"));
         }
@@ -22,7 +21,7 @@ public class ItemInteractListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void PlayerInteractEvent(PlayerInteractEvent e) {
         if (e.hasItem()) {
-            if (e.getItem().hasItemMeta() && !e.isCancelled()) {
+            if (e.getItem().hasItemMeta()) {
                 if (Utils.ExistInList(Lang.readGeneralText("CantEat"), Utils.getLore(e.getItem()))) {
                     e.getPlayer().sendMessage(Lang.readGeneralText("CantEatMessage"));
                     e.setCancelled(true);

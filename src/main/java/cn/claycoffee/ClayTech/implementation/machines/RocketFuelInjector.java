@@ -55,10 +55,10 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
             Lang.readMachinesText("SPLIT_LINE"));
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
+    private static final Map<Block, ItemStack> item = new HashMap<>();
+    private static final Map<Block, ItemStack> itemFuel = new HashMap<>();
     public static Map<Block, MachineRecipe> processing = new HashMap<>();
     public static Map<Block, Integer> progress = new HashMap<>();
-    private static Map<Block, ItemStack> item = new HashMap<>();
-    private static Map<Block, ItemStack> itemFuel = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
@@ -155,7 +155,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                 @Override
                 public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == Material.AIR;
                 }
             });
         }
@@ -218,11 +218,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                         Utils.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←"), " "));
 
                 ItemStack rocket = item.get(b);
-                if (RocketUtils.getFuel(rocket) + 5 > RocketUtils.getMaxFuel(rocket)) {
-                    RocketUtils.setFuel(rocket, RocketUtils.getMaxFuel(rocket));
-                } else {
-                    RocketUtils.setFuel(rocket, RocketUtils.getFuel(rocket) + 5);
-                }
+                RocketUtils.setFuel(rocket, Math.min(RocketUtils.getFuel(rocket) + 5, RocketUtils.getMaxFuel(rocket)));
                 new BukkitRunnable() {
 
                     @Override

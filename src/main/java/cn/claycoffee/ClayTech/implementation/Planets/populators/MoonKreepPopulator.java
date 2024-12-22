@@ -46,24 +46,12 @@ public class MoonKreepPopulator extends BlockPopulator {
                     }
 
                     switch (random.nextInt(6)) {
-                        case 0:
-                            x = Math.min(x + 1, 15);
-                            break;
-                        case 1:
-                            y = Math.min(y + 1, 20);
-                            break;
-                        case 2:
-                            z = Math.min(z + 1, 15);
-                            break;
-                        case 3:
-                            x = Math.max(x - 1, 0);
-                            break;
-                        case 4:
-                            y = Math.max(y - 1, 30);
-                            break;
-                        default:
-                            z = Math.max(z - 1, 0);
-                            break;
+                        case 0 -> x = Math.min(x + 1, 15);
+                        case 1 -> y = Math.min(y + 1, 20);
+                        case 2 -> z = Math.min(z + 1, 15);
+                        case 3 -> x = Math.max(x - 1, 0);
+                        case 4 -> y = Math.max(y - 1, 30);
+                        default -> z = Math.max(z - 1, 0);
                     }
                 }
 

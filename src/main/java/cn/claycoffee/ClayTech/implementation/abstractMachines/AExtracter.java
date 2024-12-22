@@ -135,7 +135,7 @@ public abstract class AExtracter extends SlimefunItem implements InventoryBlock,
                 @Override
                 public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == Material.AIR;
                 }
             });
         }

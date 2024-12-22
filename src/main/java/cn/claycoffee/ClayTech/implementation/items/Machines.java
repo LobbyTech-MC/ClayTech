@@ -107,6 +107,7 @@ public class Machines {
                 ClayTechItems.CLAY_SPACESUIT_OXYGEN_INJECTOR);
         SlimefunItemStack cobblestonegenerator = new SlimefunItemStack("CLAY_COBBLESTONE_GENERATOR",
                 ClayTechItems.CLAY_COBBLESTONE_GENERATOR);
+        // todo
         //SlimefunItemStack electricwaterpump = new SlimefunItemStack("CLAY_ELECTRIC_WATER_PUMP",
         //        ClayTechItems.CLAY_ELECTRIC_WATER_PUMP);
         SlimefunItemStack electriccopier = new SlimefunItemStack("CLAY_ELECTRIC_COPIER",
@@ -136,6 +137,7 @@ public class Machines {
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClaySpaceSuitOxygenInjector).register(ClayTech.getInstance());
         new CobbleStoneGenerator(ClayTechItems.C_MACHINES, cobblestonegenerator, "CLAY_COBBLESTONE_GENERATOR",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayCobbleStoneGenerator).register(ClayTech.getInstance());
+        // todo
         //new ElectricWaterPump(ClayTechItems.C_MACHINES, electricwaterpump, "CLAY_ELECTRIC_WATER_PUMP",
         //        RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricWaterPump).register(ClayTech.getInstance());
         new ClayElectricCopier(ClayTechItems.C_MACHINES, electriccopier, "CLAY_ELECTRIC_COPIER",

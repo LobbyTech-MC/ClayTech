@@ -36,7 +36,7 @@ import java.util.zip.GZIPOutputStream;
 /**
  * bStats collects some data for plugin authors.
  * <p>
- * Check out https://bStats.org/ to learn more about bStats!
+ * Check out <a href="https://bStats.org/">...</a> to learn more about bStats!
  */
 public class Metrics {
 
@@ -79,7 +79,7 @@ public class Metrics {
     // A list with all custom charts
     private final List<CustomChart> charts = new ArrayList<>();
     // Is bStats enabled on this server?
-    private boolean enabled;
+    private final boolean enabled;
 
     /**
      * Class constructor.
@@ -117,10 +117,11 @@ public class Metrics {
 
             // Inform the server owners about bStats
             config.options().header(
-                            "bStats collects some data for plugin authors like how many servers are using their plugins.\n"
-                                    + "To honor their work, you should not disable it.\n"
-                                    + "This has nearly no effect on the server performance!\n"
-                                    + "Check out https://bStats.org/ to learn more :)")
+                            """
+                                    bStats collects some data for plugin authors like how many servers are using their plugins.
+                                    To honor their work, you should not disable it.
+                                    This has nearly no effect on the server performance!
+                                    Check out https://bStats.org/ to learn more :)""")
                     .copyDefaults(true);
             try {
                 config.save(configFile);

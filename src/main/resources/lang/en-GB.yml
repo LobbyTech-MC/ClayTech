@@ -311,8 +311,8 @@ Items:
   CHOCOLATE: "&eChocolate"
   CHOCOLATE_LORE:
     - "&6Chocolate"
-    - "&7Increase 15 hunger value and gain 30 seconds
-    - "&7 of resistance III affect after eating."
+    - "&7Increase 15 hunger value and gain 30 seconds"
+    - "&7of resistance III affect after eating."
     - "&7Try some chocolate!"
     - "<cantplace>"
   LUOSI_RICE_NOODLE: "&eSnail Rice Noddle"

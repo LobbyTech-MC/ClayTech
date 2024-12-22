@@ -73,6 +73,10 @@ public class ClayElectricCopier extends ANewContainer {
 
     protected void tick(Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
+        if (inv == null) {
+            return;
+        }
+
         CraftingOperation currentOperation = processor.getOperation(b);
 
         if (currentOperation != null) {
@@ -102,7 +106,6 @@ public class ClayElectricCopier extends ANewContainer {
                 // Mode II
                 mode.put(b, 2);
             } else mode.put(b, 0);
-            ;
             if (mode.get(b) > 0) {
                 BookMeta sourceMeta = (BookMeta) input.getItemMeta();
                 MachineRecipe r;

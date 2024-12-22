@@ -20,7 +20,7 @@ public class WeaponListener implements Listener {
                 Player d = (Player) ((Projectile) e.getDamager()).getShooter();
                 Player p = (Player) e.getEntity();
                 Affect.AffectCheck(d, p);
-            } catch (Exception err) {
+            } catch (Exception ignored) {
             }
         } else {
             if (e.getDamager().getType() == EntityType.PLAYER && e.getEntity().getType() == EntityType.PLAYER) {
@@ -40,7 +40,7 @@ public class WeaponListener implements Listener {
                     Player p = (Player) e.getRightClicked();
                     Affect.AffectCheck(d, p);
                 }
-            } catch (Exception err) {
+            } catch (Exception ignored) {
 
             }
         }

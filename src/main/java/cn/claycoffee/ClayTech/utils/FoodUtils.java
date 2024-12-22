@@ -96,7 +96,7 @@ public class FoodUtils {
                 }
             }
 
-        } catch (NullPointerException err) {
+        } catch (NullPointerException ignored) {
         }
     }
 
@@ -108,7 +108,7 @@ public class FoodUtils {
     public static void destroy(Player p, Block b, ItemStack targetBlock, ItemStack dropItem, ItemStack disableItem,
                                int from, int to, BlockBreakEvent b1) {
         if (b.getType() == targetBlock.getType()) {
-            if (p.getInventory().getItemInMainHand() != new ItemStack(Material.AIR)) {
+            if (!p.getInventory().getItemInMainHand().equals(new ItemStack(Material.AIR))) {
                 if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)
                         || SlimefunUtils.isItemSimilar(disableItem, p.getInventory().getItemInMainHand(), true)) {
                     return;

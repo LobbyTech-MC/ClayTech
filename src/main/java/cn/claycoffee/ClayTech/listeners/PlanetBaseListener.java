@@ -108,7 +108,7 @@ public class PlanetBaseListener implements Listener {
                             && ClayTechManager.isSpaceSuit(piv.getLeggings())
                             && ClayTechManager.isSpaceSuit(piv.getBoots())) {
                         if (RocketUtils.getOxygen(e.getItem()) >= 4) {
-                            List<String> okPart = new ArrayList<String>();
+                            List<String> okPart = new ArrayList<>();
                             if (RocketUtils.getMaxOxygen(piv.getHelmet()) > RocketUtils.getOxygen(piv.getHelmet())) {
                                 okPart.add("HELMET");
                             }
@@ -124,7 +124,7 @@ public class PlanetBaseListener implements Listener {
                                 okPart.add("BOOTS");
                             }
                             int totalOxygen = RocketUtils.getOxygen(e.getItem());
-                            if (okPart.size() == 0) {
+                            if (okPart.isEmpty()) {
                                 e.getPlayer().sendMessage(Lang.readGeneralText("SPACESUIT_DISTRIBUTER_FULL"));
                                 return;
                             }

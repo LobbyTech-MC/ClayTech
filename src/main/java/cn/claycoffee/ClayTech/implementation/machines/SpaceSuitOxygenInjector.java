@@ -51,9 +51,9 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     private static final List<Material> LEAVES = Arrays
             .asList(new Material[]{Material.OAK_LEAVES, Material.ACACIA_LEAVES, Material.BIRCH_LEAVES,
                     Material.DARK_OAK_LEAVES, Material.JUNGLE_LEAVES, Material.SPRUCE_LEAVES});
+    private static final Map<Block, ItemStack> item = new HashMap<>();
     public static Map<Block, MachineRecipe> processing = new HashMap<>();
     public static Map<Block, Integer> progress = new HashMap<>();
-    private static Map<Block, ItemStack> item = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
     public SpaceSuitOxygenInjector(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
@@ -157,7 +157,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 @Override
                 public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == Material.AIR;
                 }
             });
         }
@@ -222,11 +222,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 inv.replaceExistingItem(4, Utils.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "));
 
                 ItemStack spacesuit = item.get(b);
-                if (RocketUtils.getOxygen(spacesuit) + 5 > RocketUtils.getMaxOxygen(spacesuit)) {
-                    RocketUtils.setOxygen(spacesuit, RocketUtils.getMaxOxygen(spacesuit));
-                } else {
-                    RocketUtils.setOxygen(spacesuit, RocketUtils.getOxygen(spacesuit) + 5);
-                }
+                RocketUtils.setOxygen(spacesuit, Math.min(RocketUtils.getOxygen(spacesuit) + 5, RocketUtils.getMaxOxygen(spacesuit)));
                 new BukkitRunnable() {
 
                     @Override

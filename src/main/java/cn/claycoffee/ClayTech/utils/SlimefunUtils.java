@@ -91,7 +91,7 @@ public class SlimefunUtils {
 
         SlimefunItem item1 = StorageCacheUtils.getSfItem(a1.getLocation());
         if (item1 != null && item1.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
-            List<Block> block = new ArrayList<Block>();
+            List<Block> block = new ArrayList<>();
             List<Block> blocks = new ArrayList<>();
             int[] range = new int[]{0, 1, 2, 3, 4};
             if (face == BlockFace.NORTH || face == BlockFace.SOUTH) {
