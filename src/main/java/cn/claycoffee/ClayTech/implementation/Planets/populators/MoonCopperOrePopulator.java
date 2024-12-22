@@ -2,7 +2,7 @@ package cn.claycoffee.ClayTech.implementation.Planets.populators;
 
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -33,14 +33,13 @@ public class MoonCopperOrePopulator extends BlockPopulator {
                         final int tz = z;
                         Block sourceb = source.getBlock(x, y, z);
                         if (sourceb.getType() == Material.STONE) {
-                            if (BlockStorage.hasBlockInfo(sourceb.getLocation())) return;
+                            if (StorageCacheUtils.hasBlock(sourceb.getLocation())) return;
                             new BukkitRunnable() {
 
                                 @Override
                                 public void run() {
                                     source.getBlock(tx, ty, tz).setType(ClayTechItems.COPPER_ORE.getType(), false);
-                                    BlockStorage.addBlockInfo(source.getBlock(tx, ty, tz), "id", "COPPER_ORE",
-                                            true);
+                                    StorageCacheUtils.setData(source.getBlock(tx, ty, tz).getLocation(), "id", "COPPER_ORE");
 
                                 }
 

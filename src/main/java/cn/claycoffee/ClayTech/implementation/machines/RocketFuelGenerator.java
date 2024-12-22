@@ -12,9 +12,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class RocketFuelGenerator extends ACraftingTable {
 
-    public RocketFuelGenerator(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public RocketFuelGenerator(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                                ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override

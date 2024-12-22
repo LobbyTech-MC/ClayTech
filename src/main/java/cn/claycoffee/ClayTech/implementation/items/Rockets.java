@@ -1,11 +1,16 @@
 package cn.claycoffee.ClayTech.implementation.items;
 
 import cn.claycoffee.ClayTech.ClayTech;
+import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.ClayTechMachineRecipes;
 import cn.claycoffee.ClayTech.ClayTechRecipeType;
+import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.utils.Lang;
+import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.SlimefunUtils;
+import cn.claycoffee.ClayTech.utils.Utils;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -14,14 +19,18 @@ import io.github.thebusybiscuit.slimefun4.core.handlers.BlockPlaceHandler;
 import io.github.thebusybiscuit.slimefun4.core.handlers.BlockUseHandler;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Map;
 
 public class Rockets {
     private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 17, 18, 26, 27, 35, 36, 44, 45, 47, 48, 49,
@@ -44,26 +53,30 @@ public class Rockets {
                 "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, rocketlauncher, false,
                 new ItemHandler[]{new BlockPlaceHandler(false) {
                     @Override
-                    public void onPlayerPlace(BlockPlaceEvent blockPlaceEvent) {
-                        BlockStorage.addBlockInfo(blockPlaceEvent.getBlock(), "owner", blockPlaceEvent.getPlayer().getName(), true);
+                    public void onPlayerPlace(@NotNull BlockPlaceEvent blockPlaceEvent) {
+                        StorageCacheUtils.setData(blockPlaceEvent.getBlock().getLocation(), "owner", blockPlaceEvent.getPlayer().getName());
                     }
 
                 }, (BlockUseHandler) ev -> {
                     PlayerInteractEvent e = ev.getInteractEvent();
                     if (e.hasBlock() && e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                         Block b = e.getClickedBlock();
-                        if (BlockStorage.checkID(b) != null) {
-                            if (BlockStorage.checkID(b).equalsIgnoreCase("ROCKET_LAUNCHER")) {
-                                /*
+                        SlimefunItem item = StorageCacheUtils.getSfItem(b.getLocation());
+                        if (item != null) {
+                            if (item.getId().equalsIgnoreCase("ROCKET_LAUNCHER")) {
                                 if (e.hasItem()) {
-                                    if (!Slimefun.hasUnlocked(e.getPlayer(), e.getItem(), true)) {
+                                    SlimefunItem item2 = SlimefunItem.getByItem(e.getItem());
+                                    if (item2 != null && !item2.getResearch().canUnlock(e.getPlayer())) {
                                         return;
                                     }
                                 }
-                                if (!Slimefun.hasUnlocked(e.getPlayer(), ClayTechItems.ROCKET_LAUNCHER, true)) {
+
+                                SlimefunItem item3 = ClayTechItems.ROCKET_LAUNCHER.getItem();
+                                if (item3 != null && !item3.getResearch().canUnlock(e.getPlayer())) {
                                     return;
                                 }
-                                Map<String, String> jbj = StrUtils.parseJSON(BlockStorage.getBlockInfoAsJson(b));
+
+                                Map<String, String> jbj = StorageCacheUtils.getBlock(b.getLocation()).getAllData();
                                 String ownerName = jbj.get("owner");
                                 if (ownerName.equalsIgnoreCase(e.getPlayer().getName())) {
                                     Planet current = PlanetUtils.getPlanet(b.getWorld());
@@ -72,7 +85,7 @@ public class Rockets {
                                         return;
                                     }
                                     if (Utils.getMetadata(b, "currentPage") != null) {
-                                        currentPage = new Integer(Utils.getMetadata(b, "currentPage")).intValue();
+                                        currentPage = Utils.getMetadata(b, "currentPage").asInt();
                                     }
                                     Inventory Preset = Bukkit.createInventory(null, 54,
                                             Lang.readMachinesText("ROCKET_LAUNCHER"));
@@ -96,8 +109,6 @@ public class Rockets {
                                     e.setCancelled(true);
                                     return;
                                 }
-
-                                */
                             }
                         }
                     }

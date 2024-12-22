@@ -1,11 +1,14 @@
 package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.ClayTech;
+import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.events.InjectOxygenEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -14,13 +17,11 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
@@ -55,15 +56,15 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     private static Map<Block, ItemStack> item = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
-    public SpaceSuitOxygenInjector(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public SpaceSuitOxygenInjector(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                                    ItemStack[] recipe) {
 
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::SetupMenu);
 
         /*
         registerBlockHandler(id, (p, b, tool, reason) -> {
-            BlockMenu inv = BlockStorage.getInventory(b);
+            BlockMenu inv = StorageCacheUtils.getMenu(b);
             if (inv != null) {
                 for (int slot : getInputSlots()) {
                     if (inv.getItemInSlot(slot) != null) {
@@ -184,7 +185,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, Config data) {
+            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
                 SpaceSuitOxygenInjector.this.tick(b);
             }
 
@@ -196,7 +197,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     }
 
     protected void tick(Block b) {
-        BlockMenu inv = BlockStorage.getInventory(b);
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {
             // 剩余时间
@@ -236,7 +237,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
 
                 }.runTask(ClayTech.getInstance());
                 inv.replaceExistingItem(22, spacesuit);
-                //ClayTechData.RunningInjectorsOxygen.remove(inv.toInventory());
+                ClayTechData.RunningInjectorsOxygen.remove(inv.toInventory());
                 progress.remove(b);
                 processing.remove(b);
                 item.remove(b);
@@ -268,7 +269,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                             new ItemStack[]{});
                     item.put(b, spacesuit.clone());
                     inv.consumeItem(22, 1);
-                    //ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
+                    ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
                     inv.replaceExistingItem(22, new ItemStack(Material.BEDROCK));
                     processing.put(b, oxygeninjectrecipe);
                     progress.put(b, oxygeninjectrecipe.getTicks());

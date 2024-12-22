@@ -1,8 +1,13 @@
 package cn.claycoffee.ClayTech.utils;
 
+import cn.claycoffee.ClayTech.ClayTech;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -146,5 +151,60 @@ public class Utils {
         meta.setLore(loreList);
         itemStack.setItemMeta(meta);
         return itemStack;
+    }
+
+    public static boolean readPlayerMetadataBoolean(Player player, String key) {
+        return player.getMetadata(key).get(0).asBoolean();
+    }
+
+    public static int readPlayerMetadataInt(Player player, String key) {
+        return player.getMetadata(key).get(0).asInt();
+    }
+
+    public static long readPlayerMetadataLong(Player player, String key) {
+        return player.getMetadata(key).get(0).asLong();
+    }
+
+    public static double readPlayerMetadataDouble(Player player, String key) {
+        return player.getMetadata(key).get(0).asDouble();
+    }
+
+    public static String readPlayerMetadataString(Player player, String key) {
+        return player.getMetadata(key).get(0).asString();
+    }
+
+    public static byte readPlayerMetadataByte(Player player, String key) {
+        return player.getMetadata(key).get(0).asByte();
+    }
+
+    public static float readPlayerMetadataFloat(Player player, String key) {
+        return player.getMetadata(key).get(0).asFloat();
+    }
+
+    public static short readPlayerMetadataShort(Player player, String key) {
+        return player.getMetadata(key).get(0).asShort();
+    }
+
+    public static MetadataValue getMetadata(Block block, String key) {
+        return block.getMetadata(key).get(0);
+    }
+    public static MetadataValue getBlockMetadata(Block block, String key) {
+        return getMetadata(block, key);
+    }
+
+    public static void setMetaData(Block block, String key, MetadataValue value) {
+        block.setMetadata(key, value);
+    }
+
+    public static void setMetaData(Block block, String key, Object value) {
+        setMetaData(block, key, new FixedMetadataValue(ClayTech.getInstance(), value));
+    }
+
+    public static void setBlockMetaData(Block block, String key, MetadataValue value) {
+        setMetaData(block, key, value);
+    }
+
+    public static void setBlockMetaData(Block block, String key, Object value) {
+        setMetaData(block, key, value);
     }
 }

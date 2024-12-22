@@ -2,6 +2,7 @@ package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.implementation.abstractMachines.ANewContainer;
 import cn.claycoffee.ClayTech.utils.Lang;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
@@ -9,7 +10,6 @@ import io.github.thebusybiscuit.slimefun4.core.machines.MachineProcessor;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,9 +31,9 @@ public class ClayElectricCopier extends ANewContainer {
     private static final Map<Block, Integer> mode = new HashMap<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public ClayElectricCopier(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public ClayElectricCopier(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                               ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ClayElectricCopier extends ANewContainer {
     }
 
     protected void tick(Block b) {
-        BlockMenu inv = BlockStorage.getInventory(b);
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         CraftingOperation currentOperation = processor.getOperation(b);
 
         if (currentOperation != null) {

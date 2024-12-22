@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Called when a item injected oxygen.当一个物品被注入氧气的时候触发.
+ * Called when an item injected oxygen.当一个物品被注入氧气的时候触发.
  */
 public class InjectOxygenEvent extends Event {
     private static final HandlerList handlers = new HandlerList();

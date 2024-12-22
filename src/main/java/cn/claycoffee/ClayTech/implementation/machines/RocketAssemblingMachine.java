@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class RocketAssemblingMachine extends ARocketTable {
 
-    public RocketAssemblingMachine(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public RocketAssemblingMachine(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                                    ItemStack[] recipe) {
-        super(category, item, id, recipeType, recipe);
+        super(itemGroup, item, id, recipeType, recipe);
     }
 
     @Override

@@ -7,8 +7,8 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class ANewContainer extends AContainer {
-    public ANewContainer(ItemGroup category, SlimefunItemStack item, RecipeType recipeType,
+    public ANewContainer(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
                          ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 }

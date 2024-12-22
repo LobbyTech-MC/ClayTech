@@ -1,7 +1,14 @@
 package cn.claycoffee.ClayTech.implementation.items;
 
+import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
+import cn.claycoffee.ClayTech.utils.Lang;
+import cn.claycoffee.ClayTech.utils.SlimefunUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 public class Skulls {
@@ -30,7 +37,6 @@ public class Skulls {
                 new ItemStack(Material.OAK_LOG), new ItemStack(Material.OAK_LOG), ClayTechItems.MAGIC_CLAY,
                 new ItemStack(Material.OAK_LOG)};
 
-        /*
         // 注册物品
         SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "CLAYCOFFEE_HEAD", ClayTechItems.CLAYCOFFEE_HEAD,
                 "notresearch", 10, RecipeType.ANCIENT_ALTAR, ClayCoffeeHeadRecipe, false);
@@ -55,7 +61,5 @@ public class Skulls {
         skull_basic2.addItems(SlimefunItem.getByItem(ClayTechItems.CLOCK_C),
                 SlimefunItem.getByItem(ClayTechItems.LANTERN_C));
         skull_basic2.register();
-
-         */
     }
 }

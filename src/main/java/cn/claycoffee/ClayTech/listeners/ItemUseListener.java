@@ -2,6 +2,7 @@ package cn.claycoffee.ClayTech.listeners;
 
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.utils.Lang;
+import cn.claycoffee.ClayTech.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -62,9 +63,8 @@ public class ItemUseListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        /*
         if (Utils.getBlockMetadata(e.getBlock(), "cantDestroy") != null) {
-            boolean canDestroy = !((boolean) Utils.getBlockMetadata(e.getBlock(), "cantDestroy"));
+            boolean canDestroy = !(Utils.getBlockMetadata(e.getBlock(), "cantDestroy").asBoolean());
             if (!canDestroy) {
                 e.setCancelled(true);
                 e.getPlayer().sendMessage(Lang.readGeneralText("cantBreak"));
@@ -74,7 +74,5 @@ public class ItemUseListener implements Listener {
             e.setCancelled(true);
             e.getPlayer().sendMessage(Lang.readGeneralText("cantBreak"));
         }
-
-         */
     }
 }

@@ -2,7 +2,9 @@ package cn.claycoffee.ClayTech.api;
 
 public enum ClayTechBranch {
 
-    DEVELOPMENT("dev"), STABLE("stable"), ALL("all");
+    DEVELOPMENT("dev"),
+    STABLE("stable"),
+    ALL("all");
 
     public final String name;
 

@@ -10,9 +10,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class ElectricStoneCrusher extends ANewContainer {
 
-    public ElectricStoneCrusher(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public ElectricStoneCrusher(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                                 ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override

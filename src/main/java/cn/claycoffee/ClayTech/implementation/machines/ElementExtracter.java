@@ -10,9 +10,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class ElementExtracter extends AExtracter {
-    public ElementExtracter(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public ElementExtracter(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                             ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     public String getInventoryTitle() {

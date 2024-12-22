@@ -1,7 +1,7 @@
 package cn.claycoffee.ClayTech.implementation.Planets.populators;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -32,7 +32,7 @@ public class MoonCoalPopulator extends BlockPopulator {
                         final int tz = z;
                         Block sourceb = source.getBlock(x, y, z);
                         if (sourceb.getType() == Material.STONE) {
-                            if (BlockStorage.hasBlockInfo(sourceb.getLocation())) return;
+                            if (StorageCacheUtils.hasBlock(sourceb.getLocation())) return;
                             new BukkitRunnable() {
 
                                 @Override

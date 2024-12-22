@@ -1,6 +1,7 @@
 package cn.claycoffee.ClayTech.listeners;
 
 import cn.claycoffee.ClayTech.ClayTech;
+import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.ConfigManager;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
@@ -8,8 +9,9 @@ import cn.claycoffee.ClayTech.api.Planet;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.PlanetUtils;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -64,8 +66,9 @@ public class PlanetBaseListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void BlockBreakEvent(BlockBreakEvent e) {
-        if (BlockStorage.checkID(e.getBlock()) != null) {
-            if (BlockStorage.checkID(e.getBlock()).equalsIgnoreCase("PLANET_BASE_SIGNER")) {
+        SlimefunItem item = StorageCacheUtils.getSfItem(e.getBlock().getLocation());
+        if (item != null) {
+            if (item.getId().equals("PLANET_BASE_SIGNER")) {
                 ConfigManager planetsData = ClayTech.getPlanetDataManager();
                 FileConfiguration pd = planetsData.getConfig();
                 int baseX = pd.getInt(e.getPlayer().getName() + "." + e.getPlayer().getWorld().getName() + ".baseX");
@@ -197,16 +200,15 @@ public class PlanetBaseListener implements Listener {
     public void InventoryClickEvent(InventoryClickEvent e) {
         if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("CLAY_ROCKET_FUEL_INJECTOR"))
                 && e.getSlot() == 20) {
-            // todo
-            //if (ClayTechData.RunningInjectors.get(e.getInventory()) != null) {
-            //    e.setCancelled(true);
-            //}
+            if (ClayTechData.RunningInjectors.get(e.getInventory()) != null) {
+                e.setCancelled(true);
+            }
         }
         if (e.getView().getTitle().equalsIgnoreCase(Lang.readMachinesText("CLAY_SPACESUIT_OXYGEN_INJECTOR"))
                 && e.getSlot() == 22) {
-            //if (ClayTechData.RunningInjectorsOxygen.get(e.getInventory()) != null) {
-            //    e.setCancelled(true);
-            //}
+            if (ClayTechData.RunningInjectorsOxygen.get(e.getInventory()) != null) {
+                e.setCancelled(true);
+            }
         }
     }
 }

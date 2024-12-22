@@ -4,6 +4,8 @@ import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.api.events.PlayerAssembleEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
 import com.google.common.base.Preconditions;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -18,13 +20,11 @@ import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOper
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public abstract class ARocketTable extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
     public static final int[] inputSlots = new int[]{11, 19, 20, 21, 28, 29, 30, 37, 38, 39};
     public static final int[] outputSlots = new int[]{34};
@@ -57,10 +58,10 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public ARocketTable(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public ARocketTable(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                         ItemStack[] recipe) {
 
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
 
         processor.setProgressBar(getProgressBar());
         createPreset(this, getInventoryTitle(), this::constructMenu);
@@ -73,7 +74,7 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
 
             @Override
             public void onBlockBreak(@NotNull Block b) {
-                BlockMenu inv = BlockStorage.getInventory(b);
+                BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
 
                 if (inv != null) {
                     inv.dropItems(b.getLocation(), getInputSlots());
@@ -135,7 +136,7 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
                 @Override
                 public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == Material.AIR;
                 }
             });
         }
@@ -146,7 +147,7 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
     }
 
     @Override
-    public EnergyNetComponentType getEnergyComponentType() {
+    public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -190,7 +191,7 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, Config data) {
+            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
                 ARocketTable.this.tick(b);
             }
 
@@ -202,34 +203,38 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
     }
 
     protected void tick(Block b) {
-        BlockMenu inv = BlockStorage.getInventory(b);
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         CraftingOperation currentOperation = processor.getOperation(b);
 
+        if (inv == null) {
+            return;
+        }
+
         if (currentOperation != null) {
-            if (takeCharge(b.getLocation())) {
+            if (!takeCharge(b.getLocation())) {
+                return;
+            }
+            if (!currentOperation.isFinished()) {
+                processor.updateProgressBar(inv, 22, currentOperation);
+                currentOperation.addProgress(1);
+            } else {
+                inv.replaceExistingItem(22, new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, " "));
 
-                if (!currentOperation.isFinished()) {
-                    processor.updateProgressBar(inv, 22, currentOperation);
-                    currentOperation.addProgress(1);
-                } else {
-                    inv.replaceExistingItem(22, new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, " "));
+                for (ItemStack output : currentOperation.getResults()) {
+                    inv.pushItem(output.clone(), getOutputSlots());
+                }
 
-                    for (ItemStack output : currentOperation.getResults()) {
-                        inv.pushItem(output.clone(), getOutputSlots());
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        Bukkit.getPluginManager()
+                                .callEvent(new PlayerAssembleEvent(b, processing.get(b).getInput(), processor.getOperation(b).getResults()[0]));
                     }
 
-                    new BukkitRunnable() {
+                }.runTask(ClayTech.getInstance());
 
-                        @Override
-                        public void run() {
-                            Bukkit.getPluginManager()
-                                    .callEvent(new PlayerAssembleEvent(b, processing.get(b).getInput(), processor.getOperation(b).getResults()[0]));
-                        }
-
-                    }.runTask(ClayTech.getInstance());
-
-                    processor.endOperation(b);
-                }
+                processor.endOperation(b);
             }
         } else {
             MachineRecipe next = findNextRecipe(inv);
@@ -241,7 +246,7 @@ public abstract class ARocketTable extends SlimefunItem implements InventoryBloc
     }
 
     @Override
-    public MachineProcessor<CraftingOperation> getMachineProcessor() {
+    public @NotNull MachineProcessor<CraftingOperation> getMachineProcessor() {
         return processor;
     }
 

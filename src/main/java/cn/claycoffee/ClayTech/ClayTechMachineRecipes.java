@@ -1,7 +1,6 @@
 package cn.claycoffee.ClayTech;
 
 import cn.claycoffee.ClayTech.utils.SlimefunUtils;
-import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

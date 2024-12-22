@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class FoodChalkingMachine extends ANewContainer {
 
-    public FoodChalkingMachine(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public FoodChalkingMachine(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                                ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override

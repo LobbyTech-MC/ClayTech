@@ -2,6 +2,7 @@ package cn.claycoffee.ClayTech.utils;
 
 import cn.claycoffee.ClayTech.ClayTech;
 import cn.claycoffee.ClayTech.ClayTechItems;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemHandler;
@@ -10,7 +11,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -22,14 +22,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SlimefunUtils {
-    public static void registerItem(ItemGroup category, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
-        SlimefunItem slimefunItem = new SlimefunItem(category, item, Recipetype, recipe);
+    public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
+        item = new SlimefunItemStack("CLAYTECH_" + id, item);
+        SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
         slimefunItem.register(ClayTech.getInstance());
     }
 
-    public static void registerItem(ItemGroup category, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch, ItemHandler[] handlers) {
-        SlimefunItem slimefunItem = new SlimefunItem(category, item, Recipetype, recipe);
+    public static void registerItem(ItemGroup itemGroup, String id, SlimefunItemStack item, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch, ItemHandler[] handlers) {
+        item = new SlimefunItemStack("CLAYTECH_" + id, item);
+        SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(new NamespacedKey(ClayTech.getInstance(), ResearchName), id.hashCode(), ResearchName, cost));
         for (ItemHandler handler : handlers) {
             slimefunItem.addItemHandler(handler);
@@ -37,25 +39,26 @@ public class SlimefunUtils {
         slimefunItem.register(ClayTech.getInstance());
     }
 
-    public static void registerItem(ItemGroup category, String id, ItemStack itemStack, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
-        registerItem(category, id, new SlimefunItemStack(id, itemStack), ResearchName, cost, Recipetype, recipe, registerResearch);
+    public static void registerItem(ItemGroup itemGroup, String id, ItemStack itemStack, String ResearchName, int cost, RecipeType Recipetype, ItemStack[] recipe, boolean registerResearch) {
+        registerItem(itemGroup, id, new SlimefunItemStack(id, itemStack), ResearchName, cost, Recipetype, recipe, registerResearch);
     }
 
-    public static void registerArmors(ItemGroup category, String nameprefix, ItemStack[] ItemStack, String ResearchName,
+    public static void registerArmors(ItemGroup itemGroup, String nameprefix, ItemStack[] ItemStack, String ResearchName,
                                       int cost, RecipeType Recipetype, ItemStack MaterialStack, boolean registerResearch) {
 
+        nameprefix = "CLAYTECH_" + nameprefix;
         SlimefunItemStack HELMET = new SlimefunItemStack(nameprefix + "_HELMET", ItemStack[0]);
-        SlimefunItem HELMET_I = new SlimefunItem(category, HELMET, Recipetype, getArmorsStack(1, MaterialStack));
+        SlimefunItem HELMET_I = new SlimefunItem(itemGroup, HELMET, Recipetype, getArmorsStack(1, MaterialStack));
         HELMET_I.register(ClayTech.getInstance());
         SlimefunItemStack CHESTPLATE = new SlimefunItemStack(nameprefix + "_CHESTPLATE", ItemStack[1]);
-        SlimefunItem CHESTPLATE_I = new SlimefunItem(category, CHESTPLATE, Recipetype,
+        SlimefunItem CHESTPLATE_I = new SlimefunItem(itemGroup, CHESTPLATE, Recipetype,
                 getArmorsStack(2, MaterialStack));
         CHESTPLATE_I.register(ClayTech.getInstance());
         SlimefunItemStack LEGGINGS = new SlimefunItemStack(nameprefix + "_LEGGINGS", ItemStack[2]);
-        SlimefunItem LEGGINGS_I = new SlimefunItem(category, LEGGINGS, Recipetype, getArmorsStack(3, MaterialStack));
+        SlimefunItem LEGGINGS_I = new SlimefunItem(itemGroup, LEGGINGS, Recipetype, getArmorsStack(3, MaterialStack));
         LEGGINGS_I.register(ClayTech.getInstance());
         SlimefunItemStack BOOTS = new SlimefunItemStack(nameprefix + "_BOOTS", ItemStack[3]);
-        SlimefunItem BOOTS_I = new SlimefunItem(category, BOOTS, Recipetype, getArmorsStack(4, MaterialStack));
+        SlimefunItem BOOTS_I = new SlimefunItem(itemGroup, BOOTS, Recipetype, getArmorsStack(4, MaterialStack));
         BOOTS_I.register(ClayTech.getInstance());
     }
 
@@ -81,9 +84,13 @@ public class SlimefunUtils {
     public static void doAirlock(Block plate, BlockFace face) {
         Block a1 = plate.getRelative(face);
         int waitTime = 5;
-        if (BlockStorage.getLocationInfo(plate.getLocation()) != null && BlockStorage.getLocationInfo(plate.getLocation()).getString("wait-time") != null)
-            waitTime = Integer.parseInt(BlockStorage.getLocationInfo(plate.getLocation()).getString("wait-time"));
-        if (BlockStorage.checkID(a1) != null && BlockStorage.checkID(a1).equals("CLAY_AIR_LOCK_BLOCK")) {
+        String sWaitTime = StorageCacheUtils.getData(plate.getLocation(), "wait-time");
+        if (sWaitTime != null) {
+            waitTime = Integer.parseInt(sWaitTime);
+        }
+
+        SlimefunItem item1 = StorageCacheUtils.getSfItem(a1.getLocation());
+        if (item1 != null && item1.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
             List<Block> block = new ArrayList<Block>();
             List<Block> blocks = new ArrayList<>();
             int[] range = new int[]{0, 1, 2, 3, 4};
@@ -93,12 +100,14 @@ public class SlimefunUtils {
                 for (int x : range) {
                     Block a2 = a1.getRelative(BlockFace.WEST, x);
                     Block a3 = a1.getRelative(BlockFace.EAST, x);
-                    if (BlockStorage.checkID(a2) != null && BlockStorage.checkID(a2).equals("CLAY_AIR_LOCK_BLOCK")) {
+                    SlimefunItem item2 = StorageCacheUtils.getSfItem(a2.getLocation());
+                    SlimefunItem item3 = StorageCacheUtils.getSfItem(a3.getLocation());
+                    if (item2 != null && item2.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
                         l++;
                         block.add(a2);
                         bo = true;
                     }
-                    if (BlockStorage.checkID(a3) != null && BlockStorage.checkID(a3).equals("CLAY_AIR_LOCK_BLOCK") && x != 0) {
+                    if (item3 != null && item3.getId().equals("CLAY_AIR_LOCK_BLOCK") && x != 0) {
                         l++;
                         block.add(a3);
                         bo = true;
@@ -107,14 +116,14 @@ public class SlimefunUtils {
                     }
                 }
                 if (l > 0) {
-                    for (Block b : block) {
-                        blocks.add(b);
-                    }
+                    blocks.addAll(block);
                     for (Block b : block) {
                         for (int i = 1; i < l; i++) {
                             Block a2 = b.getRelative(BlockFace.UP, i);
-                            if (BlockStorage.checkID(a2) != null && !BlockStorage.checkID(a2).equals("CLAY_AIR_LOCK_BLOCK") || BlockStorage.checkID(a2) == null)
+                            SlimefunItem item2 = StorageCacheUtils.getSfItem(a2.getLocation());
+                            if (item2 == null || !item2.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
                                 return;
+                            }
                             blocks.add(a2);
                         }
                     }
@@ -125,12 +134,14 @@ public class SlimefunUtils {
                 for (int x : range) {
                     Block a2 = a1.getRelative(BlockFace.NORTH, x);
                     Block a3 = a1.getRelative(BlockFace.SOUTH, x);
-                    if (BlockStorage.checkID(a2) != null && BlockStorage.checkID(a2).equals("CLAY_AIR_LOCK_BLOCK")) {
+                    SlimefunItem item2 = StorageCacheUtils.getSfItem(a2.getLocation());
+                    SlimefunItem item3 = StorageCacheUtils.getSfItem(a3.getLocation());
+                    if (item2 != null && item2.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
                         l++;
                         block.add(a2);
                         bo = true;
                     }
-                    if (BlockStorage.checkID(a3) != null && BlockStorage.checkID(a3).equals("CLAY_AIR_LOCK_BLOCK") && x != 0) {
+                    if (item3 != null && item3.getId().equals("CLAY_AIR_LOCK_BLOCK") && x != 0) {
                         l++;
                         block.add(a3);
                         bo = true;
@@ -139,14 +150,14 @@ public class SlimefunUtils {
                     }
                 }
                 if (l > 0) {
-                    for (Block b : block) {
-                        blocks.add(b);
-                    }
+                    blocks.addAll(block);
                     for (Block b : block) {
                         for (int i = 1; i < l; i++) {
                             Block a2 = b.getRelative(BlockFace.UP, i);
-                            if (BlockStorage.checkID(a2) != null && !BlockStorage.checkID(a2).equals("CLAY_AIR_LOCK_BLOCK") || BlockStorage.checkID(a2) == null)
+                            SlimefunItem item2 = StorageCacheUtils.getSfItem(a2.getLocation());
+                            if (item2 == null || !item2.getId().equals("CLAY_AIR_LOCK_BLOCK")) {
                                 return;
+                            }
                             blocks.add(a2);
                         }
                     }

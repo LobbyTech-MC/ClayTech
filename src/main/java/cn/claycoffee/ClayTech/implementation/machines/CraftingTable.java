@@ -19,9 +19,9 @@ public class CraftingTable extends ACraftingTable {
     private static Map<Block, ItemStack[]> inputItem = new HashMap<>();
     private static Map<Block, ItemStack> outputItem = new HashMap<>();
 
-    public CraftingTable(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public CraftingTable(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                          ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override

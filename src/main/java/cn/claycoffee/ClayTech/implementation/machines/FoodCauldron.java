@@ -11,9 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class FoodCauldron extends ACraftingTable {
-    public FoodCauldron(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+    public FoodCauldron(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
                         ItemStack[] recipe) {
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
     }
 
     @Override

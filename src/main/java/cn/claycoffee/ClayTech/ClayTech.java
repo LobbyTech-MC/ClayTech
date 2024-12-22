@@ -45,28 +45,31 @@ import io.github.thebusybiscuit.slimefun4.api.exceptions.IdConflictException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+@SuppressWarnings({"unused", "deprecation"})
 public class ClayTech extends JavaPlugin implements SlimefunAddon {
     protected static ClayTech plugin;
     private static String locale;
     private static String highrailspeed;
-    private static String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",")
+    private static final String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",")
             .split(",")[3];
-    private static boolean compatible = true;
-    private static List<Planet> planetList = new ArrayList<Planet>();
+    private static final boolean compatible = true;
+    private static final List<Planet> planetList = new ArrayList<>();
     private static String overworld = "";
     private static ClayTechUpdater updater;
     private static boolean spacetravelneedperm;
@@ -139,7 +142,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return worldBorderEnabled;
     }
 
-    @SuppressWarnings({"unused", "static-access"})
     @Override
     public void onEnable() {
         plugin = this;
@@ -147,13 +149,12 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         configManager = new ConfigManager("config.yml");
         config = configManager.getConfig();
         locale = config.getString("Locale");
-        if (locale == null)
+        if (locale == null) {
             locale = "en-US";
+        }
         highrailspeed = configManager.getConfig().getString("highrailspeed");
-        if (highrailspeed == null)
+        if (highrailspeed == null) {
             highrailspeed = "3";
-        if (!new File(getDataFolder() + "/" + locale + ".yml").exists()) {
-            Bukkit.getLogger().info("§cLoading Error: Locale not found.Disabling plugin..");
         }
 
         service = new LocalizationService(this);
@@ -163,7 +164,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         overworld = config.getString("overworld");
 
         if (!compatible) {
-            Bukkit.getLogger().info(Lang.readGeneralText("Not_compatible"));
+            getLogger().info(Lang.readGeneralText("Not_compatible"));
         }
 
         Metrics mt = new Metrics(this, 6887);
@@ -172,18 +173,18 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         planetManager = new ConfigManager("planets.yml");
         planetDataManager = new ConfigManager("planetdata.yml");
 
-        Bukkit.getLogger().info(Lang.readGeneralText("startTip"));
-        Bukkit.getLogger().info(Lang.readGeneralText("registeringItems"));
+        getLogger().info(Lang.readGeneralText("startTip"));
+        getLogger().info(Lang.readGeneralText("registeringItems"));
         try {
             registerSlimefun();
             registerPlanets();
             registerResources();
         } catch (Exception e) {
-            Bukkit.getLogger().info(Lang.readGeneralText("registeringError"));
+            getLogger().info(Lang.readGeneralText("registeringError"));
             e.printStackTrace();
         }
         if (this.getServer().getPluginManager().isPluginEnabled("WorldBorder")) {
-            Bukkit.getLogger().info(Lang.readGeneralText("WorldBorder"));
+            getLogger().info(Lang.readGeneralText("WorldBorder"));
             worldBorderEnabled = true;
         }
 
@@ -198,106 +199,137 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         Bukkit.getPluginManager().registerEvents(new PlanetBaseListener(), this);
         Bukkit.getPluginManager().registerEvents(new BlockUseListener(), this);
 
-        this.getCommand("claytech").setExecutor(new ClayTechCommands());
-
+        PluginCommand command = this.getCommand("claytech");
+        if (command != null) {
+            command.setExecutor(new ClayTechCommands());
+        } else {
+            getLogger().severe("Command /claytech not found.");
+        }
+        
         spacetravelneedperm = config.getBoolean("space-travel-need-perm");
 
         ClayTechData.currentVersion = this.getDescription().getVersion();
-        new BukkitRunnable() {
 
-            @Override
-            public void run() {
-                // Updater
-                updateBranch = config.getString("update-branch");
-                updater = new ClayTechUpdater();
-                if (!getConfig().getBoolean("disable-auto-updater")) {
+        autoUpdate.runTaskAsynchronously(this);
 
-                    updater.tryUpdate();
-                    new BukkitRunnable() {
-
-                        @Override
-                        public void run() {
-                            updater.tryUpdate();
-                        }
-
-                    }.runTaskTimerAsynchronously(ClayTech.getInstance(), 1728000, 1728000);
-                } else {
-                    Bukkit.getLogger().info(ChatColor.YELLOW + Lang.readGeneralText("Info_1"));
-                    Bukkit.getLogger().info(ChatColor.YELLOW + Lang.readGeneralText("Auto-updater_disabled"));
-                    Bukkit.getLogger().info(ChatColor.YELLOW + Lang.readGeneralText("Info_6"));
-                }
-                List<String> Authors = plugin.getDescription().getAuthors();
-                Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_1"));
-                Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_2").replaceAll("\\{version\\}",
-                        plugin.getDescription().getVersion()));
-                Bukkit.getLogger().info(
-                        ChatColor.GREEN + Lang.readGeneralText("Info_3").replaceAll(
-                                "\\{author\\}",
-                                Arrays.toString(Authors.toArray(new String[Authors.size()]))));
-                Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_4"));
-                Bukkit.getLogger().info(ChatColor.GREEN
-                        + Lang.readGeneralText("Info_5").replaceAll("\\{issue_tracker\\}", plugin.getBugTrackerURL()));
-                Bukkit.getLogger().info(ChatColor.GREEN + Lang.readGeneralText("Info_6"));
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    Planet p = PlanetUtils.getPlanet(player.getWorld());
-                    if (p != null) {
-                        if (!p.getHabitable()) {
-                            World PreviousWorld = player.getWorld();
-                            new BukkitRunnable() {
-                                @SuppressWarnings("deprecation")
-                                @Override
-                                public void run() {
-                                    if (!PreviousWorld.equals(player.getWorld()) || !player.isOnline()) {
-                                        this.cancel();
-                                        return;
-                                    }
-                                    if (!(ClayTechManager.isSpaceSuit(player.getInventory().getHelmet())
-                                            && ClayTechManager.isSpaceSuit(player.getInventory().getChestplate())
-                                            && ClayTechManager.isSpaceSuit(player.getInventory().getLeggings())
-                                            && ClayTechManager.isSpaceSuit(player.getInventory().getBoots()))) {
-                                        // 扣血
-                                        player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
-                                                Lang.readGeneralText("SpaceSuitError_Sub"));
-                                        player.damage(5);
-
-                                    } else {
-                                        if (!(RocketUtils.getOxygen(player.getInventory().getHelmet()) > 0
-                                                && RocketUtils.getOxygen(player.getInventory().getChestplate()) > 0
-                                                && RocketUtils.getOxygen(player.getInventory().getLeggings()) > 0
-                                                && RocketUtils.getOxygen(player.getInventory().getBoots()) > 0)) {
-                                            // 扣血
-                                            player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
-                                                    Lang.readGeneralText("SpaceSuitError_Sub"));
-                                            player.damage(5);
-                                        } else {
-                                            int harmlevel = p.getHarmLevel();
-                                            if (RocketUtils
-                                                    .getProtectLevel(player.getInventory().getHelmet()) < harmlevel
-                                                    || RocketUtils.getProtectLevel(
-                                                    player.getInventory().getChestplate()) < harmlevel
-                                                    || RocketUtils.getProtectLevel(
-                                                    player.getInventory().getLeggings()) < harmlevel
-                                                    || RocketUtils.getProtectLevel(
-                                                    player.getInventory().getBoots()) < harmlevel) {
-                                                // 扣血
-                                                player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
-                                                        Lang.readGeneralText("SpaceSuitError_Sub"));
-                                                player.damage(5);
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }.runTaskTimer(ClayTech.getInstance(), 20, 20);
-                        }
-                    }
-                }
-            }
-
-        }.runTaskAsynchronously(this);
+        harmInSpace.runTaskTimer(ClayTech.getInstance(), 20, 20);
 
         getLogger().info("ClayTech has been enabled.");
     }
+
+    private final BukkitRunnable autoUpdate = new BukkitRunnable() {
+
+        @Override
+        public void run() {
+            ChatColor yellow = ChatColor.YELLOW;
+            ChatColor green = ChatColor.GREEN;
+            // Updater
+            updateBranch = config.getString("update-branch");
+            updater = new ClayTechUpdater();
+            if (!getConfig().getBoolean("disable-auto-updater")) {
+
+                updater.tryUpdate();
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        updater.tryUpdate();
+                    }
+
+                }.runTaskTimerAsynchronously(ClayTech.getInstance(), 1728000, 1728000);
+            } else {
+                getLogger().info(yellow + Lang.readGeneralText("Info_1"));
+                getLogger().info(yellow + Lang.readGeneralText("Auto-updater_disabled"));
+                getLogger().info(yellow + Lang.readGeneralText("Info_6"));
+            }
+            List<String> Authors = plugin.getDescription().getAuthors();
+            getLogger().info(green + Lang.readGeneralText("Info_1"));
+            getLogger().info(green + Lang.readGeneralText("Info_2").replaceAll("\\{version\\}",
+                    plugin.getDescription().getVersion()));
+            getLogger().info(
+                    green + Lang.readGeneralText("Info_3").replaceAll(
+                            "\\{author\\}",
+                            Arrays.toString(Authors.toArray(new String[0]))));
+            getLogger().info(green + Lang.readGeneralText("Info_4"));
+            getLogger().info(green
+                    + Lang.readGeneralText("Info_5").replaceAll("\\{issue_tracker\\}", plugin.getBugTrackerURL()));
+            getLogger().info(green + Lang.readGeneralText("Info_6"));
+        }
+
+    };
+
+    private static final BukkitRunnable harmInSpace = new BukkitRunnable() {
+        @SuppressWarnings("deprecation")
+        @Override
+        public void run() {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player == null) {
+                    continue;
+                }
+
+                if (!player.isOnline()) {
+                    continue;
+                }
+                
+                Planet planet = PlanetUtils.getPlanet(player.getWorld());
+                if (planet == null) {
+                    continue;
+                }
+
+                if (planet.getHabitable()) {
+                    continue;
+                }
+
+                int harmlevel = planet.getHarmLevel();
+
+                World PreviousWorld = player.getWorld();
+                if (!PreviousWorld.equals(player.getWorld())) {
+                    return;
+                }
+
+                boolean isSpaceSuit = ClayTechManager.isSpaceSuit(player.getInventory().getHelmet())
+                        && ClayTechManager.isSpaceSuit(player.getInventory().getChestplate())
+                        && ClayTechManager.isSpaceSuit(player.getInventory().getLeggings())
+                        && ClayTechManager.isSpaceSuit(player.getInventory().getBoots());
+                if (!(isSpaceSuit)) {
+                    player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
+                            Lang.readGeneralText("SpaceSuitError_Sub"));
+                    player.damage(5);
+                    return;
+                }
+
+                boolean isOxygenSuit = RocketUtils.getOxygen(player.getInventory().getHelmet()) > 0
+                        && RocketUtils.getOxygen(player.getInventory().getChestplate()) > 0
+                        && RocketUtils.getOxygen(player.getInventory().getLeggings()) > 0
+                        && RocketUtils.getOxygen(player.getInventory().getBoots()) > 0;
+                if (!(isOxygenSuit)) {
+                    player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
+                            Lang.readGeneralText("SpaceSuitError_Sub"));
+                    player.damage(5);
+                    return;
+                }
+                
+                boolean isProtectSuit = 
+                        RocketUtils
+                        .getProtectLevel(player.getInventory().getHelmet()) > harmlevel
+                        && RocketUtils.getProtectLevel(
+                        player.getInventory().getChestplate()) > harmlevel
+                        && RocketUtils.getProtectLevel(
+                        player.getInventory().getLeggings()) > harmlevel
+                        && RocketUtils.getProtectLevel(
+                        player.getInventory().getBoots()) > harmlevel;
+
+                if (!isProtectSuit) {
+                    // 扣血
+                    player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
+                            Lang.readGeneralText("SpaceSuitError_Sub"));
+                    player.damage(5);
+                    return;
+                }
+            }
+        }
+
+    };
 
     @Override
     public void onDisable() {
@@ -308,35 +340,24 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
                     os.write(ClayTechData.updateJar);
                     os.close();
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         }
     }
 
     private String languageCodeToLanguage(String code) {
-        switch (code.toUpperCase()) {
-            case "ZH-CN":
-                return "Simplified Chinese";
-            case "ZH-TW":
-                return "Traditional Chinese";
-            case "EN-US":
-                return "English(US)";
-            case "EN-GB":
-                return "English(UK)";
-            case "JA":
-                return "Japanese";
-            case "PL-PL":
-                return "Polski";
-            case "FR":
-                return "Français";
-            default:
-                return code;
-        }
+        return switch (code.toUpperCase()) {
+            case "ZH-CN" -> "Simplified Chinese";
+            case "ZH-TW" -> "Traditional Chinese";
+            case "EN-US" -> "English(US)";
+            case "EN-GB" -> "English(UK)";
+            case "JA" -> "Japanese";
+            case "PL-PL" -> "Polski";
+            case "FR" -> "Français";
+            default -> code;
+        };
     }
 
     private void registerSlimefun() {
@@ -463,12 +484,12 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
 
     @Override
-    public JavaPlugin getJavaPlugin() {
+    public @NotNull JavaPlugin getJavaPlugin() {
         return this;
     }
 
     @Override
-    public File getFile() {
+    public @NotNull File getFile() {
         return super.getFile();
     }
 
@@ -491,8 +512,8 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     }
 
     @Override
-    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        List<String> PlanetNameList = new ArrayList<String>();
+    public ChunkGenerator getDefaultWorldGenerator(@NotNull String worldName, String id) {
+        List<String> PlanetNameList = new ArrayList<>();
         List<Planet> PlanetList = getPlanets();
         for (Planet p : PlanetList) {
             PlanetNameList.add(p.getPlanetWorldName());

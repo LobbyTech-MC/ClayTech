@@ -1,7 +1,8 @@
 package cn.claycoffee.ClayTech.listeners;
 
 import cn.claycoffee.ClayTech.ClayTech;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -20,8 +21,9 @@ public class RailwayListener implements Listener {
             Location veloc = ve.getLocation();
             Block rail = veworld.getBlockAt(veloc);
             if (rail.getBlockData().getMaterial() == Material.POWERED_RAIL) {
-                if (BlockStorage.checkID(rail) != null) {
-                    if (BlockStorage.checkID(rail).equalsIgnoreCase("CLAY_HIGHSPEED_RAILWAY")) {
+                SlimefunItem item = StorageCacheUtils.getSfItem(rail.getLocation());
+                if (item != null) {
+                    if (item.getId().equals("CLAY_HIGHSPEED_RAILWAY")) {
                         ve.setMaxSpeed(0.4d * Double.parseDouble(ClayTech.getHighRailSpeed()));
                     } else {
                         ve.setMaxSpeed(0.4d);

@@ -1,12 +1,15 @@
 package cn.claycoffee.ClayTech.implementation.machines;
 
 import cn.claycoffee.ClayTech.ClayTech;
+import cn.claycoffee.ClayTech.ClayTechData;
 import cn.claycoffee.ClayTech.ClayTechItems;
 import cn.claycoffee.ClayTech.api.ClayTechManager;
 import cn.claycoffee.ClayTech.api.events.RocketInjectFuelEvent;
 import cn.claycoffee.ClayTech.utils.Lang;
 import cn.claycoffee.ClayTech.utils.RocketUtils;
 import cn.claycoffee.ClayTech.utils.Utils;
+import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -21,13 +24,11 @@ import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOper
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
@@ -61,10 +62,10 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     protected final List<MachineRecipe> recipes = new ArrayList<>();
     private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
-    public RocketFuelInjector(ItemGroup category, SlimefunItemStack item, RecipeType recipeType,
+    public RocketFuelInjector(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
                               ItemStack[] recipe) {
 
-        super(category, item, recipeType, recipe);
+        super(itemGroup, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::constructMenu);
 
         addItemHandler(onBlockBreak());
@@ -75,7 +76,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
 
             @Override
             public void onBlockBreak(@NotNull Block b) {
-                BlockMenu inv = BlockStorage.getInventory(b);
+                BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
 
                 if (inv != null) {
                     inv.dropItems(b.getLocation(), getInputSlots());
@@ -182,7 +183,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, Config data) {
+            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
                 RocketFuelInjector.this.tick(b);
             }
 
@@ -194,7 +195,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     }
 
     protected void tick(Block b) {
-        BlockMenu inv = BlockStorage.getInventory(b);
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {
             // 剩余时间
@@ -231,7 +232,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
 
                 }.runTask(ClayTech.getInstance());
                 inv.replaceExistingItem(20, rocket);
-                //ClayTechData.RunningInjectors.remove(inv.toInventory());
+                ClayTechData.RunningInjectors.remove(inv.toInventory());
                 progress.remove(b);
                 processing.remove(b);
                 item.remove(b);
@@ -262,7 +263,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                             new ItemStack[]{});
                     item.put(b, rocket.clone());
                     inv.consumeItem(20, 1);
-                    //ClayTechData.RunningInjectors.put(inv.toInventory(), b);
+                    ClayTechData.RunningInjectors.put(inv.toInventory(), b);
                     inv.replaceExistingItem(20, new ItemStack(Material.BEDROCK));
                     processing.put(b, fuelinjectrecipe);
                     progress.put(b, fuelinjectrecipe.getTicks());

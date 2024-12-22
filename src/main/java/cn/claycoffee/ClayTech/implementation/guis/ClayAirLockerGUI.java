@@ -1,9 +1,9 @@
 package cn.claycoffee.ClayTech.implementation.guis;
 
 import cn.claycoffee.ClayTech.utils.Lang;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -44,15 +44,20 @@ public class ClayAirLockerGUI extends ChestMenu {
     public void init() {
         for (int v : new int[]{11, 15}) {
             this.addMenuClickHandler(v, (p, s, i, t) -> {
-                int waitTime = Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation()).getString("wait-time"));
+                String sWaitTime = StorageCacheUtils.getData(b.getLocation(), "wait-time");
+                if (sWaitTime == null) {
+                    return false;
+                }
+
+                int waitTime = Integer.parseInt(sWaitTime);
                 if (s == 11) {
                     if (waitTime <= 1) return false;
                     waitTime--;
-                    BlockStorage.addBlockInfo(b.getLocation(), "wait-time", waitTime + "");
+                    StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
                     open(p);
                 } else {
                     waitTime++;
-                    BlockStorage.addBlockInfo(b.getLocation(), "wait-time", waitTime + "");
+                    StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
                     open(p);
                 }
                 return false;
@@ -64,10 +69,11 @@ public class ClayAirLockerGUI extends ChestMenu {
     public void setupBlockMenu(Inventory inventory, Player player, Block b) {
         if (this.b != null) {
             int waitTime = 5;
-            if (BlockStorage.getLocationInfo(b.getLocation()) != null && BlockStorage.getLocationInfo(b.getLocation()).getString("wait-time") != null) {
-                waitTime = Integer.parseInt(BlockStorage.getLocationInfo(b.getLocation()).getString("wait-time"));
+            String sWaitTime = StorageCacheUtils.getData(b.getLocation(), "wait-time");
+            if (sWaitTime != null) {
+                waitTime = Integer.parseInt(sWaitTime);
             } else {
-                BlockStorage.addBlockInfo(b.getLocation(), "wait-time", waitTime + "");
+                StorageCacheUtils.setData(b.getLocation(), "wait-time", waitTime + "");
             }
             ItemStack borderItem = new CustomItemStack(Material.BLUE_STAINED_GLASS_PANE, Lang.readMachinesText("SPLIT_LINE"));
             ItemStack waitTimeItem = new CustomItemStack(Material.CLOCK, Lang.readMachinesText("wait-time").replaceAll("%TIME%", waitTime + ""));
