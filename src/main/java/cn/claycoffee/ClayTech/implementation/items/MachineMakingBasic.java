@@ -14,20 +14,20 @@ public class MachineMakingBasic {
     public MachineMakingBasic() {
 
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "BLISTERING_CORE", ClayTechItems.BLISTERING_CORE,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.BLISTERING_CORE,
+                "BLISTERING_CORE_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.BLISTERING_CORE,
                 false);
 
         Research before_element = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_BEFORE_ELEMENT"),
                 9917, Lang.readResearchesText("CLAYTECH_BEFORE_ELEMENTS"), 50);
 
-        before_element.addItems(new SlimefunItem[]{SlimefunItem.getByItem(ClayTechItems.BLISTERING_CORE)});
+        before_element.addItems(SlimefunItem.getByItem(ClayTechItems.BLISTERING_CORE));
         before_element.register();
 
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "INK_MODULE", ClayTechItems.INK_MODULE,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.INK_MODULE,
+                "INK_MODULE_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.INK_MODULE,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "COPYING_MODULE", ClayTechItems.COPYING_MODULE,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.COPYING_MODULE,
+                "COPYING_MODULE_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.COPYING_MODULE,
                 false);
         Research copier = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_COPIER"),
                 9934, Lang.readResearchesText("CLAYTECH_COPIER"), 50);

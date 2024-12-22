@@ -50,7 +50,7 @@ public class Rockets {
                 ClayTechItems.CLAY_FUSION_INGOT};
 
         SlimefunUtils.registerItem(ClayTechItems.C_MACHINES, "ROCKET_LAUNCHER", ClayTechItems.ROCKET_LAUNCHER,
-                "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, rocketlauncher, false,
+                "ROCKET_LAUNCHER_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, rocketlauncher, false,
                 new ItemHandler[]{new BlockPlaceHandler(false) {
                     @Override
                     public void onPlayerPlace(@NotNull BlockPlaceEvent blockPlaceEvent) {
@@ -120,7 +120,7 @@ public class Rockets {
         ms2.register();
 
         // 火箭一阶
-        SlimefunUtils.registerItem(ClayTechItems.C_OTHER, "ROCKET_1", ClayTechItems.ROCKET, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_OTHER, "ROCKET_1", ClayTechItems.ROCKET, "ROCKET_1_RESEARCH", 10,
                 ClayTechRecipeType.CLAY_ROCKET_ASSEMBLING_MACHINE, ClayTechMachineRecipes.ROCKET_1, false);
     }
 }

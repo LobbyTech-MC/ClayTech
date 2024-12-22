@@ -39,14 +39,14 @@ public class Skulls {
 
         // 注册物品
         SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "CLAYCOFFEE_HEAD", ClayTechItems.CLAYCOFFEE_HEAD,
-                "notresearch", 10, RecipeType.ANCIENT_ALTAR, ClayCoffeeHeadRecipe, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "STALIN_HEAD", ClayTechItems.STALIN_HEAD, "notresearch",
+                "CLAYCOFFEE_HEAD_RESEARCH", 10, RecipeType.ANCIENT_ALTAR, ClayCoffeeHeadRecipe, false);
+        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "STALIN_HEAD", ClayTechItems.STALIN_HEAD, "STALIN_HEAD_RESEARCH",
                 10, RecipeType.ANCIENT_ALTAR, OtherHeadRecipe, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "MARX_HEAD", ClayTechItems.MARX_HEAD, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "MARX_HEAD", ClayTechItems.MARX_HEAD, "MARX_HEAD_RESEARCH", 10,
                 RecipeType.ANCIENT_ALTAR, OtherHeadRecipe2, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "CLOCK_C", ClayTechItems.CLOCK_C, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "CLOCK_C", ClayTechItems.CLOCK_C, "CLOCK_C_RESEARCH", 10,
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClockRecipe, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "LANTERN_C", ClayTechItems.LANTERN_C, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_DECORATES, "LANTERN_C", ClayTechItems.LANTERN_C, "LANTERN_C_RESEARCH", 10,
                 RecipeType.ENHANCED_CRAFTING_TABLE, LanternRecipe, false);
 
         // 注册研究

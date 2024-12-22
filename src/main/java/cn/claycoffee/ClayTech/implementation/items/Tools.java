@@ -13,10 +13,10 @@ import org.bukkit.NamespacedKey;
 public class Tools {
     public Tools() {
         SlimefunUtils.registerItem(ClayTechItems.C_TOOLS, "REINFORCED_ALLOY_PICKAXE",
-                ClayTechItems.REINFORCED_ALLOY_PICKAXE, "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE,
+                ClayTechItems.REINFORCED_ALLOY_PICKAXE, "REINFORCED_ALLOY_PICKAXE_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE,
                 ClayTechMachineRecipes.REINFORCED_ALLOY_PICKAXE, false);
         SlimefunUtils.registerItem(ClayTechItems.C_TOOLS, "CLAY_ALLOY_PICKAXE", ClayTechItems.CLAY_ALLOY_PICKAXE,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_ALLOY_PICKAXE,
+                "CLAY_ALLOY_PICKAXE_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_ALLOY_PICKAXE,
                 false);
 
         Research rs = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_TOOLS_1"), 9922,

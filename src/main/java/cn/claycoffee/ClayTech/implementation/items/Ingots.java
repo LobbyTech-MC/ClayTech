@@ -14,22 +14,22 @@ import org.bukkit.NamespacedKey;
 public class Ingots {
     public Ingots() {
         SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "CLAY_FUSION_INGOT", ClayTechItems.CLAY_FUSION_INGOT,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_FUSION_INGOT,
+                "CLAY_FUSION_INGOT_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_FUSION_INGOT,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "CLAY_ALLOY_INGOT", ClayTechItems.CLAY_ALLOY_INGOT,
-                "notresearch", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_ALLOY_INGOT,
+                "CLAY_ALLOY_INGOT_RESEARCH", 10, ClayTechRecipeType.CLAY_CRAFTING_TABLE, ClayTechMachineRecipes.CLAY_ALLOY_INGOT,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "CLAY_SILICON_INGOT", ClayTechItems.SILICON_INGOT,
-                "notresearch", 10, ClayTechRecipeType.CLAY_EXPERIMENT_TABLE_BASIC, ClayTechMachineRecipes.SILICON_INGOT,
+                "SILICON_INGOT_RESEARCH", 10, ClayTechRecipeType.CLAY_EXPERIMENT_TABLE_BASIC, ClayTechMachineRecipes.SILICON_INGOT,
                 false);
-        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "KREEP_ROCK", ClayTechItems.KREEP_ROCK, "notresearch",
+        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "KREEP_ROCK", ClayTechItems.KREEP_ROCK, "KREEP_ROCK_RESEARCH",
                 10, ClayTechRecipeType.DIG_IN_THE_MOON, ClayTechItems.NORECIPE, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "KREEP_INGOT", ClayTechItems.KREEP_INGOT, "notresearch",
+        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "KREEP_INGOT", ClayTechItems.KREEP_INGOT, "KREEP_INGOT_RESEARCH",
                 10, RecipeType.SMELTERY, ClayTechMachineRecipes.KREEP_INGOT, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "COPPER_ORE", ClayTechItems.COPPER_ORE, "notresearch",
+        SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "COPPER_ORE", ClayTechItems.COPPER_ORE, "COPPER_ORE_RESEARCH",
                 10, ClayTechRecipeType.DIG_IN_NON_EARTH, ClayTechItems.NORECIPE, false);
         SlimefunUtils.registerItem(ClayTechItems.C_ORESTHINGS, "CLAY_FUSION_ORE", ClayTechItems.CLAY_FUSION_ORE,
-                "notresearch", 10, ClayTechRecipeType.DIG_IN_NON_EARTH, ClayTechItems.NORECIPE, false);
+                "CLAY_FUSION_ORE_RESEARCH", 10, ClayTechRecipeType.DIG_IN_NON_EARTH, ClayTechItems.NORECIPE, false);
 
         Research rs = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_OREINGOTS_1"), 9923,
                 Lang.readResearchesText("CLAYTECH_OREINGOTS_I"), 50);

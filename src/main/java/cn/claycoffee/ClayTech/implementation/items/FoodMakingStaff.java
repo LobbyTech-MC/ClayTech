@@ -22,22 +22,22 @@ public class FoodMakingStaff {
                 null};
 
         SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "RAW_CHICKEN_FOOT", ClayTechItems.RAW_CHICKEN_FOOT,
-                "notresearch", 10, ClayTechRecipeType.CLAY_FOOD_CHALKING_MACHINE,
+                "ChickenFootResearch", 10, ClayTechRecipeType.CLAY_FOOD_CHALKING_MACHINE,
                 ClayTechMachineRecipes.RAW_CHICKEN_FOOT, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "RAW_BREAD", ClayTechItems.RAW_BREAD, "notresearch",
+        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "RAW_BREAD", ClayTechItems.RAW_BREAD, "BreadResearch",
                 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipec, false);
         SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "RAW_VEGETABLE", ClayTechItems.RAW_VEGETABLE,
-                "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, reciped, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "CLAY_LEMON", ClayTechItems.CLAY_LEMON, "notresearch",
+                "VegetableResearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, reciped, false);
+        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "CLAY_LEMON", ClayTechItems.CLAY_LEMON, "LemonResearch",
                 10, ClayTechRecipeType.PLUCKING, ClayTechItems.NORECIPE, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "STARCH", ClayTechItems.STARCH, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "STARCH", ClayTechItems.STARCH, "StarchResearch", 10,
                 ClayTechRecipeType.HARVEST, ClayTechItems.NORECIPE, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "FLOUR", ClayTechItems.FLOUR, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "FLOUR", ClayTechItems.FLOUR, "FlourResearch", 10,
                 ClayTechRecipeType.HARVEST, ClayTechItems.NORECIPE, false);
         SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "SNAIL_HEALTHY", ClayTechItems.SNAIL_HEALTHY,
-                "notresearch", 10, ClayTechRecipeType.FISHING, ClayTechItems.NORECIPE, false);
+                "SnailResearch", 10, ClayTechRecipeType.FISHING, ClayTechItems.NORECIPE, false);
         SlimefunUtils.registerItem(ClayTechItems.C_FOODMATERIALS, "CLAY_SWEET_POTATO", ClayTechItems.CLAY_SWEET_POTATO,
-                "notresearch", 10, ClayTechRecipeType.HARVEST, ClayTechItems.NORECIPE, false);
+                "SweetPotatoResearch", 10, ClayTechRecipeType.HARVEST, ClayTechItems.NORECIPE, false);
 
         Research foodmaterialsI = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_FOODMATERIALSBASIC"),
                 9910, Lang.readResearchesText("CLAYTECH_FOOD_MAKINGS_I"), 50);
@@ -56,5 +56,25 @@ public class FoodMakingStaff {
                 Lang.readResearchesText("CLAYTECH_FRUIT_I"), 50);
         foodmaterialsII.addItems(SlimefunItem.getByItem(ClayTechItems.CLAY_LEMON));
         foodmaterialsII.register();
+
+        Research starchResearch = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_STARCH_RESEARCH"), 9914,
+                Lang.readResearchesText("CLAYTECH_STARCH_RESEARCH"), 50);
+        starchResearch.addItems(SlimefunItem.getByItem(ClayTechItems.STARCH));
+        starchResearch.register();
+
+        Research flourResearch = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_FLOUR_RESEARCH"), 9915,
+                Lang.readResearchesText("CLAYTECH_FLOUR_RESEARCH"), 50);
+        flourResearch.addItems(SlimefunItem.getByItem(ClayTechItems.FLOUR));
+        flourResearch.register();
+
+        Research snailHealthyResearch = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_SNAIL_HEALTHY_RESEARCH"), 9916,
+                Lang.readResearchesText("CLAYTECH_SNAIL_HEALTHY_RESEARCH"), 50);
+        snailHealthyResearch.addItems(SlimefunItem.getByItem(ClayTechItems.SNAIL_HEALTHY));
+        snailHealthyResearch.register();
+
+        Research claySweetPotatoResearch = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_CLAY_SWEET_POTATO_RESEARCH"), 9917,
+                Lang.readResearchesText("CLAYTECH_CLAY_SWEET_POTATO_RESEARCH"), 50);
+        claySweetPotatoResearch.addItems(SlimefunItem.getByItem(ClayTechItems.CLAY_SWEET_POTATO));
+        claySweetPotatoResearch.register();
     }
 }

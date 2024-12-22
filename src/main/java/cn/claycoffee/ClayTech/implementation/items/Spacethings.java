@@ -26,10 +26,10 @@ public class Spacethings {
         ItemStack[] clayairlockblock = new ItemStack[]{SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, null, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT};
 
         SlimefunUtils.registerItem(ClayTechItems.C_OTHER, "CLAY_AIR_LOCK_PLATE",
-                ClayTechItems.CLAY_AIR_LOCK_PLATE, "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE,
+                ClayTechItems.CLAY_AIR_LOCK_PLATE, "CLAY_AIR_LOCK_PLATE_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE,
                 clayairlockplate, false);
         SlimefunUtils.registerItem(ClayTechItems.C_OTHER, "CLAY_AIR_LOCK_BLOCK", ClayTechItems.CLAY_AIR_LOCK_BLOCK,
-                "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, clayairlockblock,
+                "CLAY_AIR_LOCK_BLOCK_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, clayairlockblock,
                 false);
 
         Research rs = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_SPACETHINGS_1"), 9936,

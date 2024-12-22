@@ -22,9 +22,9 @@ public class Clay_basic {
                 new ItemStack(Material.STICK), new ItemStack(Material.DIRT), endingot2,
                 new ItemStack(Material.IRON_INGOT), endingot2};
 
-        SlimefunUtils.registerItem(ClayTechItems.C_BASICS, "MAGIC_CLAY", ClayTechItems.MAGIC_CLAY, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_BASICS, "MAGIC_CLAY", ClayTechItems.MAGIC_CLAY, "MAGIC_CLAY_RESEARCH", 10,
                 RecipeType.ENHANCED_CRAFTING_TABLE, recipea, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_BASICS, "CLAY_STICK", ClayTechItems.CLAY_STICK, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_BASICS, "CLAY_STICK", ClayTechItems.CLAY_STICK, "CLAY_STICK_RESEARCH", 10,
                 RecipeType.ENHANCED_CRAFTING_TABLE, recipeb, false);
 
         Research basic = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_BASIC"), 9900,

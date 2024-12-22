@@ -8,9 +8,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a936f7a-9cb7-4377-a50a-145773459a69" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClayTech.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ClayTech.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Armors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Armors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/ClayFuelResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/ClayFuelResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Clay_basic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Clay_basic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/DrinkMakingStaff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/DrinkMakingStaff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Drinks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Drinks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/EffectItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/EffectItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Elements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/FoodMakingStaff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/FoodMakingStaff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Foods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Foods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Golden_things.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Golden_things.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Ingots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Ingots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/MachineMakingBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/MachineMakingBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/PotionAffect_Weapons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/PotionAffect_Weapons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Railways.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Railways.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/RocketMakings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/RocketMakings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Rockets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Rockets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Skulls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Skulls.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Spacethings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Spacethings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/ClayTech/implementation/items/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +50,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -48,14 +67,14 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\github_clone\ClayTech\src\main\resources\lang" />

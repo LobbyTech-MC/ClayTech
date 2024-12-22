@@ -21,14 +21,14 @@ public class Drinks {
         ItemStack[] reciped = {null, ClayTechItems.TEA_POWDER, null, ClayTechItems.LEMON_POWDER,
                 ClayTechItems.TEA_POWDER, ClayTechItems.LEMON_POWDER, null, ClayTechItems.DRINK_BOTTLE, null};
 
-        SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "CLAY_COFFEE", ClayTechItems.CLAY_COFFEE, "notresearch", 10,
+        SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "CLAY_COFFEE", ClayTechItems.CLAY_COFFEE, "CLAY_COFFEE_RESEARCH", 10,
                 ClayTechRecipeType.CLAY_FOOD_CAULDRON, recipea, false);
         SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "LEMON_POWDER_DRINK", ClayTechItems.LEMON_POWDER_DRINK,
-                "notresearch", 10, ClayTechRecipeType.CLAY_FOOD_CAULDRON, recipeb, false);
-        SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "TEA_DRINK", ClayTechItems.TEA_DRINK, "notresearch", 10,
+                "LEMON_POWDER_DRINK_RESEARCH", 10, ClayTechRecipeType.CLAY_FOOD_CAULDRON, recipeb, false);
+        SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "TEA_DRINK", ClayTechItems.TEA_DRINK, "TEA_DRINK_RESEARCH", 10,
                 ClayTechRecipeType.CLAY_FOOD_CAULDRON, recipec, false);
         SlimefunUtils.registerItem(ClayTechItems.C_DRINK, "LEMON_TEA_DRINK", ClayTechItems.LEMON_TEA_DRINK,
-                "notresearch", 10, ClayTechRecipeType.CLAY_FOOD_CAULDRON, reciped, false);
+                "LEMON_TEA_DRINK_RESEARCH", 10, ClayTechRecipeType.CLAY_FOOD_CAULDRON, reciped, false);
 
         Research foodI = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_DRINKBASIC"), 9909,
                 Lang.readResearchesText("CLAYTECH_DRINK_I"), 50);

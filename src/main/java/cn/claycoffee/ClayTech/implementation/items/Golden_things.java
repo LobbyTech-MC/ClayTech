@@ -35,19 +35,19 @@ public class Golden_things {
                 ClayTechItems.ARTIFICIAL_GOLD_BLOCK};
 
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "ARTIFICIAL_GOLD_NUGGET",
-                ClayTechItems.ARTIFICIAL_GOLD_NUGGET, "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipec,
+                ClayTechItems.ARTIFICIAL_GOLD_NUGGET, "ARTIFICIAL_GOLD_NUGGET_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipec,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "ARTIFICIAL_GOLD_INGOT_O",
-                ClayTechItems.ARTIFICIAL_GOLD_INGOT_O, "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, reciped,
+                ClayTechItems.ARTIFICIAL_GOLD_INGOT_O, "ARTIFICIAL_GOLD_INGOT_O_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, reciped,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "ARTIFICIAL_GOLD_INGOT",
-                ClayTechItems.ARTIFICIAL_GOLD_INGOT, "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipee,
+                ClayTechItems.ARTIFICIAL_GOLD_INGOT, "ARTIFICIAL_GOLD_INGOT_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipee,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_MATERIALS, "ARTIFICIAL_GOLD_BLOCK",
-                ClayTechItems.ARTIFICIAL_GOLD_BLOCK, "notresearch", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipef,
+                ClayTechItems.ARTIFICIAL_GOLD_BLOCK, "ARTIFICIAL_GOLD_BLOCK_RESEARCH", 10, RecipeType.ENHANCED_CRAFTING_TABLE, recipef,
                 false);
         SlimefunUtils.registerItem(ClayTechItems.C_FOOD, "ARTIFICIAL_ENCHANTED_GOLDEN_APPLE",
-                ClayTechItems.ARTIFICIAL_ENCHANTED_GOLDEN_APPLE, "notresearch", 10, RecipeType.ANCIENT_ALTAR, recipeg,
+                ClayTechItems.ARTIFICIAL_ENCHANTED_GOLDEN_APPLE, "ARTIFICIAL_ENCHANTED_GOLDEN_APPLE_RESEARCH", 10, RecipeType.ANCIENT_ALTAR, recipeg,
                 false);
 
         Research artificial_basic = new Research(new NamespacedKey(ClayTech.getInstance(), "CLAYTECH_ARTIFICIAL_BASIC"),
