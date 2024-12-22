@@ -1,11 +1,10 @@
 package cn.claycoffee.clayTech.api;
 
-import cn.claycoffee.clayTech.ClayTech;
+import cn.claycoffee.clayTech.ClayTechData;
 import cn.claycoffee.clayTech.ClayTechItems;
 import cn.claycoffee.clayTech.utils.Lang;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 
 import java.lang.reflect.Field;
 
@@ -64,6 +63,6 @@ public class ClayTechManager {
     }
 
     public static void allowSpaceTeleportOnce(Player p) {
-        p.setMetadata("allowSpaceTeleport", new FixedMetadataValue(ClayTech.getInstance(), true));
+        ClayTechData.AllowSpaceTeleport.add(p.getUniqueId());
     }
 }

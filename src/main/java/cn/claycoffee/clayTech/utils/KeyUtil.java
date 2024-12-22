@@ -5,9 +5,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class KeyUtil {
+    public static NamespacedKey DURABILITY = newKey("durability");
+
     public static NamespacedKey newKey(JavaPlugin plugin, String key) {
         return new NamespacedKey(plugin, key);
     }
+
     public static NamespacedKey newKey(String namespace, String key) {
         return new NamespacedKey(namespace, key);
     }

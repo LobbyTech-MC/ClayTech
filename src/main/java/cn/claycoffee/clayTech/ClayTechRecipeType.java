@@ -5,7 +5,6 @@ import cn.claycoffee.clayTech.utils.Lang;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 
 public class ClayTechRecipeType {

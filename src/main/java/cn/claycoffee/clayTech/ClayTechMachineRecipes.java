@@ -1,6 +1,7 @@
 package cn.claycoffee.clayTech;
 
-import cn.claycoffee.clayTech.utils.SlimefunUtils;
+import cn.claycoffee.clayTech.api.objects.enums.ArmorType;
+import cn.claycoffee.clayTech.utils.SlimefunUtil;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -121,12 +122,12 @@ public class ClayTechMachineRecipes {
     public final static ItemStack[] CLAY_ALLOY_PICKAXE = {ClayTechItems.CLAY_ALLOY_INGOT,
             ClayTechItems.CLAY_ALLOY_INGOT, ClayTechItems.CLAY_ALLOY_INGOT, null, ClayTechItems.CLAY_ALLOY_INGOT, null,
             null, ClayTechItems.CLAY_ALLOY_INGOT, null};
-    public final static ItemStack[] CLAY_ALLOY_HELMET = SlimefunUtils.getArmorsStack(1, ClayTechItems.CLAY_ALLOY_INGOT);
-    public final static ItemStack[] CLAY_ALLOY_CHESTPLATE = SlimefunUtils.getArmorsStack(2,
+    public final static ItemStack[] CLAY_ALLOY_HELMET = SlimefunUtil.getArmorsStack(ArmorType.HELMET, ClayTechItems.CLAY_ALLOY_INGOT);
+    public final static ItemStack[] CLAY_ALLOY_CHESTPLATE = SlimefunUtil.getArmorsStack(ArmorType.CHESTPLATE,
             ClayTechItems.CLAY_ALLOY_INGOT);
-    public final static ItemStack[] CLAY_ALLOY_LEGGINGS = SlimefunUtils.getArmorsStack(3,
+    public final static ItemStack[] CLAY_ALLOY_LEGGINGS = SlimefunUtil.getArmorsStack(ArmorType.LEGGINGS,
             ClayTechItems.CLAY_ALLOY_INGOT);
-    public final static ItemStack[] CLAY_ALLOY_BOOTS = SlimefunUtils.getArmorsStack(4, ClayTechItems.CLAY_ALLOY_INGOT);
+    public final static ItemStack[] CLAY_ALLOY_BOOTS = SlimefunUtil.getArmorsStack(ArmorType.BOOTS, ClayTechItems.CLAY_ALLOY_INGOT);
     public final static ItemStack[] SILICON_INGOT = {ClayTechItems.ELEMENT_SILICON, ClayTechItems.ELEMENT_SILICON,
             ClayTechItems.ELEMENT_SILICON, ClayTechItems.ELEMENT_SILICON, ClayTechItems.ELEMENT_SILICON, null, null,
             null, null};

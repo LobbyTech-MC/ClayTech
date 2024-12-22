@@ -1,6 +1,6 @@
 package cn.claycoffee.clayTech;
 
-import cn.claycoffee.clayTech.aarewrite.api.ClayTechBranch;
+import cn.claycoffee.clayTech.api.ClayTechBranch;
 import cn.claycoffee.clayTech.utils.FileDownloader;
 import cn.claycoffee.clayTech.utils.Lang;
 import com.google.gson.JsonArray;
@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+@Deprecated
 public class ClayTechUpdater {
     private final ClayTech plugin = ClayTech.getInstance();
     private ClayTechBranch branch;

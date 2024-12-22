@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+@Deprecated
 public class FileDownloader {
 
     public static String updateFunc(String urlp, String fileName, String savePath, JsonArray ja) {

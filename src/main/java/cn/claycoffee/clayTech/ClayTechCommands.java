@@ -4,6 +4,7 @@ import cn.claycoffee.clayTech.utils.Lang;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class ClayTechCommands implements TabExecutor {
     String[] subCommands = {"checkupdate"};
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length > 1)
             return new ArrayList<>();
         if (args.length == 0)
@@ -23,13 +24,13 @@ public class ClayTechCommands implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, String[] args) {
         if (command.getName().equalsIgnoreCase("claytech")) {
             if (args.length >= 1) {
                 if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("checkupdate")) {
                         if (sender.hasPermission("claytech.checkupdate")) {
-                            ClayTech.getUpdater().tryUpdate();
+                            sender.sendMessage(Lang.readGeneralText("check_update_deprecated"));
                             return true;
                         } else {
                             sender.sendMessage(Lang.readGeneralText("no_permission"));

@@ -75,6 +75,7 @@ General:
   Yes_1: "是"
   No_1: "否"
   WorldBorder: "&e检测到 WorldBorder."
+  check_update_deprecated: "&c该命令已弃用."
 Categories:
   Basic: "&b粘土科技 - 基础"
   Weapons: "&b粘土科技 - 武器"

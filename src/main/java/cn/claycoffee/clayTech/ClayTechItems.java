@@ -3,6 +3,7 @@ package cn.claycoffee.clayTech;
 import cn.claycoffee.clayTech.utils.ItemUtil;
 import cn.claycoffee.clayTech.utils.KeyUtil;
 import cn.claycoffee.clayTech.utils.Lang;
+import cn.claycoffee.clayTech.utils.SkullUtil;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.items.groups.LockedItemGroup;
@@ -15,14 +16,15 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ClayTechItems {
     public static final SlimefunItemStack CLAYCOFFEE_HEAD = getSlimefunItemStack(Material.PLAYER_HEAD, Lang.readItemText("CLAYCOFFEE_HEAD"), Lang.readItemLore("CLAYCOFFEE_HEAD"), "CLAYCOFFEE_HEAD");
-    public static final SlimefunItemStack STALIN_HEAD = getSlimefunItemStack(SkullItem.fromURL("http://textures.minecraft.net/texture/96fb8390f61a2cc51c08201834369829d9ba301effc01b6a7cb10d830c6c5043"), Lang.readItemText("STALIN_HEAD"), Lang.readItemLore("STALIN_HEAD"), "STALIN_HEAD");
-    public static final SlimefunItemStack MARX_HEAD = getSlimefunItemStack(SkullItem.fromURL("http://textures.minecraft.net/texture/69aee2502a4a7db127d891b2449ed5b7e0563bd0f5f443e032cfd3919ffed6ff"), Lang.readItemText("MARX_HEAD"), Lang.readItemLore("MARX_HEAD"), "MARX_HEAD");
+    public static final SlimefunItemStack STALIN_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/96fb8390f61a2cc51c08201834369829d9ba301effc01b6a7cb10d830c6c5043"), Lang.readItemText("STALIN_HEAD"), Lang.readItemLore("STALIN_HEAD"), "STALIN_HEAD");
+    public static final SlimefunItemStack MARX_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/69aee2502a4a7db127d891b2449ed5b7e0563bd0f5f443e032cfd3919ffed6ff"), Lang.readItemText("MARX_HEAD"), Lang.readItemLore("MARX_HEAD"), "MARX_HEAD");
     public static final SlimefunItemStack CLOCK_C = getSlimefunItemStack(Material.CLOCK, Lang.readItemText("CLOCK_C"), Lang.readItemLore("CLOCK_C"), "CLOCK_C");
     public static final SlimefunItemStack LANTERN_C = getSlimefunItemStack(Material.LANTERN, Lang.readItemText("LANTERN_C"), Lang.readItemLore("LANTERN_C"), "LANTERN_C");
     public static final SlimefunItemStack[] NORECIPE = {null, null, null, null, null, null, null, null, null};
@@ -168,84 +170,84 @@ public class ClayTechItems {
 
     // 头颅
     public static final ItemStack CLAY_FUEL = getSlimefunItemStack(
-            SkullItem.fromHash("3ce2dad9baf7eaba7e80d4d0f9fac0aab01a76b12fb71c3d2af2a16fdd4c7383"),
+            SkullUtil.getByHash("3ce2dad9baf7eaba7e80d4d0f9fac0aab01a76b12fb71c3d2af2a16fdd4c7383"),
             Lang.readItemText("CLAY_FUEL"), "CLAY_FUEL");
     public static final ItemStack MIXED_ROCKET_FUEL =
-            getSlimefunItemStack(SkullItem.fromHash("3ce2dad9baf7eaba7e80d4d0f9fac0aab01a76b12fb71c3d2af2a16fdd4c7383"),
+            getSlimefunItemStack(SkullUtil.getByHash("3ce2dad9baf7eaba7e80d4d0f9fac0aab01a76b12fb71c3d2af2a16fdd4c7383"),
                     Lang.readItemText("MIXED_ROCKET_FUEL"), Lang.readItemLore("MIXED_ROCKET_FUEL"), "MIXED_ROCKET_FUEL");
 
-    public static final ItemStack CLAY_COFFEE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_COFFEE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/411511bdd55bcb82803c8039f1c155fd43062636e23d4d46c4d761c04d22c2"),
             Lang.readItemText("CLAY_COFFEE"), Lang.readItemLore("CLAY_COFFEE"), "CLAY_COFFEE");
-    public static final ItemStack DRINK_BOTTLE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack DRINK_BOTTLE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/9179ce4849723434e84747ec85fbbfb1121456c8aeb2e9171fb8328921d45"),
             Lang.readItemText("DRINK_BOTTLE"), Lang.readItemLore("DRINK_BOTTLE"), "DRINK_BOTTLE");
-    public static final ItemStack DIRTY_DRINK_BOTTLE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack DIRTY_DRINK_BOTTLE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/9179ce4849723434e84747ec85fbbfb1121456c8aeb2e9171fb8328921d45"),
             Lang.readItemText("DIRTY_DRINK_BOTTLE"), Lang.readItemLore("DIRTY_DRINK_BOTTLE"), "DIRTY_DRINK_BOTTLE");
-    public static final ItemStack SPICY_CHICKEN_BURGER = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack SPICY_CHICKEN_BURGER = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/c5e27988a6538010efc0e24756bc3e3eea24d7536b20932c17e0404e5cc55f"),
             Lang.readItemText("SPICY_CHICKEN_BURGER"), Lang.readItemLore("SPICY_CHICKEN_BURGER"), "SPICY_CHICKEN_BURGER");
-    public static final ItemStack BABA_BURGER = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack BABA_BURGER = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/c5e27988a6538010efc0e24756bc3e3eea24d7536b20932c17e0404e5cc55f"),
             Lang.readItemText("BABA_BURGER"), Lang.readItemLore("BABA_BURGER"), "BABA_BURGER");
-    public static final ItemStack RAW_VEGETABLE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack RAW_VEGETABLE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/477dd842c975d8fb03b1add66db8377a18ba987052161f22591e6a4ede7f5"),
             Lang.readItemText("LETTUSE"), Lang.readItemLore("LETTUSE"), "LETTUSE");
-    public static final ItemStack CLAY_LEMON = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_LEMON = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/957fd56ca15978779324df519354b6639a8d9bc1192c7c3de925a329baef6c"),
             Lang.readItemText("LEMON"), Lang.readItemLore("LEMON"), "LEMON");
-    public static final ItemStack LEMON_POWDER_DRINK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack LEMON_POWDER_DRINK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/d8e94ddd769a5bea748376b4ec7383fd36d267894d7c3bee011e8e4f5fcd7"),
             Lang.readItemText("LEMON_POWDER_DRINK"), Lang.readItemLore("LEMON_POWDER_DRINK"), "LEMON_POWDER_DRINK");
-    public static final ItemStack TEA_DRINK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack TEA_DRINK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/d8e94ddd769a5bea748376b4ec7383fd36d267894d7c3bee011e8e4f5fcd7"),
             Lang.readItemText("TEA_DRINK"), Lang.readItemLore("TEA_DRINK"), "TEA_DRINK");
-    public static final ItemStack LEMON_TEA_DRINK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack LEMON_TEA_DRINK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/d8e94ddd769a5bea748376b4ec7383fd36d267894d7c3bee011e8e4f5fcd7"),
             Lang.readItemText("LEMON_TEA_DRINK"), Lang.readItemLore("LEMON_TEA_DRINK"), "LEMON_TEA_DRINK");
-    public static final ItemStack CHOCOLATE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CHOCOLATE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/819f948d17718adace5dd6e050c586229653fef645d7113ab94d17b639cc466"),
             Lang.readItemText("CHOCOLATE"), Lang.readItemLore("CHOCOLATE"), "CHOCOLATE");
-    public static final ItemStack SNAIL_FOOD = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack SNAIL_FOOD = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/26834b5b25426de63538ec82ca8fbecfcbb3e682d8063643d2e67a7621bd"),
             Lang.readItemText("LUOSI_RICE_NOODLE"), Lang.readItemLore("LUOSI_RICE_NOODLE"), "LUOSI_RICE_NOODLE");
-    public static final ItemStack ROCKET = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack ROCKET = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/377bf2855806da82d902314ce3e706cd3d1c1f83ed986df19e179b17a0595"),
             Lang.readItemText("ROCKET"), Lang.readItemLore("ROCKET"), "ROCKET");
-    public static final ItemStack FUEL_TANK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack FUEL_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("FUEL_TANK"), Lang.readItemLore("FUEL_TANK"), "FUEL_TANK");
-    public static final ItemStack ROCKET_ENGINE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack ROCKET_ENGINE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("ROCKET_ENGINE"), Lang.readItemLore("ROCKET_ENGINE"), "ROCKET_ENGINE");
-    public static final ItemStack ROCKET_FUEL_TANK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack ROCKET_FUEL_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("ROCKET_FUEL_TANK"), Lang.readItemLore("ROCKET_FUEL_TANK"), "ROCKET_FUEL_TANK");
-    public static final ItemStack OXYGEN_TANK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack OXYGEN_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/52baeb4a35da8a85d14bdccf7184f5545088f954da55144f235c2983fdb8e05b"),
             Lang.readItemText("OXYGEN_TANK"), Lang.readItemLore("OXYGEN_TANK"), "OXYGEN_TANK");
-    public static final ItemStack SPACESUIT_OXYGEN_TANK = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack SPACESUIT_OXYGEN_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/52baeb4a35da8a85d14bdccf7184f5545088f954da55144f235c2983fdb8e05b"),
             Lang.readItemText("SPACESUIT_OXYGEN_TANK"), Lang.readItemLore("SPACESUIT_OXYGEN_TANK"), "SPACESUIT_OXYGEN_TANK");
 
     // 机器
-    public static final ItemStack CLAY_CRAFTING_TABLE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_CRAFTING_TABLE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/6d6c65b44c34b1acc2ccb346752397125f0d9ffa0ab3c50a99d1db3b74c63"),
             Lang.readItemText("CLAY_FUSION_MACHINE"), Lang.readItemLore("CLAY_FUSION_MACHINE"), MachineTier.BASIC, MachineType.MACHINE, 128, "CLAY_FUSION_MACHINE");
     public static final ItemStack CLAY_ELECTRIC_STONE_CRUSHER = getSlimefunItemStack(Material.RED_STAINED_GLASS, Lang.readItemText("CLAY_ELECTRIC_STONE_CRUSHER"), Lang.readItemLore("CLAY_ELECTRIC_STONE_CRUSHER"), MachineTier.BASIC, MachineType.MACHINE, 128, "CLAY_ELECTRIC_STONE_CRUSHER");
-    public static final ItemStack CLAY_FOOD_CAULDRON = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_FOOD_CAULDRON = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/dfd9b2f42d5f1c2a77b511fe41a4c6b5c192fb10b2ceadde05bd1af52a151"),
             Lang.readItemText("CLAY_ELETRIC_CAULDRON"), Lang.readItemLore("CLAY_ELETRIC_CAULDRON"), MachineTier.AVERAGE, MachineType.MACHINE, 512, "CLAY_ELETRIC_CAULDRON");
 
-    public static final ItemStack CLAY_FOOD_CHALKING_MACHINE = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_FOOD_CHALKING_MACHINE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/98636123b1a3755abd8aef6d85b2a85bf10f486edefdd1a3cef7679d825"),
             Lang.readItemText("CLAY_FOOD_CHALKING_MACHINE"), Lang.readItemLore("CLAY_FOOD_CHALKING_MACHINE"), MachineTier.AVERAGE, MachineType.MACHINE, 512, "CLAY_FOOD_CHALKING_MACHINE");
 
-    public static final ItemStack CLAY_ELEMENT_EXTRACTER = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_ELEMENT_EXTRACTER = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/c74170c66bf3140f234b322add724c5df6949a9209f807ebf86d4f9c8c1e178"),
             Lang.readItemText("CLAY_ELEMENT_EXTRACTER"), Lang.readItemLore("CLAY_ELEMENT_EXTRACTER"), MachineTier.ADVANCED, MachineType.MACHINE, 1024, "CLAY_ELEMENT_EXTRACTER");
-    public static final ItemStack CLAY_EXPERIMENT_TABLE_NORMAL = getSlimefunItemStack(SkullItem.fromURL(
+    public static final ItemStack CLAY_EXPERIMENT_TABLE_NORMAL = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/52baeb4a35da8a85d14bdccf7184f5545088f954da55144f235c2983fdb8e05b"),
             Lang.readItemText("CLAY_EXPERIMENT_TABLE_NORMAL"), Lang.readItemLore("CLAY_EXPERIMENT_TABLE_NORMAL"), MachineTier.ADVANCED, MachineType.MACHINE, 1024, "CLAY_EXPERIMENT_TABLE_NORMAL");
     public static final ItemStack CLAY_ROCKET_ASSEMBLING_MACHINE = getSlimefunItemStack(Material.GOLD_BLOCK, Lang.readItemText("CLAY_ROCKET_ASSEMBLING_MACHINE"), Lang.readItemLore("CLAY_ROCKET_ASSEMBLING_MACHINE"), MachineTier.ADVANCED, MachineType.MACHINE, 512, "CLAY_ROCKET_ASSEMBLING_MACHINE");
@@ -277,7 +279,7 @@ public class ClayTechItems {
             KeyUtil.newKey("claytech_food"),
             new CustomItemStack(Material.ENCHANTED_GOLDEN_APPLE, Lang.readCategoriesText("Food")), N_BASIC);
     public static final LockedItemGroup C_FOODMATERIALS = new LockedItemGroup(
-            KeyUtil.newKey( "claytech_foodmaterials"),
+            KeyUtil.newKey("claytech_foodmaterials"),
             new CustomItemStack(Material.COCOA_BEANS, Lang.readCategoriesText("FoodMakings")), N_BASIC);
     public static final LockedItemGroup C_DRINK = new LockedItemGroup(
             KeyUtil.newKey("claytech_drink"),
@@ -309,7 +311,9 @@ public class ClayTechItems {
     public static SlimefunItemStack HONEY_SWEET = new SlimefunItemStack("HONEY_SWEET", new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
             Lang.readItemLore("HONEY_SWEET")));
 
-    public static SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER")));
+    public static SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"))), meta -> {
+        meta.getPersistentDataContainer().set(KeyUtil.newKey("durability"), PersistentDataType.INTEGER, 32);
+    });
 
     static {
         ItemUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);

@@ -1,47 +1,39 @@
 package cn.claycoffee.clayTech;
 
+import cn.claycoffee.clayTech.api.objects.Planet;
+import cn.claycoffee.clayTech.core.managers.ConfigManager;
+import cn.claycoffee.clayTech.core.managers.ListenerManager;
+import cn.claycoffee.clayTech.core.services.LocalizationService;
+import cn.claycoffee.clayTech.implementation.items.Armors;
+import cn.claycoffee.clayTech.implementation.items.ClayBasic;
+import cn.claycoffee.clayTech.implementation.items.ClayFuelResource;
+import cn.claycoffee.clayTech.implementation.items.DrinkMakingStaff;
+import cn.claycoffee.clayTech.implementation.items.Drinks;
+import cn.claycoffee.clayTech.implementation.items.EffectItems;
+import cn.claycoffee.clayTech.implementation.items.Elements;
+import cn.claycoffee.clayTech.implementation.items.FoodMakingStaff;
+import cn.claycoffee.clayTech.implementation.items.Foods;
+import cn.claycoffee.clayTech.implementation.items.GoldenThings;
+import cn.claycoffee.clayTech.implementation.items.Ingots;
+import cn.claycoffee.clayTech.implementation.items.MachineMakingBasic;
+import cn.claycoffee.clayTech.implementation.items.Machines;
+import cn.claycoffee.clayTech.implementation.items.PotionAffectWeapons;
+import cn.claycoffee.clayTech.implementation.items.Railways;
+import cn.claycoffee.clayTech.implementation.items.RocketMakings;
+import cn.claycoffee.clayTech.implementation.items.Rockets;
+import cn.claycoffee.clayTech.implementation.items.Skulls;
+import cn.claycoffee.clayTech.implementation.items.Spacethings;
+import cn.claycoffee.clayTech.implementation.items.Tools;
 import cn.claycoffee.clayTech.api.ClayTechManager;
-import cn.claycoffee.clayTech.aarewrite.api.Planet;
-import cn.claycoffee.clayTech.implementation.Planets.Earth;
-import cn.claycoffee.clayTech.implementation.Planets.Mars;
-import cn.claycoffee.clayTech.implementation.Planets.Moon;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Armors;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.ClayFuelResource;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.ClayBasic;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.DrinkMakingStaff;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Drinks;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.EffectItems;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Elements;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.FoodMakingStaff;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Foods;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.GoldenThings;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Ingots;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.MachineMakingBasic;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Machines;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.PotionAffectWeapons;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Railways;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.RocketMakings;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Rockets;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Skulls;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Spacethings;
-import cn.claycoffee.clayTech.aarewrite.implementation.items.Tools;
+import cn.claycoffee.clayTech.core.worlds.Earth;
+import cn.claycoffee.clayTech.core.worlds.Mars;
+import cn.claycoffee.clayTech.core.worlds.Moon;
 import cn.claycoffee.clayTech.implementation.resources.ClayFuel;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.BlockUseListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.FoodDropListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.FoodEatListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.ItemInteractListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.ItemUseListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.PlanetBaseListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.PlanetListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.RailwayListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.RocketLauncherListener;
-import cn.claycoffee.clayTech.aarewrite.core.listeners.WeaponListener;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.Metrics;
-import cn.claycoffee.clayTech.utils.PlanetUtils;
-import cn.claycoffee.clayTech.utils.RocketUtils;
+import cn.claycoffee.clayTech.utils.PlanetUtil;
+import cn.claycoffee.clayTech.utils.RocketUtil;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.api.exceptions.IdConflictException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -71,13 +63,12 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     private static String locale;
     private static String highrailspeed;
     private static String overworld = "";
-    private static ClayTechUpdater updater;
     private static boolean spacetravelneedperm;
     private static String updateBranch;
     private static FileConfiguration config;
     private static FileConfiguration defaultLang;
     private static boolean worldBorderEnabled;
-    private static LocalizationService service;
+    private static LocalizationService localizationService;
     private static final BukkitRunnable harmInSpace = new BukkitRunnable() {
         @SuppressWarnings("deprecation")
         @Override
@@ -91,7 +82,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
                     continue;
                 }
 
-                Planet planet = PlanetUtils.getPlanet(player.getWorld());
+                Planet planet = PlanetUtil.getPlanet(player.getWorld());
                 if (planet == null) {
                     continue;
                 }
@@ -118,10 +109,10 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
                     return;
                 }
 
-                boolean isOxygenSuit = RocketUtils.getOxygen(player.getInventory().getHelmet()) > 0
-                        && RocketUtils.getOxygen(player.getInventory().getChestplate()) > 0
-                        && RocketUtils.getOxygen(player.getInventory().getLeggings()) > 0
-                        && RocketUtils.getOxygen(player.getInventory().getBoots()) > 0;
+                boolean isOxygenSuit = RocketUtil.getOxygen(player.getInventory().getHelmet()) > 0
+                        && RocketUtil.getOxygen(player.getInventory().getChestplate()) > 0
+                        && RocketUtil.getOxygen(player.getInventory().getLeggings()) > 0
+                        && RocketUtil.getOxygen(player.getInventory().getBoots()) > 0;
                 if (!(isOxygenSuit)) {
                     player.sendTitle(Lang.readGeneralText("SpaceSuitError"),
                             Lang.readGeneralText("SpaceSuitError_Sub"));
@@ -130,13 +121,13 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
                 }
 
                 boolean isProtectSuit =
-                        RocketUtils
+                        RocketUtil
                                 .getProtectLevel(player.getInventory().getHelmet()) > harmlevel
-                                && RocketUtils.getProtectLevel(
+                                && RocketUtil.getProtectLevel(
                                 player.getInventory().getChestplate()) > harmlevel
-                                && RocketUtils.getProtectLevel(
+                                && RocketUtil.getProtectLevel(
                                 player.getInventory().getLeggings()) > harmlevel
-                                && RocketUtils.getProtectLevel(
+                                && RocketUtil.getProtectLevel(
                                 player.getInventory().getBoots()) > harmlevel;
 
                 if (!isProtectSuit) {
@@ -150,6 +141,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         }
 
     };
+    private static ListenerManager listenerManager;
     private static ConfigManager configManager;
     private static ConfigManager planetManager;
     private static ConfigManager planetDataManager;
@@ -161,23 +153,11 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             ChatColor green = ChatColor.GREEN;
             // Updater
             updateBranch = config.getString("update-branch");
-            updater = new ClayTechUpdater();
-            if (!getConfig().getBoolean("disable-auto-updater")) {
 
-                updater.tryUpdate();
-                new BukkitRunnable() {
+            getLogger().info(yellow + Lang.readGeneralText("Info_1"));
+            getLogger().info(yellow + Lang.readGeneralText("Auto-updater_disabled"));
+            getLogger().info(yellow + Lang.readGeneralText("Info_6"));
 
-                    @Override
-                    public void run() {
-                        updater.tryUpdate();
-                    }
-
-                }.runTaskTimerAsynchronously(ClayTech.getInstance(), 1728000, 1728000);
-            } else {
-                getLogger().info(yellow + Lang.readGeneralText("Info_1"));
-                getLogger().info(yellow + Lang.readGeneralText("Auto-updater_disabled"));
-                getLogger().info(yellow + Lang.readGeneralText("Info_6"));
-            }
             List<String> Authors = plugin.getDescription().getAuthors();
             getLogger().info(green + Lang.readGeneralText("Info_1"));
             getLogger().info(green + Lang.readGeneralText("Info_2").replaceAll("\\{version\\}",
@@ -195,7 +175,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     };
 
     public static LocalizationService getLocalizationService() {
-        return service;
+        return localizationService;
     }
 
     public static ConfigManager getConfigManager() {
@@ -224,10 +204,6 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
     public static String getHighRailSpeed() {
         return highrailspeed;
-    }
-
-    public static ClayTechUpdater getUpdater() {
-        return updater;
     }
 
     public static boolean getCompatible() {
@@ -260,18 +236,20 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
         configManager = new ConfigManager("config.yml");
         config = configManager.getConfig();
+
         locale = config.getString("Locale");
         if (locale == null) {
             locale = "en-US";
         }
+
         highrailspeed = configManager.getConfig().getString("highrailspeed");
         if (highrailspeed == null) {
             highrailspeed = "3";
         }
 
-        service = new LocalizationService(this);
-        service.addLanguage(locale);
-        service.addLanguage("en-US");
+        localizationService = new LocalizationService(this);
+        localizationService.addLanguage(locale);
+        localizationService.addLanguage("en-US");
 
         overworld = config.getString("overworld");
 
@@ -288,8 +266,11 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         getLogger().info(Lang.readGeneralText("startTip"));
         getLogger().info(Lang.readGeneralText("registeringItems"));
         try {
+            getLogger().info("正在注册粘液物品");
             registerSlimefun();
+            getLogger().info("正在注册星球");
             registerPlanets();
+            getLogger().info("正在注册资源");
             registerResources();
         } catch (Exception e) {
             getLogger().info(Lang.readGeneralText("registeringError"));
@@ -300,16 +281,9 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             worldBorderEnabled = true;
         }
 
-        Bukkit.getPluginManager().registerEvents(new ItemInteractListener(), this);
-        Bukkit.getPluginManager().registerEvents(new ItemUseListener(), this);
-        Bukkit.getPluginManager().registerEvents(new FoodEatListener(), this);
-        Bukkit.getPluginManager().registerEvents(new FoodDropListener(), this);
-        Bukkit.getPluginManager().registerEvents(new WeaponListener(), this);
-        Bukkit.getPluginManager().registerEvents(new RailwayListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlanetListener(), this);
-        Bukkit.getPluginManager().registerEvents(new RocketLauncherListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlanetBaseListener(), this);
-        Bukkit.getPluginManager().registerEvents(new BlockUseListener(), this);
+        getLogger().info("正在注册监听器");
+        listenerManager = new ListenerManager(this);
+        listenerManager.setup();
 
         PluginCommand command = this.getCommand("claytech");
         if (command != null) {
