@@ -1,9 +1,13 @@
 package cn.claycoffee.clayTech.api.slimefun;
 
+import cn.claycoffee.clayTech.ClayTech;
+import cn.claycoffee.clayTech.api.events.PlayerCraftItemEvent;
 import cn.claycoffee.clayTech.utils.Lang;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -12,10 +16,13 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,33 +90,96 @@ public abstract class ACraftingTable extends AbstractMachine {
 
     @Override
     public @Nullable MachineRecipe findNextRecipe(@NotNull BlockMenu inv) {
-        MachineRecipe ret = null;
-        Map<Integer, Integer> found = new HashMap<>();
-        int i;
         for (MachineRecipe recipe : recipes) {
-            i = 0;
-            for (ItemStack input : recipe.getInput()) {
-                if (SlimefunUtils.isItemSimilar(inv.getItemInSlot(inputSlots[i]), input, true)) {
+            boolean found = true;
+            for (int i = 0; i < getInputSlots().length; i++) {
+                ItemStack input = recipe.getInput()[i];
+                ItemStack existing = inv.getItemInSlot(getInputSlots()[i]);
 
-                    if (input != null) {
-                        found.put(inputSlots[i], input.getAmount());
+                if (input == null && existing != null) {
+                    found = false;
+                    break;
+                }
+
+                if (!SlimefunUtils.isItemSimilar(existing, input, true)) {
+                    found = false;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < getOutputSlots().length; i++) {
+                ItemStack output = recipe.getOutput()[i];
+                ItemStack existing = inv.getItemInSlot(getOutputSlots()[i]);
+
+                if (existing == null) {
+                    continue;
+                }
+
+                if (output.getAmount() + existing.getAmount() > output.getMaxStackSize()) {
+                    found = false;
+                    break;
+                }
+
+                if (!SlimefunUtils.isItemSimilar(existing, output, true, false)) {
+                    found = false;
+                    break;
+                }
+            }
+
+            if (found) {
+                ItemStack[] input = recipe.getInput();
+                for (int i = 0; i < getInputSlots().length; i++) {
+                    if (input[i] != null) {
+                        inv.consumeItem(getInputSlots()[i], input[i].getAmount());
                     }
                 }
-                if (inv.getItemInSlot(inputSlots[i]) == input && input == null) {
-                    found.put(i, 0);
-                }
-                if (i < 8) {
-                    i++;
-                } else
-                    i = 0;
+
+                return recipe;
             }
-            if (found.size() == recipe.getInput().length) {
-                ret = recipe;
-                break;
-            } else
-                found.clear();
         }
 
-        return ret;
+        return null;
+    }
+
+    protected void tick(Block b) {
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
+        if (inv == null) {
+            return;
+        }
+
+        CraftingOperation currentOperation = getMachineProcessor().getOperation(b);
+
+        if (currentOperation != null) {
+            if (takeCharge(b.getLocation())) {
+
+                if (!currentOperation.isFinished()) {
+                    getMachineProcessor().updateProgressBar(inv, 4, currentOperation);
+                    currentOperation.addProgress(1);
+                } else {
+                    inv.replaceExistingItem(4, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
+
+                    for (ItemStack output : currentOperation.getResults()) {
+                        inv.pushItem(output.clone(), getOutputSlots());
+                    }
+
+                    new BukkitRunnable() {
+
+                        @Override
+                        public void run() {
+                            Bukkit.getPluginManager()
+                                    .callEvent(new PlayerCraftItemEvent(b, getMachineProcessor().getOperation(b).getIngredients(), getMachineProcessor().getOperation(b).getResults()[0]));
+                        }
+
+                    }.runTask(ClayTech.getInstance());
+                    getMachineProcessor().endOperation(b);
+                }
+            }
+        } else {
+            MachineRecipe next = findNextRecipe(inv);
+
+            if (next != null) {
+                getMachineProcessor().startOperation(b, new CraftingOperation(next));
+            }
+        }
     }
 }

@@ -93,7 +93,7 @@ public class RocketMakings {
                         SlimefunUtil.newItem()
                                 .withItemGroup(ClayTechItems.C_MATERIALS)
                                 .withItem(ClayTechItems.MIXED_ROCKET_FUEL)
-                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipeType(ClayTechRecipeType.CLAY_ROCKET_FUEL_GENERATOR)
                                 .withRecipe(ClayTechMachineRecipes.MIXED_ROCKET_FUEL)
                                 .build())
                 .build();

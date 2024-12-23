@@ -27,8 +27,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Final_ROOT
+ * @author Final_ROOT, ClayCoffee, balugaq
  */
+@SuppressWarnings({"unused", "deprecation"})
 public final class ItemStackUtil {
     public static final ItemStack AIR = new ItemStack(Material.AIR);
     public static final @org.jetbrains.annotations.Nullable ItemNameAdapter itemNameAdapter = ItemNameAdapter.get();
@@ -247,24 +248,6 @@ public final class ItemStackUtil {
             return null;
         }
         return lore.get(lore.size() - 1);
-    }
-
-    public static void setLore(@Nonnull ItemStack item, @Nonnull String... lore) {
-        if (ItemStackUtil.isItemNull(item)) {
-            return;
-        }
-        ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setLore(Arrays.stream(lore).toList());
-        item.setItemMeta(itemMeta);
-    }
-
-    public static void setLore(@Nonnull ItemStack item, @Nonnull List<String> lore) {
-        if (ItemStackUtil.isItemNull(item)) {
-            return;
-        }
-        ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setLore(lore);
-        item.setItemMeta(itemMeta);
     }
 
     public static void replaceLore(@Nonnull ItemStack item, int loreOffset, @Nonnull String... lore) {
@@ -542,5 +525,51 @@ public final class ItemStackUtil {
         meta.setLore(loreList);
         itemStack.setItemMeta(meta);
         return itemStack;
+    }
+
+    public static @NotNull ItemStack setDisplayName(@NotNull ItemStack item, String newDisplayName) {
+        ItemStack ret = item.clone();
+        ItemMeta im = item.getItemMeta();
+        im.setDisplayName(newDisplayName);
+        ret.setItemMeta(im);
+        return ret;
+    }
+
+    public static @NotNull ItemStack setLore(@NotNull ItemStack item, String[] newLore) {
+        ItemStack ret = item.clone();
+        ItemMeta im = item.getItemMeta();
+        im.setLore(Arrays.asList(newLore));
+        ret.setItemMeta(im);
+        return ret;
+    }
+
+    public static void setLore(@NotNull ItemStack item, List<String> newLore) {
+        ItemMeta im = item.getItemMeta();
+        im.setLore(newLore);
+        item.setItemMeta(im);
+    }
+
+    public static @NotNull ItemStack setInfo(@NotNull ItemStack item, String displayName, List<String> lore) {
+        ItemStack ret = item.clone();
+        ItemMeta im = item.getItemMeta();
+        im.setDisplayName(displayName);
+        im.setLore(lore);
+        ret.setItemMeta(im);
+        return ret;
+    }
+
+    public static @NotNull ItemStack setInfo(@NotNull ItemStack item, String displayName, String[] lore) {
+        ItemStack ret = item.clone();
+        ItemMeta im = item.getItemMeta();
+        im.setDisplayName(displayName);
+        im.setLore(Arrays.asList(lore));
+        ret.setItemMeta(im);
+        return ret;
+    }
+
+    public static @NotNull ItemStack addEnchantment(@NotNull ItemStack item, @NotNull Enchantment ench, int lvl) {
+        ItemStack ret = item.clone();
+        ret.addUnsafeEnchantment(ench, lvl);
+        return ret;
     }
 }

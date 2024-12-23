@@ -8,12 +8,14 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,34 +85,27 @@ public class ClayElectricCopier extends ANewContainer {
                 }
             }
         } else {
-            if (inv.getItemInSlot(19) == null || inv.getItemInSlot(20) == null) return;
+            ItemStack input1 = inv.getItemInSlot(19);
+            ItemStack input2 = inv.getItemInSlot(20);
 
-            ItemStack input = inv.getItemInSlot(19);
-            ItemStack output = inv.getItemInSlot(20);
-            if (inv.getItemInSlot(19).getType() == Material.WRITABLE_BOOK && inv.getItemInSlot(20).getType() == Material.WRITABLE_BOOK) {
-                // Mode I
-                mode.put(b, 1);
-            } else if (inv.getItemInSlot(19).getType() == Material.WRITTEN_BOOK && inv.getItemInSlot(20).getType() == Material.WRITABLE_BOOK) {
-                // Mode II
-                mode.put(b, 2);
-            } else if (inv.getItemInSlot(19).getType() == Material.WRITABLE_BOOK && inv.getItemInSlot(20).getType() == Material.WRITTEN_BOOK) {
-                // Mode II
-                mode.put(b, 2);
-            } else mode.put(b, 0);
-            if (mode.get(b) > 0) {
-                BookMeta sourceMeta = (BookMeta) input.getItemMeta();
-                MachineRecipe r;
-                if (mode.get(b) == 1) {
-                    r = new MachineRecipe(sourceMeta.getPages().size() * 4, new ItemStack[]{}, new ItemStack[]{input});
-                } else {
-                    BookMeta copyMeta = (BookMeta) output.getItemMeta();
-                    copyMeta.setPages(sourceMeta.getPages());
-                    copyMeta.setGeneration(BookMeta.Generation.COPY_OF_ORIGINAL);
-                    ItemStack c = output.clone();
-                    c.setItemMeta(copyMeta);
-                    r = new MachineRecipe(sourceMeta.getPages().size() * 4, new ItemStack[]{input}, new ItemStack[]{c});
+            if (input1 == null || input2 == null) {
+                return;
+            }
+
+            if (input1.getType() == Material.WRITTEN_BOOK && input2.getType() == Material.WRITABLE_BOOK) {
+                ItemMeta meta1 = input1.getItemMeta();
+                if (meta1 instanceof BookMeta bookMeta1) {
+                    MachineRecipe recipe = new MachineRecipe(bookMeta1.getPageCount()*4, new ItemStack[]{input2.clone()}, new ItemStack[]{input1.clone()});
+                    getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
                 }
-                getMachineProcessor().startOperation(b, new CraftingOperation(r));
+            }
+
+            if (input1.getType() == Material.WRITABLE_BOOK && input2.getType() == Material.WRITTEN_BOOK) {
+                ItemMeta meta2 = input2.getItemMeta();
+                if (meta2 instanceof BookMeta bookMeta2) {
+                    MachineRecipe recipe = new MachineRecipe(bookMeta2.getPageCount()*4, new ItemStack[]{input1.clone()}, new ItemStack[]{input2.clone()});
+                    getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
+                }
             }
         }
     }

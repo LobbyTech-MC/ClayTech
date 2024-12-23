@@ -1,9 +1,11 @@
 package cn.claycoffee.clayTech.api.slimefun;
 
 import cn.claycoffee.clayTech.utils.Lang;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -13,6 +15,7 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecip
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -109,4 +112,36 @@ public abstract class AExtracter extends AbstractMachine {
         return r;
     }
 
+    @Override
+    protected void tick(Block b) {
+        BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
+        if (inv == null) {
+            return;
+        }
+        CraftingOperation currentOperation = getMachineProcessor().getOperation(b);
+
+        if (currentOperation != null) {
+            if (takeCharge(b.getLocation())) {
+
+                if (!currentOperation.isFinished()) {
+                    getMachineProcessor().updateProgressBar(inv, 22, currentOperation);
+                    currentOperation.addProgress(1);
+                } else {
+                    inv.replaceExistingItem(22, new CustomItemStack(Material.PINK_STAINED_GLASS_PANE, " "));
+
+                    for (ItemStack output : currentOperation.getResults()) {
+                        inv.pushItem(output.clone(), getOutputSlots());
+                    }
+
+                    getMachineProcessor().endOperation(b);
+                }
+            }
+        } else {
+            MachineRecipe next = findNextRecipe(inv);
+
+            if (next != null) {
+                getMachineProcessor().startOperation(b, new CraftingOperation(next));
+            }
+        }
+    }
 }

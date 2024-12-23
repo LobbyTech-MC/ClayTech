@@ -62,7 +62,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
     private static final List<Planet> planetList = new ArrayList<>();
     protected static ClayTech plugin;
     private static @Nullable String locale;
-    private static @Nullable String highrailspeed;
+    private static @Nullable Double highrailspeed;
     private static @Nullable String overworld = "";
     private static boolean spacetravelneedperm;
     private static @Nullable String updateBranch;
@@ -203,7 +203,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return spacetravelneedperm;
     }
 
-    public static String getHighRailSpeed() {
+    public static Double getHighRailSpeed() {
         return highrailspeed;
     }
 
@@ -243,9 +243,9 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             locale = "en-US";
         }
 
-        highrailspeed = configManager.getConfig().getString("highrailspeed");
+        highrailspeed = configManager.getConfig().getDouble("highrailspeed");
         if (highrailspeed == null) {
-            highrailspeed = "3";
+            highrailspeed = 3D;
         }
 
         localizationService = new LocalizationService(this);

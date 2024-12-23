@@ -324,8 +324,8 @@ public class LocalizationService {
         str = ChatColor.translateAlternateColorCodes('&', str);
         if (str.contains("<") && str.contains(">")) {
             str = str.replaceAll("<no_premission>", Lang.readGeneralText("no_permission"));
-            str = str.replaceAll("<cantplace>", Lang.readGeneralText("CantPlace"));
-            str = str.replaceAll("<cantbreak>", Lang.readGeneralText("CantBreak"));
+            str = str.replaceAll("<cantplace>", Lang.readGeneralText("CantPlaceLore"));
+            str = str.replaceAll("<cantbreak>", Lang.readGeneralText("CantBreakLore"));
             str = str.replaceAll("<blindfive>", Lang.readGeneralText("Blind_5_effect"));
             str = str.replaceAll("<slownessfive>", Lang.readGeneralText("Slowness_5_effect"));
             str = str.replaceAll("<confusionfive>", Lang.readGeneralText("Confusion_5_effect"));

@@ -1,12 +1,9 @@
 package cn.claycoffee.clayTech.implementation.machines;
 
 import cn.claycoffee.clayTech.ClayTech;
-import cn.claycoffee.clayTech.ClayTechData;
-import cn.claycoffee.clayTech.api.ClayTechManager;
-import cn.claycoffee.clayTech.api.events.InjectOxygenEvent;
+import cn.claycoffee.clayTech.api.slimefun.ANewContainer;
 import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.Lang;
-import cn.claycoffee.clayTech.utils.RocketUtil;
 import com.xzavier0722.mc.plugin.slimefun4.storage.controller.SlimefunBlockData;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -17,58 +14,51 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
-    public final static int[] inputslots = new int[]{22};
-    public final static int[] outputslots = new int[]{};
-    private static final int[] BORDER_A = {0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27,
-            28, 29, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44};
-    private static final int[] BORDER_B = {12, 13, 14, 21, 23, 30, 31, 32};
+public class ElectricWaterPump extends ANewContainer {
+    public final static int[] inputslots = new int[]{20};
+    public final static int[] outputslots = new int[]{24};
+    private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 31, 17, 18, 26, 27, 35, 36, 37, 38, 39,
+            40, 41, 42, 43, 44};
+    private static final int[] BORDER_B = {10, 11, 12, 19, 21, 28, 29, 30, 14, 15, 16, 23, 25, 32, 33, 34};
     private static final ItemStack BORDER_A_ITEM = new CustomItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    private static final List<Material> LEAVES = Arrays
-            .asList(Material.OAK_LEAVES, Material.ACACIA_LEAVES, Material.BIRCH_LEAVES,
-                    Material.DARK_OAK_LEAVES, Material.JUNGLE_LEAVES, Material.SPRUCE_LEAVES,
-                    Material.AZALEA_LEAVES, Material.FLOWERING_AZALEA_LEAVES, Material.MANGROVE_LEAVES,
-                    Material.CHERRY_LEAVES);
-    private static final Map<Block, ItemStack> item = new HashMap<>();
-    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
+    public static Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
-    public SpaceSuitOxygenInjector(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
-                                   ItemStack @NotNull [] recipe) {
+    public ElectricWaterPump(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
+                             ItemStack[] recipe) {
 
-        super(itemGroup, item, recipeType, recipe);
+        super(category, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::SetupMenu);
     }
 
     @Override
-    public @NotNull EnergyNetComponentType getEnergyComponentType() {
+    public EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -87,27 +77,23 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return outputslots;
     }
 
-    public @NotNull String getInventoryTitle() {
-        return Lang.readMachinesText("CLAY_SPACESUIT_OXYGEN_INJECTOR");
+    public String getInventoryTitle() {
+        return Lang.readMachinesText("CLAY_ELECTRIC_WATER_PUMP");
     }
 
-    public @NotNull ItemStack getProgressBar() {
+    public ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 
     public int getEnergyConsumption() {
-        return 80;
+        return 26;
     }
 
     public int getSpeed() {
         return 1;
     }
 
-    public @NotNull String getMachineIdentifier() {
-        return "CLAY_SPACESUIT_OXYGEN_INJECTOR";
-    }
-
-    public void SetupMenu(@NotNull BlockMenuPreset Preset) {
+    public void SetupMenu(BlockMenuPreset Preset) {
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -117,7 +103,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         for (int eachID : BORDER_B) {
             Preset.addItem(eachID, BORDER_B_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         }
-        Preset.addItem(4, ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "),
+        Preset.addItem(22, ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l→"), " "),
                 ChestMenuUtils.getEmptyClickHandler());
 
         Preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -131,9 +117,9 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
                                        ClickAction action) {
-                    return cursor == null || cursor.getType() == Material.AIR;
+                    return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
                 }
             });
         }
@@ -148,7 +134,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return getProcessing(b) != null;
     }
 
-    public void registerRecipe(@NotNull MachineRecipe recipe) {
+    public void registerRecipe(MachineRecipe recipe) {
         recipe.setTicks(recipe.getTicks() / getSpeed());
         recipes.add(recipe);
     }
@@ -161,8 +147,8 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(@NotNull Block b, SlimefunItem sf, SlimefunBlockData data) {
-                SpaceSuitOxygenInjector.this.tick(b);
+            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
+                ElectricWaterPump.this.tick(b);
             }
 
             @Override
@@ -172,7 +158,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         });
     }
 
-    protected void tick(@NotNull Block b) {
+    protected void tick(Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {
@@ -181,73 +167,59 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
 
             if (timeleft > 0) {
                 // 还在处理
-                ChestMenuUtils.updateProgressbar(inv, 4, timeleft, processing.get(b).getTicks(), getProgressBar());
+                ChestMenuUtils.updateProgressbar(inv, 22, timeleft, processing.get(b).getTicks(), getProgressBar());
 
                 if (isChargeable()) {
-                    if (getCharge(b.getLocation()) < getEnergyConsumption()) {
+                    if (getCharge(b.getLocation()) < getEnergyConsumption())
                         return;
-                    }
                     removeCharge(b.getLocation(), getEnergyConsumption());
                     progress.put(b, timeleft - 1);
-                } else {
-                    if (!LEAVES.contains(b.getLocation().add(0, 1, 0).getBlock().getType())) {
-                        return;
-                    }
+                } else
                     progress.put(b, timeleft - 1);
-                }
             } else {
                 // 处理结束
-                inv.replaceExistingItem(4, ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "));
+                inv.replaceExistingItem(22,
+                        ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l→"), " "));
 
-                ItemStack spacesuit = item.get(b);
-                RocketUtil.setOxygen(spacesuit, Math.min(RocketUtil.getOxygen(spacesuit) + 5, RocketUtil.getMaxOxygen(spacesuit)));
+                for (ItemStack output : processing.get(b).getOutput()) {
+                    if (output != null)
+                        inv.pushItem(output.clone(), getOutputSlots());
+                }
+
+                progress.remove(b);
+                processing.remove(b);
+            }
+        } else {
+            // 没有在处理
+            ItemStack input = inv.getItemInSlot(20);
+            ItemStack output = inv.getItemInSlot(24);
+            if (input != null && output == null) {
+                if (isChargeable()) {
+                    if (getCharge(b.getLocation()) < getEnergyConsumption())
+                        return;
+                    removeCharge(b.getLocation(), getEnergyConsumption());
+                }
+                Dispenser dp = (Dispenser) b.getBlockData();
+                Block targetBlock = b.getRelative(dp.getFacing());
+                if (targetBlock.getType() != Material.WATER)
+                    return;
+
                 new BukkitRunnable() {
 
                     @Override
                     public void run() {
-                        Bukkit.getPluginManager().callEvent(new InjectOxygenEvent(b, spacesuit));
-
+                        targetBlock.setType(Material.AIR);
                     }
 
                 }.runTask(ClayTech.getInstance());
-                inv.replaceExistingItem(22, spacesuit);
-                ClayTechData.RunningInjectorsOxygen.remove(inv.toInventory());
-                progress.remove(b);
-                processing.remove(b);
-                item.remove(b);
-            }
-        } else {
-            // 没有在处理
-            ItemStack spacesuit = inv.getItemInSlot(22);
-            if (spacesuit != null) {
-                if (ClayTechManager.isSpaceSuit(spacesuit) && spacesuit.getAmount() == 1
-                        || ClayTechManager.isOxygenDistributer(spacesuit) && spacesuit.getAmount() == 1) {
-                    if (isChargeable()) {
-                        if (getCharge(b.getLocation()) < getEnergyConsumption())
-                            return;
-                        removeCharge(b.getLocation(), getEnergyConsumption());
-                    }
-                    if (!LEAVES.contains(b.getLocation().add(0, 1, 0).getBlock().getType()))
-                        return;
-                    if (RocketUtil.getOxygen(spacesuit) >= RocketUtil.getMaxOxygen(spacesuit))
-                        return;
-                    new BukkitRunnable() {
 
-                        @Override
-                        public void run() {
-                            b.getLocation().add(0, 1, 0).getBlock().setType(Material.AIR); // 消耗树叶
-                        }
+                inv.consumeItem(20, 1);
 
-                    }.runTask(ClayTech.getInstance());
-                    MachineRecipe oxygeninjectrecipe = new MachineRecipe(8, new ItemStack[]{spacesuit},
-                            new ItemStack[]{});
-                    item.put(b, spacesuit.clone());
-                    inv.consumeItem(22, 1);
-                    ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
-                    inv.replaceExistingItem(22, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
-                    processing.put(b, oxygeninjectrecipe);
-                    progress.put(b, oxygeninjectrecipe.getTicks());
-                }
+                MachineRecipe recipe = new MachineRecipe(5, new ItemStack[]{new ItemStack(Material.BUCKET)},
+                        new ItemStack[]{new ItemStack(Material.WATER_BUCKET)});
+
+                processing.put(b, recipe);
+                progress.put(b, recipe.getTicks());
             }
         }
     }

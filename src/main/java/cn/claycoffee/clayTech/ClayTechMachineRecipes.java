@@ -99,7 +99,7 @@ public class ClayTechMachineRecipes {
             ClayTechItems.CLAY_SWEET_POTATO, null, null, new ItemStack(Material.COAL), null};
     public final static ItemStack[] ELEMENT_CARBON = {null, null, null, null, new ItemStack(Material.COAL, 8), null,
             null, null, null};
-    public final static ItemStack[] ELEMENT_OXYGEN = {null, null, null, null, new ItemStack(Material.GRASS_BLOCK, 3),
+    public final static ItemStack[] ELEMENT_OXYGEN = {null, null, null, null, new ItemStack(Material.DIRT, 3),
             null, null, null, null};
     public final static ItemStack[] ELEMENT_SILICON = {null, null, null, null, new ItemStack(Material.SAND, 10), null,
             null, null, null};

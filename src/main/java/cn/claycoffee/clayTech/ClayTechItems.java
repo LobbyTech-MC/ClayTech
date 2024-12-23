@@ -1,6 +1,6 @@
 package cn.claycoffee.clayTech;
 
-import cn.claycoffee.clayTech.utils.ItemUtil;
+import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.KeyUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.SkullUtil;
@@ -168,6 +168,7 @@ public class ClayTechItems {
     public static final SlimefunItemStack COPYING_MODULE = getSlimefunItemStack(Material.DIAMOND, Lang.readItemText("COPYING_MODULE"), Lang.readItemLore("COPYING_MODULE"), "COPYING_MODULE");
     public static final SlimefunItemStack CLAY_AIR_LOCK_PLATE = getSlimefunItemStack(Material.STONE_PRESSURE_PLATE, Lang.readItemText("CLAY_AIR_LOCK_PLATE"), Lang.readItemLore("CLAY_AIR_LOCK_PLATE"), "CLAY_AIR_LOCK_PLATE");
     public static final SlimefunItemStack CLAY_AIR_LOCK_BLOCK = getSlimefunItemStack(Material.getMaterial(ClayTech.getInstance().getConfig().getString("clay-air-lock-block-texture")), Lang.readItemText("CLAY_AIR_LOCK_BLOCK"), Lang.readItemLore("CLAY_AIR_LOCK_BLOCK"), "CLAY_AIR_LOCK_BLOCK");
+    public static final SlimefunItemStack CLAY_ELECTRIC_WATER_PUMP = getSlimefunItemStack(Material.DISPENSER, Lang.readItemText("CLAY_ELECTRIC_WATER_PUMP"), Lang.readItemLore("CLAY_ELECTRIC_WATER_PUMP"), "CLAY_ELECTRIC_WATER_PUMP");
 
     // 头颅
     public static final ItemStack CLAY_FUEL = getSlimefunItemStack(
@@ -309,68 +310,68 @@ public class ClayTechItems {
     public static final LockedItemGroup C_ORESTHINGS = new LockedItemGroup(
             KeyUtil.newKey("claytech_oresthings"),
             new CustomItemStack(Material.BRICK, Lang.readCategoriesText("OreThings")), N_BASIC);
-    public static @NotNull SlimefunItemStack HONEY_SWEET = new SlimefunItemStack("HONEY_SWEET", new CustomItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
-            Lang.readItemLore("HONEY_SWEET")));
+    public static @NotNull SlimefunItemStack HONEY_SWEET = getSlimefunItemStack(Material.HONEYCOMB, Lang.readItemText("HONEY_SWEET"),
+            Lang.readItemLore("HONEY_SWEET"), "HONEY_SWEET");
 
-    public static @NotNull SlimefunItemStack TNT_EXPLOSION_CREATER = new SlimefunItemStack("TNT_EXPLOSION_CREATER", new CustomItemStack(new CustomItemStack(Material.TNT, Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"))), meta -> {
+    public static @NotNull SlimefunItemStack TNT_EXPLOSION_CREATER = getSlimefunItemStack(new CustomItemStack(Material.TNT, meta -> {
         meta.getPersistentDataContainer().set(KeyUtil.newKey("durability"), PersistentDataType.INTEGER, 32);
-    });
+    }), Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"), "TNT_EXPLOSION_CREATER");
 
     static {
-        ItemUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
-        ItemUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 9);
-        ItemUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DURABILITY, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.DURABILITY, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.MENDING, 1);
-        ItemUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.DURABILITY, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.MENDING, 1);
-        ItemUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.DURABILITY, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.MENDING, 1);
-        ItemUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.DURABILITY, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 9);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(Material m, String name, @NotNull String id) {
-        return new SlimefunItemStack(id, new CustomItemStack(m, name));
+        return new SlimefunItemStack("CLAYTECH_" + id, new CustomItemStack(m, name));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(Material m, String name, @NotNull List<String> lore, @NotNull String id) {
-        return new SlimefunItemStack(id, new CustomItemStack(m, name, lore));
+        return new SlimefunItemStack("CLAYTECH_" + id, new CustomItemStack(m, name, lore));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, @NotNull String id) {
-        return new SlimefunItemStack(id, ItemUtil.setDisplayName(stack, name));
+        return new SlimefunItemStack("CLAYTECH_" + id, ItemStackUtil.setDisplayName(stack, name));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, List<String> lore, @NotNull String id) {
-        return new SlimefunItemStack(id, ItemUtil.setInfo(stack, name, lore));
+        return new SlimefunItemStack("CLAYTECH_" + id, ItemStackUtil.setInfo(stack, name, lore));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, String[] lore, @NotNull String id) {
-        return new SlimefunItemStack(id, ItemUtil.setInfo(stack, name, lore));
+        return new SlimefunItemStack("CLAYTECH_" + id, ItemStackUtil.setInfo(stack, name, lore));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, @NotNull List<String> lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         ItemStack item = stack.clone();
 
-        lore.replaceAll(s -> s.replaceAll("%TIER%", LoreBuilder.machine(tier, type)));
-        lore.replaceAll(s -> s.replaceAll("%POWER%", LoreBuilder.powerBuffer(buffer)));
+        lore.replaceAll(s -> ClayTech.getLocalizationService().color(s.replaceAll("%TIER%", LoreBuilder.machine(tier, type))));
+        lore.replaceAll(s -> ClayTech.getLocalizationService().color(s.replaceAll("%POWER%", LoreBuilder.powerBuffer(buffer))));
 
-        return new SlimefunItemStack(id, ItemUtil.setInfo(item, name, lore));
+        return new SlimefunItemStack(id, ItemStackUtil.setInfo(item, name, lore));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull Material m, String name, @NotNull List<String> lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         ItemStack item = new ItemStack(m);
 
-        lore.replaceAll(s -> s.replaceAll("%TIER%", LoreBuilder.machine(tier, type)));
-        lore.replaceAll(s -> s.replaceAll("%POWER%", LoreBuilder.powerBuffer(buffer)));
+        lore.replaceAll(s -> ClayTech.getLocalizationService().color(s.replaceAll("%TIER%", LoreBuilder.machine(tier, type))));
+        lore.replaceAll(s -> ClayTech.getLocalizationService().color(s.replaceAll("%POWER%", LoreBuilder.powerBuffer(buffer))));
 
-        return new SlimefunItemStack(id, ItemUtil.setInfo(item, name, lore));
+        return new SlimefunItemStack("CLAYTECH_" + id, ItemStackUtil.setInfo(item, name, lore));
     }
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull Material m, String name, String[] lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
@@ -379,5 +380,24 @@ public class ClayTechItems {
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, String[] lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         return getSlimefunItemStack(stack, name, Arrays.asList(lore), tier, type, buffer, id);
+    }
+
+    static {
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 9);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
     }
 }

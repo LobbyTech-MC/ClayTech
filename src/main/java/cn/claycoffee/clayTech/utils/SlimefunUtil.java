@@ -1,6 +1,7 @@
 package cn.claycoffee.clayTech.utils;
 
 import cn.claycoffee.clayTech.ClayTech;
+import cn.claycoffee.clayTech.api.objects.NotPlaceableItem;
 import cn.claycoffee.clayTech.api.objects.enums.ArmorType;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
@@ -9,6 +10,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -30,14 +32,14 @@ public class SlimefunUtil {
     }
 
     public static void registerItem(@NotNull ItemGroup itemGroup, @NotNull String id, SlimefunItemStack item, @NotNull String ResearchName, int cost, @NotNull RecipeType Recipetype, ItemStack @NotNull [] recipe, boolean registerResearch) {
-        item = new SlimefunItemStack("CLAYTECH_" + id, item);
+        item = new SlimefunItemStack(id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
         slimefunItem.register(ClayTech.getInstance());
     }
 
     public static void registerItem(@NotNull ItemGroup itemGroup, @NotNull String id, SlimefunItemStack item, @NotNull String ResearchName, int cost, @NotNull RecipeType Recipetype, ItemStack @NotNull [] recipe, boolean registerResearch, ItemHandler @NotNull [] handlers) {
-        item = new SlimefunItemStack("CLAYTECH_" + id, item);
+        item = new SlimefunItemStack(id, item);
         SlimefunItem slimefunItem = new SlimefunItem(itemGroup, item, Recipetype, recipe);
         slimefunItem.setResearch(new Research(KeyUtil.newKey(ResearchName), id.hashCode(), ResearchName, cost));
         for (ItemHandler handler : handlers) {
@@ -53,7 +55,6 @@ public class SlimefunUtil {
     public static void registerArmors(@NotNull ItemGroup itemGroup, String nameprefix, ItemStack @NotNull [] ItemStack, String ResearchName,
                                       int cost, @NotNull RecipeType Recipetype, ItemStack MaterialStack, boolean registerResearch) {
 
-        nameprefix = "CLAYTECH_" + nameprefix;
         SlimefunItemStack HELMET = new SlimefunItemStack(nameprefix + "_HELMET", ItemStack[0]);
         SlimefunItem HELMET_I = new SlimefunItem(itemGroup, HELMET, Recipetype, getArmorsStack(ArmorType.HELMET, MaterialStack));
         HELMET_I.register(ClayTech.getInstance());
@@ -105,6 +106,11 @@ public class SlimefunUtil {
         private SlimefunItemStack itemStack;
         private RecipeType recipeType;
         private ItemStack[] recipe;
+        private boolean placeable = true;
+        public @NotNull ItemBuilder withPlaceable(boolean placeable) {
+            this.placeable = placeable;
+            return this;
+        }
 
         public @NotNull ItemBuilder withItemGroup(ItemGroup itemGroup) {
             this.itemGroup = itemGroup;
@@ -112,7 +118,6 @@ public class SlimefunUtil {
         }
 
         public @NotNull ItemBuilder withItem(SlimefunItemStack itemStack) {
-            itemStack = new SlimefunItemStack("CLAYTECH_" + itemStack.getItemId(), itemStack);
             this.itemStack = itemStack;
             return this;
         }
@@ -159,7 +164,25 @@ public class SlimefunUtil {
                 throw new IllegalArgumentException("Recipe cannot be null");
             }
 
-            SlimefunItem slimefunItem = new SlimefunItem(itemGroup, itemStack, recipeType, recipe);
+            List<String> lore = ItemStackUtil.getLore(itemStack);
+            if (lore != null && !lore.isEmpty()) {
+                for (String line : lore) {
+                    if (line.equals(Lang.readGeneralText("CantPlaceLore"))) {
+                        placeable = false;
+                        break;
+                    }
+                }
+            }
+
+            SlimefunItem slimefunItem;
+            if (placeable) {
+                slimefunItem = new SlimefunItem(itemGroup, itemStack, recipeType, recipe);
+            } else {
+                slimefunItem = new NotPlaceableItem(itemGroup, itemStack, recipeType, recipe);
+            }
+            if (slimefunItem == null) {
+                throw new IllegalArgumentException("Slimefun Item cannot be null");
+            }
             for (ItemHandler handler : handlers) {
                 slimefunItem.addItemHandler(handler);
             }

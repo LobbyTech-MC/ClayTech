@@ -6,6 +6,7 @@ import cn.claycoffee.clayTech.implementation.machines.ClayElectricCopier;
 import cn.claycoffee.clayTech.implementation.machines.CobbleStoneGenerator;
 import cn.claycoffee.clayTech.implementation.machines.CraftingTable;
 import cn.claycoffee.clayTech.implementation.machines.ElectricStoneCrusher;
+import cn.claycoffee.clayTech.implementation.machines.ElectricWaterPump;
 import cn.claycoffee.clayTech.implementation.machines.ElementExtracter;
 import cn.claycoffee.clayTech.implementation.machines.ExperimentTableNormal;
 import cn.claycoffee.clayTech.implementation.machines.FoodCauldron;
@@ -88,63 +89,61 @@ public class Machines {
         ItemStack[] ClayWitherKiller = {ClayTechItems.BLISTERING_CORE, SlimefunItems.PROGRAMMABLE_ANDROID_2_BUTCHER, ClayTechItems.BLISTERING_CORE, ClayTechItems.TEMPERATURE_RESISTANCE_OBSIDIAN, SlimefunItems.WITHER_ASSEMBLER, ClayTechItems.TEMPERATURE_RESISTANCE_OBSIDIAN, ClayTechItems.TEMPERATURE_RESISTANCE_OBSIDIAN, SlimefunItems.CARBONADO_EDGED_CAPACITOR, ClayTechItems.TEMPERATURE_RESISTANCE_OBSIDIAN};
 
         // 机器
-        SlimefunItemStack craftingtable = new SlimefunItemStack("CLAY_CRAFTING_TABLE",
+        SlimefunItemStack craftingtable = new SlimefunItemStack("CLAYTECH_CRAFTING_TABLE",
                 ClayTechItems.CLAY_CRAFTING_TABLE);
-        SlimefunItemStack foodcauldron = new SlimefunItemStack("CLAY_FOOD_CAULDRON", ClayTechItems.CLAY_FOOD_CAULDRON);
-        SlimefunItemStack chalkingmachine = new SlimefunItemStack("CLAY_FOOD_CHALKING_MACHINE",
+        SlimefunItemStack foodcauldron = new SlimefunItemStack("CLAYTECH_FOOD_CAULDRON", ClayTechItems.CLAY_FOOD_CAULDRON);
+        SlimefunItemStack chalkingmachine = new SlimefunItemStack("CLAYTECH_FOOD_CHALKING_MACHINE",
                 ClayTechItems.CLAY_FOOD_CHALKING_MACHINE);
-        SlimefunItemStack elementextracter = new SlimefunItemStack("CLAY_ELEMENT_EXTRACTER",
+        SlimefunItemStack elementextracter = new SlimefunItemStack("CLAYTECH_ELEMENT_EXTRACTER",
                 ClayTechItems.CLAY_ELEMENT_EXTRACTER);
-        SlimefunItemStack electricstonecrusher = new SlimefunItemStack("CLAY_ELECTRIC_STONE_CRUSHER",
+        SlimefunItemStack electricstonecrusher = new SlimefunItemStack("CLAYTECH_ELECTRIC_STONE_CRUSHER",
                 ClayTechItems.CLAY_ELECTRIC_STONE_CRUSHER);
-        SlimefunItemStack experimenttablebasic = new SlimefunItemStack("CLAY_EXPERIMENT_TABLE_BASIC",
+        SlimefunItemStack experimenttablebasic = new SlimefunItemStack("CLAYTECH_EXPERIMENT_TABLE_BASIC",
                 ClayTechItems.CLAY_EXPERIMENT_TABLE_NORMAL);
-        SlimefunItemStack rocketassemblingmachine = new SlimefunItemStack("CLAY_ROCKET_ASSEMBLING_MACHINE",
+        SlimefunItemStack rocketassemblingmachine = new SlimefunItemStack("CLAYTECH_ROCKET_ASSEMBLING_MACHINE",
                 ClayTechItems.CLAY_ROCKET_ASSEMBLING_MACHINE);
-        SlimefunItemStack rocketfuelgenerator = new SlimefunItemStack("CLAY_ROCKET_FUEL_GENERATOR",
+        SlimefunItemStack rocketfuelgenerator = new SlimefunItemStack("CLAYTECH_ROCKET_FUEL_GENERATOR",
                 ClayTechItems.CLAY_ROCKET_FUEL_GENERATOR);
-        SlimefunItemStack rocketfuelinjector = new SlimefunItemStack("CLAY_ROCKET_FUEL_INJECTOR",
+        SlimefunItemStack rocketfuelinjector = new SlimefunItemStack("CLAYTECH_ROCKET_FUEL_INJECTOR",
                 ClayTechItems.CLAY_ROCKET_FUEL_INJECTOR);
-        SlimefunItemStack spacesuitoxygeninjector = new SlimefunItemStack("CLAY_SPACESUIT_OXYGEN_INJECTOR",
+        SlimefunItemStack spacesuitoxygeninjector = new SlimefunItemStack("CLAYTECH_SPACESUIT_OXYGEN_INJECTOR",
                 ClayTechItems.CLAY_SPACESUIT_OXYGEN_INJECTOR);
-        SlimefunItemStack cobblestonegenerator = new SlimefunItemStack("CLAY_COBBLESTONE_GENERATOR",
+        SlimefunItemStack cobblestonegenerator = new SlimefunItemStack("CLAYTECH_COBBLESTONE_GENERATOR",
                 ClayTechItems.CLAY_COBBLESTONE_GENERATOR);
-        // todo
-        //SlimefunItemStack electricwaterpump = new SlimefunItemStack("CLAY_ELECTRIC_WATER_PUMP",
-        //        ClayTechItems.CLAY_ELECTRIC_WATER_PUMP);
-        SlimefunItemStack electriccopier = new SlimefunItemStack("CLAY_ELECTRIC_COPIER",
+        SlimefunItemStack electricwaterpump = new SlimefunItemStack("CLAYTECH_ELECTRIC_WATER_PUMP",
+                ClayTechItems.CLAY_ELECTRIC_WATER_PUMP);
+        SlimefunItemStack electriccopier = new SlimefunItemStack("CLAYTECH_ELECTRIC_COPIER",
                 ClayTechItems.CLAY_ELECTRIC_COPIER);
-        SlimefunItemStack witherkiller = new SlimefunItemStack("CLAY_WITHER_KILLER",
+        SlimefunItemStack witherkiller = new SlimefunItemStack("CLAYTECH_WITHER_KILLER",
                 ClayTechItems.CLAY_WITHER_KILLER);
 
-        new CraftingTable(ClayTechItems.C_MACHINES, craftingtable, "CLAY_CRAFTING_TABLE",
+        new CraftingTable(ClayTechItems.C_MACHINES, craftingtable, "CLAYTECH_CRAFTING_TABLE",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayCrafingTable).register(ClayTech.getInstance());
-        new ElectricStoneCrusher(ClayTechItems.C_MACHINES, electricstonecrusher, "CLAY_ELECTRIC_STONE_CRUSHER",
+        new ElectricStoneCrusher(ClayTechItems.C_MACHINES, electricstonecrusher, "CLAYTECH_ELECTRIC_STONE_CRUSHER",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayStoneCrusher).register(ClayTech.getInstance());
-        new FoodCauldron(ClayTechItems.C_MACHINES, foodcauldron, "CLAY_FOOD_CAULDRON",
+        new FoodCauldron(ClayTechItems.C_MACHINES, foodcauldron, "CLAYTECH_FOOD_CAULDRON",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayFoodCauldron).register(ClayTech.getInstance());
-        new FoodChalkingMachine(ClayTechItems.C_MACHINES, chalkingmachine, "CLAY_FOOD_CHALKING_MACHINE",
+        new FoodChalkingMachine(ClayTechItems.C_MACHINES, chalkingmachine, "CLAYTECH_FOOD_CHALKING_MACHINE",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayChalkingMachine).register(ClayTech.getInstance());
-        new ElementExtracter(ClayTechItems.C_MACHINES, elementextracter, "CLAY_ELEMENT_EXTRACTER",
+        new ElementExtracter(ClayTechItems.C_MACHINES, elementextracter, "CLAYTECH_ELEMENT_EXTRACTER",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayElementExtracter).register(ClayTech.getInstance());
-        new ExperimentTableNormal(ClayTechItems.C_MACHINES, experimenttablebasic, "CLAY_EXPERIMENT_TABLE_BASIC",
+        new ExperimentTableNormal(ClayTechItems.C_MACHINES, experimenttablebasic, "CLAYTECH_EXPERIMENT_TABLE_BASIC",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayExperimentTableBasic).register(ClayTech.getInstance());
-        new RocketAssemblingMachine(ClayTechItems.C_MACHINES, rocketassemblingmachine, "CLAY_ROCKET_ASSEMBLING_MACHINE",
+        new RocketAssemblingMachine(ClayTechItems.C_MACHINES, rocketassemblingmachine, "CLAYTECH_ROCKET_ASSEMBLING_MACHINE",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayRocketAssemblingMachine).register(ClayTech.getInstance());
-        new RocketFuelGenerator(ClayTechItems.C_MACHINES, rocketfuelgenerator, "CLAY_ROCKET_FUEL_GENERATOR",
+        new RocketFuelGenerator(ClayTechItems.C_MACHINES, rocketfuelgenerator, "CLAYTECH_ROCKET_FUEL_GENERATOR",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayRocketFuelGenerator).register(ClayTech.getInstance());
         new RocketFuelInjector(ClayTechItems.C_MACHINES, rocketfuelinjector,
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayRocketFuelInjector).register(ClayTech.getInstance());
-        new SpaceSuitOxygenInjector(ClayTechItems.C_MACHINES, spacesuitoxygeninjector, "CLAY_SPACESUIT_OXYGEN_INJECTOR",
+        new SpaceSuitOxygenInjector(ClayTechItems.C_MACHINES, spacesuitoxygeninjector, "CLAYTECH_SPACESUIT_OXYGEN_INJECTOR",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClaySpaceSuitOxygenInjector).register(ClayTech.getInstance());
-        new CobbleStoneGenerator(ClayTechItems.C_MACHINES, cobblestonegenerator, "CLAY_COBBLESTONE_GENERATOR",
+        new CobbleStoneGenerator(ClayTechItems.C_MACHINES, cobblestonegenerator, "CLAYTECH_COBBLESTONE_GENERATOR",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayCobbleStoneGenerator).register(ClayTech.getInstance());
-        // todo
-        //new ElectricWaterPump(ClayTechItems.C_MACHINES, electricwaterpump, "CLAY_ELECTRIC_WATER_PUMP",
-        //        RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricWaterPump).register(ClayTech.getInstance());
-        new ClayElectricCopier(ClayTechItems.C_MACHINES, electriccopier, "CLAY_ELECTRIC_COPIER",
+        new ElectricWaterPump(ClayTechItems.C_MACHINES, electricwaterpump, "CLAYTECH_ELECTRIC_WATER_PUMP",
+                RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricWaterPump).register(ClayTech.getInstance());
+        new ClayElectricCopier(ClayTechItems.C_MACHINES, electriccopier, "CLAYTECH_ELECTRIC_COPIER",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayElectricCopier).register(ClayTech.getInstance());
-        new WitherKiller(ClayTechItems.C_MACHINES, witherkiller, "CLAY_WITHER_KILLER",
+        new WitherKiller(ClayTechItems.C_MACHINES, witherkiller, "CLAYTECH_WITHER_KILLER",
                 RecipeType.ENHANCED_CRAFTING_TABLE, ClayWitherKiller).register(ClayTech.getInstance());
 
 

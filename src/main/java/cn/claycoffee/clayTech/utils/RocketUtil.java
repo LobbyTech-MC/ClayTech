@@ -1,5 +1,6 @@
 package cn.claycoffee.clayTech.utils;
 
+import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.api.ClayTechManager;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

@@ -15,6 +15,7 @@ General:
   basic_command: "&3粘土科技 {version} &eBy &6ClayCoffee"
   LatestVersion: "&a您当前正在使用 &6ClayTech &a最新版本."
   CantPlaceLore: "&e不可放置"
+  CantBreakLore: "&e不可破坏"
   no_permission: "§c你没有权限."
   CantPlace: "§b[粘土科技]§c你不能放置该物品."
   CantBreak: "§b[粘土科技]§c你不能破坏该物品."
