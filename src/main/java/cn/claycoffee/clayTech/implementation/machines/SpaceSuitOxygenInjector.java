@@ -220,17 +220,22 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
             // 没有在处理
             ItemStack spacesuit = inv.getItemInSlot(22);
             if (spacesuit != null) {
-                if (ClayTechManager.isSpaceSuit(spacesuit) && spacesuit.getAmount() == 1
-                        || ClayTechManager.isOxygenDistributer(spacesuit) && spacesuit.getAmount() == 1) {
+                if (spacesuit.getAmount() == 1 && (ClayTechManager.isSpaceSuit(spacesuit) || ClayTechManager.isOxygenDistributer(spacesuit))) {
                     if (isChargeable()) {
-                        if (getCharge(b.getLocation()) < getEnergyConsumption())
+                        if (getCharge(b.getLocation()) < getEnergyConsumption()) {
                             return;
+                        }
                         removeCharge(b.getLocation(), getEnergyConsumption());
                     }
-                    if (!LEAVES.contains(b.getLocation().add(0, 1, 0).getBlock().getType()))
+                    if (!LEAVES.contains(b.getLocation().add(0, 1, 0).getBlock().getType())) {
                         return;
-                    if (RocketUtil.getOxygen(spacesuit) >= RocketUtil.getMaxOxygen(spacesuit))
+                    }
+                    if (StorageCacheUtils.getSfItem(b.getLocation().add(0, 1, 0)) != null) {
                         return;
+                    }
+                    if (RocketUtil.getOxygen(spacesuit) >= RocketUtil.getMaxOxygen(spacesuit)) {
+                        return;
+                    }
                     new BukkitRunnable() {
 
                         @Override
@@ -244,7 +249,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                     item.put(b, spacesuit.clone());
                     inv.consumeItem(22, 1);
                     ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
-                    inv.replaceExistingItem(22, new ItemStack(Material.WHITE_STAINED_GLASS_PANE));
+                    inv.replaceExistingItem(22, new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " "));
                     processing.put(b, oxygeninjectrecipe);
                     progress.put(b, oxygeninjectrecipe.getTicks());
                 }

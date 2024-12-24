@@ -1,5 +1,6 @@
 package cn.claycoffee.clayTech.core.managers;
 
+import cn.claycoffee.clayTech.core.listeners.AirLockListener;
 import cn.claycoffee.clayTech.core.listeners.Debug;
 import cn.claycoffee.clayTech.core.listeners.FoodDropListener;
 import cn.claycoffee.clayTech.core.listeners.FoodEatListener;
@@ -24,6 +25,7 @@ public class ListenerManager {
     public ListenerManager(JavaPlugin plugin) {
         this.plugin = plugin;
         listeners.add(new Debug()); // todo remove it in release version
+        listeners.add(new AirLockListener());
         listeners.add(new FoodDropListener());
         listeners.add(new FoodEatListener());
         listeners.add(new ItemInteractListener());

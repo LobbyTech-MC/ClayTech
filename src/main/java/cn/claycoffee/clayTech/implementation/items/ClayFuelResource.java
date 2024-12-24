@@ -9,7 +9,7 @@ public class ClayFuelResource {
     public ClayFuelResource() {
         SlimefunUtil.newResearch()
                 .withId(SlimefunUtil.getResearchId())
-                .withName(Lang.readResearchesText("CLAY_FUEL"))
+                .withName(Lang.readResearchesText("CLAYTECH_FUEL"))
                 .withCost(10)
                 .addItem(
                         SlimefunUtil.newItem()

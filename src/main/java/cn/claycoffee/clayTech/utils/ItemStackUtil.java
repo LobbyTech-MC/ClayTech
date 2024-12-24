@@ -567,9 +567,7 @@ public final class ItemStackUtil {
         return ret;
     }
 
-    public static @NotNull ItemStack addEnchantment(@NotNull ItemStack item, @NotNull Enchantment ench, int lvl) {
-        ItemStack ret = item.clone();
-        ret.addUnsafeEnchantment(ench, lvl);
-        return ret;
+    public static void addEnchantment(@NotNull ItemStack item, @NotNull Enchantment ench, int lvl) {
+        item.addUnsafeEnchantment(ench, lvl);
     }
 }

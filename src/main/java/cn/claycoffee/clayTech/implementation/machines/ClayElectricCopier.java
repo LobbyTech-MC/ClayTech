@@ -80,8 +80,8 @@ public class ClayElectricCopier extends ANewContainer {
                     currentOperation.addProgress(1);
                 } else {
                     inv.replaceExistingItem(22, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
+                    inv.pushItem(getMachineProcessor().getOperation(b).getResults()[0], getOutputSlots());
                     getMachineProcessor().endOperation(b);
-                    inv.addItem(getInputSlots()[0], getMachineProcessor().getOperation(b).getIngredients()[0]);
                 }
             }
         } else {
@@ -96,6 +96,7 @@ public class ClayElectricCopier extends ANewContainer {
                 ItemMeta meta1 = input1.getItemMeta();
                 if (meta1 instanceof BookMeta bookMeta1) {
                     MachineRecipe recipe = new MachineRecipe(bookMeta1.getPageCount()*4, new ItemStack[]{input2.clone()}, new ItemStack[]{input1.clone()});
+                    inv.consumeItem(20, 1);
                     getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
                 }
             }
@@ -104,6 +105,7 @@ public class ClayElectricCopier extends ANewContainer {
                 ItemMeta meta2 = input2.getItemMeta();
                 if (meta2 instanceof BookMeta bookMeta2) {
                     MachineRecipe recipe = new MachineRecipe(bookMeta2.getPageCount()*4, new ItemStack[]{input1.clone()}, new ItemStack[]{input2.clone()});
+                    inv.consumeItem(19, 1);
                     getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
                 }
             }

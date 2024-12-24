@@ -46,13 +46,6 @@ public class FoodMakingStaff {
 
         SlimefunUtil.newResearch()
                 .withId(SlimefunUtil.getResearchId())
-                .withName(Lang.readResearchesText("CLAYTECH_FOOD_MAKINGS_II"))
-                .withCost(50)
-                .addItem(ClayTechItems.FLOUR)
-                .build();
-
-        SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
                 .withName(Lang.readResearchesText("CLAYTECH_FRUIT_I"))
                 .withCost(50)
                 .addItem(ClayTechItems.CLAY_LEMON)

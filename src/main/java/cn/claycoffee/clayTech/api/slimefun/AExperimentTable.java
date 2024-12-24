@@ -113,8 +113,15 @@ public abstract class AExperimentTable extends AbstractMachine {
             if (found.size() == 5) {
                 r = recipe;
                 break;
-            } else
+            } else {
                 found.clear();
+            }
+        }
+
+        if (r != null) {
+            for (int slot : inputSlots) {
+                inv.consumeItem(slot, found.get(slot));
+            }
         }
 
         return r;

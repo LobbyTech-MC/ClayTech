@@ -168,7 +168,7 @@ public class ClayTechItems {
     public static final SlimefunItemStack COPYING_MODULE = getSlimefunItemStack(Material.DIAMOND, Lang.readItemText("COPYING_MODULE"), Lang.readItemLore("COPYING_MODULE"), "COPYING_MODULE");
     public static final SlimefunItemStack CLAY_AIR_LOCK_PLATE = getSlimefunItemStack(Material.STONE_PRESSURE_PLATE, Lang.readItemText("CLAY_AIR_LOCK_PLATE"), Lang.readItemLore("CLAY_AIR_LOCK_PLATE"), "CLAY_AIR_LOCK_PLATE");
     public static final SlimefunItemStack CLAY_AIR_LOCK_BLOCK = getSlimefunItemStack(Material.getMaterial(ClayTech.getInstance().getConfig().getString("clay-air-lock-block-texture")), Lang.readItemText("CLAY_AIR_LOCK_BLOCK"), Lang.readItemLore("CLAY_AIR_LOCK_BLOCK"), "CLAY_AIR_LOCK_BLOCK");
-    public static final SlimefunItemStack CLAY_ELECTRIC_WATER_PUMP = getSlimefunItemStack(Material.DISPENSER, Lang.readItemText("CLAY_ELECTRIC_WATER_PUMP"), Lang.readItemLore("CLAY_ELECTRIC_WATER_PUMP"), "CLAY_ELECTRIC_WATER_PUMP");
+    public static final SlimefunItemStack CLAY_ELECTRIC_WATER_PUMP = getSlimefunItemStack(Material.DISPENSER, Lang.readItemText("CLAY_ELECTRIC_WATER_PUMP"), Lang.readItemLore("CLAY_ELECTRIC_WATER_PUMP"), MachineTier.BASIC, MachineType.MACHINE, 256, "CLAY_ELECTRIC_WATER_PUMP");
 
     // 头颅
     public static final ItemStack CLAY_FUEL = getSlimefunItemStack(

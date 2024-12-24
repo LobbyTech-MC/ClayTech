@@ -1,4 +1,4 @@
-name: ClayTech-Changed
+name: ClayTech-Fixed
 main: cn.claycoffee.clayTech.ClayTech
 version: ${project.version}
 api-version: 1.20

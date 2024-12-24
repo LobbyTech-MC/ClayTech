@@ -24,8 +24,8 @@ public class FoodDropListener implements Listener {
                     // 这里放其他事件
                     FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.GRASS),
                             ClayTechItems.DIRTY_TEA, new ItemStack(Material.SHEARS), 10, e);
-                    FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.WHEAT), ClayTechItems.FLOUR,
-                            new ItemStack(Material.SHEARS), 15, 20, e);
+                    FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.WHEAT),
+                            ClayTechItems.FLOUR, new ItemStack(Material.SHEARS), 15, 20, e);
                     FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.POTATOES),
                             ClayTechItems.STARCH, new ItemStack(Material.SHEARS), 15, 20, e);
                     FoodUtil.destroy(e.getPlayer(), e.getBlock(), new ItemStack(Material.POTATOES),

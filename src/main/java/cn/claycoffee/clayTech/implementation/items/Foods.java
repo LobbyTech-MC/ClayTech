@@ -67,7 +67,6 @@ public class Foods {
                                 .withRecipeType(ClayTechRecipeType.CLAY_FOOD_CAULDRON)
                                 .withRecipe(ClayTechMachineRecipes.HONEY_SWEET)
                                 .build())
-                .addItem(ClayTechItems.CLAY_SWEET_POTATO)
                 .addItem(
                         SlimefunUtil.newItem()
                                 .withItemGroup(ClayTechItems.C_FOOD)
@@ -78,7 +77,28 @@ public class Foods {
                 .addItem(
                         SlimefunUtil.newItem()
                                 .withItemGroup(ClayTechItems.C_FOOD)
+                                .withItem(ClayTechItems.CLAY_SWEET_POTATO)
+                                .withRecipeType(ClayTechRecipeType.HARVEST)
+                                .withRecipe(ClayTechItems.NORECIPE)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_FOOD)
                                 .withItem(ClayTechItems.GREEN_GRASS)
+                                .withRecipeType(ClayTechRecipeType.HARVEST)
+                                .withRecipe(ClayTechItems.NORECIPE)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_FOOD)
+                                .withItem(ClayTechItems.STARCH)
+                                .withRecipeType(ClayTechRecipeType.HARVEST)
+                                .withRecipe(ClayTechItems.NORECIPE)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_FOOD)
+                                .withItem(ClayTechItems.FLOUR)
                                 .withRecipeType(ClayTechRecipeType.HARVEST)
                                 .withRecipe(ClayTechItems.NORECIPE)
                                 .build())
