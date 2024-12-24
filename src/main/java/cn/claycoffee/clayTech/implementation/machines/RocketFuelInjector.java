@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.Map;
 
 public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
+    private static final ItemStack HANDLED_PROGRESS_BAR = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←", " ");
+    private static final ItemStack HANDLING_PROGRESS_BAR = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " ");
     public final static int[] inputSlots = new int[]{20, 24};
     public final static int[] outputSlots = new int[]{};
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 31, 17, 18, 26, 27, 35, 36, 37, 38, 39,
@@ -215,8 +217,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                     progress.put(b, timeleft - 1);
             } else {
                 // 处理结束
-                inv.replaceExistingItem(22,
-                        ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←"), " "));
+                inv.replaceExistingItem(22, HANDLED_PROGRESS_BAR.clone());
 
                 ItemStack rocket = item.get(b);
                 RocketUtil.setFuel(rocket, Math.min(RocketUtil.getFuel(rocket) + 5, RocketUtil.getMaxFuel(rocket)));
@@ -261,7 +262,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                     item.put(b, rocket.clone());
                     inv.consumeItem(20, 1);
                     ClayTechData.RunningInjectors.put(inv.toInventory(), b);
-                    inv.replaceExistingItem(20, new ItemStack(Material.BEDROCK));
+                    inv.replaceExistingItem(20, HANDLING_PROGRESS_BAR.clone());
                     processing.put(b, fuelinjectrecipe);
                     progress.put(b, fuelinjectrecipe.getTicks());
                 }

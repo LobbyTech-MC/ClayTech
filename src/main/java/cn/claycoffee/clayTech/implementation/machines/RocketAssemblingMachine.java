@@ -34,10 +34,11 @@ public class RocketAssemblingMachine extends ARocketTable {
 
     @Override
     public void registerDefaultRecipes() {
-        ItemStack[] ROCKET_1 = {null, ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_FUEL_TANK,
-                ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_CONTROL_CORE,
-                ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_ENGINE,
-                ClayTechItems.ROCKET_STEEL_PLATE};
+        ItemStack[] ROCKET_1 = {
+                new ItemStack(Material.AIR),
+                ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_GLASS,
+                ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_STEEL_PLATE,
+                ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_STEEL_PLATE};
         this.registerRecipe(600, ROCKET_1, new ItemStack[]{ClayTechItems.ROCKET});
     }
 

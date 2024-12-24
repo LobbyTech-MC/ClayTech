@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+    private static final ItemStack HANDLED_PROGRESS_BAR = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " ");
+    private static final ItemStack HANDLING_PROGRESS_BAR = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " ");
     public final static int[] inputslots = new int[]{22};
     public final static int[] outputslots = new int[]{};
     private static final int[] BORDER_A = {0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27,
@@ -197,7 +199,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                 }
             } else {
                 // 处理结束
-                inv.replaceExistingItem(4, ItemStackUtil.addLore(new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE), " "));
+                inv.replaceExistingItem(4, HANDLED_PROGRESS_BAR.clone());
 
                 ItemStack spacesuit = item.get(b);
                 RocketUtil.setOxygen(spacesuit, Math.min(RocketUtil.getOxygen(spacesuit) + 5, RocketUtil.getMaxOxygen(spacesuit)));
@@ -249,7 +251,7 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
                     item.put(b, spacesuit.clone());
                     inv.consumeItem(22, 1);
                     ClayTechData.RunningInjectorsOxygen.put(inv.toInventory(), b);
-                    inv.replaceExistingItem(22, new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " "));
+                    inv.replaceExistingItem(22, HANDLING_PROGRESS_BAR.clone());
                     processing.put(b, oxygeninjectrecipe);
                     progress.put(b, oxygeninjectrecipe.getTicks());
                 }

@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
+    private static final ItemStack COBBLESTONE = new ItemStack(Material.COBBLESTONE);
     public final static int[] inputSlots = new int[]{};
     public final static int[] outputSlots = new int[]{22};
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41,
@@ -94,7 +95,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
 
     @Override
     public int[] getOutputSlots() {
-        return new int[]{22};
+        return outputSlots;
     }
 
     public void constructMenu(@NotNull BlockMenuPreset preset) {
@@ -126,7 +127,7 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
 
     @Override
     public int[] getInputSlots() {
-        return new int[]{};
+        return inputSlots;
     }
 
     @Override
@@ -170,28 +171,8 @@ public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock
 
     protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
-        CraftingOperation currentOperation = processor.getOperation(b);
-
-        if (currentOperation != null) {
-            if (takeCharge(b.getLocation())) {
-
-                if (!currentOperation.isFinished()) {
-                    processor.updateProgressBar(inv, 13, currentOperation);
-                    currentOperation.addProgress(1);
-                } else {
-                    inv.replaceExistingItem(13, new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " "));
-
-                    for (ItemStack output : currentOperation.getResults()) {
-                        inv.pushItem(output.clone(), getOutputSlots());
-                    }
-
-                    processor.endOperation(b);
-                }
-            }
-        } else {
-            MachineRecipe r = new MachineRecipe(1, new ItemStack[]{},
-                    new ItemStack[]{new ItemStack(Material.COBBLESTONE)});
-            processor.startOperation(b, new CraftingOperation(r));
+        if (takeCharge(b.getLocation())) {
+            inv.pushItem(COBBLESTONE.clone(), getOutputSlots());
         }
     }
 

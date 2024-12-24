@@ -26,8 +26,6 @@ public class ClayTechItems {
     public static final SlimefunItemStack CLAYCOFFEE_HEAD = getSlimefunItemStack(Material.PLAYER_HEAD, Lang.readItemText("CLAYCOFFEE_HEAD"), Lang.readItemLore("CLAYCOFFEE_HEAD"), "CLAYCOFFEE_HEAD");
     public static final SlimefunItemStack STALIN_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/96fb8390f61a2cc51c08201834369829d9ba301effc01b6a7cb10d830c6c5043"), Lang.readItemText("STALIN_HEAD"), Lang.readItemLore("STALIN_HEAD"), "STALIN_HEAD");
     public static final SlimefunItemStack MARX_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/69aee2502a4a7db127d891b2449ed5b7e0563bd0f5f443e032cfd3919ffed6ff"), Lang.readItemText("MARX_HEAD"), Lang.readItemLore("MARX_HEAD"), "MARX_HEAD");
-    public static final SlimefunItemStack CLOCK_C = getSlimefunItemStack(Material.CLOCK, Lang.readItemText("CLOCK_C"), Lang.readItemLore("CLOCK_C"), "CLOCK_C");
-    public static final SlimefunItemStack LANTERN_C = getSlimefunItemStack(Material.LANTERN, Lang.readItemText("LANTERN_C"), Lang.readItemLore("LANTERN_C"), "LANTERN_C");
     public static final SlimefunItemStack[] NORECIPE = {null, null, null, null, null, null, null, null, null};
     // 注册
     public static final SlimefunItemStack MAGIC_CLAY = getSlimefunItemStack(Material.CLAY_BALL, Lang.readItemText("MAGIC_CLAY"), Lang.readItemLore("MAGIC_CLAY"), "MAGIC_CLAY");
@@ -178,9 +176,14 @@ public class ClayTechItems {
             getSlimefunItemStack(SkullUtil.getByHash("3ce2dad9baf7eaba7e80d4d0f9fac0aab01a76b12fb71c3d2af2a16fdd4c7383"),
                     Lang.readItemText("MIXED_ROCKET_FUEL"), Lang.readItemLore("MIXED_ROCKET_FUEL"), "MIXED_ROCKET_FUEL");
 
+    public static final ItemStack CLOCK_C = getSlimefunItemStack(SkullUtil.getByURL(
+                    "http://textures.minecraft.net/texture/ba10da526e5111cfb6e3ebd47693e162dd52d41a2182028daa7c2b19aa3143"),
+            Lang.readItemText("BLACK_CLOCK"), Lang.readItemLore("BLACK_CLOCK"), "BLACK_CLOCK");
+    public static final ItemStack LANTERN_C = getSlimefunItemStack(SkullUtil.getByURL(
+                    "http://textures.minecraft.net/texture/7cc217a9b9e3ce3cd0484c7e8ce49d1cf741281bdda5a4d6cb821f378752718"),
+            Lang.readItemText("LANTERN"), Lang.readItemLore("LANTERN"), "LANTERN");
     public static final ItemStack CLAY_COFFEE = getSlimefunItemStack(SkullUtil.getByURL(
-                    "https://textures.minecraft.net/texture/411511bdd55bcb82803c8039f1c155fd43062636e23d4d46c4d761c04d22c2"),
-            Lang.readItemText("CLAY_COFFEE"), Lang.readItemLore("CLAY_COFFEE"), "CLAY_COFFEE");
+            "http://textures.minecraft.net/texture/411511bdd55bcb82803c8039f1c155fd43062636e23d4d46c4d761c04d22c2"), Lang.readItemText("CLAY_COFFEE"), Lang.readItemLore("CLAY_COFFEE"), "CLAY_COFFEE");
     public static final ItemStack DRINK_BOTTLE = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/9179ce4849723434e84747ec85fbbfb1121456c8aeb2e9171fb8328921d45"),
             Lang.readItemText("DRINK_BOTTLE"), Lang.readItemLore("DRINK_BOTTLE"), "DRINK_BOTTLE");

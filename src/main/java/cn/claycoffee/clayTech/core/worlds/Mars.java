@@ -95,21 +95,8 @@ public class Mars extends ChunkGenerator {
         return chunkData;
     }
 
-//	@Override
-//	public List<BlockPopulator> getDefaultPopulators(World world) {
-//  	TODO 点缀
-//	}
-
-    // Use moon's as a temp solution lol
-    @Override
-    public @NotNull List<BlockPopulator> getDefaultPopulators(World world) {
-        List<BlockPopulator> ret = new ArrayList<>();
-        ret.add(new MoonCoalPopulator());
-        ret.add(new MoonDiamondPopulator());
-        // Check enabled ores then add its populator to the list
-        ret.add(new MoonKreepPopulator());
-        ret.add(new MoonCopperOrePopulator());
-        ret.add(new MoonClayFusionOrePopulator());
-        return ret;
-    }
+    // todo 世界装饰器
+    //	@Override
+    //	public List<BlockPopulator> getDefaultPopulators(World world) {
+    //	}
 }

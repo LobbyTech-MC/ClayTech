@@ -653,6 +653,7 @@ MachineRecipes:
   CLEANING: "&a&o通过清洗获得"
 Machines:
   SPLIT_LINE: " "
+  CLAY_EXPERIMENTTABLE_NORMAL: "&b实验台(普通)"
   CLAY_FUSION_MACHINE: "&b粘土融合器"
   CLAY_ELEMENT_EXTRACTER: "&b元素提取机"
   CLAY_FOOD_CAULDRON: "&b电锅"

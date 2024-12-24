@@ -64,19 +64,7 @@ public class Rockets {
                                         Block b = e.getClickedBlock();
                                         SlimefunItem item = StorageCacheUtils.getSfItem(b.getLocation());
                                         if (item != null) {
-                                            if (item.getId().equals("ROCKET_LAUNCHER")) {
-                                                if (e.hasItem()) {
-                                                    SlimefunItem item2 = SlimefunItem.getByItem(e.getItem());
-                                                    if (item2 != null && !item2.getResearch().canUnlock(e.getPlayer())) {
-                                                        return;
-                                                    }
-                                                }
-
-                                                SlimefunItem item3 = ClayTechItems.ROCKET_LAUNCHER.getItem();
-                                                if (item3 != null && !item3.getResearch().canUnlock(e.getPlayer())) {
-                                                    return;
-                                                }
-
+                                            if (item.getId().equals(ClayTechItems.ROCKET_LAUNCHER.getItemId())) {
                                                 Map<String, String> jbj = StorageCacheUtils.getBlock(b.getLocation()).getAllData();
                                                 String ownerName = jbj.get("owner");
                                                 if (ownerName.equalsIgnoreCase(e.getPlayer().getName())) {
