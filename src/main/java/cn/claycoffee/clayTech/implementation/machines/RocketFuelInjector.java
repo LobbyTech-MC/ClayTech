@@ -34,8 +34,10 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -158,6 +160,19 @@ public class RocketFuelInjector extends ANewContainer {
             @Override
             public boolean isSynchronized() {
                 return false;
+            }
+        }, new BlockBreakHandler(false, false) {
+            @Override
+            public void onPlayerBreak(BlockBreakEvent blockBreakEvent, ItemStack itemStack, List<ItemStack> list) {
+                Block block = blockBreakEvent.getBlock();
+                ItemStack rocket = item.get(block);
+                if (rocket != null) {
+                    World world = block.getWorld();
+                    world.dropItemNaturally(block.getLocation(), rocket);
+                    item.remove(block);
+                    itemFuel.remove(block);
+                    ClayTechData.RunningInjectors.remove(StorageCacheUtils.getMenu(block.getLocation()).toInventory());
+                }
             }
         });
     }

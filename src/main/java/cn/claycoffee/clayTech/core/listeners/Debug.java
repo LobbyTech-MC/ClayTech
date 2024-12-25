@@ -39,5 +39,16 @@ public class Debug implements Listener {
                 }
             }.runTask(ClayTech.getInstance());
         }
+
+        if (e.getMessage().equalsIgnoreCase("gobelt")) {
+            new BukkitRunnable() {
+
+                @Override
+                public void run() {
+                    ClayTechManager.allowSpaceTeleportOnce(e.getPlayer());
+                    e.getPlayer().teleport(PlanetUtil.findSafeLocation(Bukkit.getWorld("CAsteroidBelt")));
+                }
+            }.runTask(ClayTech.getInstance());
+        }
     }
 }

@@ -88,7 +88,7 @@ public class RocketLauncherListener implements Listener {
                                         }
                                         boolean inRocket = false;
                                         inRocket = ClayTechData.InRocketPlayers.contains(p.getUniqueId());
-                                        if (inRocket) {
+                                        if (!inRocket) {
                                             ClayTechData.InRocketPlayers.add(p.getUniqueId());
                                             p.sendMessage(Lang.readGeneralText("RocketOK"));
                                             new BukkitRunnable() {

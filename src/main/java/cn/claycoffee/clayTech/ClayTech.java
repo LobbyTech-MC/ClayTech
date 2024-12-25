@@ -8,6 +8,7 @@ import cn.claycoffee.clayTech.core.services.LocalizationService;
 import cn.claycoffee.clayTech.core.worlds.Earth;
 import cn.claycoffee.clayTech.core.worlds.Mars;
 import cn.claycoffee.clayTech.core.worlds.Moon;
+import cn.claycoffee.clayTech.core.worlds.AsteroidBelt;
 import cn.claycoffee.clayTech.implementation.items.Armors;
 import cn.claycoffee.clayTech.implementation.items.ClayBasic;
 import cn.claycoffee.clayTech.implementation.items.ClayFuelResource;
@@ -369,7 +370,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public String getBugTrackerURL() {
-        return "https://github.com/ClayCoffee/ClayTech/issues";
+        return "https://github.com/balugaq/ClayTech/issues";
     }
 
     private void registerPlanets() {
@@ -379,6 +380,8 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         new Moon();
         // Mars 火星
         new Mars();
+        // Asteroid Belt 小行星带
+        new AsteroidBelt();
     }
 
     private void registerResources() {

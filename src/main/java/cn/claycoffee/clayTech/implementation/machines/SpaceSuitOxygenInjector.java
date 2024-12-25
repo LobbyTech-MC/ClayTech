@@ -14,6 +14,7 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
+import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
@@ -26,8 +27,10 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -105,10 +108,6 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
         return 1;
     }
 
-    public @NotNull String getMachineIdentifier() {
-        return "CLAY_SPACESUIT_OXYGEN_INJECTOR";
-    }
-
     public void SetupMenu(@NotNull BlockMenuPreset Preset) {
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -170,6 +169,20 @@ public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBl
             @Override
             public boolean isSynchronized() {
                 return false;
+            }
+        }, new BlockBreakHandler(false, false) {
+            @Override
+            public void onPlayerBreak(BlockBreakEvent blockBreakEvent, ItemStack itemStack, List<ItemStack> list) {
+                Block block = blockBreakEvent.getBlock();
+                if (isProcessing(block)) {
+                    MachineRecipe recipe = getProcessing(block);
+                    ItemStack input = recipe.getInput()[0];
+                    World world = block.getWorld();
+                    world.dropItemNaturally(block.getLocation(), input);
+                    processing.remove(block);
+                    progress.remove(block);
+                    item.remove(block);
+                }
             }
         });
     }

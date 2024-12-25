@@ -200,8 +200,11 @@ public class PlanetListener implements Listener {
                 }
             }
 
-            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, (int) (1 / p.getGravity())));
-            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, (int) (1 / p.getGravity())));
+            int gravity = (int) (1 / p.getGravity());
+            if (gravity > 1) {
+                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, gravity));
+                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, gravity));
+            }
         }
     }
 
@@ -350,8 +353,11 @@ public class PlanetListener implements Listener {
                 }
             }
 
-            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, (int) (1 / p.getGravity())));
-            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, (int) (1 / p.getGravity())));
+            int gravity = (int) (1 / p.getGravity());
+            if (gravity > 1) {
+                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, gravity));
+                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, gravity));
+            }
         }
     }
 

@@ -687,5 +687,6 @@ Planets:
   Earth: "&a地球(主世界)"
   Moon: "&e月球"
   Mars: "&6火星"
+  AsteroidBelt: "&6小行星带"
 Resources:
   CLAY_FUEL: "粘土燃料"

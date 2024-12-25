@@ -35,6 +35,9 @@ public class PlanetUtil {
     }
 
     public static @Nullable Location findSafeLocation(@NotNull World w) {
+        if (w == null) {
+            return null;
+        }
         boolean pass = false;
         Location ret = null;
         int i = 0;
