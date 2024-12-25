@@ -25,7 +25,7 @@ public class AsteroidBelt extends ChunkGenerator {
 	public AsteroidBelt() {
 		new Planet("CAsteroidBelt",
 				new CustomItemStack(Material.COBBLESTONE, Lang.readPlanetsText("AsteroidBelt")), this,
-				World.Environment.THE_END, false, 0.16, 382500000, 1, true, 1).register();
+				World.Environment.THE_END, false, 0.16, 382500000, 1, true, 175).register();
 	}
 
 	@Override

@@ -405,7 +405,7 @@ Items:
   ROCKET: "<rocket> (一阶)"
   ROCKET_LORE:
     - "&3一阶的火箭"
-    - "<fuel> &60&9/&a125"
+    - "<fuel> &60&9/&a400"
     - "&c&l不要堆叠"
     - "<cantplace>"
   MOTOR_CORE: "&e马达核心"
@@ -437,7 +437,7 @@ Items:
   ROCKET_FUEL_TANK: "&9一阶火箭燃料罐"
   ROCKET_FUEL_TANK_LORE:
     - "&3可以用来装燃料!"
-    - "&b可储存&6125&b点燃料"
+    - "&b可储存&6400&b点燃料"
     - "<cantplace>"
   ROCKET_GLASS: "&9一阶火箭玻璃"
   ROCKET_GLASS_LORE:

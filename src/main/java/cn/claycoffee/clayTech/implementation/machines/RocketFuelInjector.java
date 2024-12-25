@@ -63,6 +63,7 @@ public class RocketFuelInjector extends ANewContainer {
             Lang.readMachinesText("SPLIT_LINE"));
     private static final Map<Block, ItemStack> item = new HashMap<>();
     private static final Map<Block, ItemStack> itemFuel = new HashMap<>();
+    private static final Map<Block, Integer> time = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
     public RocketFuelInjector(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType,
@@ -171,6 +172,7 @@ public class RocketFuelInjector extends ANewContainer {
                     world.dropItemNaturally(block.getLocation(), rocket);
                     item.remove(block);
                     itemFuel.remove(block);
+                    time.remove(block);
                     ClayTechData.RunningInjectors.remove(StorageCacheUtils.getMenu(block.getLocation()).toInventory());
                 }
             }
@@ -179,24 +181,27 @@ public class RocketFuelInjector extends ANewContainer {
 
     protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
-        // 机器正在处理
-        CraftingOperation operation = getMachineProcessor().getOperation(b);
+        if (inv == null) {
+            return;
+        }
+        // 机器正在处理;
+        Integer operation = time.get(b);
         if (operation != null) {
             // 剩余时间
-            int timeleft = operation.getRemainingTicks();
+            int timeleft = operation;
 
             if (timeleft > 0) {
                 // 还在处理
-                ChestMenuUtils.updateProgressbar(inv, 22, timeleft, operation.getTotalTicks(), getProgressBar());
+                ChestMenuUtils.updateProgressbar(inv, 22, timeleft, 8, getProgressBar());
 
                 if (isChargeable()) {
                     if (getCharge(b.getLocation()) < getEnergyConsumption()) {
                         return;
                     }
                     removeCharge(b.getLocation(), getEnergyConsumption());
-                    operation.addProgress(1);
+                    time.put(b, timeleft - 1);
                 } else {
-                    operation.addProgress(1);
+                    time.put(b, timeleft - 1);
                 }
             } else {
                 // 处理结束
@@ -216,7 +221,7 @@ public class RocketFuelInjector extends ANewContainer {
                 ClayTechData.RunningInjectors.remove(inv.toInventory());
                 item.remove(b);
                 itemFuel.remove(b);
-                getMachineProcessor().endOperation(b);
+                time.remove(b);
             }
         } else {
             // 没有在处理
@@ -231,20 +236,19 @@ public class RocketFuelInjector extends ANewContainer {
                             return;
                         removeCharge(b.getLocation(), getEnergyConsumption());
                     }
-                    if (RocketUtil.getFuel(rocket) == RocketUtil.getMaxFuel(rocket))
+                    if (RocketUtil.getFuel(rocket) == RocketUtil.getMaxFuel(rocket)) {
                         return;
+                    }
                     ItemStack f = fuel.clone();
                     f.setAmount(1);
                     itemFuel.put(b, f);
 
                     inv.consumeItem(24, 1);
-
-                    MachineRecipe fuelinjectrecipe = new MachineRecipe(8, new ItemStack[]{rocket, fuel},
-                            new ItemStack[]{});
                     item.put(b, rocket.clone());
                     inv.consumeItem(20, 1);
                     ClayTechData.RunningInjectors.put(inv.toInventory(), b);
                     inv.replaceExistingItem(20, HANDLING_PROGRESS_BAR.clone());
+                    time.put(b, 8);
                 }
             }
         }
