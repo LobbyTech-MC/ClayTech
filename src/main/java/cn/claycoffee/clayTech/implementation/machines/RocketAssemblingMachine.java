@@ -35,7 +35,7 @@ public class RocketAssemblingMachine extends ARocketTable {
     @Override
     public void registerDefaultRecipes() {
         ItemStack[] ROCKET_1 = {
-                new ItemStack(Material.AIR),
+                null,
                 ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_GLASS,
                 ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_STEEL_PLATE,
                 ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_STEEL_PLATE};

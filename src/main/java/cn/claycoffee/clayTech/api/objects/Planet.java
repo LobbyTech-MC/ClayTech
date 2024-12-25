@@ -29,13 +29,14 @@ public class Planet {
     private final Environment environment;
     private final boolean spawnMob;
     private boolean habitable;
-    private int gravity;
+    private double gravity;
     private int distance;
     private int harmlevel;
     private boolean cold;
+    private int fuel;
 
     public Planet(String planetName, ItemStack displayItem, ChunkGenerator planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
+                  boolean habitable, double gravity, int distance, int harmlevel, boolean cold, int fuel) {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld;
@@ -45,6 +46,7 @@ public class Planet {
         this.distance = distance;
         this.harmlevel = harmlevel;
         this.cold = cold;
+        this.fuel = fuel;
         if (!f.contains(this.planetName)) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
                 f.set(this.planetName, true);
@@ -77,15 +79,17 @@ public class Planet {
     }
 
     public Planet(String planetName, ItemStack displayItem, @NotNull World planetWorld, Environment environment,
-                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold) {
+                  boolean habitable, int gravity, int distance, int harmlevel, boolean cold, int fuel) {
         this.planetName = planetName;
         this.displayItem = displayItem;
         this.planetWorld = planetWorld.getGenerator();
         this.environment = environment;
         this.habitable = habitable;
         this.gravity = gravity;
+        this.distance = distance;
         this.harmlevel = harmlevel;
         this.cold = cold;
+        this.fuel = fuel;
         if (!f.contains(this.planetName)) {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
                 f.set(this.planetName, true);
@@ -217,7 +221,7 @@ public class Planet {
         return this.spawnMob;
     }
 
-    public int getGravity() {
+    public double getGravity() {
         return this.gravity;
     }
 
@@ -235,5 +239,8 @@ public class Planet {
 
     public ChunkGenerator getPlanetGenerator() {
         return this.planetWorld;
+    }
+    public int getFuel() {
+        return this.fuel;
     }
 }

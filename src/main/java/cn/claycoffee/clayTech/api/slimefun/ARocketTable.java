@@ -96,34 +96,60 @@ public abstract class ARocketTable extends AbstractMachine {
 
     @Override
     public @Nullable MachineRecipe findNextRecipe(@NotNull BlockMenu inv) {
-        MachineRecipe r = null;
-        Map<Integer, Integer> found = new HashMap<>();
-        int i;
         for (MachineRecipe recipe : recipes) {
-            i = 0;
-            for (ItemStack input : recipe.getInput()) {
-                if (SlimefunUtils.isItemSimilar(inv.getItemInSlot(inputSlots[i]), input, true)) {
-                    // 如果该位置的物品符合某合成配方的对应位置物品
-                    if (input != null) {
-                        found.put(inputSlots[i], input.getAmount());
+            boolean found = true;
+            for (int i = 0; i < getInputSlots().length; i++) {
+                ItemStack input = recipe.getInput()[i];
+                ItemStack existing = inv.getItemInSlot(getInputSlots()[i]);
+
+                if (input == null && existing != null && existing.getType() != Material.AIR) {
+                    found = false;
+                    break;
+                }
+
+                if (input != null && (existing == null || existing.getType() == Material.AIR)) {
+                    found = false;
+                    break;
+                }
+
+                if (!SlimefunUtils.isItemSimilar(existing, input, true)) {
+                    found = false;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < getOutputSlots().length; i++) {
+                ItemStack output = recipe.getOutput()[i];
+                ItemStack existing = inv.getItemInSlot(getOutputSlots()[i]);
+
+                if (existing == null) {
+                    continue;
+                }
+
+                if (output.getAmount() + existing.getAmount() > output.getMaxStackSize()) {
+                    found = false;
+                    break;
+                }
+
+                if (!SlimefunUtils.isItemSimilar(existing, output, true, false)) {
+                    found = false;
+                    break;
+                }
+            }
+
+            if (found) {
+                ItemStack[] input = recipe.getInput();
+                for (int i = 0; i < getInputSlots().length; i++) {
+                    if (input[i] != null) {
+                        inv.consumeItem(getInputSlots()[i], input[i].getAmount());
                     }
                 }
-                if (inv.getItemInSlot(inputSlots[i]) == input && input == null) {
-                    found.put(i, 0);
-                }
-                if (i < 9) {
-                    i++;
-                } else
-                    i = 0;
+
+                return recipe;
             }
-            if (found.size() == recipe.getInput().length) {
-                r = recipe;
-                break;
-            } else
-                found.clear();
         }
 
-        return r;
+        return null;
     }
 
     @Override

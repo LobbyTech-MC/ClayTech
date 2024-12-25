@@ -23,7 +23,7 @@ import java.util.Stack;
 
 public class AirLockListener implements Listener {
     private static final String PLATE_ID = ClayTechItems.CLAY_AIR_LOCK_PLATE.getItemId();
-    private static final int MAX_SEARCH_DISTANCE = 8;
+    private static final int MAX_SEARCH_DISTANCE = 81;
     private static final Material BLOCK_TYPE = ClayTechItems.CLAY_AIR_LOCK_BLOCK.getType();
     private static final BlockFace[] FACES = {BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST};
     @EventHandler
@@ -56,38 +56,53 @@ public class AirLockListener implements Listener {
         AvailableFaces.remove(doorFace);
         AvailableFaces.remove(doorFace.getOppositeFace());
 
-        Set<Location> searchedLocations = StaffUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, this::isAirLock);
-
-        Set<Location> locationsToOpen = new HashSet<>();
-        Set<Location> locationsToClose = new HashSet<>();
-        for (Location location : searchedLocations) {
-            Block block = location.getBlock();
-            if (block.getType() == BLOCK_TYPE) {
-                locationsToOpen.add(location);
-            } else {
-                locationsToClose.add(location);
-            }
-        }
-
         Bukkit.getServer().getScheduler().runTaskLater(ClayTech.getInstance(), () -> {
-            for (Location location : locationsToOpen) {
+            for (Location location : getOpenLocations(centerLocation, doorFace)) {
                 location.getBlock().setType(Material.AIR);
             }
         }, 1);
 
         Bukkit.getServer().getScheduler().runTaskLater(ClayTech.getInstance(), () -> {
-            for (Location location : locationsToClose) {
+            for (Location location : getCloseLocations(centerLocation, doorFace)) {
                 location.getBlock().setType(BLOCK_TYPE);
             }
         }, 25);
     }
 
-    public boolean isAirLock(Location location) {
+    public static boolean isAirLock(Location location) {
         SlimefunItem item = StorageCacheUtils.getSfItem(location);
         if (item == null) {
             return false;
         }
 
         return item.getId().equals(ClayTechItems.CLAY_AIR_LOCK_BLOCK.getItemId());
+    }
+
+    public static Set<Location> getOpenLocations(Location centerLocation, BlockFace doorFace) {
+        Set<Location> searchedLocations = StaffUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
+
+        Set<Location> locationsToOpen = new HashSet<>();
+        for (Location location : searchedLocations) {
+            Block block = location.getBlock();
+            if (block.getType() == BLOCK_TYPE) {
+                locationsToOpen.add(location);
+            }
+        }
+
+        return locationsToOpen;
+    }
+
+    public Set<Location> getCloseLocations(Location centerLocation, BlockFace doorFace) {
+        Set<Location> searchedLocations = StaffUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
+
+        Set<Location> locationsToClose = new HashSet<>();
+        for (Location location : searchedLocations) {
+            Block block = location.getBlock();
+            if (block.getType() != BLOCK_TYPE) {
+                locationsToClose.add(location);
+            }
+        }
+
+        return locationsToClose;
     }
 }

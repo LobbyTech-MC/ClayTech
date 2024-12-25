@@ -27,7 +27,7 @@ public class Mars extends ChunkGenerator {
 
     public Mars() {
         new Planet("CMars", new CustomItemStack(Material.YELLOW_GLAZED_TERRACOTTA, Lang.readPlanetsText("Mars")), this,
-                Environment.NORMAL, true, 1, 100, 0, false).register();
+                Environment.NORMAL, true, 0.38D, 227000000, 0, false, 125).register();
     }
 
     @SuppressWarnings("deprecation")

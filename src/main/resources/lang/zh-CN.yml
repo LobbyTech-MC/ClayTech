@@ -669,7 +669,7 @@ Machines:
   CLAY_WITHER_KILLER: "&e沙雕机"
   CLAY_AIR_LOCKER: "&e气闸门"
   ROCKET_LAUNCHER: "&9火箭发射器"
-  DISTANCE_TO_PLANET: "&9距离当前星球 &6%ly% &9光年"
+  DISTANCE_TO_PLANET: "&9距离当前星球 &6%km% &9公里"
   FUEL_TO_PLANET: "&9到达需要燃料 &6%fuel% &9点"
   PLANET_HABITABLE: "&9适合居住: &6%habitable%"
   PLANET_GRAVITY: "&9重力: &6%gravity%&9G"

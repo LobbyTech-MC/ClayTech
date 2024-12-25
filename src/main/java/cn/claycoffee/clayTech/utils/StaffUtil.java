@@ -91,13 +91,17 @@ public class StaffUtil {
 
             Location queuedLocation = currentBlock.getLocation();
             if (!locations.contains(queuedLocation)) {
-                if (filter != null && !filter.apply(queuedLocation)) {
+                if (filter != null && filter.apply(queuedLocation)) {
                     locations.add(queuedLocation);
                 }
 
                 for (BlockFace face : faces) {
                     Block block = currentBlock.getRelative(face);
                     if (filter != null) {
+                        if (block.getType() != type) {
+                            continue;
+                        }
+
                         if (!filter.apply(block.getLocation())) {
                             continue;
                         }

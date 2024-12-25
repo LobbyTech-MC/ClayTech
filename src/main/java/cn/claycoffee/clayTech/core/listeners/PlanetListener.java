@@ -199,11 +199,9 @@ public class PlanetListener implements Listener {
                     }.runTaskTimer(ClayTech.getInstance(), 20, 20);
                 }
             }
-            if (p.getGravity() > 1) {
-                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 99999, p.getGravity() - 1));
-                e.getPlayer()
-                        .addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 99999, p.getGravity() - 1));
-            }
+
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, (int) (1 / p.getGravity())));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, (int) (1 / p.getGravity())));
         }
     }
 
@@ -351,10 +349,9 @@ public class PlanetListener implements Listener {
                     }.runTaskTimer(ClayTech.getInstance(), 20, 20);
                 }
             }
-            if (p.getGravity() > 1) {
-                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 99999, p.getGravity() - 1));
-                e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 99999, p.getGravity() - 1));
-            }
+
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 999999, (int) (1 / p.getGravity())));
+            e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 999999, (int) (1 / p.getGravity())));
         }
     }
 

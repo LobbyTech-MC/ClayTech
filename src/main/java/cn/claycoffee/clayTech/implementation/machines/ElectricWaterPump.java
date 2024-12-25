@@ -30,6 +30,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class ElectricWaterPump extends ANewContainer {
     }
 
     @Override
-    public EnergyNetComponentType getEnergyComponentType() {
+    public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
 
@@ -77,7 +78,7 @@ public class ElectricWaterPump extends ANewContainer {
         return outputslots;
     }
 
-    public String getInventoryTitle() {
+    public @NotNull String getInventoryTitle() {
         return Lang.readMachinesText("CLAY_ELECTRIC_WATER_PUMP");
     }
 
@@ -139,7 +140,7 @@ public class ElectricWaterPump extends ANewContainer {
         recipes.add(recipe);
     }
 
-    public void registerRecipe(int seconds, ItemStack[] input, ItemStack[] output) {
+    public void registerRecipe(int seconds, ItemStack @NotNull [] input, ItemStack[] output) {
         registerRecipe(new MachineRecipe(seconds, input, output));
     }
 

@@ -93,12 +93,7 @@ public class PlanetUtil {
     }
 
     public static int getFuel(@NotNull Planet from, @NotNull Planet to) {
-        int distance = getDistance(from, to);
-        if (distance == 0) {
-            return 25;
-        } else {
-            return 25 + distance;
-        }
+        return Math.abs(from.getFuel() - to.getFuel());
     }
 
     public static @NotNull String booleanToString(boolean b) {
@@ -157,7 +152,7 @@ public class PlanetUtil {
                 v++;
                 ItemStack di = each.getDisplayStack();
                 di = ItemStackUtil.setLoreList(di, new String[]{
-                        Lang.readMachinesText("DISTANCE_TO_PLANET").replaceAll("%ly%",
+                        Lang.readMachinesText("DISTANCE_TO_PLANET").replaceAll("%km%",
                                 "" + PlanetUtil.getDistance(current, each)),
                         Lang.readMachinesText("FUEL_TO_PLANET").replaceAll("%fuel%",
                                 "" + PlanetUtil.getFuel(current, each)),

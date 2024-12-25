@@ -41,24 +41,11 @@ public abstract class AbstractMachine extends AContainer {
     public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
-    public @NotNull int getProcessBarSlot() {
+    public int getProcessBarSlot() {
         return 22;
     }
 
-    public void registerRecipe(int seconds, ItemStack @NotNull [] input, ItemStack[] output) {
-        if (input.length > 9) {
-            if (output[0].hasItemMeta()) {
-                Bukkit.getLogger()
-                        .warning("There is an error when registering the recipe.Please contact the author.Error recipe:"
-                                + output[0].getItemMeta().getDisplayName());
-                return;
-            } else {
-                Bukkit.getLogger()
-                        .warning("There is an error when registering the recipe.Please contact the author.Error recipe:"
-                                + output[0].getType());
-                return;
-            }
-        }
+    public void registerRecipe(int seconds, ItemStack[] input, ItemStack[] output) {
         registerRecipe(new MachineRecipe(seconds, input, output));
     }
 

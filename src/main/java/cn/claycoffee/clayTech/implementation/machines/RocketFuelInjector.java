@@ -5,6 +5,7 @@ import cn.claycoffee.clayTech.ClayTechData;
 import cn.claycoffee.clayTech.ClayTechItems;
 import cn.claycoffee.clayTech.api.ClayTechManager;
 import cn.claycoffee.clayTech.api.events.RocketInjectFuelEvent;
+import cn.claycoffee.clayTech.api.slimefun.ANewContainer;
 import cn.claycoffee.clayTech.utils.ItemStackUtil;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.RocketUtil;
@@ -46,7 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
+public class RocketFuelInjector extends ANewContainer {
     private static final ItemStack HANDLED_PROGRESS_BAR = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, "§9§l←", " ");
     private static final ItemStack HANDLING_PROGRESS_BAR = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " ");
     public final static int[] inputSlots = new int[]{20, 24};
@@ -60,10 +61,7 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
             Lang.readMachinesText("SPLIT_LINE"));
     private static final Map<Block, ItemStack> item = new HashMap<>();
     private static final Map<Block, ItemStack> itemFuel = new HashMap<>();
-    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
-    private final MachineProcessor<CraftingOperation> processor = new MachineProcessor<>(this);
 
     public RocketFuelInjector(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType,
                               ItemStack @NotNull [] recipe) {
@@ -72,24 +70,6 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         createPreset(this, getInventoryTitle(), this::constructMenu);
 
         addItemHandler(onBlockBreak());
-    }
-
-    protected @NotNull BlockBreakHandler onBlockBreak() {
-        return new SimpleBlockBreakHandler() {
-
-            @Override
-            public void onBlockBreak(@NotNull Block b) {
-                BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
-
-                if (inv != null) {
-                    inv.dropItems(b.getLocation(), getInputSlots());
-                    inv.dropItems(b.getLocation(), getOutputSlots());
-                }
-
-                processor.endOperation(b);
-            }
-
-        };
     }
 
     @Override
@@ -122,14 +102,6 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
 
     public int getEnergyConsumption() {
         return 64;
-    }
-
-    public int getSpeed() {
-        return 1;
-    }
-
-    public @NotNull String getMachineIdentifier() {
-        return "CLAY_ROCKET_FUEL_INJECTOR";
     }
 
     public void constructMenu(@NotNull BlockMenuPreset preset) {
@@ -165,13 +137,6 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
         preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
     }
 
-    public MachineRecipe getProcessing(Block b) {
-        return processing.get(b);
-    }
-
-    public boolean isProcessing(Block b) {
-        return getProcessing(b) != null;
-    }
 
     public void registerRecipe(@NotNull MachineRecipe recipe) {
         recipe.setTicks(recipe.getTicks() / getSpeed());
@@ -200,21 +165,24 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
     protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
-        if (isProcessing(b)) {
+        CraftingOperation operation = getMachineProcessor().getOperation(b);
+        if (operation != null) {
             // 剩余时间
-            int timeleft = progress.get(b);
+            int timeleft = operation.getRemainingTicks();
 
             if (timeleft > 0) {
                 // 还在处理
-                ChestMenuUtils.updateProgressbar(inv, 22, timeleft, processing.get(b).getTicks(), getProgressBar());
+                ChestMenuUtils.updateProgressbar(inv, 22, timeleft, operation.getTotalTicks(), getProgressBar());
 
                 if (isChargeable()) {
-                    if (getCharge(b.getLocation()) < getEnergyConsumption())
+                    if (getCharge(b.getLocation()) < getEnergyConsumption()) {
                         return;
+                    }
                     removeCharge(b.getLocation(), getEnergyConsumption());
-                    progress.put(b, timeleft - 1);
-                } else
-                    progress.put(b, timeleft - 1);
+                    operation.addProgress(1);
+                } else {
+                    operation.addProgress(1);
+                }
             } else {
                 // 处理结束
                 inv.replaceExistingItem(22, HANDLED_PROGRESS_BAR.clone());
@@ -231,10 +199,9 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                 }.runTask(ClayTech.getInstance());
                 inv.replaceExistingItem(20, rocket);
                 ClayTechData.RunningInjectors.remove(inv.toInventory());
-                progress.remove(b);
-                processing.remove(b);
                 item.remove(b);
                 itemFuel.remove(b);
+                getMachineProcessor().endOperation(b);
             }
         } else {
             // 没有在处理
@@ -263,15 +230,8 @@ public class RocketFuelInjector extends SlimefunItem implements InventoryBlock, 
                     inv.consumeItem(20, 1);
                     ClayTechData.RunningInjectors.put(inv.toInventory(), b);
                     inv.replaceExistingItem(20, HANDLING_PROGRESS_BAR.clone());
-                    processing.put(b, fuelinjectrecipe);
-                    progress.put(b, fuelinjectrecipe.getTicks());
                 }
             }
         }
-    }
-
-    @Override
-    public @NotNull MachineProcessor<CraftingOperation> getMachineProcessor() {
-        return processor;
     }
 }
