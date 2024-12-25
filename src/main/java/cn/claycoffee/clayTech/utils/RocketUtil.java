@@ -1,6 +1,5 @@
 package cn.claycoffee.clayTech.utils;
 
-import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.api.ClayTechManager;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +11,8 @@ public class RocketUtil {
         if (ClayTechManager.isRocket(im)) {
             for (String str : ItemStackUtil.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Fuel"))) {
-                    str = StrUtil.getRightStr(str, "§6");
-                    str = StrUtil.getLeftStr(str, "§9");
+                    str = StringUtil.getRightStr(str, "§6");
+                    str = StringUtil.getLeftStr(str, "§9");
                     return Integer.parseInt(str);
                 }
             }
@@ -27,7 +26,7 @@ public class RocketUtil {
         if (ClayTechManager.isRocket(im)) {
             for (String str : ItemStackUtil.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Fuel"))) {
-                    str = StrUtil.getRightStr(str, "§9/§a");
+                    str = StringUtil.getRightStr(str, "§9/§a");
                     return Integer.parseInt(str);
                 }
             }
@@ -56,8 +55,8 @@ public class RocketUtil {
         if (ClayTechManager.isSpaceSuit(im) || ClayTechManager.isOxygenDistributer(im)) {
             for (String str : ItemStackUtil.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Oxygen"))) {
-                    str = StrUtil.getRightStr(str, "§6");
-                    str = StrUtil.getLeftStr(str, "§9");
+                    str = StringUtil.getRightStr(str, "§6");
+                    str = StringUtil.getLeftStr(str, "§9");
                     return Integer.parseInt(str);
                 }
             }
@@ -86,7 +85,7 @@ public class RocketUtil {
         if (ClayTechManager.isSpaceSuit(im) || ClayTechManager.isOxygenDistributer(im)) {
             for (String str : ItemStackUtil.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("Oxygen"))) {
-                    str = StrUtil.getRightStr(str, "§9/§a");
+                    str = StringUtil.getRightStr(str, "§9/§a");
                     return Integer.parseInt(str);
                 }
             }
@@ -100,7 +99,7 @@ public class RocketUtil {
         if (ClayTechManager.isSpaceSuit(im)) {
             for (String str : ItemStackUtil.getLore(im)) {
                 if (str.startsWith(Lang.readGeneralText("ProtectLevel"))) {
-                    str = StrUtil.getRightStr(str, "§6");
+                    str = StringUtil.getRightStr(str, "§6");
                     return Integer.parseInt(str);
                 }
             }

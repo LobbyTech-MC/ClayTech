@@ -2,7 +2,7 @@ package cn.claycoffee.clayTech.utils;
 
 import org.jetbrains.annotations.Nullable;
 
-public class StrUtil {
+public class StringUtil {
     public static String getLeftStr(@Nullable String str, @Nullable String separator) {
         if (str == null || separator == null) {
             return null;

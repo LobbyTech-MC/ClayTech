@@ -3,16 +3,12 @@ package cn.claycoffee.clayTech.utils;
 import cn.claycoffee.clayTech.ClayTechItems;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import org.bukkit.Axis;
-import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -25,7 +21,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class StaffUtil {
+public class AirLockUtil {
     public static final Set<BlockFace> validFaces = new HashSet<>();
 
     static {

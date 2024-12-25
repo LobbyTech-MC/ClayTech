@@ -2,7 +2,7 @@ package cn.claycoffee.clayTech.core.listeners;
 
 import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.ClayTechItems;
-import cn.claycoffee.clayTech.utils.StaffUtil;
+import cn.claycoffee.clayTech.utils.AirLockUtil;
 import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Bukkit;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 public class AirLockListener implements Listener {
     private static final String PLATE_ID = ClayTechItems.CLAY_AIR_LOCK_PLATE.getItemId();
@@ -79,7 +78,7 @@ public class AirLockListener implements Listener {
     }
 
     public static Set<Location> getOpenLocations(Location centerLocation, BlockFace doorFace) {
-        Set<Location> searchedLocations = StaffUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
+        Set<Location> searchedLocations = AirLockUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
 
         Set<Location> locationsToOpen = new HashSet<>();
         for (Location location : searchedLocations) {
@@ -93,7 +92,7 @@ public class AirLockListener implements Listener {
     }
 
     public Set<Location> getCloseLocations(Location centerLocation, BlockFace doorFace) {
-        Set<Location> searchedLocations = StaffUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
+        Set<Location> searchedLocations = AirLockUtil.getLocations(centerLocation.getBlock(), doorFace, MAX_SEARCH_DISTANCE, AirLockListener::isAirLock);
 
         Set<Location> locationsToClose = new HashSet<>();
         for (Location location : searchedLocations) {
