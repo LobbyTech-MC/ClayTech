@@ -6,7 +6,6 @@ import cn.claycoffee.clayTech.utils.Lang;
 import com.google.common.collect.ImmutableList;
 
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -14,6 +13,7 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
@@ -43,6 +43,7 @@ public class AsteroidBelt extends ChunkGenerator {
 	@Override
 	public @NotNull ChunkData generateChunkData(@NotNull World world, @NotNull Random random, int x, int z, @NotNull BiomeGrid biome) {
 
-        return Bukkit.createChunkData(world);
+		ChunkData chunkData = createChunkData(world);
+		return chunkData;
 	}
 }

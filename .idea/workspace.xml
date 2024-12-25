@@ -8,11 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a936f7a-9cb7-4377-a50a-145773459a69" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/listeners/AirLockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/listeners/AirLockListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/RocketUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/RocketUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/StaffUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/AirLockUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/StrUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/StringUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/utils/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/ClayTech.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/ClayTech.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/api/objects/Planet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/api/objects/Planet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/listeners/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/listeners/Debug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/managers/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/managers/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/worlds/AsteroidBelt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/claycoffee/clayTech/core/worlds/AsteroidBelt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/planets.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/planets.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +54,15 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/github_clone/TsingshanTechnology",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/github_clone/TsingshanTechnology&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\github_clone\ClayTech\src\main\resources\lang" />

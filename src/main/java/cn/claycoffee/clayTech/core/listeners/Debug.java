@@ -10,9 +10,14 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
 public class Debug implements Listener {
     @EventHandler
     public void onWantTeleport(@NotNull AsyncPlayerChatEvent e) {
+        if (!ClayTech.getConfigManager().isDebug()) {
+            return;
+        }
+
         if (!e.getPlayer().isOp()) {
             return;
         }

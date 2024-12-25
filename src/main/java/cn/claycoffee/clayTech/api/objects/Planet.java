@@ -4,6 +4,7 @@ import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.core.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
@@ -51,7 +52,7 @@ public class Planet {
             if (this.planetName.equalsIgnoreCase(ClayTech.getOverworld())) {
                 f.set(this.planetName, true);
             } else {
-                f.set(this.planetName, false);
+                f.set(this.planetName, true);
             }
             try {
                 f.save(planet.getFile());
@@ -126,12 +127,12 @@ public class Planet {
                 if (Bukkit.getWorld(this.planetName) != null) {
                     Bukkit.unloadWorld(this.planetName, true);
                 }
-                ClayTech.getInstance().getLogger().info("Planet overworld unloaded because it is not enabled in the config.");
+                ClayTech.getInstance().getLogger().info("Planet overworld unloaded because it is not enabled in the config. ErrorCode: 1");
                 return;
             }
             for (Planet each : ClayTech.getPlanets()) {
                 if (each.planetName.equalsIgnoreCase(this.planetName)) {
-                    Bukkit.getLogger().info("Registering Error: Planet" + this.planetName + "already exists!");
+                    Bukkit.getLogger().info("Registering Error: Planet" + this.planetName + "already exists! ErrorCode: 2");
                     return;
                 }
             }
@@ -144,12 +145,12 @@ public class Planet {
             if (Bukkit.getWorld(this.planetName) != null) {
                 Bukkit.unloadWorld(this.planetName, true);
             }
-            ClayTech.getInstance().getLogger().info("Planet \"" + this.planetName + "\" unloaded because it is not enabled in the config.");
+            ClayTech.getInstance().getLogger().info("Planet \"" + this.planetName + "\" unloaded because it is not enabled in the config. ErrorCode: 3");
             return;
         }
         for (Planet each : ClayTech.getPlanets()) {
             if (each.planetName.equalsIgnoreCase(this.planetName)) {
-                Bukkit.getLogger().info("Registering Error: Planet" + this.planetName + "already exists!");
+                Bukkit.getLogger().info("Registering Error: Planet" + this.planetName + "already exists! ErrorCode: 4");
                 return;
             }
         }
@@ -163,10 +164,28 @@ public class Planet {
             newWorld = newWorld.type(WorldType.NORMAL);
             newWorld = newWorld.generateStructures(false);
             newWorld = newWorld.generator(getPlanetGenerator());
-            World w = newWorld.createWorld();
+            World world = newWorld.createWorld();
+            if (world == null) {
+                ClayTech.getInstance().getLogger().info("Failed to create planet \"" + this.planetName + "\"! ErrorCode: 5");
+                return;
+            }
+
+            if (world.getEnvironment() == World.Environment.THE_END) {
+                // Prevents ender dragon spawn using portal
+                world.getBlockAt(0, 0, 0).setType(Material.END_PORTAL);
+                Bukkit.getScheduler().runTaskTimer(ClayTech.getInstance(), () -> {
+                    if (world.getPlayerCount() > 0) {
+                        if (world.getBlockAt(0, 0, 0).getType() == Material.END_PORTAL) {
+                            world.getBlockAt(0, 0, 0).setType(Material.AIR);
+                        };
+                    } else {
+                        world.getBlockAt(0, 0, 0).setType(Material.END_PORTAL);
+                    }
+                }, 1, 20);
+            }
             if (this.cold) {
                 // 如果冷就不会下雨
-                w.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
+                world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
             }
             ClayTech.getInstance().getLogger().info("Planet \"" + this.planetName + "\" created with seed " + seed);
             return;
@@ -177,7 +196,7 @@ public class Planet {
             ClayTech.getInstance().getLogger().info("Planet \"" + this.planetName + "\" created!");
         } catch (Exception e) {
             e.printStackTrace();
-            ClayTech.getInstance().getLogger().info("Failed to create planet \"" + this.planetName + "\"!");
+            ClayTech.getInstance().getLogger().info("Failed to create planet \"" + this.planetName + "\"! ErrorCode: 6");
         }
     }
 

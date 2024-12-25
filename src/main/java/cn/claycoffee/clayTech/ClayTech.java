@@ -268,11 +268,11 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         getLogger().info(Lang.readGeneralText("startTip"));
         getLogger().info(Lang.readGeneralText("registeringItems"));
         try {
-            getLogger().info("正在注册粘液物品");
+            getLogger().info(Lang.readGeneralText("registeringSlimefun"));
             registerSlimefun();
-            getLogger().info("正在注册星球");
+            getLogger().info(Lang.readGeneralText("registeringPlanets"));
             registerPlanets();
-            getLogger().info("正在注册资源");
+            getLogger().info(Lang.readGeneralText("registeringResources"));
             registerResources();
         } catch (Exception e) {
             getLogger().info(Lang.readGeneralText("registeringError"));
@@ -283,7 +283,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
             worldBorderEnabled = true;
         }
 
-        getLogger().info("正在注册监听器");
+        getLogger().info(Lang.readGeneralText("registeringListeners"));
         listenerManager = new ListenerManager(this);
         listenerManager.setup();
 

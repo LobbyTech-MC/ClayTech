@@ -77,6 +77,10 @@ General:
   No_1: "否"
   WorldBorder: "&e检测到 WorldBorder."
   check_update_deprecated: "&c该命令已弃用."
+  registeringSlimefun: "正在注册粘液物品"
+  registeringPlanets: "正在注册星球"
+  registeringResources: "正在注册自然资源"
+  registeringListeners: "正在注册监听器"
 Categories:
   Basic: "&b粘土科技 - 基础"
   Weapons: "&b粘土科技 - 武器"

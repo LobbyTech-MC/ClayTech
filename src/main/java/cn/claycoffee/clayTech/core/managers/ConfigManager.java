@@ -65,4 +65,8 @@ public class ConfigManager {
             existingConfig.set(key, newValue);
         }
     }
+
+    public boolean isDebug() {
+        return existingConfig.getBoolean("debug");
+    }
 }
