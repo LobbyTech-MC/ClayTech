@@ -183,6 +183,41 @@ public class ClayTechMachineRecipes {
             ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_CONTROL_CORE,
             ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_ENGINE,
             ClayTechItems.ROCKET_STEEL_PLATE};
+    public final static ItemStack[] ROCKET_2_ENGINE_SHELL = {ClayTechItems.ROCKET_ENGINE_SHELL,
+            ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL,
+            ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL,
+            ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL};
+    public final static ItemStack[] ROCKET_2_ENGINE = {ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE,
+            ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE,
+            ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE,
+            ClayTechItems.ROCKET_ENGINE};
+    public final static ItemStack[] ROCKET_2_ANTENNA = {ClayTechItems.ROCKET_ANTENNA, ClayTechItems.ROCKET_ANTENNA,
+            ClayTechItems.ROCKET_ANTENNA, ClayTechItems.ROCKET_ANTENNA, ClayTechItems.ROCKET_ANTENNA,
+            ClayTechItems.ROCKET_ANTENNA, ClayTechItems.ROCKET_ANTENNA, ClayTechItems.ROCKET_ANTENNA,
+            ClayTechItems.ROCKET_ANTENNA};
+    public final static ItemStack[] ROCKET_2_CPU = {ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU,
+            ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU,
+            ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU};
+    public final static ItemStack[] ROCKET_2_CONTROL_CORE = {ClayTechItems.ROCKET_CONTROL_CORE,
+            ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE,
+            ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE,
+            ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE};
+    public final static ItemStack[] ROCKET_2_FUEL_TANK = {ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK,
+            ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK,
+            ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK,
+            ClayTechItems.ROCKET_FUEL_TANK};
+    public final static ItemStack[] ROCKET_2_GLASS = {ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_GLASS,
+            ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_GLASS,
+            ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_GLASS, ClayTechItems.ROCKET_GLASS,
+            ClayTechItems.ROCKET_GLASS};
+    public final static ItemStack[] ROCKET_2_STEEL_PLATE = {ClayTechItems.ROCKET_STEEL_PLATE,
+            ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE,
+            ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE,
+            ClayTechItems.ROCKET_STEEL_PLATE, ClayTechItems.ROCKET_STEEL_PLATE};
+    public final static ItemStack[] ROCKET_2 = {ClayTechItems.ROCKET_2_GLASS, ClayTechItems.ROCKET_2_FUEL_TANK,
+            ClayTechItems.ROCKET_2_GLASS, ClayTechItems.ROCKET_2_STEEL_PLATE, ClayTechItems.ROCKET_2_CONTROL_CORE,
+            ClayTechItems.ROCKET_2_STEEL_PLATE, ClayTechItems.ROCKET_2_STEEL_PLATE, ClayTechItems.ROCKET_2_ENGINE_SHELL,
+            ClayTechItems.ROCKET_2_STEEL_PLATE};
     public final static ItemStack[] OXYGEN_TANK = {SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT,
             SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, ClayTechItems.CLAY_STICK, SlimefunItems.TIN_INGOT,
             SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT, SlimefunItems.TIN_INGOT};

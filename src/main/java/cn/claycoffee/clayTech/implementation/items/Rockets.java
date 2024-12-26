@@ -111,5 +111,12 @@ public class Rockets {
                 .withRecipeType(ClayTechRecipeType.CLAY_ROCKET_ASSEMBLING_MACHINE)
                 .withRecipe(ClayTechMachineRecipes.ROCKET_1)
                 .build();
+
+        SlimefunUtil.newItem()
+                .withItemGroup(ClayTechItems.C_OTHER)
+                .withItem(ClayTechItems.ROCKET_2)
+                .withRecipeType(ClayTechRecipeType.CLAY_ROCKET_ASSEMBLING_MACHINE)
+                .withRecipe(ClayTechMachineRecipes.ROCKET_2)
+                .build();
     }
 }

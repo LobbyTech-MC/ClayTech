@@ -5,6 +5,7 @@ import cn.claycoffee.clayTech.ClayTechMachineRecipes;
 import cn.claycoffee.clayTech.ClayTechRecipeType;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.SlimefunUtil;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 public class RocketMakings {
     public RocketMakings() {
@@ -100,6 +101,68 @@ public class RocketMakings {
 
         SlimefunUtil.newResearch()
                 .withId(SlimefunUtil.getResearchId())
+                .withName(Lang.readResearchesText("CLAYTECH_ROCKETS_II"))
+                .withCost(120)
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_ENGINE_SHELL)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_ENGINE_SHELL)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_ENGINE)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_ENGINE)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_ANTENNA)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_ANTENNA)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_CPU)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_CPU)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_CONTROL_CORE)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_CONTROL_CORE)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_FUEL_TANK)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_FUEL_TANK)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_GLASS)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_GLASS)
+                                .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItem(ClayTechItems.ROCKET_2_STEEL_PLATE)
+                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_STEEL_PLATE)
+                                .build())
+                .build();
+
+        SlimefunUtil.newResearch()
+                .withId(SlimefunUtil.getResearchId())
                 .withName(Lang.readResearchesText("CLAYTECH_SPACESUIT_I"))
                 .withCost(55)
                 .addItem(
@@ -181,6 +244,13 @@ public class RocketMakings {
                                 .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
                                 .withRecipe(ClayTechMachineRecipes.OXYGEN_DISTRIBUTER)
                                 .build())
+                .build();
+
+        SlimefunUtil.newItem()
+                .withItemGroup(ClayTechItems.C_MATERIALS)
+                .withItem(ClayTechItems.ROCKET_2_BLUEPRINT)
+                .withRecipeType(RecipeType.NULL) // todo
+                .withRecipe(ClayTechItems.NORECIPE) // todo
                 .build();
     }
 }

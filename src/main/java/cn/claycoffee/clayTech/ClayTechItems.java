@@ -141,6 +141,18 @@ public class ClayTechItems {
             getSlimefunItemStack(Material.LIME_STAINED_GLASS_PANE, Lang.readItemText("ROCKET_GLASS"), Lang.readItemLore("ROCKET_GLASS"), "ROCKET_GLASS");
     public static final SlimefunItemStack ROCKET_STEEL_PLATE =
             getSlimefunItemStack(Material.PAPER, Lang.readItemText("ROCKET_STEEL_PLATE"), Lang.readItemLore("ROCKET_STEEL_PLATE"), "ROCKET_STEEL_PLATE");
+    public static final SlimefunItemStack ROCKET_2_ENGINE_SHELL =  getSlimefunItemStack(Material.IRON_INGOT,
+            Lang.readItemText("ROCKET_2_ENGINE_SHELL"), "ROCKET_2_ENGINE_SHELL");
+    public static final SlimefunItemStack ROCKET_2_ANTENNA =
+            getSlimefunItemStack(Material.REDSTONE_TORCH, Lang.readItemText("ROCKET_2_ANTENNA"), Lang.readItemLore("ROCKET_2_ANTENNA"), "ROCKET_2_ANTENNA");
+    public static final SlimefunItemStack ROCKET_2_CPU =
+            getSlimefunItemStack(Material.NETHER_STAR, Lang.readItemText("ROCKET_2_CPU"), Lang.readItemLore("ROCKET_2_CPU"), "ROCKET_2_CPU");
+    public static final SlimefunItemStack ROCKET_2_CONTROL_CORE =
+            getSlimefunItemStack(Material.FIREWORK_STAR, Lang.readItemText("ROCKET_2_CONTROL_CORE"), Lang.readItemLore("ROCKET_2_CONTROL_CORE"), "ROCKET_2_CONTROL_CORE");
+    public static final SlimefunItemStack ROCKET_2_GLASS =
+            getSlimefunItemStack(Material.LIME_STAINED_GLASS_PANE, Lang.readItemText("ROCKET_2_GLASS"), Lang.readItemLore("ROCKET_2_GLASS"), "ROCKET_2_GLASS");
+    public static final SlimefunItemStack ROCKET_2_STEEL_PLATE =
+            getSlimefunItemStack(Material.PAPER, Lang.readItemText("ROCKET_2_STEEL_PLATE"), Lang.readItemLore("ROCKET_2_STEEL_PLATE"), "ROCKET_2_STEEL_PLATE");
     public static final SlimefunItemStack SPACESUIT_HELMET =
             getSlimefunItemStack(Material.DIAMOND_HELMET, Lang.readItemText("SPACESUIT_HELMET"), Lang.readItemLore("SPACESUIT_HELMET"), "SPACESUIT_HELMET");
     public static final SlimefunItemStack SPACESUIT_CHESTPLATE =
@@ -229,6 +241,18 @@ public class ClayTechItems {
     public static final ItemStack ROCKET_FUEL_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
             Lang.readItemText("ROCKET_FUEL_TANK"), Lang.readItemLore("ROCKET_FUEL_TANK"), "ROCKET_FUEL_TANK");
+    public static final ItemStack ROCKET_2 = getSlimefunItemStack(SkullUtil.getByURL(
+                    "https://textures.minecraft.net/texture/377bf2855806da82d902314ce3e706cd3d1c1f83ed986df19e179b17a0595"),
+            Lang.readItemText("ROCKET_2"), Lang.readItemLore("ROCKET_2"), "ROCKET_2");
+    public static final ItemStack FUEL_TANK_2 = getSlimefunItemStack(SkullUtil.getByURL(
+                    "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
+            Lang.readItemText("ROCKET_FUEL_TANK_2"), Lang.readItemLore("ROCKET_FUEL_TANK_2"), "ROCKET_FUEL_TANK_2");
+    public static final ItemStack ROCKET_2_ENGINE = getSlimefunItemStack(SkullUtil.getByURL(
+                    "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
+            Lang.readItemText("ROCKET_2_ENGINE"), Lang.readItemLore("ROCKET_2_ENGINE"), "ROCKET_2_ENGINE");
+    public static final ItemStack ROCKET_2_FUEL_TANK = getSlimefunItemStack(SkullUtil.getByURL(
+                    "https://textures.minecraft.net/texture/5175bdf47aea1a4bf1d349be6b7fa4ab37f479672f4c43aca57511b427ab4"),
+            Lang.readItemText("ROCKET_2_FUEL_TANK"), Lang.readItemLore("ROCKET_2_FUEL_TANK"), "ROCKET_2_FUEL_TANK");
     public static final ItemStack OXYGEN_TANK = getSlimefunItemStack(SkullUtil.getByURL(
                     "https://textures.minecraft.net/texture/52baeb4a35da8a85d14bdccf7184f5545088f954da55144f235c2983fdb8e05b"),
             Lang.readItemText("OXYGEN_TANK"), Lang.readItemLore("OXYGEN_TANK"), "OXYGEN_TANK");
@@ -319,6 +343,9 @@ public class ClayTechItems {
     public static @NotNull SlimefunItemStack TNT_EXPLOSION_CREATER = getSlimefunItemStack(new CustomItemStack(Material.TNT, meta -> {
         meta.getPersistentDataContainer().set(KeyUtil.newKey("durability"), PersistentDataType.INTEGER, 32);
     }), Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"), "TNT_EXPLOSION_CREATER");
+
+    public static SlimefunItemStack ROCKET_2_BLUEPRINT = getSlimefunItemStack(new CustomItemStack(Material.LIGHT_BLUE_DYE),
+            Lang.readItemText("ROCKET_2_BLUEPRINT"), Lang.readItemLore("ROCKET_2_BLUEPRINT"), "ROCKET_2_BLUEPRINT");
 
     static {
         ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);

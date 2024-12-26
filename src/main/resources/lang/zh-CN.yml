@@ -405,6 +405,12 @@ Items:
   ROCKET: "<rocket> (一阶)"
   ROCKET_LORE:
     - "&3一阶的火箭"
+    - "<fuel> &60&9/&a125"
+    - "&c&l不要堆叠"
+    - "<cantplace>"
+  ROCKET_2: "<rocket> (二阶)"
+  ROCKET_2_LORE:
+    - "&3二阶的火箭"
     - "<fuel> &60&9/&a400"
     - "&c&l不要堆叠"
     - "<cantplace>"
@@ -437,7 +443,7 @@ Items:
   ROCKET_FUEL_TANK: "&9一阶火箭燃料罐"
   ROCKET_FUEL_TANK_LORE:
     - "&3可以用来装燃料!"
-    - "&b可储存&6400&b点燃料"
+    - "&b可储存&6125&b点燃料"
     - "<cantplace>"
   ROCKET_GLASS: "&9一阶火箭玻璃"
   ROCKET_GLASS_LORE:
@@ -447,6 +453,38 @@ Items:
   ROCKET_STEEL_PLATE: "&9一阶火箭钢板"
   ROCKET_STEEL_PLATE_LORE:
     - "&3制作一阶火箭的必备材料"
+  ROCKET_2_ENGINE_SHELL: "&6二阶火箭引擎外壳"
+  ROCKET_2_ENGINE: "&9二阶火箭引擎"
+  ROCKET_2_ENGINE_LORE:
+    - "&3制造二阶火箭的必需品!"
+    - "<cantplace>"
+  ROCKET_2_ANTENNA: "&9二阶火箭天线"
+  ROCKET_2_ANTENNA_LORE:
+    - "&3用于在火箭轨道中的信息传输"
+    - "<cantplace>"
+  ROCKET_2_CPU: "&9二阶火箭中央处理器"
+  ROCKET_2_CPU_LORE:
+    - "&3处理火箭的基本信息"
+  ROCKET_2_CONTROL_CORE: "&9二阶火箭控制核心"
+  ROCKET_2_CONTROL_CORE_LORE:
+    - "&3火箭的大脑,没有它就没有火箭"
+  ROCKET_2_FUEL_TANK: "&9二阶火箭燃料罐"
+  ROCKET_2_FUEL_TANK_LORE:
+    - "&3可以用来装燃料!"
+    - "&b可储存&6400&b点燃料"
+    - "<cantplace>"
+  ROCKET_2_GLASS: "&9二阶火箭玻璃"
+  ROCKET_2_GLASS_LORE:
+    - "&3非同寻常的玻璃"
+    - "&3可以在宇宙使用!"
+    - "<cantplace>"
+  ROCKET_2_STEEL_PLATE: "&9二阶火箭钢板"
+  ROCKET_2_STEEL_PLATE_LORE:
+    - "&3制作二阶火箭的必备材料"
+  ROCKET_2_BLUEPRINT: "&9二阶火箭蓝图"
+  ROCKET_2_BLUEPRINT_LORE:
+    - "&3制作二阶火箭的蓝图"
+    - "&3需要一定的工程技术"
   CLAY_ROCKET_ASSEMBLING_MACHINE: "&9火箭组装器"
   CLAY_ROCKET_ASSEMBLING_MACHINE_LORE:
     - ""

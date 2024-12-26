@@ -4,19 +4,23 @@ import cn.claycoffee.clayTech.ClayTech;
 import cn.claycoffee.clayTech.core.managers.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Planet. 星球.
@@ -24,6 +28,8 @@ import java.util.Random;
 public class Planet {
     private static final ConfigManager planet = ClayTech.getPlanetManager();
     private static final FileConfiguration f = planet.getConfig();
+    private static final Set<String> preventEndDragon = new HashSet<>();
+    private static final Set<String> preventBedrock = new HashSet<>();
     private final String planetName;
     private final ItemStack displayItem;
     private final @Nullable ChunkGenerator planetWorld;
@@ -171,15 +177,46 @@ public class Planet {
             }
 
             if (world.getEnvironment() == World.Environment.THE_END) {
+                String worldName = world.getName();
+
                 // Prevents ender dragon spawn using portal
-                world.getBlockAt(0, 0, 0).setType(Material.END_PORTAL);
+                preventEndDragon.add(worldName);
+                Location endPortal = world.getBlockAt(0, 0, 0).getLocation();
+                endPortal.getBlock().setType(Material.END_PORTAL);
+
+                // remove end portal when the chunk load (make sure bukkit has ignored the world)
                 Bukkit.getScheduler().runTaskTimer(ClayTech.getInstance(), () -> {
-                    if (world.getPlayerCount() > 0) {
-                        if (world.getBlockAt(0, 0, 0).getType() == Material.END_PORTAL) {
-                            world.getBlockAt(0, 0, 0).setType(Material.AIR);
-                        };
-                    } else {
-                        world.getBlockAt(0, 0, 0).setType(Material.END_PORTAL);
+                    if (!preventEndDragon.contains(worldName)) {
+                        return;
+                    }
+
+                    for (Player player : world.getPlayers()) {
+                        if (player.getLocation().distance(endPortal) < 20) {
+                            if (world.getBlockAt(0, 0, 0).getType() == Material.END_PORTAL) {
+                                world.getBlockAt(0, 0, 0).setType(Material.AIR);
+                            }
+
+                            preventEndDragon.remove(worldName);
+                        }
+                    }
+                }, 1, 20);
+
+                // Same, but for bedrock
+                preventBedrock.add(worldName);
+                Location bedrock = world.getBlockAt(0, 60, 0).getLocation();
+                Bukkit.getScheduler().runTaskTimer(ClayTech.getInstance(), () -> {
+                    if (preventBedrock.contains(worldName)) {
+                        return;
+                    }
+
+                    for (Player player : world.getPlayers()) {
+                        if (player.getLocation().distance(bedrock) < 20) {
+                            if (world.getBlockAt(0, 60, 0).getType() == Material.BEDROCK) {
+                                world.getBlockAt(0, 60, 0).setType(Material.AIR);
+                            }
+
+                            preventBedrock.remove(worldName);
+                        }
                     }
                 }, 1, 20);
             }
