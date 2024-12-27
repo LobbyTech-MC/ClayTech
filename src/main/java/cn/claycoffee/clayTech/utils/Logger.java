@@ -97,7 +97,7 @@ public class Logger {
         }
     }
 
-    public static void sendMessage(@Nullable Player player, String message) {
+    public static void sendMessage(@Nullable Player player, @Nullable String message) {
         if (player == null) {
             return;
         }
@@ -170,18 +170,19 @@ public class Logger {
     public static void log() {
         log("");
     }
+
     public static void warning(@Nullable String message) {
         plugin.getLogger().warning(message);
     }
-    
+
     public static void error(@Nullable String message) {
         plugin.getLogger().severe(message);
     }
-    
+
     public static void severe(@Nullable String message) {
         error(message);
     }
-    
+
     public static void warning(@Nullable Object object) {
         if (object == null) {
             warning("null");
@@ -189,7 +190,7 @@ public class Logger {
         }
         warning(object.toString());
     }
-    
+
     public static void error(@Nullable Object object) {
         if (object == null) {
             error("null");
@@ -197,7 +198,7 @@ public class Logger {
         }
         error(object.toString());
     }
-    
+
     public static void severe(@Nullable Object object) {
         if (object == null) {
             severe("null");
@@ -205,7 +206,7 @@ public class Logger {
         }
         error(object.toString());
     }
-    
+
     public static void warning(@Nullable String @Nullable ... messages) {
         if (messages == null) {
             warning("null");
@@ -219,7 +220,7 @@ public class Logger {
             warning(message);
         }
     }
-    
+
     public static void error(@Nullable String @Nullable ... messages) {
         if (messages == null) {
             error("null");
@@ -233,7 +234,7 @@ public class Logger {
             error(message);
         }
     }
-    
+
     public static void severe(@Nullable String @Nullable ... messages) {
         if (messages == null) {
             severe("null");
@@ -247,7 +248,7 @@ public class Logger {
             severe(message);
         }
     }
-    
+
     public static void warning(@Nullable Object @Nullable ... objects) {
         if (objects == null) {
             warning("null");
@@ -261,7 +262,7 @@ public class Logger {
             warning(object);
         }
     }
-    
+
     public static void error(@Nullable Object @Nullable ... objects) {
         if (objects == null) {
             error("null");
@@ -275,7 +276,7 @@ public class Logger {
             error(object);
         }
     }
-    
+
     public static void severe(@Nullable Object @Nullable ... objects) {
         if (objects == null) {
             severe("null");
@@ -289,41 +290,41 @@ public class Logger {
             severe(object);
         }
     }
-    
+
     public static void log(@Nullable String message, Throwable e) {
         log(message);
         log(e);
     }
-    
+
     public static void log(@Nullable Object object, Throwable e) {
         log(object);
         log(e);
     }
-    
+
     public static void log(@Nullable String message, @Nullable Throwable e, Object @Nullable ... objects) {
         log(message, e);
         log(objects);
     }
-    
+
     public static void log(@Nullable Object object, @Nullable Throwable e, Object @Nullable ... objects) {
         log(object, e);
         log(objects);
     }
-    
+
     public static void log(@Nullable String message, @Nullable Throwable e, String @Nullable ... messages) {
         log(message, e);
         log(messages);
     }
-    
+
     public static void log(@Nullable Object object, @Nullable Throwable e, String @Nullable ... messages) {
         log(object, e);
         log(messages);
     }
-    
+
     public static void fine(@Nullable String message) {
         plugin.getLogger().fine(message);
     }
-    
+
     public static void fine(@Nullable Object object) {
         if (object == null) {
             fine("null");
@@ -331,7 +332,7 @@ public class Logger {
         }
         fine(object.toString());
     }
-    
+
     public static void fine(@Nullable String @Nullable ... messages) {
         if (messages == null) {
             fine("null");
@@ -345,7 +346,7 @@ public class Logger {
             fine(message);
         }
     }
-    
+
     public static void fine(@Nullable Object @Nullable ... objects) {
         if (objects == null) {
             fine("null");
@@ -359,67 +360,67 @@ public class Logger {
             fine(object);
         }
     }
-    
+
     public static void fine(@Nullable String message, Throwable e) {
         fine(message);
         log(e);
     }
-    
+
     public static void fine(@Nullable Object object, Throwable e) {
         fine(object);
         log(e);
     }
-    
+
     public static void fine(@Nullable String message, @Nullable Throwable e, Object @Nullable ... objects) {
         fine(message, e);
         log(objects);
     }
-    
+
     public static void fine(@Nullable Object object, @Nullable Throwable e, Object @Nullable ... objects) {
         fine(object, e);
         log(objects);
     }
-    
+
     public static void fine(@Nullable String message, @Nullable Throwable e, String @Nullable ... messages) {
         fine(message, e);
         log(messages);
     }
-    
+
     public static void fine(@Nullable Object object, @Nullable Throwable e, String @Nullable ... messages) {
         fine(object, e);
         log(messages);
     }
-    
+
     public static void debug(@Nullable String message, Throwable e) {
         debug(message);
         log(e);
     }
-    
+
     public static void debug(@Nullable Object object, Throwable e) {
         debug(object);
         log(e);
     }
-    
+
     public static void debug(@Nullable String message, @Nullable Throwable e, Object @Nullable ... objects) {
         debug(message, e);
         log(objects);
     }
-    
+
     public static void debug(@Nullable Object object, @Nullable Throwable e, Object @Nullable ... objects) {
         debug(object, e);
         log(objects);
     }
-    
+
     public static void debug(@Nullable String message, @Nullable Throwable e, String @Nullable ... messages) {
         debug(message, e);
         log(messages);
     }
-    
+
     public static void debug(@Nullable Object object, @Nullable Throwable e, String @Nullable ... messages) {
         debug(object, e);
         log(messages);
     }
-    
+
     public static void log(Level level, @Nullable String message) {
         plugin.getLogger().log(level, message);
     }

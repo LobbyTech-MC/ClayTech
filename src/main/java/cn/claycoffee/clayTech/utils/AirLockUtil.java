@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -67,7 +68,7 @@ public class AirLockUtil {
         return new HashSet<>(sortedLocations);
     }
 
-    public static @NotNull Set<Location> getRawLocations(@NotNull Block lookingBlock, @NotNull BlockFace lookingFacing, int limitBlocks, Function<Location, Boolean> filter) {
+    public static @NotNull Set<Location> getRawLocations(@NotNull Block lookingBlock, @NotNull BlockFace lookingFacing, int limitBlocks, @Nullable Function<Location, Boolean> filter) {
         Set<Location> locations = new HashSet<>();
         Queue<Location> queue = new LinkedList<>();
         Location lookingLocation = lookingBlock.getLocation();

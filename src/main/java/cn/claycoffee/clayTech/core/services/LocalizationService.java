@@ -193,7 +193,7 @@ public class LocalizationService {
         return this.getStringList(path).stream().map(this::color).toList().toArray(new String[0]);
     }
 
-    protected JavaPlugin getPlugin() {
+    protected @NotNull JavaPlugin getPlugin() {
         return this.plugin;
     }
 

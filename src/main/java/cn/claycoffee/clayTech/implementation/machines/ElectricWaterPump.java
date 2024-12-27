@@ -10,17 +10,13 @@ import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetComponent;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.interfaces.InventoryBlock;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import org.bukkit.Material;
@@ -31,6 +27,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ElectricWaterPump extends ANewContainer {
-    public final static int[] inputslots = new int[]{20};
-    public final static int[] outputslots = new int[]{24};
+    public static final int[] inputslots = new int[]{20};
+    public static final int[] outputslots = new int[]{24};
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 31, 17, 18, 26, 27, 35, 36, 37, 38, 39,
             40, 41, 42, 43, 44};
     private static final int[] BORDER_B = {10, 11, 12, 19, 21, 28, 29, 30, 14, 15, 16, 23, 25, 32, 33, 34};
@@ -47,12 +44,12 @@ public class ElectricWaterPump extends ANewContainer {
             Lang.readMachinesText("SPLIT_LINE"));
     private static final ItemStack BORDER_B_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
-    public static Map<Block, MachineRecipe> processing = new HashMap<>();
-    public static Map<Block, Integer> progress = new HashMap<>();
+    public static @NotNull Map<Block, MachineRecipe> processing = new HashMap<>();
+    public static @NotNull Map<Block, Integer> progress = new HashMap<>();
     protected final List<MachineRecipe> recipes = new ArrayList<>();
 
-    public ElectricWaterPump(ItemGroup category, SlimefunItemStack item, String id, RecipeType recipeType,
-                             ItemStack[] recipe) {
+    public ElectricWaterPump(@NotNull ItemGroup category, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                             ItemStack @NotNull [] recipe) {
 
         super(category, item, recipeType, recipe);
         createPreset(this, getInventoryTitle(), this::SetupMenu);
@@ -82,7 +79,7 @@ public class ElectricWaterPump extends ANewContainer {
         return Lang.readMachinesText("CLAY_ELECTRIC_WATER_PUMP");
     }
 
-    public ItemStack getProgressBar() {
+    public @NotNull ItemStack getProgressBar() {
         return new ItemStack(Material.REDSTONE_TORCH);
     }
 
@@ -94,7 +91,7 @@ public class ElectricWaterPump extends ANewContainer {
         return 1;
     }
 
-    public void SetupMenu(BlockMenuPreset Preset) {
+    public void SetupMenu(@NotNull BlockMenuPreset Preset) {
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(43, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
         Preset.addItem(5, BORDER_A_ITEM.clone(), ChestMenuUtils.getEmptyClickHandler());
@@ -118,7 +115,7 @@ public class ElectricWaterPump extends ANewContainer {
                 }
 
                 @Override
-                public boolean onClick(InventoryClickEvent e, Player p, int slot, ItemStack cursor,
+                public boolean onClick(InventoryClickEvent e, Player p, int slot, @Nullable ItemStack cursor,
                                        ClickAction action) {
                     return cursor == null || cursor.getType() == null || cursor.getType() == Material.AIR;
                 }
@@ -135,7 +132,7 @@ public class ElectricWaterPump extends ANewContainer {
         return getProcessing(b) != null;
     }
 
-    public void registerRecipe(MachineRecipe recipe) {
+    public void registerRecipe(@NotNull MachineRecipe recipe) {
         recipe.setTicks(recipe.getTicks() / getSpeed());
         recipes.add(recipe);
     }
@@ -148,7 +145,7 @@ public class ElectricWaterPump extends ANewContainer {
     public void preRegister() {
         addItemHandler(new BlockTicker() {
             @Override
-            public void tick(Block b, SlimefunItem sf, SlimefunBlockData data) {
+            public void tick(@NotNull Block b, SlimefunItem sf, SlimefunBlockData data) {
                 ElectricWaterPump.this.tick(b);
             }
 
@@ -159,7 +156,7 @@ public class ElectricWaterPump extends ANewContainer {
         });
     }
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         // 机器正在处理
         if (isProcessing(b)) {

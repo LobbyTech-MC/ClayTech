@@ -141,10 +141,8 @@ public class ClayTechItems {
             getSlimefunItemStack(Material.LIME_STAINED_GLASS_PANE, Lang.readItemText("ROCKET_GLASS"), Lang.readItemLore("ROCKET_GLASS"), "ROCKET_GLASS");
     public static final SlimefunItemStack ROCKET_STEEL_PLATE =
             getSlimefunItemStack(Material.PAPER, Lang.readItemText("ROCKET_STEEL_PLATE"), Lang.readItemLore("ROCKET_STEEL_PLATE"), "ROCKET_STEEL_PLATE");
-    public static final SlimefunItemStack ROCKET_2_ENGINE_SHELL =  getSlimefunItemStack(Material.IRON_INGOT,
+    public static final SlimefunItemStack ROCKET_2_ENGINE_SHELL = getSlimefunItemStack(Material.IRON_INGOT,
             Lang.readItemText("ROCKET_2_ENGINE_SHELL"), "ROCKET_2_ENGINE_SHELL");
-    public static final SlimefunItemStack ROCKET_2_ANTENNA =
-            getSlimefunItemStack(Material.REDSTONE_TORCH, Lang.readItemText("ROCKET_2_ANTENNA"), Lang.readItemLore("ROCKET_2_ANTENNA"), "ROCKET_2_ANTENNA");
     public static final SlimefunItemStack ROCKET_2_CPU =
             getSlimefunItemStack(Material.NETHER_STAR, Lang.readItemText("ROCKET_2_CPU"), Lang.readItemLore("ROCKET_2_CPU"), "ROCKET_2_CPU");
     public static final SlimefunItemStack ROCKET_2_CONTROL_CORE =
@@ -344,8 +342,27 @@ public class ClayTechItems {
         meta.getPersistentDataContainer().set(KeyUtil.newKey("durability"), PersistentDataType.INTEGER, 32);
     }), Lang.readItemText("TNT_EXPLOSION_CREATER"), Lang.readItemLore("TNT_EXPLOSION_CREATER"), "TNT_EXPLOSION_CREATER");
 
-    public static SlimefunItemStack ROCKET_2_BLUEPRINT = getSlimefunItemStack(new CustomItemStack(Material.LIGHT_BLUE_DYE),
+    public static @NotNull SlimefunItemStack ROCKET_2_BLUEPRINT = getSlimefunItemStack(new CustomItemStack(Material.LIGHT_BLUE_DYE),
             Lang.readItemText("ROCKET_2_BLUEPRINT"), Lang.readItemLore("ROCKET_2_BLUEPRINT"), "ROCKET_2_BLUEPRINT");
+
+    static {
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
+        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 9);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.MENDING, 1);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.DURABILITY, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
+        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
+    }
 
     static {
         ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
@@ -410,24 +427,5 @@ public class ClayTechItems {
 
     private static @NotNull SlimefunItemStack getSlimefunItemStack(@NotNull ItemStack stack, String name, String[] lore, @NotNull MachineTier tier, @NotNull MachineType type, int buffer, @NotNull String id) {
         return getSlimefunItemStack(stack, name, Arrays.asList(lore), tier, type, buffer, id);
-    }
-
-    static {
-        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DURABILITY, 9);
-        ItemStackUtil.addEnchantment(REINFORCED_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 9);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DURABILITY, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_PICKAXE, Enchantment.DIG_SPEED, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.DURABILITY, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_HELMET, Enchantment.MENDING, 1);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.DURABILITY, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_CHESTPLATE, Enchantment.MENDING, 1);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.DURABILITY, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_LEGGINGS, Enchantment.MENDING, 1);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.DURABILITY, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.PROTECTION_ENVIRONMENTAL, 10);
-        ItemStackUtil.addEnchantment(CLAY_ALLOY_BOOTS, Enchantment.MENDING, 1);
     }
 }

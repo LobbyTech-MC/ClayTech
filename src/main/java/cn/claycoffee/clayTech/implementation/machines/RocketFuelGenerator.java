@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class RocketFuelGenerator extends ACraftingTable {
 
-    public RocketFuelGenerator(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                               ItemStack[] recipe) {
+    public RocketFuelGenerator(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                               ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 

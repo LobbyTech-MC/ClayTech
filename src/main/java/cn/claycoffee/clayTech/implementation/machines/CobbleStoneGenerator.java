@@ -39,9 +39,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CobbleStoneGenerator extends SlimefunItem implements InventoryBlock, EnergyNetComponent, MachineProcessHolder<CraftingOperation> {
+    public static final int[] inputSlots = new int[]{};
+    public static final int[] outputSlots = new int[]{22};
     private static final ItemStack COBBLESTONE = new ItemStack(Material.COBBLESTONE);
-    public final static int[] inputSlots = new int[]{};
-    public final static int[] outputSlots = new int[]{22};
     private static final int[] BORDER_A = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 37, 38, 39, 40, 41,
             42, 43, 44, 12, 14, 21, 23, 30, 31, 32};
     private static final int[] BORDER_B = {10, 11, 15, 16, 19, 20, 24, 25, 28, 29, 33, 34};

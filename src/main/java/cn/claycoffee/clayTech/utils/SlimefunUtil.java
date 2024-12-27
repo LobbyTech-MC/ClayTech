@@ -10,7 +10,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
-import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -107,6 +106,7 @@ public class SlimefunUtil {
         private RecipeType recipeType;
         private ItemStack[] recipe;
         private boolean placeable = true;
+
         public @NotNull ItemBuilder withPlaceable(boolean placeable) {
             this.placeable = placeable;
             return this;
@@ -122,7 +122,7 @@ public class SlimefunUtil {
             return this;
         }
 
-        public ItemBuilder withItem(ItemStack itemStack) {
+        public @NotNull ItemBuilder withItem(ItemStack itemStack) {
             if (itemStack instanceof SlimefunItemStack slimefunItemStack) {
                 return withItem(slimefunItemStack);
             }
@@ -190,7 +190,7 @@ public class SlimefunUtil {
             return slimefunItem;
         }
 
-        public SlimefunItem go() {
+        public @NotNull SlimefunItem go() {
             return build();
         }
     }
@@ -263,7 +263,7 @@ public class SlimefunUtil {
             return research;
         }
 
-        public Research go() {
+        public @NotNull Research go() {
             return build();
         }
     }

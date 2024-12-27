@@ -5,7 +5,6 @@ import cn.claycoffee.clayTech.ClayTechMachineRecipes;
 import cn.claycoffee.clayTech.ClayTechRecipeType;
 import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.SlimefunUtil;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 
 public class RocketMakings {
     public RocketMakings() {
@@ -116,13 +115,6 @@ public class RocketMakings {
                                 .withItem(ClayTechItems.ROCKET_2_ENGINE)
                                 .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
                                 .withRecipe(ClayTechMachineRecipes.ROCKET_2_ENGINE)
-                                .build())
-                .addItem(
-                        SlimefunUtil.newItem()
-                                .withItemGroup(ClayTechItems.C_MATERIALS)
-                                .withItem(ClayTechItems.ROCKET_2_ANTENNA)
-                                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
-                                .withRecipe(ClayTechMachineRecipes.ROCKET_2_ANTENNA)
                                 .build())
                 .addItem(
                         SlimefunUtil.newItem()
@@ -249,8 +241,8 @@ public class RocketMakings {
         SlimefunUtil.newItem()
                 .withItemGroup(ClayTechItems.C_MATERIALS)
                 .withItem(ClayTechItems.ROCKET_2_BLUEPRINT)
-                .withRecipeType(RecipeType.NULL) // todo
-                .withRecipe(ClayTechItems.NORECIPE) // todo
+                .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
+                .withRecipe(ClayTechMachineRecipes.ROCKET_2_BLUEPRINT)
                 .build();
     }
 }

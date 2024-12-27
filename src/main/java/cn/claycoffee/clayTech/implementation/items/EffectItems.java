@@ -11,6 +11,7 @@ import cn.claycoffee.clayTech.utils.Lang;
 import cn.claycoffee.clayTech.utils.SlimefunUtil;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,6 +19,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class EffectItems {
     public EffectItems() {
@@ -54,7 +57,7 @@ public class EffectItems {
 
                                     Location currentLoc = player.getLocation();
                                     Inventory inv = player.getInventory();
-                                    ItemStack tnt = inv.getItem(inv.first(Material.TNT));
+                                    ItemStack tnt = findFirstTNTStack(inv);
                                     if (tnt == null) {
                                         player.sendMessage(Lang.readGeneralText("TNT_EXPLOSION_CREATER_NO_TNT"));
                                         return;
@@ -77,5 +80,19 @@ public class EffectItems {
                                 })
                                 .build())
                 .build();
+    }
+
+    public static @Nullable ItemStack findFirstTNTStack(@NotNull Inventory inv) {
+        for (ItemStack item : inv.getContents()) {
+            if (item == null) {
+                continue;
+            }
+
+            if (item.getType() == Material.TNT && SlimefunUtils.isItemSimilar(item, new ItemStack(Material.TNT), true)) {
+                return item;
+            }
+        }
+
+        return null;
     }
 }

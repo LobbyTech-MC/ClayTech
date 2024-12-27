@@ -26,9 +26,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @SuppressWarnings("deprecation")
 public abstract class ARocketTable extends AbstractMachine {
     public static final int[] inputSlots = new int[]{11, 19, 20, 21, 28, 29, 30, 37, 38, 39};
@@ -41,8 +38,8 @@ public abstract class ARocketTable extends AbstractMachine {
     private static final ItemStack OTHERBORDER_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
 
-    public ARocketTable(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                        ItemStack[] recipe) {
+    public ARocketTable(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                        ItemStack @NotNull [] recipe) {
 
         super(itemGroup, item, recipeType, recipe);
     }
@@ -153,7 +150,7 @@ public abstract class ARocketTable extends AbstractMachine {
     }
 
     @Override
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         if (inv == null) {
             return;

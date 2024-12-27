@@ -10,7 +10,6 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -41,6 +40,7 @@ public abstract class AbstractMachine extends AContainer {
     public @NotNull EnergyNetComponentType getEnergyComponentType() {
         return EnergyNetComponentType.CONSUMER;
     }
+
     public int getProcessBarSlot() {
         return 22;
     }
@@ -58,7 +58,7 @@ public abstract class AbstractMachine extends AContainer {
     @Override
     public abstract int getCapacity();
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         CraftingOperation currentOperation = getMachineProcessor().getOperation(b);
         if (currentOperation != null) {

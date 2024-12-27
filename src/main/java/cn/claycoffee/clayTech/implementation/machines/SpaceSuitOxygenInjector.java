@@ -44,10 +44,10 @@ import java.util.List;
 import java.util.Map;
 
 public class SpaceSuitOxygenInjector extends SlimefunItem implements InventoryBlock, EnergyNetComponent {
+    public static final int[] inputslots = new int[]{22};
+    public static final int[] outputslots = new int[]{};
     private static final ItemStack HANDLED_PROGRESS_BAR = new CustomItemStack(Material.BLACK_STAINED_GLASS_PANE, " ");
     private static final ItemStack HANDLING_PROGRESS_BAR = new CustomItemStack(Material.WHITE_STAINED_GLASS_PANE, " ");
-    public final static int[] inputslots = new int[]{22};
-    public final static int[] outputslots = new int[]{};
     private static final int[] BORDER_A = {0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27,
             28, 29, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44};
     private static final int[] BORDER_B = {12, 13, 14, 21, 23, 30, 31, 32};

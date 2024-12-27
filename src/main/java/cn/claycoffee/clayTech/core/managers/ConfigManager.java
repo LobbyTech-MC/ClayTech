@@ -23,11 +23,11 @@ public class ConfigManager {
         setupDefaultConfig(ymlName);
     }
 
-    public FileConfiguration getConfig() {
+    public @NotNull FileConfiguration getConfig() {
         return existingConfig;
     }
 
-    public File getFile() {
+    public @NotNull File getFile() {
         return existingFile;
     }
 

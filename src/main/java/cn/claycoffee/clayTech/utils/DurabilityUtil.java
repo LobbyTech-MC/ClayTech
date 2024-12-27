@@ -26,6 +26,7 @@ public class DurabilityUtil {
         if (durability == null) {
             return 0;
         }
+
         return durability;
     }
 
@@ -34,7 +35,7 @@ public class DurabilityUtil {
             return;
         }
 
-        if (durability < 0) {
+        if (durability <= 0) {
             itemStack.setType(Material.AIR);
             return;
         }

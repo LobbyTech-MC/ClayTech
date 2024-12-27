@@ -26,8 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AExtracter extends AbstractMachine {
-    public final static int[] inputSlots = new int[]{20};
-    public final static int[] outputSlots = new int[]{24};
+    public static final int[] inputSlots = new int[]{20};
+    public static final int[] outputSlots = new int[]{24};
     private static final int[] BORDER = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 49,
             50, 51, 52, 53, 13};
     private static final int[] BORDER_A = {10, 11, 12, 19, 21, 28, 29, 30, 14, 15, 16, 23, 25, 32, 33, 34};
@@ -39,7 +39,7 @@ public abstract class AExtracter extends AbstractMachine {
     private static final ItemStack BORDERB_ITEM = new CustomItemStack(Material.MAGENTA_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
 
-    public AExtracter(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public AExtracter(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType, ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 
@@ -113,7 +113,7 @@ public abstract class AExtracter extends AbstractMachine {
     }
 
     @Override
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         if (inv == null) {
             return;

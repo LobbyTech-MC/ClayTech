@@ -8,7 +8,6 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.implementation.operations.CraftingOperation;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.Material;
@@ -33,8 +32,8 @@ import java.util.Map;
 public class ClayElectricCopier extends ANewContainer {
     private static final Map<Block, Integer> mode = new HashMap<>();
 
-    public ClayElectricCopier(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                              ItemStack[] recipe) {
+    public ClayElectricCopier(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                              ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 
@@ -95,7 +94,7 @@ public class ClayElectricCopier extends ANewContainer {
             if (input1.getType() == Material.WRITTEN_BOOK && input2.getType() == Material.WRITABLE_BOOK) {
                 ItemMeta meta1 = input1.getItemMeta();
                 if (meta1 instanceof BookMeta bookMeta1) {
-                    MachineRecipe recipe = new MachineRecipe(bookMeta1.getPageCount()*4, new ItemStack[]{input2.clone()}, new ItemStack[]{input1.clone()});
+                    MachineRecipe recipe = new MachineRecipe(bookMeta1.getPageCount() * 4, new ItemStack[]{input2.clone()}, new ItemStack[]{input1.clone()});
                     inv.consumeItem(20, 1);
                     getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
                 }
@@ -104,7 +103,7 @@ public class ClayElectricCopier extends ANewContainer {
             if (input1.getType() == Material.WRITABLE_BOOK && input2.getType() == Material.WRITTEN_BOOK) {
                 ItemMeta meta2 = input2.getItemMeta();
                 if (meta2 instanceof BookMeta bookMeta2) {
-                    MachineRecipe recipe = new MachineRecipe(bookMeta2.getPageCount()*4, new ItemStack[]{input1.clone()}, new ItemStack[]{input2.clone()});
+                    MachineRecipe recipe = new MachineRecipe(bookMeta2.getPageCount() * 4, new ItemStack[]{input1.clone()}, new ItemStack[]{input2.clone()});
                     inv.consumeItem(19, 1);
                     getMachineProcessor().startOperation(b, new CraftingOperation(recipe));
                 }

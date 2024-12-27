@@ -22,7 +22,7 @@ import java.util.Random;
 public class PlanetUtil {
     private static final int[] planet = {19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41,
             42, 43};
-    private final static int MAX_TRY_TIMES = 40;
+    private static final int MAX_TRY_TIMES = 40;
 
     public static int getHighestBlockAt(@NotNull World w, int x, int z) {
         int currentHighestY = 0;

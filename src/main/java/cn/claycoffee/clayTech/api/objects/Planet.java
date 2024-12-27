@@ -293,9 +293,10 @@ public class Planet {
         return this.displayItem.clone();
     }
 
-    public ChunkGenerator getPlanetGenerator() {
+    public @Nullable ChunkGenerator getPlanetGenerator() {
         return this.planetWorld;
     }
+
     public int getFuel() {
         return this.fuel;
     }

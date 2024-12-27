@@ -624,8 +624,8 @@ Items:
     - "&3与气闸门一同使用"
     - "&3当气闸门被踩时生效"
   CLAYCOFFEE_HEAD: "ClayCoffee 的头"
-  CLOCK_C : "&b时钟"
-  LANTERN_C : "&b灯笼"
+  CLOCK_C: "&b时钟"
+  LANTERN_C: "&b灯笼"
   # End Items
 Researches:
   CLAYTECH_ARMORS_I: "基础效果装备"

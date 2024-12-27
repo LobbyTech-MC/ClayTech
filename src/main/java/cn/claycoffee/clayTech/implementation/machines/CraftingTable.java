@@ -13,8 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class CraftingTable extends ACraftingTable {
-    public CraftingTable(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                         ItemStack[] recipe) {
+    public CraftingTable(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                         ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 

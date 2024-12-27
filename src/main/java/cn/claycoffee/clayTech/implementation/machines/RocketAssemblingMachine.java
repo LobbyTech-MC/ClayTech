@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class RocketAssemblingMachine extends ARocketTable {
 
-    public RocketAssemblingMachine(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                                   ItemStack[] recipe) {
+    public RocketAssemblingMachine(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                                   ItemStack @NotNull [] recipe) {
         super(itemGroup, item, id, recipeType, recipe);
     }
 

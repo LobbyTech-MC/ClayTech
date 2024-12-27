@@ -12,8 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class FoodCauldron extends ACraftingTable {
-    public FoodCauldron(ItemGroup itemGroup, SlimefunItemStack item, String id, RecipeType recipeType,
-                        ItemStack[] recipe) {
+    public FoodCauldron(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, String id, @NotNull RecipeType recipeType,
+                        ItemStack @NotNull [] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
 

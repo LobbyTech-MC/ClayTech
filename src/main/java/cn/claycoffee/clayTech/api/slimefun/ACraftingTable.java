@@ -26,9 +26,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class ACraftingTable extends AbstractMachine {
     protected static final int[] inputSlots = new int[]{19, 20, 21, 28, 29, 30, 37, 38, 39};
     protected static final int[] outputSlots = new int[]{34};
@@ -40,8 +37,8 @@ public abstract class ACraftingTable extends AbstractMachine {
     private static final ItemStack BORDER_2_ITEM = new CustomItemStack(Material.LIME_STAINED_GLASS_PANE,
             Lang.readMachinesText("SPLIT_LINE"));
 
-    public ACraftingTable(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType,
-                          ItemStack[] recipe) {
+    public ACraftingTable(@NotNull ItemGroup itemGroup, @NotNull SlimefunItemStack item, @NotNull RecipeType recipeType,
+                          ItemStack @NotNull [] recipe) {
 
         super(itemGroup, item, recipeType, recipe);
     }
@@ -141,7 +138,7 @@ public abstract class ACraftingTable extends AbstractMachine {
         return null;
     }
 
-    protected void tick(Block b) {
+    protected void tick(@NotNull Block b) {
         BlockMenu inv = StorageCacheUtils.getMenu(b.getLocation());
         if (inv == null) {
             return;

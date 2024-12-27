@@ -5,10 +5,10 @@ import cn.claycoffee.clayTech.api.objects.Planet;
 import cn.claycoffee.clayTech.core.managers.ConfigManager;
 import cn.claycoffee.clayTech.core.managers.ListenerManager;
 import cn.claycoffee.clayTech.core.services.LocalizationService;
+import cn.claycoffee.clayTech.core.worlds.AsteroidBelt;
 import cn.claycoffee.clayTech.core.worlds.Earth;
 import cn.claycoffee.clayTech.core.worlds.Mars;
 import cn.claycoffee.clayTech.core.worlds.Moon;
-import cn.claycoffee.clayTech.core.worlds.AsteroidBelt;
 import cn.claycoffee.clayTech.implementation.items.Armors;
 import cn.claycoffee.clayTech.implementation.items.ClayBasic;
 import cn.claycoffee.clayTech.implementation.items.ClayFuelResource;
@@ -196,7 +196,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return plugin;
     }
 
-    public static String getLocale() {
+    public static @Nullable String getLocale() {
         return locale;
     }
 
@@ -204,7 +204,7 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return spacetravelneedperm;
     }
 
-    public static Double getHighRailSpeed() {
+    public static @Nullable Double getHighRailSpeed() {
         return highrailspeed;
     }
 
@@ -216,11 +216,11 @@ public class ClayTech extends JavaPlugin implements SlimefunAddon {
         return planetList;
     }
 
-    public static String getOverworld() {
+    public static @Nullable String getOverworld() {
         return overworld;
     }
 
-    public static String getUpdateBranch() {
+    public static @Nullable String getUpdateBranch() {
         return updateBranch;
     }
 
