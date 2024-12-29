@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.claycoffee</groupId>
     <artifactId>ClayTech</artifactId>
-    <version>UNOFFICIAL-test-26</version>
+    <version>UNOFFICIAL-1</version>
     <build>
         <plugins>
             <plugin>

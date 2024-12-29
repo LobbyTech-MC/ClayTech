@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 public class Drinks {
     public Drinks() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950242)
                 .withName(Lang.readResearchesText("CLAYTECH_DRINK_I"))
                 .withCost(50)
                 .addItem(

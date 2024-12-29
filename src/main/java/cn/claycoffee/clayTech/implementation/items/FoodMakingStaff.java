@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 public class FoodMakingStaff {
     public FoodMakingStaff() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950245)
                 .withName(Lang.readResearchesText("CLAYTECH_FOOD_MAKINGS_I"))
                 .withCost(50)
                 .addItem(
@@ -45,7 +45,7 @@ public class FoodMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950246)
                 .withName(Lang.readResearchesText("CLAYTECH_FRUIT_I"))
                 .withCost(50)
                 .addItem(ClayTechItems.CLAY_LEMON)

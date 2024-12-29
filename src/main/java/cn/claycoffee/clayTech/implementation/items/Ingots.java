@@ -10,7 +10,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 public class Ingots {
     public Ingots() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950253)
                 .withName(Lang.readResearchesText("CLAYTECH_OREINGOTS_I"))
                 .withCost(50)
                 .addItem(
@@ -37,7 +37,7 @@ public class Ingots {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950254)
                 .withName(Lang.readResearchesText("CLAYTECH_OREINGOTS_II"))
                 .withCost(50)
                 .addItem(

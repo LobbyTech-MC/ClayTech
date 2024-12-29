@@ -26,7 +26,7 @@ public class EffectItems {
     public EffectItems() {
         // rewrite
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950243)
                 .withName(Lang.readResearchesText("CLAYTECH_EFFECT_ITEM_I"))
                 .withCost(30)
                 .addItem(

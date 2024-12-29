@@ -222,16 +222,16 @@ public class ClayTechMachineRecipes {
             ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL,
             ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE_SHELL};
     public static final ItemStack[] ROCKET_2_ENGINE = {
-            ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE,
-            ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE,
-            ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_ENGINE};
+            ClayTechItems.ROCKET_2_ENGINE_SHELL, ClayTechItems.ROCKET_2_ENGINE_SHELL, ClayTechItems.ROCKET_2_ENGINE_SHELL,
+            ClayTechItems.ROCKET_2_ENGINE_SHELL, ClayTechItems.ROCKET_ENGINE, ClayTechItems.ROCKET_2_ENGINE_SHELL,
+            ClayTechItems.ROCKET_2_ENGINE_SHELL, ClayTechItems.ROCKET_2_ENGINE_SHELL, ClayTechItems.ROCKET_2_ENGINE_SHELL};
     public static final ItemStack[] ROCKET_2_CPU = {
             ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU,
             ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU,
             ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU, ClayTechItems.ROCKET_CPU};
     public static final ItemStack[] ROCKET_2_CONTROL_CORE = {
             ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE,
-            ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE,
+            ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_2_CPU, ClayTechItems.ROCKET_CONTROL_CORE,
             ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE, ClayTechItems.ROCKET_CONTROL_CORE};
     public static final ItemStack[] ROCKET_2_FUEL_TANK = {
             ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK, ClayTechItems.ROCKET_FUEL_TANK,

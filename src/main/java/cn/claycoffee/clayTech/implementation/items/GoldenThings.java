@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class GoldenThings {
     public GoldenThings() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950250)
                 .withName(Lang.readResearchesText("CLAYTECH_ARTIFICIAL_I"))
                 .withCost(45)
                 .addItem(
@@ -46,7 +46,7 @@ public class GoldenThings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950251)
                 .withName(Lang.readResearchesText("CLAYTECH_ARTIFICIAL_ORE_I"))
                 .withCost(30)
                 .addItem(
@@ -62,7 +62,7 @@ public class GoldenThings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950252)
                 .withName(Lang.readResearchesText("CLAYTECH_ARTIFICIAL_ENCHANTED_GOLDEN_APPLE"))
                 .withCost(100)
                 .addItem(

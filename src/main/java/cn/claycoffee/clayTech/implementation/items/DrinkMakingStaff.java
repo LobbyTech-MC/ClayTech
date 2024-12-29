@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 public class DrinkMakingStaff {
     public DrinkMakingStaff() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950234)
                 .withName(Lang.readResearchesText("CLAYTECH_COCOA_BEAN"))
                 .withCost(10)
                 .addItem(
@@ -29,7 +29,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950235)
                 .withName(Lang.readResearchesText("CLAYTECH_PLASTIC"))
                 .withCost(10)
                 .addItem(
@@ -45,7 +45,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950236)
                 .withName(Lang.readResearchesText("CLAYTECH_DRINK_BOTTLE"))
                 .withCost(10)
                 .addItem(
@@ -61,7 +61,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950237)
                 .withName(Lang.readResearchesText("CLAYTECH_DIRTY_DRINK_BOTTLE"))
                 .withCost(10)
                 .addItem(
@@ -74,7 +74,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950238)
                 .withName(Lang.readResearchesText("CLAYTECH_DIRTY_TEA"))
                 .withCost(10)
                 .addItem(
@@ -87,7 +87,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950239)
                 .withName(Lang.readResearchesText("CLAYTECH_RAW_TEA"))
                 .withCost(10)
                 .addItem(
@@ -100,7 +100,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950240)
                 .withName(Lang.readResearchesText("CLAYTECH_TEA_POWDER"))
                 .withCost(10)
                 .addItem(
@@ -113,7 +113,7 @@ public class DrinkMakingStaff {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950241)
                 .withName(Lang.readResearchesText("CLAYTECH_LEMON_POWDER"))
                 .withCost(10)
                 .addItem(

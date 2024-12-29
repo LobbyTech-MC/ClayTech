@@ -133,5 +133,13 @@ public class CraftingTable extends ACraftingTable {
                 new ItemStack[]{ClayTechItems.INK_MODULE});
         this.registerRecipe(60, ClayTechMachineRecipes.COPYING_MODULE,
                 new ItemStack[]{ClayTechItems.COPYING_MODULE});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_BLUEPRINT, new ItemStack[]{ClayTechItems.ROCKET_2_BLUEPRINT});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_CPU, new ItemStack[]{ClayTechItems.ROCKET_2_CPU});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_ENGINE, new ItemStack[]{ClayTechItems.ROCKET_2_ENGINE});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_FUEL_TANK, new ItemStack[]{ClayTechItems.ROCKET_2_FUEL_TANK});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_GLASS, new ItemStack[]{ClayTechItems.ROCKET_2_GLASS});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_STEEL_PLATE, new ItemStack[]{ClayTechItems.ROCKET_2_STEEL_PLATE});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2_CONTROL_CORE, new ItemStack[]{ClayTechItems.ROCKET_2_CONTROL_CORE});
+        this.registerRecipe(60, ClayTechMachineRecipes.ROCKET_2, new ItemStack[]{ClayTechItems.ROCKET_2});
     }
 }

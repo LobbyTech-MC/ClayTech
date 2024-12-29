@@ -39,7 +39,7 @@ public class Rockets {
 
     public Rockets() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950272)
                 .withName(Lang.readResearchesText("CLAYTECH_UNIVERSE_MACHINE_II"))
                 .withCost(55)
                 .addItem(

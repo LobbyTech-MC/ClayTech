@@ -148,7 +148,7 @@ public class Machines {
 
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950257)
                 .withName(Lang.readResearchesText("CLAYTECH_ELECTRICMACHINE"))
                 .withCost(65)
                 .addItems(
@@ -159,31 +159,28 @@ public class Machines {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950258)
                 .withName(Lang.readResearchesText("CLAYTECH_ELEMENT_EXTRACTER_MACHINE"))
                 .withCost(65)
                 .addItem(ClayTechItems.CLAY_ELEMENT_EXTRACTER)
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950259)
                 .withName(Lang.readResearchesText("CLAYTECH_COBBLESTONE_GENERATOR"))
                 .withCost(65)
                 .addItem(ClayTechItems.CLAY_COBBLESTONE_GENERATOR)
                 .build();
 
-        // todo
-        /*
-        SlimefunUtils.newResearch()
-                .withId(SlimefunUtils.getResearchId())
+        SlimefunUtil.newResearch()
+                .withId(950260)
                 .withName(Lang.readResearchesText("CLAYTECH_ELECTRIC_WATER_PUMP"))
                 .withCost(65)
                 .addItem(ClayTechItems.CLAY_ELECTRIC_WATER_PUMP)
                 .build();
-         */
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950261)
                 .withName(Lang.readResearchesText("CLAYTECH_WITHER_KILLER"))
                 .withCost(65)
                 .addItem(ClayTechItems.CLAY_WITHER_KILLER)

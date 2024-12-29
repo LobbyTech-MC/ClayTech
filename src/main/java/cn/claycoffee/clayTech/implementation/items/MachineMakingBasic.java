@@ -9,7 +9,7 @@ import cn.claycoffee.clayTech.utils.SlimefunUtil;
 public class MachineMakingBasic {
     public MachineMakingBasic() {
         SlimefunUtil.newResearch()
-                .withCost(SlimefunUtil.getResearchId())
+                .withCost(950255)
                 .withName(Lang.readResearchesText("CLAYTECH_BEFORE_ELEMENTS"))
                 .withCost(50)
                 .addItem(
@@ -22,7 +22,7 @@ public class MachineMakingBasic {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withCost(SlimefunUtil.getResearchId())
+                .withCost(950256)
                 .withName(Lang.readResearchesText("CLAYTECH_COPIER"))
                 .withCost(50)
                 .addItem(

@@ -19,12 +19,10 @@ import org.bukkit.inventory.ItemStack;
 public class Spacethings {
     public Spacethings() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950275)
                 .withName(Lang.readResearchesText("CLAYTECH_SPACETHINGS_I"))
                 .withCost(70)
                 .addItem(
-                        // todo
-                        // CLAY_AIR_LOCK_BLOCK 暂时删除，后续再加回来
                         SlimefunUtil.newItem()
                                 .withItemGroup(ClayTechItems.C_OTHER)
                                 .withItem(ClayTechItems.CLAY_AIR_LOCK_BLOCK)

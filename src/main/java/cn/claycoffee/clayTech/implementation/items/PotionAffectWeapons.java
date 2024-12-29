@@ -10,7 +10,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 public class PotionAffectWeapons {
     public PotionAffectWeapons() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950262)
                 .withName(Lang.readResearchesText("CLAYTECH_BEFORE_AFFECT_WEAPONS"))
                 .withCost(50)
                 .addItem(
@@ -58,7 +58,7 @@ public class PotionAffectWeapons {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950263)
                 .withName(Lang.readResearchesText("CLAYTECH_AFFECT_WEAPONS"))
                 .withCost(50)
                 .addItem(
@@ -78,7 +78,7 @@ public class PotionAffectWeapons {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950264)
                 .withName(Lang.readResearchesText("CLAYTECH_BEFORE_ADVANCED_AFFECT_WEAPONS"))
                 .withCost(75)
                 .addItem(
@@ -112,7 +112,7 @@ public class PotionAffectWeapons {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950265)
                 .withName(Lang.readResearchesText("CLAYTECH_ADVANCED_AFFECT_WEAPONS"))
                 .withCost(100)
                 .addItem(

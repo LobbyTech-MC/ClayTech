@@ -10,7 +10,7 @@ import cn.claycoffee.clayTech.utils.SlimefunUtil;
 public class Armors {
     public Armors() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950230)
                 .withName(Lang.readResearchesText("ANTI_SLOWNESS_ARMOR"))
                 .withCost(50)
                 .addItem(
@@ -22,7 +22,7 @@ public class Armors {
                                 .build())
                 .build();
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950231)
                 .withName(Lang.readResearchesText("CLAY_ALLOY_ARMORS"))
                 .withCost(65)
                 .addItem(

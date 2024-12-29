@@ -9,7 +9,7 @@ import cn.claycoffee.clayTech.utils.SlimefunUtil;
 public class Foods {
     public Foods() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950247)
                 .withName(Lang.readResearchesText("CLAYTECH_FOOD_I"))
                 .withCost(50)
                 .addItem(
@@ -57,7 +57,7 @@ public class Foods {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950248)
                 .withName(Lang.readResearchesText("CLAYTECH_FOOD_II"))
                 .withCost(50)
                 .addItem(
@@ -105,7 +105,7 @@ public class Foods {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950249)
                 .withName(Lang.readResearchesText("CLAYTECH_FISH_I"))
                 .withCost(30)
                 .addItem(

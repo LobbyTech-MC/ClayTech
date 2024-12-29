@@ -9,7 +9,7 @@ import cn.claycoffee.clayTech.utils.SlimefunUtil;
 public class RocketMakings {
     public RocketMakings() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950267)
                 .withName(Lang.readResearchesText("CLAYTECH_ROCKETS_I"))
                 .withCost(85)
                 .addItem(
@@ -99,7 +99,7 @@ public class RocketMakings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950268)
                 .withName(Lang.readResearchesText("CLAYTECH_ROCKETS_II"))
                 .withCost(120)
                 .addItem(
@@ -154,7 +154,7 @@ public class RocketMakings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950269)
                 .withName(Lang.readResearchesText("CLAYTECH_SPACESUIT_I"))
                 .withCost(55)
                 .addItem(
@@ -202,7 +202,7 @@ public class RocketMakings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950270)
                 .withName(Lang.readResearchesText("CLAYTECH_UNIVERSE_MACHINE_I"))
                 .withCost(70)
                 .addItem(ClayTechItems.CLAY_ROCKET_ASSEMBLING_MACHINE)
@@ -212,12 +212,12 @@ public class RocketMakings {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950271)
                 .withName(Lang.readResearchesText("CLAYTECH_BASE_I"))
                 .withCost(50)
                 .addItem(
                         SlimefunUtil.newItem()
-                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItemGroup(ClayTechItems.C_MACHINES)
                                 .withItem(ClayTechItems.PLANET_BASE_SIGNER)
                                 .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
                                 .withRecipe(ClayTechMachineRecipes.PLANET_BASE_SIGNER)
@@ -231,7 +231,7 @@ public class RocketMakings {
                                 .build())
                 .addItem(
                         SlimefunUtil.newItem()
-                                .withItemGroup(ClayTechItems.C_MATERIALS)
+                                .withItemGroup(ClayTechItems.C_ARMORS)
                                 .withItem(ClayTechItems.OXYGEN_DISTRIBUTER)
                                 .withRecipeType(ClayTechRecipeType.CLAY_CRAFTING_TABLE)
                                 .withRecipe(ClayTechMachineRecipes.OXYGEN_DISTRIBUTER)

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class ClayBasic {
     public ClayBasic() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950232)
                 .withName(Lang.readResearchesText("CLAYTECH_START"))
                 .withCost(20)
                 .addItem(

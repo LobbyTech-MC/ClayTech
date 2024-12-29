@@ -9,7 +9,7 @@ import cn.claycoffee.clayTech.utils.SlimefunUtil;
 public class Railways {
     public Railways() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950266)
                 .withName(Lang.readResearchesText("CLAYTECH_RAILWAY_I"))
                 .withCost(40)
                 .addItem(

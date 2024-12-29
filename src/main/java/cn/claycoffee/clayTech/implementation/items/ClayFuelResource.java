@@ -8,7 +8,7 @@ import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 public class ClayFuelResource {
     public ClayFuelResource() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950233)
                 .withName(Lang.readResearchesText("CLAYTECH_FUEL"))
                 .withCost(10)
                 .addItem(

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 public class Skulls {
     public Skulls() {
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950273)
                 .withName(Lang.readResearchesText("CLAYTECH_SKULL_I"))
                 .withCost(50)
                 .addItem(
@@ -46,7 +46,7 @@ public class Skulls {
                 .build();
 
         SlimefunUtil.newResearch()
-                .withId(SlimefunUtil.getResearchId())
+                .withId(950274)
                 .withName(Lang.readResearchesText("CLAYTECH_DECORATES_I"))
                 .withCost(50)
                 .addItem(
