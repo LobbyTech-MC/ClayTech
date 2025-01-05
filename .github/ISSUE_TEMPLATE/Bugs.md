@@ -1,6 +1,9 @@
 ---
-name: Bug report about: Report the bugs title: "[BUG]"
-labels: 'bug' assignees: ''
+name: ""
+Bug report about: ""
+Report the bugs title: "[BUG]"
+labels: 'bug' 
+assignees: ''
 
 ---
 

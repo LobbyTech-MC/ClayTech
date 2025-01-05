@@ -1,6 +1,9 @@
 ---
-name: New Feature Request about: Request a new feature. title: "[NewFeature]"
-labels: 'NewFeature' assignees: ''
+name: ""
+New Feature Request about: Request a new feature. 
+title: "[NewFeature]"
+labels: 'NewFeature' 
+assignees: ''
 
 ---
 

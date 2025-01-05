@@ -1,10 +1,9 @@
-name: ClayTech
-main: cn.claycoffee.ClayTech.ClayTech
+name: ClayTech-Fixed
+main: cn.claycoffee.clayTech.ClayTech
 version: ${project.version}
-api-version: 1.13
-author: ClayCoffee
-loadbefore: [ Multiverse-Core ]
-depend: [ Slimefun, ClayAPI ]
+api-version: 1.20
+authors: [ ClayCoffee, balugaq ]
+depend: [ Slimefun ]
 softdepend: [ WorldBorder ]
 commands:
   claytech:
