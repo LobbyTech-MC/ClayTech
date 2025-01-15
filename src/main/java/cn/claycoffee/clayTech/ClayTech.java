@@ -57,8 +57,6 @@ import java.util.List;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class ClayTech extends JavaPlugin implements SlimefunAddon {
-    private static final String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",")
-            .split(",")[3];
     private static final boolean compatible = true;
     private static final List<Planet> planetList = new ArrayList<>();
     protected static ClayTech plugin;
