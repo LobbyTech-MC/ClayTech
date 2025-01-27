@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClayTechItems {
-    public static final SlimefunItemStack CLAYCOFFEE_HEAD = getSlimefunItemStack(Material.PLAYER_HEAD, Lang.readItemText("CLAYCOFFEE_HEAD"), Lang.readItemLore("CLAYCOFFEE_HEAD"), "CLAYCOFFEE_HEAD");
+    public static final SlimefunItemStack CLAYCOFFEE_HEAD = getSlimefunItemStack(SkullUtil.getByHash("58c55ba01ccc7e79b5495e5c4e00080ff6c92a832b2905fed724f2f68a3bb94c"), Lang.readItemText("CLAYCOFFEE_HEAD"), Lang.readItemLore("CLAYCOFFEE_HEAD"), "CLAYCOFFEE_HEAD");
     public static final SlimefunItemStack STALIN_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/96fb8390f61a2cc51c08201834369829d9ba301effc01b6a7cb10d830c6c5043"), Lang.readItemText("STALIN_HEAD"), Lang.readItemLore("STALIN_HEAD"), "STALIN_HEAD");
     public static final SlimefunItemStack MARX_HEAD = getSlimefunItemStack(SkullUtil.getByURL("http://textures.minecraft.net/texture/69aee2502a4a7db127d891b2449ed5b7e0563bd0f5f443e032cfd3919ffed6ff"), Lang.readItemText("MARX_HEAD"), Lang.readItemLore("MARX_HEAD"), "MARX_HEAD");
     public static final SlimefunItemStack[] NORECIPE = {null, null, null, null, null, null, null, null, null};
