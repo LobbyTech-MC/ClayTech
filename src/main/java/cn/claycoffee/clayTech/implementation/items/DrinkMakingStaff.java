@@ -123,6 +123,13 @@ public class DrinkMakingStaff {
                                 .withRecipeType(ClayTechRecipeType.CLAY_FOOD_CHALKING_MACHINE)
                                 .withRecipe(ClayTechMachineRecipes.LEMON_POWDER)
                                 .build())
+                .addItem(
+                        SlimefunUtil.newItem()
+                                .withItemGroup(ClayTechItems.C_FOODMATERIALS)
+                                .withItem(ClayTechItems.CLAY_LEMON)
+                                .withRecipeType(ClayTechRecipeType.HARVEST)
+                                .withRecipe(ClayTechItems.NORECIPE)
+                                .build())
                 .build();
     }
 }
