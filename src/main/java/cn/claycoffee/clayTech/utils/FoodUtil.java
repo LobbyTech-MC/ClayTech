@@ -4,6 +4,10 @@ import cn.claycoffee.clayTech.ClayTechItems;
 import cn.claycoffee.clayTech.api.events.PlayerDrinkEvent;
 import cn.claycoffee.clayTech.api.events.PlayerEatEvent;
 import cn.claycoffee.clayTech.api.events.PlayerWashEvent;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,7 +22,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
 
 public class FoodUtil {
     public static void drink(@NotNull Player p, @NotNull ItemStack handingItem, ItemStack food, int incraseFoodLevel,
@@ -55,6 +61,30 @@ public class FoodUtil {
                             PotionEffect @NotNull [] effect) {
         if (handingItem.hasItemMeta()) {
             if (SlimefunUtils.isItemSimilar(food, handingItem, true)) {
+                if (food instanceof SlimefunItemStack sis) {
+                    SlimefunItem item = sis.getItem();
+                    if (item != null) {
+                        Research research = item.getResearch();
+                        if (research != null) {
+                            Optional<PlayerProfile> profile = PlayerProfile.find(p);
+                            if (profile.isPresent()) {
+                                Set<Research> researches = profile.get().getResearches();
+                                boolean researched = false;
+                                for (Research r : researches) {
+                                    if (r.getKey().equals(research.getKey())) {
+                                        researched = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!researched) {
+                                    p.sendMessage(Lang.readGeneralText("Cant_Eat_Message"));
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
                 if (p.getFoodLevel() < 20) {
                     p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.0F, 1.0F);
                     handingItem.setAmount(handingItem.getAmount() - 1);
@@ -101,14 +131,14 @@ public class FoodUtil {
         }
     }
 
-    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull ItemStack targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
+    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull Material targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
                                int i, @NotNull BlockBreakEvent b1) {
         destroy(p, b, targetBlock, dropItem, disableItem, i, i, b1);
     }
 
-    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull ItemStack targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
+    public static void destroy(@NotNull Player p, @NotNull Block b, @NotNull Material targetBlock, @NotNull ItemStack dropItem, ItemStack disableItem,
                                int from, int to, @NotNull BlockBreakEvent b1) {
-        if (b.getType() == targetBlock.getType()) {
+        if (b.getType() == targetBlock) {
             if (!p.getInventory().getItemInMainHand().equals(new ItemStack(Material.AIR))) {
                 if (p.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH)
                         || SlimefunUtils.isItemSimilar(disableItem, p.getInventory().getItemInMainHand(), true)) {
